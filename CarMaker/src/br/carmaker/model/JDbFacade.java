@@ -7,6 +7,7 @@ package br.carmaker.model;
 
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.LoginDAO;
+import java.util.List;
 
 /**
  *
@@ -15,16 +16,24 @@ import br.carmaker.model.dao.LoginDAO;
 public class JDbFacade {
     private static LoginDAO login;
     
-    private final JDbFacade sInstance = null;
+    private static final JDbFacade sInstance = null;
     
-    public JDbFacade getInstance(){
+    public static JDbFacade getInstance(){
         if(sInstance == null){
             return new JDbFacade();
         }
         return sInstance;
     }
     
-    public static JEmployee getEmployeeByID(int id){
+    public JEmployee getEmployeeByID(int id){
         return JEmployeeDAO.getEmployeeByID(id);
+    }
+    
+    public void insertEmployee(JEmployee employee){
+        JEmployeeDAO.insertEmployee(employee);
+    }
+    
+    public List<JEmployee> getAllEmployees(){
+        return JEmployeeDAO.getAllEmployees();
     }
 }

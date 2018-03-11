@@ -19,8 +19,6 @@ public class MessageDialog extends javax.swing.JDialog {
         initComponents();
     }
     
-    private String headerText;
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -89,6 +87,7 @@ public class MessageDialog extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOkMouseClicked
@@ -143,7 +142,7 @@ public class MessageDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblOk;
     // End of variables declaration//GEN-END:variables
 
-    public void configurarDialog(){
+    public void configurarDialog(String headerText){
         lblHeaderText.setText(headerText);
     }
 }

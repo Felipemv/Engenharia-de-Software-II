@@ -1,4 +1,4 @@
-package br.carmaker.model;
+package br.carmaker.model.enums;
 
 public enum EAffiliate {
     DEALERSHIP("Concessionaria"),

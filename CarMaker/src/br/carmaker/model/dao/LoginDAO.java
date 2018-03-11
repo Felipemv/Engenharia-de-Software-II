@@ -21,10 +21,10 @@ public class LoginDAO {
 
     private static LoginDAO instance;
 
-    private final String TABLE_NAME = "employees";
-    private final String COL_ID = "id_user";
-    private final String COL_EMAIL = "email";
-    private final String COL_PASSWORD = "user_password";
+    private final String TABLE_NAME = "employee";
+    private final String ID = "id";
+    private final String EMAIL = "email";
+    private final String PASS = "pass";
 
     public static LoginDAO getInstance() {
         if (instance == null) {
@@ -40,7 +40,7 @@ public class LoginDAO {
 
         try {//
             stmt = connection.prepareStatement("SELECT * FROM "+TABLE_NAME
-                    + " WHERE "+COL_EMAIL+"='"+email+"' AND "+COL_PASSWORD+"='"
+                    + " WHERE "+EMAIL+"='"+email+"' AND "+PASS+"='"
                     + password +"'");
 
             rs = stmt.executeQuery();
@@ -49,7 +49,7 @@ public class LoginDAO {
             }
             int i = -1;
             while (rs.next()) {
-                i = rs.getInt(COL_ID);                                
+                i = rs.getInt(ID);                                
             }            
             return i;
         } catch (SQLException ex) {

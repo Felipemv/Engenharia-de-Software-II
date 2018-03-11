@@ -1,5 +1,6 @@
 package br.carmaker.model;
 
+import br.carmaker.model.enums.EDeliveryStatus;
 import java.util.Date;
 
 public class JOrder {	

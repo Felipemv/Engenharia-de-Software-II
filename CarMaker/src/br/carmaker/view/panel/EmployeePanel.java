@@ -5,11 +5,19 @@
  */
 package br.carmaker.view.panel;
 
-import br.carmaker.model.EEmployeeType;
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.EmployeeList;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -121,27 +129,12 @@ public class EmployeePanel extends javax.swing.JPanel {
         DefaultListModel<JEmployee> dlm = new DefaultListModel<>();
         JEmployee employee = new JEmployee();
         
-        employee.setName("Felipe Martins Vitor");
-        employee.setAddress("Edson Castro Duarte");
-        employee.setEmail("felipevitor@gec.inatel.br");
-        employee.setPhone("(35)99757-7551");
-        employee.setRegisterNumber("1147");
-        employee.setRole(EEmployeeType.Manager);
-        //employee.setPhoto(new ImageIcon(getClass().
-        //        getResource("C:\\Users\\Usuário\\Desktop\\a.png")));
+        List<JEmployee> list = JDbFacade.getInstance().getAllEmployees();
         
-        dlm.addElement(employee);
-        employee = new JEmployee();
-        employee.setName("Felipe Martins Vitor");
-        employee.setAddress("Edson Castro Duarte");
-        employee.setEmail("felipevitor@gec.inatel.br");
-        employee.setPhone("(35)99757-7551");
-        employee.setRegisterNumber("1147");
-        employee.setRole(EEmployeeType.Manager);
-        //employee.setPhoto(new ImageIcon(getClass().
-        //        getResource("C:\\Users\\Usuário\\Desktop//a.png")));
-        dlm.addElement(employee);
-        
+        for (int i = 0; i < list.size(); i++) {
+            dlm.addElement(list.get(i));
+        }            
+               
         jList1.setModel(dlm);
         jList1.setCellRenderer(new EmployeeList());
     }

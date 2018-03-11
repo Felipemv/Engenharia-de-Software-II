@@ -5,8 +5,8 @@
  */
 package br.carmaker.view.frame;
 
-import br.carmaker.model.EEmployeeType;
-import br.carmaker.model.EMenuItem;
+import br.carmaker.model.enums.EEmployeeType;
+import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.ConfirmDialog;
@@ -46,7 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         selectMenuItem(panelCardHome, EMenuItem.HOME.getMenuItem(), menuHome);
         
-        JEmployee employee = JDbFacade.getEmployeeByID(id);
+        JEmployee employee = JDbFacade.getInstance().getEmployeeByID(id);
         lblUser.setText("Bem vindo, "+ employee.getName());
         
         if(employee.getRole() != EEmployeeType.Manager){

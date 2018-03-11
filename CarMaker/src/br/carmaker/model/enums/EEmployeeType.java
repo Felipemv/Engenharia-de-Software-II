@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.carmaker.model;
+package br.carmaker.model.enums;
 
 /**
  *
@@ -32,4 +32,8 @@ public enum EEmployeeType {
     public static EEmployeeType valueAt(int value){
        return values()[value];
     }
+
+    public int getUserType() {
+        return userType;
+    }   
 }

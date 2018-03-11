@@ -5,6 +5,7 @@
  */
 package br.carmaker.model;
 
+import br.carmaker.model.enums.EEmployeeType;
 import javax.swing.Icon;
 
 /**
@@ -20,7 +21,7 @@ public class JEmployee extends JBaseEntity{
     private EEmployeeType role;
     private String email;
     private String password;
-    private Icon photo;
+    private byte[] photo;
 
     public String getName() {
         return name;
@@ -78,11 +79,11 @@ public class JEmployee extends JBaseEntity{
         this.password = password;
     }
 
-    public Icon getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Icon photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
     
