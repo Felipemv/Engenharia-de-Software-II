@@ -6,9 +6,11 @@
 package br.carmaker.view.dialog;
 
 import br.carmaker.model.enums.EMenuItem;
+import java.awt.Frame;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.paint.Color;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -23,6 +25,8 @@ public class RegisterDialog extends javax.swing.JDialog {
     public RegisterDialog(java.awt.Frame parent, boolean modal, int panel) {
         super(parent, modal);
         initComponents();
+        
+        this.parent = parent;
         
         employeeDialog = new EmployeeDialog();      //Dialog 0
         feedstockDialog = new FeedstockDialog();    //Dialog 1
@@ -59,7 +63,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
+        lblHeader = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -87,31 +91,32 @@ public class RegisterDialog extends javax.swing.JDialog {
         orderDialog = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(220, 220, 220));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel3.setBackground(new java.awt.Color(64, 64, 64));
 
-        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(188, 189, 187));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setText("Cadastro de Usuários:");
+        lblHeader.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+        lblHeader.setForeground(new java.awt.Color(188, 189, 187));
+        lblHeader.setText("Cadastrar:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(504, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -129,6 +134,11 @@ public class RegisterDialog extends javax.swing.JDialog {
         });
 
         btnCancel.setText("Cancelar");
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -487,6 +497,11 @@ public class RegisterDialog extends javax.swing.JDialog {
         selectMenuItem(4);
     }//GEN-LAST:event_menuOrdersMouseClicked
 
+    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
+        this.dispose();
+        parent.setEnabled(true);
+    }//GEN-LAST:event_btnCancelMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -537,7 +552,6 @@ public class RegisterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel carDialog;
     private javax.swing.JPanel employeeDialog;
     private javax.swing.JPanel feedstockDialog;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -550,6 +564,7 @@ public class RegisterDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblEmployeeSb;
     private javax.swing.JLabel lblFeedstock;
     private javax.swing.JLabel lblFeedstockSb;
+    private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblOrder;
     private javax.swing.JLabel lblOrderSb;
     private javax.swing.JPanel menuAffiliates;
@@ -561,6 +576,8 @@ public class RegisterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel panelView;
     // End of variables declaration//GEN-END:variables
 
+    private Frame parent;
+    
     private List<JLabel> labelList;
     private List<JLabel> barList;
     

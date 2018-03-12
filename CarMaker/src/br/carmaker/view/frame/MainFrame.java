@@ -15,6 +15,7 @@ import br.carmaker.view.panel.HomePanel;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -26,6 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
+     * @param id número de identificação do usuário
      */
     public MainFrame(int id) {
         initComponents();
@@ -33,7 +35,7 @@ public class MainFrame extends javax.swing.JFrame {
         sidebar = panelSideBar.getBackground();
 
         panelCardHome = new HomePanel();
-        panelCardEmployee = new EmployeePanel();
+        panelCardEmployee = new EmployeePanel(this);
       
         menuText = new ArrayList<>();
         menuText.add(lblHome);
@@ -53,6 +55,8 @@ public class MainFrame extends javax.swing.JFrame {
             menuEmployees.setVisible(false);
             menuAffiliates.setVisible(false);
         }
+        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
     /**
@@ -99,6 +103,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelCardEmployee = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CarMaker");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -118,7 +123,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblHome.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblHome.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblHome.setForeground(new java.awt.Color(255, 255, 255));
         lblHome.setText(EMenuItem.HOME.getMenuItem());
         menuHome.add(lblHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
@@ -141,7 +146,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuEmployees.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblEmployees.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblEmployees.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblEmployees.setForeground(new java.awt.Color(255, 255, 255));
         lblEmployees.setText(EMenuItem.EMPLOYEES.getMenuItem());
         menuEmployees.add(lblEmployees, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
@@ -164,7 +169,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuCars.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblCars.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblCars.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblCars.setForeground(new java.awt.Color(255, 255, 255));
         lblCars.setText(EMenuItem.CARS.getMenuItem());
         menuCars.add(lblCars, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
@@ -185,7 +190,7 @@ public class MainFrame extends javax.swing.JFrame {
         lblImgFeedstock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/feedstock.png.png"))); // NOI18N
         panelFeedstock.add(lblImgFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        lblFeedstock.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblFeedstock.setForeground(new java.awt.Color(255, 255, 255));
         lblFeedstock.setText(EMenuItem.FEEDSTOCK.getMenuItem());
         panelFeedstock.add(lblFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 0, 170, 50));
@@ -204,7 +209,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuOrders.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblOrders.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblOrders.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblOrders.setForeground(new java.awt.Color(255, 255, 255));
         lblOrders.setText(EMenuItem.ORDERS.getMenuItem());
         menuOrders.add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
@@ -227,7 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuAffiliates.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblAffiliates.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblAffiliates.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblAffiliates.setForeground(new java.awt.Color(255, 255, 255));
         lblAffiliates.setText(EMenuItem.AFFILIATES.getMenuItem());
         menuAffiliates.add(lblAffiliates, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
@@ -250,7 +255,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuReport.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblReports.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblReports.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblReports.setForeground(new java.awt.Color(255, 255, 255));
         lblReports.setText(EMenuItem.REPORT.getMenuItem());
         menuReport.add(lblReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
@@ -263,7 +268,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelUser.add(lblUserPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
 
-        lblUser.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lblUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 255, 255));
         lblUser.setText("Bem Vindo, Usuário");
         panelUser.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 60));
@@ -282,7 +287,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         menuLogout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogout.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        lblLogout.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblLogout.setForeground(new java.awt.Color(255, 255, 255));
         lblLogout.setText(EMenuItem.LOGOUT.getMenuItem());
         menuLogout.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));

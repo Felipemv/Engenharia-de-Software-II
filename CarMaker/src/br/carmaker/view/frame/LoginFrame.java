@@ -33,28 +33,39 @@ public class LoginFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        tfUser = new javax.swing.JTextField();
-        tfPassword = new javax.swing.JPasswordField();
+        jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        lblUserError = new javax.swing.JLabel();
-        lblLogin = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        tfUser = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
+        tfPassword = new javax.swing.JPasswordField();
+        lblUserError = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CarMaker");
+        setResizable(false);
         setSize(new java.awt.Dimension(400, 300));
 
-        jPanel1.setBackground(new java.awt.Color(29, 32, 38));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(64, 64, 64));
 
         jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Car Maker");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 4, 390, 50));
 
-        tfUser.setBackground(new java.awt.Color(29, 32, 38));
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Usuário:");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
+        jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 260, 10));
+
+        tfUser.setBackground(new java.awt.Color(64, 64, 64));
+        tfUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfUser.setForeground(new java.awt.Color(255, 255, 255));
         tfUser.setText("felipevitor@gec.inatel.br");
         tfUser.setBorder(null);
@@ -69,9 +80,16 @@ public class LoginFrame extends javax.swing.JFrame {
                 tfUserKeyPressed(evt);
             }
         });
-        jPanel1.add(tfUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 280, 30));
+        jPanel2.add(tfUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 260, 30));
 
-        tfPassword.setBackground(new java.awt.Color(29, 32, 38));
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Senha:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 30));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 260, 10));
+
+        tfPassword.setBackground(new java.awt.Color(64, 64, 64));
+        tfPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfPassword.setForeground(new java.awt.Color(255, 255, 255));
         tfPassword.setText("123");
         tfPassword.setBorder(null);
@@ -86,42 +104,50 @@ public class LoginFrame extends javax.swing.JFrame {
                 tfPasswordKeyPressed(evt);
             }
         });
-        jPanel1.add(tfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 280, 30));
+        jPanel2.add(tfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 260, 30));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Usuário:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 60, 270, -1));
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Senha:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 128, 270, -1));
-
-        lblUserError.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        lblUserError.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblUserError.setForeground(new java.awt.Color(255, 0, 0));
         lblUserError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblUserError.setText("Usuário ou senha incorretos.");
         lblUserError.setVisible(false);
-        jPanel1.add(lblUserError, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 400, 30));
+        jPanel2.add(lblUserError, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 400, 30));
 
-        lblLogin.setBackground(new java.awt.Color(51, 51, 51));
-        lblLogin.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLogin.setText("Entrar");
-        lblLogin.setOpaque(true);
-        lblLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButton1.setBackground(new java.awt.Color(51, 51, 51));
+        jButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Entrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblLoginMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblLoginMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblLoginMouseExited(evt);
+                jButton1MouseClicked(evt);
             }
         });
-        jPanel1.add(lblLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 70, 26));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 280, 10));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 182, 280, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(175, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(176, 176, 176))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,7 +157,7 @@ public class LoginFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -148,27 +174,19 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfUserKeyPressed
 
-    private void tfPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPasswordCaretUpdate
-        lblUserError.setVisible(false);
-    }//GEN-LAST:event_tfPasswordCaretUpdate
-
     private void tfPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPasswordKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             login();
         }
     }//GEN-LAST:event_tfPasswordKeyPressed
+   
+    private void tfPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPasswordCaretUpdate
+        lblUserError.setVisible(false);
+    }//GEN-LAST:event_tfPasswordCaretUpdate
 
-    private void lblLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseClicked
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         login();
-    }//GEN-LAST:event_lblLoginMouseClicked
-
-    private void lblLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseEntered
-        lblLogin.setBackground(Color.LIGHT_GRAY);
-    }//GEN-LAST:event_lblLoginMouseEntered
-
-    private void lblLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLoginMouseExited
-        lblLogin.setBackground(Color.DARK_GRAY);
-    }//GEN-LAST:event_lblLoginMouseExited
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -206,13 +224,14 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblUserError;
     private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfUser;
