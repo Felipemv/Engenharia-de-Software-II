@@ -1,15 +1,15 @@
 package br.carmaker.model;
 
 public class JShippingCompany extends AAffiliate{
-    private int amountPerTransport;
+    private int amount;
     private JCar car;
 
-    public int getAmountPerTransport() {
-        return amountPerTransport;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAmountPerTransport(int amountPerTransport) {
-        this.amountPerTransport = amountPerTransport;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public JCar getCar() {

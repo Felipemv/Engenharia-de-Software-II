@@ -12,7 +12,7 @@ import javax.swing.Icon;
  *
  * @author Usuário
  */
-public class JEmployee extends JBaseEntity{
+public class JEmployee extends ABaseEntity{
     
     private String name;
     private String address;

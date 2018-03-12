@@ -3,8 +3,8 @@ package br.carmaker.model;
 public class JFeedstock {	
     private String name;
     private JSupplier supplier;
-    private int quantityPerLot;
-    private double costPerLot;
+    private int quantity;
+    private double cost;
 
     public String getName() {
         return name;
@@ -22,19 +22,19 @@ public class JFeedstock {
         this.supplier = supplier;
     }
 
-    public int getQuantityPerLot() {
-        return quantityPerLot;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setQuantityPerLot(int quantityPerLot) {
-        this.quantityPerLot = quantityPerLot;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getCostPerLot() {
-        return costPerLot;
+    public double getCost() {
+        return cost;
     }
 
-    public void setCostPerLot(double costPerLot) {
-        this.costPerLot = costPerLot;
+    public void setCost(double cost) {
+        this.cost = cost;
     }        
 }

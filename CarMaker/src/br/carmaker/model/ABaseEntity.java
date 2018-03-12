@@ -9,7 +9,7 @@ package br.carmaker.model;
  *
  * @author Usuário
  */
-public class JBaseEntity {
+public class ABaseEntity {
     private int id;
 
     public int getId() {
