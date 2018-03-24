@@ -11,7 +11,6 @@ import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.panel.EmployeePanel;
-import br.carmaker.view.panel.HomePanel;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public class MainFrame extends javax.swing.JFrame {
         selectedMenuItem = EMenuItem.HOME.getMenuItem();
         sidebar = panelSideBar.getBackground();
 
-        panelCardHome = new HomePanel();
         panelCardEmployee = new EmployeePanel(this);
       
         menuText = new ArrayList<>();
@@ -70,55 +68,83 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         panelSideBar = new javax.swing.JPanel();
+        lblHeader = new javax.swing.JLabel();
+        panelUser = new javax.swing.JPanel();
+        lblUserPicture = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
         menuHome = new javax.swing.JPanel();
         lblHome = new javax.swing.JLabel();
         lblImgHome = new javax.swing.JLabel();
         menuEmployees = new javax.swing.JPanel();
         lblEmployees = new javax.swing.JLabel();
         lblImgEmployees = new javax.swing.JLabel();
+        menuFeedstock = new javax.swing.JPanel();
+        lblImgFeedstock = new javax.swing.JLabel();
+        lblFeedstock = new javax.swing.JLabel();
         menuCars = new javax.swing.JPanel();
         lblCars = new javax.swing.JLabel();
         lblImgCars = new javax.swing.JLabel();
-        panelFeedstock = new javax.swing.JPanel();
-        lblImgFeedstock = new javax.swing.JLabel();
-        lblFeedstock = new javax.swing.JLabel();
-        menuOrders = new javax.swing.JPanel();
-        lblOrders = new javax.swing.JLabel();
-        lblImgOrders = new javax.swing.JLabel();
         menuAffiliates = new javax.swing.JPanel();
         lblAffiliates = new javax.swing.JLabel();
         lblImgAffiliates = new javax.swing.JLabel();
+        menuOrders = new javax.swing.JPanel();
+        lblOrders = new javax.swing.JLabel();
+        lblImgOrders = new javax.swing.JLabel();
         menuReport = new javax.swing.JPanel();
         lblReports = new javax.swing.JLabel();
         lblImgReports = new javax.swing.JLabel();
-        panelUser = new javax.swing.JPanel();
-        lblUserPicture = new javax.swing.JLabel();
-        lblUser = new javax.swing.JLabel();
         menuLogout = new javax.swing.JPanel();
         lblLogout = new javax.swing.JLabel();
         lblImgLogout = new javax.swing.JLabel();
-        lblHeader = new javax.swing.JLabel();
         panelView = new javax.swing.JPanel();
         panelCardHome = new javax.swing.JPanel();
+        mainPanel = new javax.swing.JPanel();
+        lblLogo = new javax.swing.JLabel();
+        lblVersion = new javax.swing.JLabel();
+        lblDevelopers = new javax.swing.JLabel();
         panelCardEmployee = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CarMaker");
+        setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         panelSideBar.setBackground(new java.awt.Color(29, 32, 38));
+
+        lblHeader.setBackground(new java.awt.Color(29, 32, 38));
+        lblHeader.setFont(new java.awt.Font("Harlow Solid Italic", 0, 48)); // NOI18N
+        lblHeader.setForeground(new java.awt.Color(255, 255, 255));
+        lblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeader.setText("Car Maker");
+        lblHeader.setToolTipText("");
+        lblHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblHeader.setOpaque(true);
+        lblHeader.setPreferredSize(new java.awt.Dimension(215, 60));
+
+        panelUser.setOpaque(false);
+        panelUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblUserPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panelUser.add(lblUserPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 80));
+
+        lblUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(255, 255, 255));
+        lblUser.setText("Bem Vindo, Usuário");
+        panelUser.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 170, 60));
 
         menuHome.setBackground(new java.awt.Color(0, 0, 0));
         menuHome.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuHomeMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuHomeMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuHomeMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuHomeMouseEntered(evt);
             }
         });
         menuHome.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -137,11 +163,11 @@ public class MainFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuEmployeesMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuEmployeesMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuEmployeesMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuEmployeesMouseEntered(evt);
             }
         });
         menuEmployees.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,16 +181,33 @@ public class MainFrame extends javax.swing.JFrame {
         lblImgEmployees.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/employee.png"))); // NOI18N
         menuEmployees.add(lblImgEmployees, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
+        menuFeedstock.setBackground(new java.awt.Color(29, 32, 38));
+        menuFeedstock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuFeedstockMouseClicked(evt);
+            }
+        });
+        menuFeedstock.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblImgFeedstock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImgFeedstock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/feedstock.png.png"))); // NOI18N
+        menuFeedstock.add(lblImgFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
+        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblFeedstock.setForeground(new java.awt.Color(255, 255, 255));
+        lblFeedstock.setText(EMenuItem.FEEDSTOCK.getMenuItem());
+        menuFeedstock.add(lblFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 0, 170, 50));
+
         menuCars.setBackground(new java.awt.Color(29, 32, 38));
         menuCars.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuCarsMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuCarsMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuCarsMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuCarsMouseEntered(evt);
             }
         });
         menuCars.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -178,56 +221,16 @@ public class MainFrame extends javax.swing.JFrame {
         lblImgCars.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/car.png"))); // NOI18N
         menuCars.add(lblImgCars, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        panelFeedstock.setBackground(new java.awt.Color(29, 32, 38));
-        panelFeedstock.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                panelFeedstockMouseClicked(evt);
-            }
-        });
-        panelFeedstock.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblImgFeedstock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImgFeedstock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/feedstock.png.png"))); // NOI18N
-        panelFeedstock.add(lblImgFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
-
-        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblFeedstock.setForeground(new java.awt.Color(255, 255, 255));
-        lblFeedstock.setText(EMenuItem.FEEDSTOCK.getMenuItem());
-        panelFeedstock.add(lblFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 0, 170, 50));
-
-        menuOrders.setBackground(new java.awt.Color(29, 32, 38));
-        menuOrders.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuOrdersMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuOrdersMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                menuOrdersMouseExited(evt);
-            }
-        });
-        menuOrders.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblOrders.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblOrders.setForeground(new java.awt.Color(255, 255, 255));
-        lblOrders.setText(EMenuItem.ORDERS.getMenuItem());
-        menuOrders.add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
-
-        lblImgOrders.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblImgOrders.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/order.png"))); // NOI18N
-        menuOrders.add(lblImgOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
-
         menuAffiliates.setBackground(new java.awt.Color(29, 32, 38));
         menuAffiliates.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuAffiliatesMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuAffiliatesMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuAffiliatesMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuAffiliatesMouseEntered(evt);
             }
         });
         menuAffiliates.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -241,16 +244,39 @@ public class MainFrame extends javax.swing.JFrame {
         lblImgAffiliates.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/affiliates.png"))); // NOI18N
         menuAffiliates.add(lblImgAffiliates, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
+        menuOrders.setBackground(new java.awt.Color(29, 32, 38));
+        menuOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuOrdersMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                menuOrdersMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuOrdersMouseEntered(evt);
+            }
+        });
+        menuOrders.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblOrders.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblOrders.setForeground(new java.awt.Color(255, 255, 255));
+        lblOrders.setText(EMenuItem.ORDERS.getMenuItem());
+        menuOrders.add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
+
+        lblImgOrders.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblImgOrders.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/order.png"))); // NOI18N
+        menuOrders.add(lblImgOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
+
         menuReport.setBackground(new java.awt.Color(29, 32, 38));
         menuReport.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuReportMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuReportMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuReportMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuReportMouseEntered(evt);
             }
         });
         menuReport.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -264,25 +290,16 @@ public class MainFrame extends javax.swing.JFrame {
         lblImgReports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/report.png"))); // NOI18N
         menuReport.add(lblImgReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        panelUser.setOpaque(false);
-        panelUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panelUser.add(lblUserPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 60));
-
-        lblUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblUser.setForeground(new java.awt.Color(255, 255, 255));
-        lblUser.setText("Bem Vindo, Usuário");
-        panelUser.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 60));
-
         menuLogout.setBackground(new java.awt.Color(29, 32, 38));
         menuLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuLogoutMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                menuLogoutMouseEntered(evt);
-            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 menuLogoutMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuLogoutMouseEntered(evt);
             }
         });
         menuLogout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -296,42 +313,36 @@ public class MainFrame extends javax.swing.JFrame {
         lblImgLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logout.png"))); // NOI18N
         menuLogout.add(lblImgLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        lblHeader.setBackground(new java.awt.Color(29, 32, 38));
-        lblHeader.setFont(new java.awt.Font("Harlow Solid Italic", 0, 48)); // NOI18N
-        lblHeader.setForeground(new java.awt.Color(255, 255, 255));
-        lblHeader.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblHeader.setText("Car Maker");
-        lblHeader.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lblHeader.setOpaque(true);
-        lblHeader.setPreferredSize(new java.awt.Dimension(215, 60));
-
         javax.swing.GroupLayout panelSideBarLayout = new javax.swing.GroupLayout(panelSideBar);
         panelSideBar.setLayout(panelSideBarLayout);
         panelSideBarLayout.setHorizontalGroup(
             panelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(panelFeedstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuCars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuAffiliates, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuOrders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(menuLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelSideBarLayout.createSequentialGroup()
+                .addGroup(panelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(menuHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuEmployees, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuFeedstock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuCars, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuAffiliates, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuOrders, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuReport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(menuLogout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelSideBarLayout.setVerticalGroup(
             panelSideBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSideBarLayout.createSequentialGroup()
-                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(menuHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(menuEmployees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelFeedstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menuFeedstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(menuCars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -341,7 +352,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(menuReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(menuLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(menuLogout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         panelView.setBackground(new java.awt.Color(255, 255, 255));
@@ -349,15 +361,54 @@ public class MainFrame extends javax.swing.JFrame {
 
         panelCardHome.setBackground(new java.awt.Color(255, 255, 255));
 
+        mainPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblLogo.setFont(new java.awt.Font("Harlow Solid Italic", 0, 100)); // NOI18N
+        lblLogo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLogo.setText("Car Maker");
+
+        lblVersion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblVersion.setText("Versão 1.0");
+
+        lblDevelopers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDevelopers.setText("Desenvolvido por Felipe Martins e Rafael Magalhães");
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addComponent(lblDevelopers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblVersion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap(209, Short.MAX_VALUE)
+                .addComponent(lblLogo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDevelopers)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblVersion)
+                .addContainerGap(210, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout panelCardHomeLayout = new javax.swing.GroupLayout(panelCardHome);
         panelCardHome.setLayout(panelCardHomeLayout);
         panelCardHomeLayout.setHorizontalGroup(
             panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 553, Short.MAX_VALUE)
+            .addGroup(panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelCardHomeLayout.setVerticalGroup(
             panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelCardHomeLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         panelView.add(panelCardHome, "card2");
@@ -388,7 +439,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(panelView, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(panelSideBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -445,9 +496,9 @@ public class MainFrame extends javax.swing.JFrame {
         panelMenuHover(menuCars, 0, EMenuItem.CARS.getMenuItem());
     }//GEN-LAST:event_menuCarsMouseExited
 
-    private void panelFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelFeedstockMouseClicked
+    private void menuFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFeedstockMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_panelFeedstockMouseClicked
+    }//GEN-LAST:event_menuFeedstockMouseClicked
 
     private void menuOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOrdersMouseClicked
         //        selectMenuItem(panelCardOrders, EMenuItem.ORDERS.getMenuItem(), menuEmployees);
@@ -536,6 +587,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAffiliates;
     private javax.swing.JLabel lblCars;
+    private javax.swing.JLabel lblDevelopers;
     private javax.swing.JLabel lblEmployees;
     private javax.swing.JLabel lblFeedstock;
     private javax.swing.JLabel lblHeader;
@@ -548,21 +600,24 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblImgLogout;
     private javax.swing.JLabel lblImgOrders;
     private javax.swing.JLabel lblImgReports;
+    private javax.swing.JLabel lblLogo;
     private javax.swing.JLabel lblLogout;
     private javax.swing.JLabel lblOrders;
     private javax.swing.JLabel lblReports;
     private javax.swing.JLabel lblUser;
     private javax.swing.JLabel lblUserPicture;
+    private javax.swing.JLabel lblVersion;
+    private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel menuAffiliates;
     private javax.swing.JPanel menuCars;
     private javax.swing.JPanel menuEmployees;
+    private javax.swing.JPanel menuFeedstock;
     private javax.swing.JPanel menuHome;
     private javax.swing.JPanel menuLogout;
     private javax.swing.JPanel menuOrders;
     private javax.swing.JPanel menuReport;
     private javax.swing.JPanel panelCardEmployee;
     private javax.swing.JPanel panelCardHome;
-    private javax.swing.JPanel panelFeedstock;
     private javax.swing.JPanel panelSideBar;
     private javax.swing.JPanel panelUser;
     private javax.swing.JPanel panelView;

@@ -58,7 +58,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Usuário:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, 30));
@@ -67,9 +67,7 @@ public class LoginFrame extends javax.swing.JFrame {
         tfUser.setBackground(new java.awt.Color(64, 64, 64));
         tfUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfUser.setForeground(new java.awt.Color(255, 255, 255));
-        tfUser.setText("felipevitor@gec.inatel.br");
         tfUser.setBorder(null);
-        tfUser.setOpaque(true);
         tfUser.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 tfUserCaretUpdate(evt);
@@ -82,7 +80,7 @@ public class LoginFrame extends javax.swing.JFrame {
         });
         jPanel2.add(tfUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 260, 30));
 
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Senha:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90, 30));
@@ -91,9 +89,7 @@ public class LoginFrame extends javax.swing.JFrame {
         tfPassword.setBackground(new java.awt.Color(64, 64, 64));
         tfPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfPassword.setForeground(new java.awt.Color(255, 255, 255));
-        tfPassword.setText("123");
         tfPassword.setBorder(null);
-        tfPassword.setOpaque(true);
         tfPassword.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 tfPasswordCaretUpdate(evt);
@@ -143,10 +139,10 @@ public class LoginFrame extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

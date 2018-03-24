@@ -41,9 +41,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,16 +70,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblPhoto" min="-2" pref="94" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblPhoto" min="-2" pref="100" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEmail" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblName" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPhone" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblRegister" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblRole" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRegister" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRole" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="364" max="32767" attributes="0"/>
+                      <EmptySpace min="44" pref="358" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -87,16 +88,16 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblPhoto" min="-2" pref="112" max="-2" attributes="0"/>
+                          <Component id="lblPhoto" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Component id="lblName" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lblPhone" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lblRegister" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="lblRole" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
