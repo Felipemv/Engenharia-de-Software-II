@@ -1,19 +1,39 @@
 package br.carmaker.model.enums;
 
 public enum EDeliveryStatus {
-	LATE("Atrasado"),
-	ON_TIME("Dentro do prazo"),
-	IN_ADVANCE("Adiantado"),
-	SCHEDULED_ARRIVAL("Chegada agendada"),
-	ACCOMPLISHED("Realizado");
+	LATE(0){
+            public String toString(){
+                return "Atrasado";
+            }
+        },
+	ON_TIME(1){
+            public String toString(){
+                return "Dentro do prazo";
+            }
+        },
+	IN_ADVANCE(2){
+            public String toString(){
+                return "Chegou Adiantado";
+            }
+        },
+	SCHEDULED_ARRIVAL(3){
+            public String toString(){
+                return "Chegada agendada";
+            }
+        },
+	ACCOMPLISHED(4){
+            public String toString(){
+                return "Chegou";
+            }
+        };
 	
-	private String status;
+	private int status;
 	
-	EDeliveryStatus(String status) {
+	EDeliveryStatus(int status) {
 		this.status = status;
 	}
 	
-	public String getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 }

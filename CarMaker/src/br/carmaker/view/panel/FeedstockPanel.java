@@ -5,26 +5,21 @@
  */
 package br.carmaker.view.panel;
 
-import br.carmaker.model.JDbFacade;
-import br.carmaker.model.JEmployee;
+import br.carmaker.model.JFeedstock;
 import br.carmaker.view.dialog.RegisterDialog;
-import br.carmaker.view.list.EmployeeList;
-import java.util.List;
-import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
  *
- * @author Usuário
+ * @author felipe
  */
-public class EmployeePanel extends javax.swing.JPanel {
+public class FeedstockPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form EmployeePanel
+     * Creates new form FeedstockPanel
      */
-    public EmployeePanel(JFrame frame) {
+    public FeedstockPanel(JFrame frame) {
         initComponents();
-        initList();
         this.mainFrame = frame;
     }
 
@@ -39,32 +34,30 @@ public class EmployeePanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        btnAddFeedstock = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listEmployee = new javax.swing.JList<>();
-        btnAddEmployee = new javax.swing.JButton();
-
-        setBackground(new java.awt.Color(255, 255, 255));
+        listFeedstock = new javax.swing.JList<>();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabel8.setText("Lista de Funcionários:");
+        jLabel8.setText("Lista de Matérias-primas:");
 
-        listEmployee.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listEmployee.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listEmployeeValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(listEmployee);
-
-        btnAddEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        btnAddEmployee.setText("Adicionar novo");
-        btnAddEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAddFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btnAddFeedstock.setText("Adicionar nova");
+        btnAddFeedstock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddEmployeeMouseClicked(evt);
+                btnAddFeedstockMouseClicked(evt);
             }
         });
+
+        listFeedstock.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listFeedstock.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listFeedstockValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(listFeedstock);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,7 +69,7 @@ public class EmployeePanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddEmployee))
+                        .addComponent(btnAddFeedstock))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -85,7 +78,7 @@ public class EmployeePanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddEmployee))
+                    .addComponent(btnAddFeedstock))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                 .addContainerGap())
@@ -103,40 +96,26 @@ public class EmployeePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listEmployeeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEmployeeValueChanged
-        
-    }//GEN-LAST:event_listEmployeeValueChanged
-
-    private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
+    private void btnAddFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddFeedstockMouseClicked
         this.setEnabled(false);
         RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0);
         dialog.setVisible(true);
-        
+
         mainFrame.setEnabled(false);
-    }//GEN-LAST:event_btnAddEmployeeMouseClicked
+    }//GEN-LAST:event_btnAddFeedstockMouseClicked
+
+    private void listFeedstockValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listFeedstockValueChanged
+
+    }//GEN-LAST:event_listFeedstockValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddEmployee;
+    private javax.swing.JButton btnAddFeedstock;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<JEmployee> listEmployee;
+    private javax.swing.JList<JFeedstock> listFeedstock;
     // End of variables declaration//GEN-END:variables
 
-    private final JFrame mainFrame;
-    
-    public void initList(){
-        DefaultListModel<JEmployee> dlm = new DefaultListModel<>();
-        JEmployee employee = new JEmployee();
-        
-        List<JEmployee> list = JDbFacade.getInstance().getAllEmployees();
-        
-        for (int i = 0; i < list.size(); i++) {
-            dlm.addElement(list.get(i));
-        }            
-               
-        listEmployee.setModel(dlm);
-        listEmployee.setCellRenderer(new EmployeeList());
-    }
+    private JFrame mainFrame;
 }

@@ -25,7 +25,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         
         this.parent = parent;
         
-//        employeeDialog = new EmployeeDialog();      //Dialog 0
+        employeeDialog = new EmployeeDialog();      //Dialog 0
 //        feedstockDialog = new FeedstockDialog();    //Dialog 1
 //        carDialog = new CarDialog();                //Dialog 2
 //        affiliateDialog = new AffiliateDialog();    //Dialog 3
@@ -52,31 +52,6 @@ public class RegisterDialog extends javax.swing.JDialog {
         btnCancel = new javax.swing.JButton();
         panelView = new javax.swing.JPanel();
         employeeDialog = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        tfName = new javax.swing.JTextField();
-        tfEmail = new javax.swing.JTextField();
-        tfConfirmEmail = new javax.swing.JTextField();
-        pfPassword = new javax.swing.JPasswordField();
-        pfConfirmPassword = new javax.swing.JPasswordField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        tfAddress = new javax.swing.JTextField();
-        tfPhone = new javax.swing.JTextField();
-        tfRegister = new javax.swing.JTextField();
-        rbManager = new javax.swing.JRadioButton();
-        rbEmployee = new javax.swing.JRadioButton();
-        addPhoto = new javax.swing.JButton();
         feedstockDialog = new javax.swing.JPanel();
         carDialog = new javax.swing.JPanel();
         affiliateDialog = new javax.swing.JPanel();
@@ -157,207 +132,15 @@ public class RegisterDialog extends javax.swing.JDialog {
         panelView.setBackground(new java.awt.Color(220, 220, 220));
         panelView.setLayout(new java.awt.CardLayout());
 
-        jPanel2.setBackground(new java.awt.Color(220, 220, 220));
-
-        jPanel10.setBackground(new java.awt.Color(226, 229, 235));
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-        );
-
-        jPanel3.setBackground(new java.awt.Color(220, 220, 220));
-
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel2.setText("Nome: ");
-
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel3.setText("Email:");
-
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel4.setText("Confirmar email: ");
-
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel5.setText("Senha:");
-
-        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel6.setText("Confirmar Senha:");
-
-        tfName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfName.setText("asdf");
-
-        tfEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfEmail.setText("asdf");
-
-        tfConfirmEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfConfirmEmail.setText("asdfa");
-
-        pfPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        pfPassword.setText("safdas");
-
-        pfConfirmPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        pfConfirmPassword.setText("asdf");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfConfirmEmail)
-                    .addComponent(tfEmail)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
-                    .addComponent(pfConfirmPassword)
-                    .addComponent(tfName))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfConfirmEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(pfConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-
-        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel7.setText("Endereço");
-
-        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel8.setText("Telefone: ");
-
-        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel9.setText("Registro:");
-
-        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel10.setText("Cargo:");
-
-        tfAddress.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfAddress.setText("asdfads");
-
-        tfPhone.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfPhone.setText("asdfas");
-
-        tfRegister.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfRegister.setText("asfd");
-
-        rbManager.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rbManager.setText("Gerente");
-
-        rbEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rbEmployee.setText("Vendedor");
-
-        addPhoto.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        addPhoto.setText("Adicionar Foto");
-        addPhoto.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addPhotoMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rbManager)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbEmployee))
-                    .addComponent(tfAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                    .addComponent(tfPhone)
-                    .addComponent(tfRegister))
-                .addGap(44, 44, 44))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38))
-            .addComponent(jSeparator1)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addPhoto)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(rbManager)
-                    .addComponent(rbEmployee))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout employeeDialogLayout = new javax.swing.GroupLayout(employeeDialog);
         employeeDialog.setLayout(employeeDialogLayout);
         employeeDialogLayout.setHorizontalGroup(
             employeeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 796, Short.MAX_VALUE)
         );
         employeeDialogLayout.setVerticalGroup(
             employeeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 445, Short.MAX_VALUE)
         );
 
         panelView.add(employeeDialog, "card2");
@@ -427,7 +210,7 @@ public class RegisterDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -484,18 +267,6 @@ public class RegisterDialog extends javax.swing.JDialog {
         parent.setEnabled(true);
     }//GEN-LAST:event_btnCancelMouseClicked
 
-    private void addPhotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPhotoMouseClicked
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagens", "jpg", "png");
-        fileChooser.addChoosableFileFilter(filter);
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
-        fileChooser.setCurrentDirectory(new File("C:\\Users\\Usuário\\Desktop"));
-        fileChooser.showOpenDialog(this);
-
-        imagem = fileChooser.getSelectedFile();
-    }//GEN-LAST:event_addPhotoMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -539,7 +310,6 @@ public class RegisterDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addPhoto;
     private javax.swing.JPanel affiliateDialog;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
@@ -547,36 +317,12 @@ public class RegisterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel carDialog;
     private javax.swing.JPanel employeeDialog;
     private javax.swing.JPanel feedstockDialog;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JPanel orderDialog;
     private javax.swing.JPanel panelFooter;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelView;
-    private javax.swing.JPasswordField pfConfirmPassword;
-    private javax.swing.JPasswordField pfPassword;
-    private javax.swing.JRadioButton rbEmployee;
-    private javax.swing.JRadioButton rbManager;
-    private javax.swing.JTextField tfAddress;
-    private javax.swing.JTextField tfConfirmEmail;
-    private javax.swing.JTextField tfEmail;
-    private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfPhone;
-    private javax.swing.JTextField tfRegister;
     // End of variables declaration//GEN-END:variables
 
     private Frame parent;

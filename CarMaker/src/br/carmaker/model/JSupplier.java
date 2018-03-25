@@ -1,16 +1,9 @@
 package br.carmaker.model;
 
+import br.carmaker.model.abstracts.AAffiliate;
+
 public class JSupplier extends AAffiliate{
-    private JFeedstock feedstock;
     private int leadTime;
-
-    public JFeedstock getFeedstock() {
-        return feedstock;
-    }
-
-    public void setFeedstock(JFeedstock feedstock) {
-        this.feedstock = feedstock;
-    }
 
     public int getLeadTime() {
         return leadTime;

@@ -5,8 +5,8 @@
  */
 package br.carmaker.model;
 
+import br.carmaker.model.abstracts.ABaseEntity;
 import br.carmaker.model.enums.EEmployeeType;
-import javax.swing.Icon;
 
 /**
  *

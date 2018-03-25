@@ -1,5 +1,7 @@
 package br.carmaker.model;
 
+import br.carmaker.model.abstracts.AAffiliate;
+
 public class JShippingCompany extends AAffiliate{
     private int amount;
     private JCar car;

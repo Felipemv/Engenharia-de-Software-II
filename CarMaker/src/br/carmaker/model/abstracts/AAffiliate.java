@@ -1,4 +1,4 @@
-package br.carmaker.model;
+package br.carmaker.model.abstracts;
 
 public abstract class AAffiliate extends ABaseEntity{
     private String name;

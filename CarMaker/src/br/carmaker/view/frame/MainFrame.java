@@ -10,7 +10,11 @@ import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.ConfirmDialog;
+import br.carmaker.view.panel.AffiliatePanel;
+import br.carmaker.view.panel.CarPanel;
 import br.carmaker.view.panel.EmployeePanel;
+import br.carmaker.view.panel.FeedstockPanel;
+import br.carmaker.view.panel.OrderPanel;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,11 @@ public class MainFrame extends javax.swing.JFrame {
         sidebar = panelSideBar.getBackground();
 
         panelCardEmployee = new EmployeePanel(this);
+        panelCardFeedstock = new FeedstockPanel(this);
+        panelCardCar = new CarPanel(this);
+//        panelCardAffiliate = new AffiliatePanel(this);
+        panelCardOrder = new OrderPanel(this);
+//        panelCardReport = new ReportPanel(this);
       
         menuText = new ArrayList<>();
         menuText.add(lblHome);
@@ -103,6 +112,11 @@ public class MainFrame extends javax.swing.JFrame {
         lblVersion = new javax.swing.JLabel();
         lblDevelopers = new javax.swing.JLabel();
         panelCardEmployee = new javax.swing.JPanel();
+        panelCardFeedstock = new javax.swing.JPanel();
+        panelCardCar = new javax.swing.JPanel();
+        panelCardAffiliate = new javax.swing.JPanel();
+        panelCardOrder = new javax.swing.JPanel();
+        panelCardReport = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("CarMaker");
@@ -185,6 +199,12 @@ public class MainFrame extends javax.swing.JFrame {
         menuFeedstock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuFeedstockMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                menuFeedstockMouseExited(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                menuFeedstockMouseEntered(evt);
             }
         });
         menuFeedstock.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -357,6 +377,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         panelView.setBackground(new java.awt.Color(255, 255, 255));
+        panelView.setMinimumSize(new java.awt.Dimension(559, 600));
         panelView.setLayout(new java.awt.CardLayout());
 
         panelCardHome.setBackground(new java.awt.Color(255, 255, 255));
@@ -377,27 +398,27 @@ public class MainFrame extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+            .addComponent(lblLogo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 559, Short.MAX_VALUE)
             .addComponent(lblDevelopers, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lblVersion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+                .addContainerGap(214, Short.MAX_VALUE)
                 .addComponent(lblLogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDevelopers)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblVersion)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addContainerGap(217, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelCardHomeLayout = new javax.swing.GroupLayout(panelCardHome);
         panelCardHome.setLayout(panelCardHomeLayout);
         panelCardHomeLayout.setHorizontalGroup(
             panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
+            .addGap(0, 559, Short.MAX_VALUE)
             .addGroup(panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -405,10 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
             panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 600, Short.MAX_VALUE)
             .addGroup(panelCardHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelCardHomeLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelView.add(panelCardHome, "card2");
@@ -419,7 +437,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelCardEmployee.setLayout(panelCardEmployeeLayout);
         panelCardEmployeeLayout.setHorizontalGroup(
             panelCardEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 553, Short.MAX_VALUE)
+            .addGap(0, 559, Short.MAX_VALUE)
         );
         panelCardEmployeeLayout.setVerticalGroup(
             panelCardEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,13 +446,78 @@ public class MainFrame extends javax.swing.JFrame {
 
         panelView.add(panelCardEmployee, "card3");
 
+        javax.swing.GroupLayout panelCardFeedstockLayout = new javax.swing.GroupLayout(panelCardFeedstock);
+        panelCardFeedstock.setLayout(panelCardFeedstockLayout);
+        panelCardFeedstockLayout.setHorizontalGroup(
+            panelCardFeedstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        panelCardFeedstockLayout.setVerticalGroup(
+            panelCardFeedstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        panelView.add(panelCardFeedstock, "card4");
+
+        javax.swing.GroupLayout panelCardCarLayout = new javax.swing.GroupLayout(panelCardCar);
+        panelCardCar.setLayout(panelCardCarLayout);
+        panelCardCarLayout.setHorizontalGroup(
+            panelCardCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        panelCardCarLayout.setVerticalGroup(
+            panelCardCarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        panelView.add(panelCardCar, "card5");
+
+        javax.swing.GroupLayout panelCardAffiliateLayout = new javax.swing.GroupLayout(panelCardAffiliate);
+        panelCardAffiliate.setLayout(panelCardAffiliateLayout);
+        panelCardAffiliateLayout.setHorizontalGroup(
+            panelCardAffiliateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        panelCardAffiliateLayout.setVerticalGroup(
+            panelCardAffiliateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        panelView.add(panelCardAffiliate, "card6");
+
+        javax.swing.GroupLayout panelCardOrderLayout = new javax.swing.GroupLayout(panelCardOrder);
+        panelCardOrder.setLayout(panelCardOrderLayout);
+        panelCardOrderLayout.setHorizontalGroup(
+            panelCardOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        panelCardOrderLayout.setVerticalGroup(
+            panelCardOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        panelView.add(panelCardOrder, "card7");
+
+        javax.swing.GroupLayout panelCardReportLayout = new javax.swing.GroupLayout(panelCardReport);
+        panelCardReport.setLayout(panelCardReportLayout);
+        panelCardReportLayout.setHorizontalGroup(
+            panelCardReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 559, Short.MAX_VALUE)
+        );
+        panelCardReportLayout.setVerticalGroup(
+            panelCardReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 600, Short.MAX_VALUE)
+        );
+
+        panelView.add(panelCardReport, "card8");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(panelSideBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -485,7 +568,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuEmployeesMouseExited
 
     private void menuCarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCarsMouseClicked
-        //        selectMenuItem(panelCardCars, EMenuItem.CARS.getMenuItem(), menuEmployees);
+        selectMenuItem(panelCardCar, EMenuItem.CARS.getMenuItem(), menuCars);
     }//GEN-LAST:event_menuCarsMouseClicked
 
     private void menuCarsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCarsMouseEntered
@@ -497,11 +580,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCarsMouseExited
 
     private void menuFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFeedstockMouseClicked
-        // TODO add your handling code here:
+        selectMenuItem(panelCardFeedstock, EMenuItem.FEEDSTOCK.getMenuItem(), menuFeedstock);
     }//GEN-LAST:event_menuFeedstockMouseClicked
 
     private void menuOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOrdersMouseClicked
-        //        selectMenuItem(panelCardOrders, EMenuItem.ORDERS.getMenuItem(), menuEmployees);
+        selectMenuItem(panelCardOrder, EMenuItem.ORDERS.getMenuItem(), menuOrders);
     }//GEN-LAST:event_menuOrdersMouseClicked
 
     private void menuOrdersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOrdersMouseEntered
@@ -547,6 +630,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void menuLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLogoutMouseExited
         panelMenuHover(menuLogout, 0, lblLogout.getText());
     }//GEN-LAST:event_menuLogoutMouseExited
+
+    private void menuFeedstockMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFeedstockMouseEntered
+        panelMenuHover(menuFeedstock, 1, lblFeedstock.getText());
+    }//GEN-LAST:event_menuFeedstockMouseEntered
+
+    private void menuFeedstockMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFeedstockMouseExited
+        panelMenuHover(menuFeedstock, 0, lblFeedstock.getText());
+    }//GEN-LAST:event_menuFeedstockMouseExited
 
     /**
      * @param args the command line arguments
@@ -616,8 +707,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel menuLogout;
     private javax.swing.JPanel menuOrders;
     private javax.swing.JPanel menuReport;
+    private javax.swing.JPanel panelCardAffiliate;
+    private javax.swing.JPanel panelCardCar;
     private javax.swing.JPanel panelCardEmployee;
+    private javax.swing.JPanel panelCardFeedstock;
     private javax.swing.JPanel panelCardHome;
+    private javax.swing.JPanel panelCardOrder;
+    private javax.swing.JPanel panelCardReport;
     private javax.swing.JPanel panelSideBar;
     private javax.swing.JPanel panelUser;
     private javax.swing.JPanel panelView;
@@ -639,7 +735,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void selectMenuItem(JPanel panel, String labelName, JPanel menuItem) {
-        
         panelView.removeAll();
         panelView.add(panel);
         panelView.repaint();
