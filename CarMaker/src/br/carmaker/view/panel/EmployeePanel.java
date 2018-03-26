@@ -9,9 +9,11 @@ import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.EmployeeList;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,6 +53,16 @@ public class EmployeePanel extends javax.swing.JPanel {
         jLabel8.setText("Lista de Funcionários:");
 
         listEmployee.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listEmployeeMouseClicked(evt);
+            }
+        });
+        listEmployee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listEmployeeKeyPressed(evt);
+            }
+        });
         listEmployee.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listEmployeeValueChanged(evt);
@@ -77,7 +89,7 @@ public class EmployeePanel extends javax.swing.JPanel {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAddEmployee))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,6 +126,18 @@ public class EmployeePanel extends javax.swing.JPanel {
         
         mainFrame.setEnabled(false);
     }//GEN-LAST:event_btnAddEmployeeMouseClicked
+
+    private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
+        if(evt.getClickCount() == 2){
+            JOptionPane.showMessageDialog(this, "Duplo Click");
+        }
+    }//GEN-LAST:event_listEmployeeMouseClicked
+
+    private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_DELETE){
+            JOptionPane.showMessageDialog(this, "Delete");
+        }
+    }//GEN-LAST:event_listEmployeeKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

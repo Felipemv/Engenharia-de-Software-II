@@ -10,14 +10,16 @@ import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.ConfirmDialog;
-import br.carmaker.view.panel.AffiliatePanel;
 import br.carmaker.view.panel.CarPanel;
 import br.carmaker.view.panel.EmployeePanel;
 import br.carmaker.view.panel.FeedstockPanel;
 import br.carmaker.view.panel.OrderPanel;
 import java.awt.Color;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -57,6 +59,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         JEmployee employee = JDbFacade.getInstance().getEmployeeByID(id);
         lblUser.setText("Bem vindo, "+ employee.getName());
+        setUserImage(employee.getPhoto());
         
         if(employee.getRole() != EEmployeeType.Manager){
             menuEmployees.setVisible(false);
@@ -139,15 +142,30 @@ public class MainFrame extends javax.swing.JFrame {
         lblHeader.setPreferredSize(new java.awt.Dimension(215, 60));
 
         panelUser.setOpaque(false);
-        panelUser.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUserPicture.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelUser.add(lblUserPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 80));
 
         lblUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblUser.setForeground(new java.awt.Color(255, 255, 255));
         lblUser.setText("Bem Vindo, Usuário");
-        panelUser.add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 170, 60));
+
+        javax.swing.GroupLayout panelUserLayout = new javax.swing.GroupLayout(panelUser);
+        panelUser.setLayout(panelUserLayout);
+        panelUserLayout.setHorizontalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelUserLayout.createSequentialGroup()
+                .addComponent(lblUserPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+        panelUserLayout.setVerticalGroup(
+            panelUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblUserPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(panelUserLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lblUser, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         menuHome.setBackground(new java.awt.Color(0, 0, 0));
         menuHome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -356,7 +374,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(panelSideBarLayout.createSequentialGroup()
                 .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(menuHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -761,5 +779,25 @@ public class MainFrame extends javax.swing.JFrame {
         confirmDialog.setVisible(true);
 
         this.setEnabled(false);
+    }
+
+    private void setUserImage(byte[] photo) {
+        
+        if (photo != null) {
+            ImageIcon img = new ImageIcon(photo);
+            Image im = img.getImage();
+            lblUserPicture.setIcon(getResizedImage(im));
+
+        } else {
+            Image img = new ImageIcon(getClass().getResource("/image/user_default.png")).getImage();
+            lblUserPicture.setIcon(getResizedImage(img));
+        } 
+    }
+
+    private Icon getResizedImage(Image img) {
+        int width = 80;
+        int height = 60;
+        
+        return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 }

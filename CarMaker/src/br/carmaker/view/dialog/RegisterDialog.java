@@ -7,8 +7,7 @@ package br.carmaker.view.dialog;
 
 import java.awt.Frame;
 import java.io.File;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JFrame;
 
 /**
  *
@@ -18,14 +17,17 @@ public class RegisterDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form RegisterDialog
+     * @param parent
+     * @param modal
+     * @param panel
      */
-    public RegisterDialog(java.awt.Frame parent, boolean modal, int panel) {
+    public RegisterDialog(JFrame parent, boolean modal, int panel) {
         super(parent, modal);
         initComponents();
         
         this.parent = parent;
         
-        employeeDialog = new EmployeeDialog();      //Dialog 0
+        employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
 //        feedstockDialog = new FeedstockDialog();    //Dialog 1
 //        carDialog = new CarDialog();                //Dialog 2
 //        affiliateDialog = new AffiliateDialog();    //Dialog 3
@@ -47,9 +49,6 @@ public class RegisterDialog extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         panelHeader = new javax.swing.JPanel();
         lblHeader = new javax.swing.JLabel();
-        panelFooter = new javax.swing.JPanel();
-        btnSave = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
         panelView = new javax.swing.JPanel();
         employeeDialog = new javax.swing.JPanel();
         feedstockDialog = new javax.swing.JPanel();
@@ -85,50 +84,6 @@ public class RegisterDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        panelFooter.setBackground(new java.awt.Color(37, 37, 39));
-
-        btnSave.setBackground(new java.awt.Color(76, 139, 244));
-        btnSave.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        btnSave.setText("Salvar");
-        btnSave.setBorder(null);
-        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSaveMouseClicked(evt);
-            }
-        });
-
-        btnCancel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        btnCancel.setText("Cancelar");
-        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelFooterLayout = new javax.swing.GroupLayout(panelFooter);
-        panelFooter.setLayout(panelFooterLayout);
-        panelFooterLayout.setHorizontalGroup(
-            panelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFooterLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCancel)
-                .addGap(21, 21, 21))
-        );
-
-        panelFooterLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCancel, btnSave});
-
-        panelFooterLayout.setVerticalGroup(
-            panelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFooterLayout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(panelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancel))
-                .addGap(24, 24, 24))
-        );
-
         panelView.setBackground(new java.awt.Color(220, 220, 220));
         panelView.setLayout(new java.awt.CardLayout());
 
@@ -140,7 +95,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         );
         employeeDialogLayout.setVerticalGroup(
             employeeDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         panelView.add(employeeDialog, "card2");
@@ -153,7 +108,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         );
         feedstockDialogLayout.setVerticalGroup(
             feedstockDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         panelView.add(feedstockDialog, "card3");
@@ -166,7 +121,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         );
         carDialogLayout.setVerticalGroup(
             carDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         panelView.add(carDialog, "card4");
@@ -179,7 +134,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         );
         affiliateDialogLayout.setVerticalGroup(
             affiliateDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         panelView.add(affiliateDialog, "card5");
@@ -192,7 +147,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         );
         orderDialogLayout.setVerticalGroup(
             orderDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 445, Short.MAX_VALUE)
+            .addGap(0, 536, Short.MAX_VALUE)
         );
 
         panelView.add(orderDialog, "card6");
@@ -202,17 +157,14 @@ public class RegisterDialog extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelFooter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(panelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(panelView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -229,43 +181,6 @@ public class RegisterDialog extends javax.swing.JDialog {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-//        String name = tfName.getText();
-//        String email = tfEmail.getText();
-//        String confirmEmail = tfConfirmEmail.getText();
-//        String password = Arrays.toString(pfPassword.getPassword());
-//        String confirmPassword = Arrays.toString(pfConfirmPassword.getPassword());
-//        String address = tfAddress.getText();
-//        String phone = tfPhone.getText();
-//        String register = tfRegister.getText();
-//        EEmployeeType role = rbManager.isSelected() ? EEmployeeType.valueAt(1) : 
-//                EEmployeeType.valueAt(0);
-//        
-//        if(validation()){
-//            JEmployee employee = new JEmployee();
-//            employee.setName(name);
-//            employee.setEmail(email);
-//            employee.setPassword(password);
-//            employee.setAddress(address);
-//            employee.setPhone(phone);
-//            employee.setRegisterNumber(register);
-//            employee.setRole(role);
-//            employee.setPhoto(getImage());
-//            
-//            JDbFacade.getInstance().insertEmployee(employee);
-//        }else{
-//            MessageDialog dialog = new MessageDialog(null, false);
-//            dialog.configurarDialog("Todos os campos são obrigatórios!");
-//            this.setEnabled(false);
-//            dialog.setVisible(true);
-//        }
-    }//GEN-LAST:event_btnSaveMouseClicked
-
-    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
-        this.dispose();
-        parent.setEnabled(true);
-    }//GEN-LAST:event_btnCancelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -311,8 +226,6 @@ public class RegisterDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel affiliateDialog;
-    private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel carDialog;
     private javax.swing.JPanel employeeDialog;
@@ -320,7 +233,6 @@ public class RegisterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JPanel orderDialog;
-    private javax.swing.JPanel panelFooter;
     private javax.swing.JPanel panelHeader;
     private javax.swing.JPanel panelView;
     // End of variables declaration//GEN-END:variables

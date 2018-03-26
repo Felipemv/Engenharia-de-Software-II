@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.list;
 
-import br.carmaker.model.JRecievedOrders;
+import br.carmaker.model.JPlacedOrders;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
@@ -16,12 +16,13 @@ import javax.swing.ListCellRenderer;
  *
  * @author felipe
  */
-public class RecievedOrderList extends javax.swing.JPanel implements ListCellRenderer<JRecievedOrders> {
+public class PlacedOrderList extends javax.swing.JPanel implements 
+        ListCellRenderer<JPlacedOrders>{
 
     /**
-     * Creates new form RecievedOrderList
+     * Creates new form PlacedOrderList
      */
-    public RecievedOrderList() {
+    public PlacedOrderList() {
         initComponents();
     }
 
@@ -36,9 +37,8 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
 
         jPanel2 = new javax.swing.JPanel();
         lblProtocol = new javax.swing.JLabel();
-        lblCar = new javax.swing.JLabel();
-        lblShippingCompany = new javax.swing.JLabel();
-        lblDealership = new javax.swing.JLabel();
+        lblFeedstock = new javax.swing.JLabel();
+        lblSupplier = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
 
@@ -48,24 +48,18 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
         lblProtocol.setBorder(null);
         lblProtocol.setMaximumSize(new java.awt.Dimension(70, 19));
 
-        lblCar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblCar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCar.setText("Carro");
-        lblCar.setBorder(null);
-        lblCar.setMaximumSize(new java.awt.Dimension(80, 19));
-        lblCar.setMinimumSize(new java.awt.Dimension(80, 19));
+        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblFeedstock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFeedstock.setText("Matéria-prima");
+        lblFeedstock.setBorder(null);
+        lblFeedstock.setMaximumSize(new java.awt.Dimension(80, 19));
+        lblFeedstock.setMinimumSize(new java.awt.Dimension(80, 19));
 
-        lblShippingCompany.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblShippingCompany.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblShippingCompany.setText("Transportadora");
-        lblShippingCompany.setBorder(null);
-        lblShippingCompany.setMinimumSize(new java.awt.Dimension(120, 19));
-
-        lblDealership.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblDealership.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDealership.setText("Concessionária");
-        lblDealership.setBorder(null);
-        lblDealership.setMinimumSize(new java.awt.Dimension(120, 19));
+        lblSupplier.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblSupplier.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSupplier.setText("Fornecedora");
+        lblSupplier.setBorder(null);
+        lblSupplier.setMinimumSize(new java.awt.Dimension(120, 19));
 
         lblStatus.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -84,26 +78,24 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
+                .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(lblCar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(lblFeedstock, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(lblShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(lblSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(lblDealership, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(lblProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblDealership, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFeedstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -122,25 +114,21 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblCar;
     private javax.swing.JLabel lblDate;
-    private javax.swing.JLabel lblDealership;
+    private javax.swing.JLabel lblFeedstock;
     private javax.swing.JLabel lblProtocol;
-    private javax.swing.JLabel lblShippingCompany;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblSupplier;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends JRecievedOrders> list, 
-            JRecievedOrders value, int index, boolean isSelected, boolean hasFocus) {
-        
-        
+    public Component getListCellRendererComponent(JList<? extends JPlacedOrders> list, 
+            JPlacedOrders value, int index, boolean isSelected, boolean hasFocus) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
         lblProtocol.setText(value.getProtocol());
-        lblCar.setText(value.getCar().getModel());
-        lblShippingCompany.setText(value.getShippingCompany().getName());
-        lblDealership.setText(value.getDealership().getName());
+        lblFeedstock.setText(value.getFeedstock().getName());
+        lblSupplier.setText(value.getSupplier().getName());
         lblStatus.setText(value.getStatus().toString());
         lblDate.setText(sdf.format(value.getExpectedDate()));
         
@@ -152,4 +140,5 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
         
         return this;
     }
+    
 }

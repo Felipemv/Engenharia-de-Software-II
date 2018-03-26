@@ -49,7 +49,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnAddEmployee" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jScrollPane1" alignment="1" pref="541" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" pref="547" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -93,6 +93,8 @@
                 <Property name="selectionMode" type="int" value="0"/>
               </Properties>
               <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listEmployeeMouseClicked"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="listEmployeeKeyPressed"/>
                 <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listEmployeeValueChanged"/>
               </Events>
               <AuxValues>

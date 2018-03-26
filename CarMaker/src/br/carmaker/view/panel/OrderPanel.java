@@ -6,9 +6,15 @@
 package br.carmaker.view.panel;
 
 import br.carmaker.model.JCar;
-import br.carmaker.model.JRecievedOrder;
+import br.carmaker.model.JDealership;
+import br.carmaker.model.JFeedstock;
+import br.carmaker.model.JPlacedOrders;
+import br.carmaker.model.JRecievedOrders;
+import br.carmaker.model.JShippingCompany;
+import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EDeliveryStatus;
 import br.carmaker.view.dialog.RegisterDialog;
+import br.carmaker.view.list.PlacedOrderList;
 import br.carmaker.view.list.RecievedOrderList;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
@@ -55,16 +61,15 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listRecievedOrders = new javax.swing.JList<>();
         jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        lblProtocol = new javax.swing.JLabel();
+        lblFeedstock = new javax.swing.JLabel();
+        lblSupplier = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listPlacedOrders = new javax.swing.JList<>();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -145,68 +150,77 @@ public class OrderPanel extends javax.swing.JPanel {
                 .addComponent(jLabel9))
         );
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList1.setMinimumSize(new java.awt.Dimension(541, 600));
-        jList1.addMouseListener(new java.awt.event.MouseAdapter() {
+        listRecievedOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listRecievedOrders.setMinimumSize(new java.awt.Dimension(541, 600));
+        listRecievedOrders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jList1MouseClicked(evt);
+                listRecievedOrdersMouseClicked(evt);
             }
         });
-        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
+        listRecievedOrders.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jList1KeyPressed(evt);
+                listRecievedOrdersKeyPressed(evt);
             }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listRecievedOrders);
 
-        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel10.setText("Protocolo");
+        lblProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblProtocol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProtocol.setText("Protocolo");
+        lblProtocol.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblProtocol.setMaximumSize(new java.awt.Dimension(70, 19));
 
-        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel11.setText("Matéria-Prima");
+        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblFeedstock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFeedstock.setText("Matéria-prima");
+        lblFeedstock.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel12.setText("Cor");
+        lblSupplier.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblSupplier.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSupplier.setText("Fornecedora");
+        lblSupplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblSupplier.setMinimumSize(new java.awt.Dimension(120, 19));
 
-        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel13.setText("Valor");
+        lblStatus.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStatus.setText("Status");
+        lblStatus.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblStatus.setMinimumSize(new java.awt.Dimension(75, 19));
 
-        jLabel14.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel14.setText("Status");
-
-        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel15.setText("Data");
+        lblDate.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setText("Data");
+        lblDate.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblDate.setMinimumSize(new java.awt.Dimension(75, 19));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFeedstock, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
-                .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel10)
-                .addComponent(jLabel11)
-                .addComponent(jLabel13)
-                .addComponent(jLabel12)
-                .addComponent(jLabel14)
-                .addComponent(jLabel15))
+                .addComponent(lblProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFeedstock)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jList2);
+        listPlacedOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(listPlacedOrders);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,13 +252,13 @@ public class OrderPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -268,28 +282,22 @@ public class OrderPanel extends javax.swing.JPanel {
         mainFrame.setEnabled(false);
     }//GEN-LAST:event_btnAddFeedstockMouseClicked
 
-    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
+    private void listRecievedOrdersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listRecievedOrdersKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_DELETE){
             JOptionPane.showMessageDialog(this, "DELETE");
         }
-    }//GEN-LAST:event_jList1KeyPressed
+    }//GEN-LAST:event_listRecievedOrdersKeyPressed
 
-    private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
+    private void listRecievedOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listRecievedOrdersMouseClicked
         if(evt.getClickCount() == 2){
           JOptionPane.showMessageDialog(this, "Duplo Click");
         }
-    }//GEN-LAST:event_jList1MouseClicked
+    }//GEN-LAST:event_listRecievedOrdersMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFeedstock;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -298,39 +306,68 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<JRecievedOrder> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblFeedstock;
+    private javax.swing.JLabel lblProtocol;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblSupplier;
+    private javax.swing.JList<JPlacedOrders> listPlacedOrders;
+    private javax.swing.JList<JRecievedOrders> listRecievedOrders;
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
 
     private void initTables() {
-        JCar car = new JCar();
-        car.setModel("UNO");
-        car.setCostPrice(5000);
-        car.setSalePrice(8000);
-        car.setProductionTime(30);
-        car.setColor("Prata");
         
-        JRecievedOrder order = new JRecievedOrder();
-        order.setCar(car);
-        order.setProtocol("123456");
-        order.setStatus(EDeliveryStatus.ON_TIME);
-        order.setExpectedDate(new Date());
+        DefaultListModel dlmR = new DefaultListModel();
+        for (int i = 1; i <= 40; i++) {
+            JCar car = new JCar();
+            car.setModel("Uno");
+            
+            JShippingCompany shippingCompany = new JShippingCompany();
+            shippingCompany.setName("Transportadora "+ i);
+            
+            JDealership dealership = new JDealership();
+            dealership.setName("Concessionária " + i);
+            
+            JRecievedOrders recievedOrder = new JRecievedOrders();
+            recievedOrder.setProtocol("123456");
+            recievedOrder.setCar(car);
+            recievedOrder.setDealership(dealership);
+            recievedOrder.setShippingCompany(shippingCompany);
+            recievedOrder.setExpectedDate(new Date());
+            recievedOrder.setStatus(EDeliveryStatus.ON_TIME);
+            
+            dlmR.addElement(recievedOrder);
+        }
         
-        DefaultListModel dlm = new DefaultListModel();
-        dlm.addElement(order);
-        dlm.addElement(order);
-        dlm.addElement(order);
-        dlm.addElement(order);
-        dlm.addElement(order);
-        jList1.setModel(dlm);
-        jList1.setCellRenderer(new RecievedOrderList());
-
+        listRecievedOrders.setModel(dlmR);
+        listRecievedOrders.setCellRenderer(new RecievedOrderList());
+        
+        DefaultListModel dlmP = new DefaultListModel();
+        for (int i = 1; i <= 40; i++) {
+            JFeedstock feedstock = new JFeedstock();
+            feedstock.setName("Matéria-prima " +i);
+            
+            JSupplier supplier = new JSupplier();
+            supplier.setName("Fornecedor " + i);
+            
+            JPlacedOrders placedOrders = new JPlacedOrders();
+            placedOrders.setProtocol("123456");
+            placedOrders.setFeedstock(feedstock);
+            placedOrders.setSupplier(supplier);
+            placedOrders.setExpectedDate(new Date());
+            placedOrders.setStatus(EDeliveryStatus.ON_TIME);
+            
+            dlmP.addElement(placedOrders);
+        }
+        
+        listPlacedOrders.setModel(dlmP);
+        listPlacedOrders.setCellRenderer(new PlacedOrderList());
     }
 }

@@ -6,7 +6,9 @@
 package br.carmaker.view.list;
 
 import br.carmaker.model.JEmployee;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -41,12 +43,14 @@ public class EmployeeList extends javax.swing.JPanel implements
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        lblPhoto = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblEmail = new javax.swing.JLabel();
         lblPhone = new javax.swing.JLabel();
         lblRegister = new javax.swing.JLabel();
         lblRole = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        lblPhoto = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -64,28 +68,48 @@ public class EmployeeList extends javax.swing.JPanel implements
 
         lblRole.setText("Cargo:");
 
+        lblAddress.setText("Endereço: ");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblPhoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEmail)
                     .addComponent(lblName)
                     .addComponent(lblPhone)
                     .addComponent(lblRegister)
-                    .addComponent(lblRole))
-                .addGap(44, 358, Short.MAX_VALUE))
+                    .addComponent(lblRole)
+                    .addComponent(lblAddress))
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblName)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -95,7 +119,10 @@ public class EmployeeList extends javax.swing.JPanel implements
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblRegister)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblRole)))
+                        .addComponent(lblRole)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAddress)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -110,9 +137,7 @@ public class EmployeeList extends javax.swing.JPanel implements
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -123,7 +148,9 @@ public class EmployeeList extends javax.swing.JPanel implements
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(8, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -131,6 +158,8 @@ public class EmployeeList extends javax.swing.JPanel implements
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPhone;
@@ -146,20 +175,49 @@ public class EmployeeList extends javax.swing.JPanel implements
         lblPhone.setText("Telefone: " + value.getPhone());
         lblRegister.setText("Nome: " + value.getRegisterNumber());
         lblRole.setText("Cargo: " + value.getRole());
+        lblAddress.setText("Endereço: " +value.getAddress());
+        lblPhoto.setIcon(getUserImage(value.getPhoto()));
         
-        byte[] image = value.getPhoto();
+        if(isSelected){
+            jPanel2.setBackground(new Color(29,32,38));
+            lblName.setForeground(Color.WHITE);
+            lblEmail.setForeground(Color.WHITE);
+            lblPhone.setForeground(Color.WHITE);
+            lblRegister.setForeground(Color.WHITE);
+            lblRole.setForeground(Color.WHITE);
+            lblAddress.setForeground(Color.WHITE);
+            lblPhoto.setForeground(Color.WHITE);
+            
+        }else{
+            jPanel2.setBackground(new Color(245,245,246));
+            jPanel2.setForeground(Color.BLACK);
+            lblName.setForeground(Color.BLACK);
+            lblEmail.setForeground(Color.BLACK);
+            lblPhone.setForeground(Color.BLACK);
+            lblRegister.setForeground(Color.BLACK);
+            lblRole.setForeground(Color.BLACK);
+            lblAddress.setForeground(Color.BLACK);
+            lblPhoto.setForeground(Color.BLACK);
+        }
+        return this;
+    }
+    
+    private ImageIcon getUserImage(byte[] image){
         if (image != null) {
-            InputStream input = new ByteArrayInputStream(image);
-            try {
-                BufferedImage imagem = ImageIO.read(input);
-                lblPhoto.setIcon(new ImageIcon(imagem));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            ImageIcon img = new ImageIcon(image);
+            Image im = img.getImage();
+            return getResizedImage(im);
 
         } else {
-            lblPhoto.setIcon(null);
-        }         
-        return this;
+            Image img = new ImageIcon(getClass().getResource("/image/user_default.png")).getImage();
+            return getResizedImage(img);
+        }
+    }
+    
+    private ImageIcon getResizedImage(Image img){
+        int width = 112;
+        int height = 150;
+        
+        return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 }

@@ -2,7 +2,7 @@ package br.carmaker.model;
 
 import br.carmaker.model.abstracts.AOrder;
 
-public class JRecievedOrder extends AOrder{
+public class JRecievedOrders extends AOrder{
     private JCar car;
     private JDealership dealership;
     private JShippingCompany shippingCompany;
