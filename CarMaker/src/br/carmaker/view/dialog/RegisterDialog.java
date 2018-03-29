@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.enums.EMenuItem;
 import java.awt.Frame;
 import java.io.File;
 import javax.swing.JFrame;
@@ -17,19 +18,26 @@ public class RegisterDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form RegisterDialog
-     * @param parent
-     * @param modal
-     * @param panel
+     * @param parent frame que chamou a dialog (MainFrame nesse caso).
+     * @param modal indica se a tela que chamou a dialog continuará executando enquanto a dialog está aberta.
+     * @param panel indica qual painel do card layout será executado.
+     * @param header é o Enum que indica a entidade que será cadastrada ou editada.
+     * @param operation é o tipo de operação da tela (0-cadastro, 1-edição).
      */
-    public RegisterDialog(JFrame parent, boolean modal, int panel) {
+    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, int operation) {
         super(parent, modal);
         initComponents();
+        if(operation == 0){
+            lblHeader.setText("Cadastro de "+ header.getMenuItem() + ":");
+        }else{
+            lblHeader.setText("Edição de " + header.getMenuItem() + ":");
+        }
         
         this.parent = parent;
         
         employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
-//        feedstockDialog = new FeedstockDialog();    //Dialog 1
-//        carDialog = new CarDialog();                //Dialog 2
+        feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
+        carDialog = new CarDialog(this, parent);                //Dialog 2
 //        affiliateDialog = new AffiliateDialog();    //Dialog 3
 //        orderDialog = new OrderDialog();            //Dialog 4
         
@@ -73,8 +81,8 @@ public class RegisterDialog extends javax.swing.JDialog {
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelHeaderLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(lblHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(lblHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelHeaderLayout.setVerticalGroup(
             panelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +220,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true, 0);
+                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true, 0, EMenuItem.HOME, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

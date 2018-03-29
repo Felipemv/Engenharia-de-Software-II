@@ -7,6 +7,7 @@ package br.carmaker.view.panel;
 
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
+import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.EmployeeList;
 import java.awt.event.KeyEvent;
@@ -23,6 +24,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form EmployeePanel
+     * @param frame frame principal que chamou o dialog (MainFrame)
      */
     public EmployeePanel(JFrame frame) {
         initComponents();
@@ -121,7 +123,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, 0);
         dialog.setVisible(true);
         
         mainFrame.setEnabled(false);
@@ -154,7 +156,7 @@ public class EmployeePanel extends javax.swing.JPanel {
         DefaultListModel<JEmployee> dlm = new DefaultListModel<>();
         JEmployee employee = new JEmployee();
         
-        List<JEmployee> list = JDbFacade.getInstance().getAllEmployees();
+        List<JEmployee> list = JDbFacade.getInstance().readAllEmployees();
         
         for (int i = 0; i < list.size(); i++) {
             dlm.addElement(list.get(i));

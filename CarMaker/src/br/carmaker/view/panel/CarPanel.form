@@ -42,7 +42,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnAddEmployee" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAddCars" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" alignment="1" pref="547" max="32767" attributes="0"/>
                   </Group>
@@ -55,7 +55,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="btnAddEmployee" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAddCars" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" pref="537" max="32767" attributes="0"/>
@@ -96,7 +96,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btnAddEmployee">
+        <Component class="javax.swing.JButton" name="btnAddCars">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="12" style="0"/>
@@ -104,7 +104,7 @@
             <Property name="text" type="java.lang.String" value="Adicionar novo"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddEmployeeMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddCarsMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>

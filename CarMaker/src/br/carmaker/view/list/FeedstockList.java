@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.list;
 
-import br.carmaker.model.JCar;
+import br.carmaker.model.JFeedstock;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -14,12 +14,12 @@ import javax.swing.ListCellRenderer;
  *
  * @author felipe
  */
-public class CarList extends javax.swing.JPanel implements ListCellRenderer<JCar>{
+public class FeedstockList extends javax.swing.JPanel implements ListCellRenderer<JFeedstock>{
 
     /**
-     * Creates new form CarList
+     * Creates new form FeedstockList
      */
-    public CarList() {
+    public FeedstockList() {
         initComponents();
     }
 
@@ -33,102 +33,80 @@ public class CarList extends javax.swing.JPanel implements ListCellRenderer<JCar
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblModel = new javax.swing.JLabel();
-        lblProductionTime = new javax.swing.JLabel();
-        lblCostPrice = new javax.swing.JLabel();
-        lblSalePrice = new javax.swing.JLabel();
-        lblColor = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblSupplier = new javax.swing.JLabel();
+        lblAmount = new javax.swing.JLabel();
+        lblCost = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
-
-        lblModel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblModel.setText("Modelo");
-
-        lblProductionTime.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblProductionTime.setText("Tempo de Produção");
-
-        lblCostPrice.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblCostPrice.setText("Preço de Custo");
-
-        lblSalePrice.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblSalePrice.setText("Preço de Venda");
-
-        lblColor.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        lblColor.setText("Cor");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), null));
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel1.setText("Modelo: ");
+        jLabel1.setText("Nome: ");
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel2.setText("Tempo de Produção: ");
+        jLabel2.setText("Fornecedor: ");
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel3.setText("Preço de Custo: ");
+        jLabel3.setText("Quantidade por lote: ");
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel4.setText("Preço de Venda: ");
+        jLabel4.setText("Custo por lote: ");
 
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel5.setText("Cor: ");
+        lblName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        lblSupplier.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        lblAmount.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        lblCost.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblProductionTime))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSalePrice))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblColor))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblModel))
+                        .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCostPrice)))
-                .addGap(0, 242, Short.MAX_VALUE))
+                        .addComponent(lblAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblModel)
-                    .addComponent(jLabel1))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProductionTime)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel3)
+                    .addComponent(lblAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCostPrice)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSalePrice)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblColor)
-                    .addComponent(jLabel5))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(lblCost, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -155,24 +133,21 @@ public class CarList extends javax.swing.JPanel implements ListCellRenderer<JCar
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblColor;
-    private javax.swing.JLabel lblCostPrice;
-    private javax.swing.JLabel lblModel;
-    private javax.swing.JLabel lblProductionTime;
-    private javax.swing.JLabel lblSalePrice;
+    private javax.swing.JLabel lblAmount;
+    private javax.swing.JLabel lblCost;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblSupplier;
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends JCar> list, 
-            JCar value, int index, boolean isSelected, boolean hasFocus) {
+    public Component getListCellRendererComponent(JList<? extends JFeedstock> list, 
+            JFeedstock value, int index, boolean isSelected, boolean hasFocus) {
         
-        lblModel.setText(value.getModel());
-        lblProductionTime.setText(Integer.toString(value.getProductionTime()));
-        lblCostPrice.setText("R$" + String.format("%.2f", value.getCostPrice()).replace(".", ","));
-        lblSalePrice.setText("R$" + String.format("%.2f", value.getSalePrice()).replace(".", ","));
-        lblColor.setText(value.getModel());
+        lblName.setText(value.getName());
+        lblSupplier.setText(value.getSupplier().getName());
+        lblAmount.setText(Integer.toString(value.getQuantity()));
+        lblCost.setText("R$" + String.format("%.2f", value.getCost()).replace(".", ","));
         
         return this;
     }

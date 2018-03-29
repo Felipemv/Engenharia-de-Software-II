@@ -44,7 +44,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnAddFeedstock" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAddOrders" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
                       <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
@@ -60,7 +60,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="btnAddFeedstock" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAddOrders" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
             <Property name="text" type="java.lang.String" value="Lista de Pedidos:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAddFeedstock">
+        <Component class="javax.swing.JButton" name="btnAddOrders">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="12" style="0"/>
@@ -96,7 +96,7 @@
             <Property name="text" type="java.lang.String" value="Adicionar novo"/>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddFeedstockMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnAddOrdersMouseClicked"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">

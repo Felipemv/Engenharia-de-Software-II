@@ -13,8 +13,8 @@ public enum EMenuItem {
     HOME("Início"),
     EMPLOYEES("Funcionários"),
     CARS("Carros"),
-    FEEDSTOCK("Matéria-prima"),
-    AFFILIATES("Afiliados"),
+    FEEDSTOCK("Matérias-primas"),
+    AFFILIATES("Afiliadas"),
     ORDERS("Pedidos"),
     REPORT("Relatório"),
     LOGOUT("Sair");

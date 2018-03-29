@@ -57,7 +57,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         selectMenuItem(panelCardHome, EMenuItem.HOME.getMenuItem(), menuHome);
         
-        JEmployee employee = JDbFacade.getInstance().getEmployeeByID(id);
+        JEmployee employee = JDbFacade.getInstance().readEmployeeByID(id);
         lblUser.setText("Bem vindo, "+ employee.getName());
         setUserImage(employee.getPhoto());
         

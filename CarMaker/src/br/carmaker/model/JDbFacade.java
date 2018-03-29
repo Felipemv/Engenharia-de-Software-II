@@ -25,15 +25,23 @@ public class JDbFacade {
         return sInstance;
     }
     
-    public JEmployee getEmployeeByID(int id){
+    public JEmployee readEmployeeByID(int id){
         return JEmployeeDAO.getEmployeeByID(id);
     }
     
-    public void insertEmployee(JEmployee employee){
+    public void createEmployee(JEmployee employee){
         JEmployeeDAO.insertEmployee(employee);
     }
     
-    public List<JEmployee> getAllEmployees(){
+    public List<JEmployee> readAllEmployees(){
         return JEmployeeDAO.getAllEmployees();
+    }
+
+    public void createFeedstock(JFeedstock feedstock) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void createCar(JCar car) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

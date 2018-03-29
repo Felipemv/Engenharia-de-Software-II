@@ -248,7 +248,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 .addGroup(panelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancel))
-                .addGap(24, 24, 24))
+                .addGap(25, 25, 25))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -364,7 +364,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
             employee.setRole(role);
             employee.setPhoto(getImage());
 
-            JDbFacade.getInstance().insertEmployee(employee);
+            JDbFacade.getInstance().createEmployee(employee);
         }else{
             MessageDialog dialog = new MessageDialog(null, false);
             dialog.configurarDialog("Todos os campos são obrigatórios!");

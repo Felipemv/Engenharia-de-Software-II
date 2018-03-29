@@ -13,6 +13,7 @@ import br.carmaker.model.JRecievedOrders;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EDeliveryStatus;
+import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.PlacedOrderList;
 import br.carmaker.view.list.RecievedOrderList;
@@ -50,7 +51,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        btnAddFeedstock = new javax.swing.JButton();
+        btnAddOrders = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -76,11 +77,11 @@ public class OrderPanel extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel8.setText("Lista de Pedidos:");
 
-        btnAddFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        btnAddFeedstock.setText("Adicionar novo");
-        btnAddFeedstock.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAddOrders.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btnAddOrders.setText("Adicionar novo");
+        btnAddOrders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddFeedstockMouseClicked(evt);
+                btnAddOrdersMouseClicked(evt);
             }
         });
 
@@ -234,7 +235,7 @@ public class OrderPanel extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddFeedstock))
+                        .addComponent(btnAddOrders))
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
@@ -246,7 +247,7 @@ public class OrderPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddFeedstock))
+                    .addComponent(btnAddOrders))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,13 +275,13 @@ public class OrderPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAddFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddFeedstockMouseClicked
+    private void btnAddOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddOrdersMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.ORDERS, 0);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);
-    }//GEN-LAST:event_btnAddFeedstockMouseClicked
+    }//GEN-LAST:event_btnAddOrdersMouseClicked
 
     private void listRecievedOrdersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listRecievedOrdersKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_DELETE){
@@ -296,7 +297,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddFeedstock;
+    private javax.swing.JButton btnAddOrders;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

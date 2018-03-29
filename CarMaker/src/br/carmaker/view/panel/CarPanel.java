@@ -6,8 +6,12 @@
 package br.carmaker.view.panel;
 
 import br.carmaker.model.JCar;
+import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
+import br.carmaker.view.list.CarList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -20,6 +24,7 @@ public class CarPanel extends javax.swing.JPanel {
      */
     public CarPanel(JFrame frame) {
         initComponents();
+        initList();
         this.mainFrame = frame;
     }
 
@@ -36,7 +41,7 @@ public class CarPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listCars = new javax.swing.JList<>();
-        btnAddEmployee = new javax.swing.JButton();
+        btnAddCars = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -51,11 +56,11 @@ public class CarPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(listCars);
 
-        btnAddEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        btnAddEmployee.setText("Adicionar novo");
-        btnAddEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnAddCars.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        btnAddCars.setText("Adicionar novo");
+        btnAddCars.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAddEmployeeMouseClicked(evt);
+                btnAddCarsMouseClicked(evt);
             }
         });
 
@@ -69,7 +74,7 @@ public class CarPanel extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAddEmployee))
+                        .addComponent(btnAddCars))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -78,7 +83,7 @@ public class CarPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddEmployee))
+                    .addComponent(btnAddCars))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
                 .addContainerGap())
@@ -100,17 +105,17 @@ public class CarPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_listCarsValueChanged
 
-    private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
+    private void btnAddCarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCarsMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 2, EMenuItem.CARS, 0);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);
-    }//GEN-LAST:event_btnAddEmployeeMouseClicked
+    }//GEN-LAST:event_btnAddCarsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddEmployee;
+    private javax.swing.JButton btnAddCars;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -118,5 +123,26 @@ public class CarPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
+
+    private void initList() {
+        
+        DefaultListModel<JCar> dlm = new DefaultListModel<>();
+        
+        for (int i = 0; i < 10; i++) {
+            JCar car = new JCar();
+        
+            car.setModel("Fiat uno");
+            car.setCostPrice(5000);
+            car.setProductionTime(20);
+            car.setSalePrice(7000);
+            car.setColor("Prata");
+            
+            dlm.addElement(car);
+        }
+        
+        listCars.setModel(dlm);
+        listCars.setCellRenderer(new CarList());
+        
+    }
 
 }

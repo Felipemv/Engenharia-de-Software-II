@@ -6,7 +6,11 @@
 package br.carmaker.view.panel;
 
 import br.carmaker.model.JFeedstock;
+import br.carmaker.model.JSupplier;
+import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
+import br.carmaker.view.list.FeedstockList;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -20,6 +24,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
      */
     public FeedstockPanel(JFrame frame) {
         initComponents();
+        initList();
         this.mainFrame = frame;
     }
 
@@ -98,14 +103,14 @@ public class FeedstockPanel extends javax.swing.JPanel {
 
     private void btnAddFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddFeedstockMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 1, EMenuItem.FEEDSTOCK, 0);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);
     }//GEN-LAST:event_btnAddFeedstockMouseClicked
 
     private void listFeedstockValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listFeedstockValueChanged
-
+        
     }//GEN-LAST:event_listFeedstockValueChanged
 
 
@@ -118,4 +123,22 @@ public class FeedstockPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
+
+    private void initList() {
+        DefaultListModel<JFeedstock> dlm = new DefaultListModel();
+        for (int i = 0; i < 10; i++) {
+            JSupplier supplier = new JSupplier();
+            supplier.setName("Fornecedor " + (i+1));
+            
+            JFeedstock feedstock = new JFeedstock();
+            feedstock.setName("Escapamento");
+            feedstock.setQuantity(300);
+            feedstock.setCost(400);
+            feedstock.setSupplier(supplier);
+            
+            dlm.addElement(feedstock);
+        }
+        listFeedstock.setModel(dlm);
+        listFeedstock.setCellRenderer(new FeedstockList());
+    }
 }
