@@ -4,7 +4,7 @@ import br.carmaker.model.abstracts.AAffiliate;
 
 public class JShippingCompany extends AAffiliate{
     private int amount;
-    private JCar car;
+    private int fleet;
 
     public int getAmount() {
         return amount;
@@ -14,12 +14,12 @@ public class JShippingCompany extends AAffiliate{
         this.amount = amount;
     }
 
-    public JCar getCar() {
-        return car;
+    public int getFleet() {
+        return fleet;
     }
 
-    public void setCar(JCar car) {
-        this.car = car;
+    public void setFleet(int fleet) {
+        this.fleet = fleet;
     }
     
 }

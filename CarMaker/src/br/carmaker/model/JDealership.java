@@ -1,15 +1,17 @@
 package br.carmaker.model;
 
 import br.carmaker.model.abstracts.AAffiliate;
+import br.carmaker.model.enums.EDealershipType;
 
 public class JDealership extends AAffiliate{
-    private JCar car;
+    private EDealershipType type;
 
-    public JCar getCar() {
-        return car;
+    public EDealershipType getType() {
+        return type;
     }
 
-    public void setCar(JCar car) {
-        this.car = car;
+    public void setType(EDealershipType type) {
+        this.type = type;
     }
+    
 }

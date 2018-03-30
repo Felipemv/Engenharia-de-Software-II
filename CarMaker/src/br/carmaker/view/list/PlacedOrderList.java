@@ -128,7 +128,7 @@ public class PlacedOrderList extends javax.swing.JPanel implements
         
         lblProtocol.setText(value.getProtocol());
         lblFeedstock.setText(value.getFeedstock().getName());
-        lblSupplier.setText(value.getSupplier().getName());
+        lblSupplier.setText(value.getFeedstock().getName());
         lblStatus.setText(value.getStatus().toString());
         lblDate.setText(sdf.format(value.getExpectedDate()));
         

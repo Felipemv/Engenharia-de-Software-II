@@ -28,7 +28,7 @@ public class EmployeePanel extends javax.swing.JPanel {
      */
     public EmployeePanel(JFrame frame) {
         initComponents();
-        initList();
+        //initList();
         this.mainFrame = frame;
     }
 

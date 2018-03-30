@@ -24,7 +24,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
      */
     public FeedstockPanel(JFrame frame) {
         initComponents();
-        initList();
+        //initList();
         this.mainFrame = frame;
     }
 

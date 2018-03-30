@@ -10,10 +10,12 @@ import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.view.dialog.ConfirmDialog;
+import br.carmaker.view.panel.AffiliatePanel;
 import br.carmaker.view.panel.CarPanel;
 import br.carmaker.view.panel.EmployeePanel;
 import br.carmaker.view.panel.FeedstockPanel;
 import br.carmaker.view.panel.OrderPanel;
+import br.carmaker.view.panel.ReportPanel;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -42,9 +44,9 @@ public class MainFrame extends javax.swing.JFrame {
         panelCardEmployee = new EmployeePanel(this);
         panelCardFeedstock = new FeedstockPanel(this);
         panelCardCar = new CarPanel(this);
-//        panelCardAffiliate = new AffiliatePanel(this);
+        panelCardAffiliate = new AffiliatePanel(this);
         panelCardOrder = new OrderPanel(this);
-//        panelCardReport = new ReportPanel(this);
+        panelCardReport = new ReportPanel(this);
       
         menuText = new ArrayList<>();
         menuText.add(lblHome);
@@ -614,7 +616,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuOrdersMouseExited
 
     private void menuAffiliatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAffiliatesMouseClicked
-        //        selectMenuItem(panelCardffiliates, EMenuItem.AFFILIATES.getMenuItem(), menuEmployees);
+        selectMenuItem(panelCardAffiliate, EMenuItem.AFFILIATES.getMenuItem(), menuAffiliates);
     }//GEN-LAST:event_menuAffiliatesMouseClicked
 
     private void menuAffiliatesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAffiliatesMouseEntered
@@ -626,7 +628,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAffiliatesMouseExited
 
     private void menuReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportMouseClicked
-        //        selectMenuItem(panelCardReport, EMenuItem.REPORT.getMenuItem(), menuReport);
+        selectMenuItem(panelCardReport, EMenuItem.REPORT.getMenuItem(), menuReport);
     }//GEN-LAST:event_menuReportMouseClicked
 
     private void menuReportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportMouseEntered

@@ -38,8 +38,8 @@ public class RegisterDialog extends javax.swing.JDialog {
         employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
         feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
         carDialog = new CarDialog(this, parent);                //Dialog 2
-//        affiliateDialog = new AffiliateDialog();    //Dialog 3
-//        orderDialog = new OrderDialog();            //Dialog 4
+        affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
+        orderDialog = new OrderDialog(this, parent);            //Dialog 4
         
         selectMenuItem(panel);
     }

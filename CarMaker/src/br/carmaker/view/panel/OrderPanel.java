@@ -36,7 +36,7 @@ public class OrderPanel extends javax.swing.JPanel {
      */
     public OrderPanel(JFrame frame) {
         initComponents();
-        initTables();
+        //initTables();
         this.mainFrame = frame;
     }
 
@@ -361,7 +361,6 @@ public class OrderPanel extends javax.swing.JPanel {
             JPlacedOrders placedOrders = new JPlacedOrders();
             placedOrders.setProtocol("123456");
             placedOrders.setFeedstock(feedstock);
-            placedOrders.setSupplier(supplier);
             placedOrders.setExpectedDate(new Date());
             placedOrders.setStatus(EDeliveryStatus.ON_TIME);
             

@@ -24,7 +24,7 @@ public class CarPanel extends javax.swing.JPanel {
      */
     public CarPanel(JFrame frame) {
         initComponents();
-        initList();
+        //initList();
         this.mainFrame = frame;
     }
 
