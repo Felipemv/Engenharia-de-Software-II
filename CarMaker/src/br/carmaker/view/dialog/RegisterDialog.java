@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JEmployee;
 import br.carmaker.model.enums.EMenuItem;
 import java.awt.Frame;
 import java.io.File;
@@ -23,23 +24,38 @@ public class RegisterDialog extends javax.swing.JDialog {
      * @param panel indica qual painel do card layout será executado.
      * @param header é o Enum que indica a entidade que será cadastrada ou editada.
      * @param operation é o tipo de operação da tela (0-cadastro, 1-edição).
+     * @param employee se caso for uma edição, qual o employee a ser editado.
      */
-    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, int operation) {
+    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, int operation, JEmployee employee) {
         super(parent, modal);
         initComponents();
         if(operation == 0){
             lblHeader.setText("Cadastro de "+ header.getMenuItem() + ":");
+            
+            this.parent = parent;
+        
+            employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
+            feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
+            carDialog = new CarDialog(this, parent);                //Dialog 2
+            affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
+            orderDialog = new OrderDialog(this, parent);            //Dialog 4
+            
         }else{
             lblHeader.setText("Edição de " + header.getMenuItem() + ":");
+            
+            this.parent = parent;
+        
+            employeeDialog = new EmployeeDialog(this, parent, employee);      //Dialog 0
+            feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
+            carDialog = new CarDialog(this, parent);                //Dialog 2
+            affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
+            orderDialog = new OrderDialog(this, parent);            //Dialog 4
+        
         }
         
-        this.parent = parent;
         
-        employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
-        feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
-        carDialog = new CarDialog(this, parent);                //Dialog 2
-        affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
-        orderDialog = new OrderDialog(this, parent);            //Dialog 4
+        
+        
         
         selectMenuItem(panel);
     }
@@ -220,7 +236,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true, 0, EMenuItem.HOME, 0);
+                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true, 0, EMenuItem.HOME, 0, null);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

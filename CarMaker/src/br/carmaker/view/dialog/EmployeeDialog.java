@@ -7,6 +7,7 @@ package br.carmaker.view.dialog;
 
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
+import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EEmployeeType;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class EmployeeDialog extends javax.swing.JPanel {
 
+    private boolean creating = true;
+    
+    
     /**
      * Creates new form employeeDialog
      * @param registerDialog
@@ -39,6 +43,30 @@ public class EmployeeDialog extends javax.swing.JPanel {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        creating = true;
+    }
+    
+    public EmployeeDialog(JDialog registerDialog, JFrame parent, JEmployee employee) {
+        initComponents();
+        this.registerDialog = registerDialog;
+        this.parent = parent;
+        tfName.setText(employee.getName());
+        tfEmail.setText(employee.getEmail());
+        tfConfirmEmail.setText(employee.getEmail());
+        pfPassword.setText(employee.getPassword());
+        pfConfirmPassword.setText(employee.getPassword());
+        tfAddress.setText(employee.getAddress());
+        tfPhone.setText(employee.getPhone());
+        tfRegister.setText(employee.getRegisterNumber());
+        lblEmployeePhoto.setIcon(getUserImage(employee.getPhoto()));
+        if(employee.getRole().equals('0')) {
+            rbEmployee.setSelected(true);
+            rbManager.setSelected(false);
+        } else {
+            rbEmployee.setSelected(false);
+            rbManager.setSelected(true);
+        }
+        creating = false;
     }
 
     /**
@@ -364,13 +392,17 @@ public class EmployeeDialog extends javax.swing.JPanel {
             employee.setRole(role);
             employee.setPhoto(getImage());
 
-            JDbFacade.getInstance().createEmployee(employee);
+            if(creating) JDbFacade.getInstance().createEmployee(employee);
+            else JEmployeeDAO.editEmployee(employee, name);
         }else{
             MessageDialog dialog = new MessageDialog(null, false);
             dialog.configurarDialog("Todos os campos são obrigatórios!");
             this.setEnabled(false);
             dialog.setVisible(true);
         }
+        
+        registerDialog.dispose();
+        parent.setEnabled(true);
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -451,5 +483,23 @@ public class EmployeeDialog extends javax.swing.JPanel {
             lblEmployeePhoto.setIcon(new ImageIcon(resizedImage));
         }
         
+    }
+    
+    private ImageIcon getUserImage(byte[] image){
+        if (image != null) {
+            ImageIcon img = new ImageIcon(image);
+            Image im = img.getImage();
+            return getResizedImage(im);
+
+        } else {
+            Image img = new ImageIcon(getClass().getResource("/image/user_default.png")).getImage();
+            return getResizedImage(img);
+        }
+    }
+    private ImageIcon getResizedImage(Image img){
+        int width = 112;
+        int height = 150;
+        
+        return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 }

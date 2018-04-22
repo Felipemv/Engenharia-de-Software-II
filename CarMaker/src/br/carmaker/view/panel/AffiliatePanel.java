@@ -161,7 +161,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
     private void btnAddAffiliatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAffiliatesMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 3, EMenuItem.AFFILIATES, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 3, EMenuItem.AFFILIATES, 0, null);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);

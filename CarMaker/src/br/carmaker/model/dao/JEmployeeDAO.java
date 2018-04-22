@@ -89,6 +89,50 @@ public class JEmployeeDAO {
         }        
     }
     
+    public static void editEmployee(JEmployee employee, String name){
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt;
+        
+//        String sql = "UPDATE  " + TABLE_NAME + "(" +NAME+ "," +ADDRESS+ ", "
+//                +PHONE+ ", " +REGISTER+ ", " +ROLE+ ", " +EMAIL+ ", "
+//                +PASSWORD+ ", " +PHOTO+ ") VALUES (?, ?, ?, ?, ?, ?, ?, ?) WHERE " + NAME + "='" + name + "'";
+
+        String sql = "UPDATE employee SET name = ?, address = ?, phone = ?, register = ?,"
+                + " role = ?, email = ?, pass = ?, photo = ? WHERE name = ?";
+        
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, employee.getName());
+            stmt.setString(2, employee.getAddress());
+            stmt.setString(3, employee.getPhone());
+            stmt.setString(4, employee.getRegisterNumber());
+            stmt.setInt(5, employee.getRole().getUserType());
+            stmt.setString(6, employee.getEmail());
+            stmt.setString(7, employee.getPassword());
+            stmt.setBytes(8, employee.getPhoto());
+            stmt.setString(9, name);
+            
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
+    
+    public static void deleteEmployee(int id){
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt;
+        
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
+        
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }
+    
     public static List<JEmployee> getAllEmployees(){
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
@@ -122,5 +166,22 @@ public class JEmployeeDAO {
             Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);           
         }      
         return listEmployees;  
+    }
+    
+    public static int getEmployeeID(String email, String password){
+        
+        List<JEmployee> listEmployees = new ArrayList<>();
+        listEmployees = getAllEmployees();
+        
+        for(int i = 0; i < listEmployees.size(); i++){
+            if(listEmployees.get(i).getEmail().equalsIgnoreCase(email)){
+                if(listEmployees.get(i).getPassword().equalsIgnoreCase(password))
+                {
+                    return listEmployees.get(i).getId();
+                }
+            }
+        }
+        
+        return -1;
     }
 }

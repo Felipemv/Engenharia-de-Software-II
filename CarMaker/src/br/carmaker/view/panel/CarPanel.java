@@ -107,7 +107,7 @@ public class CarPanel extends javax.swing.JPanel {
 
     private void btnAddCarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCarsMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 2, EMenuItem.CARS, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 2, EMenuItem.CARS, 0, null);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);

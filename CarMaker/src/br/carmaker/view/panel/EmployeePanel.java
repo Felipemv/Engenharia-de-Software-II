@@ -7,10 +7,12 @@ package br.carmaker.view.panel;
 
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
+import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.EmployeeList;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -28,7 +30,7 @@ public class EmployeePanel extends javax.swing.JPanel {
      */
     public EmployeePanel(JFrame frame) {
         initComponents();
-        //initList();
+        initList();
         this.mainFrame = frame;
     }
 
@@ -123,7 +125,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, 0);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, 0, null);
         dialog.setVisible(true);
         
         mainFrame.setEnabled(false);
@@ -132,12 +134,33 @@ public class EmployeePanel extends javax.swing.JPanel {
     private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
         if(evt.getClickCount() == 2){
             JOptionPane.showMessageDialog(this, "Duplo Click");
+            
+            int id = listEmployee.getSelectedIndex();
+            ArrayList<JEmployee> list = (ArrayList<JEmployee>) JDbFacade.getInstance().readAllEmployees();
+            String email = list.get(id).getEmail();
+            String password = list.get(id).getPassword();
+            id = JEmployeeDAO.getEmployeeID(email, password);
+            JEmployee employee = JEmployeeDAO.getEmployeeByID(id);
+            
+            RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, 1, employee);
+            dialog.setVisible(true);
+
+            mainFrame.setEnabled(false);
+            
         }
     }//GEN-LAST:event_listEmployeeMouseClicked
 
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_DELETE){
             JOptionPane.showMessageDialog(this, "Delete");
+            
+            int id = listEmployee.getSelectedIndex();
+            ArrayList<JEmployee> list = (ArrayList<JEmployee>) JDbFacade.getInstance().readAllEmployees();
+            String email = list.get(id).getEmail();
+            String password = list.get(id).getPassword();
+            id = JEmployeeDAO.getEmployeeID(email, password);
+            
+            JEmployeeDAO.deleteEmployee(id);
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
 

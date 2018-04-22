@@ -66,7 +66,7 @@ public class LoginFrame extends javax.swing.JFrame {
         tfUser.setBackground(new java.awt.Color(64, 64, 64));
         tfUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfUser.setForeground(new java.awt.Color(255, 255, 255));
-        tfUser.setText("felipevitor@gec.inatel.br");
+        tfUser.setText("rafael@");
         tfUser.setBorder(null);
         tfUser.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
