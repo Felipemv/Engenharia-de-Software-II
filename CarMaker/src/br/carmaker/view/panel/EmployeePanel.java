@@ -81,6 +81,11 @@ public class EmployeePanel extends javax.swing.JPanel {
                 btnAddEmployeeMouseClicked(evt);
             }
         });
+        btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEmployeeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,7 +130,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, 0, null);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES);
         dialog.setVisible(true);
         
         mainFrame.setEnabled(false);
@@ -133,36 +138,25 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
         if(evt.getClickCount() == 2){
-            JOptionPane.showMessageDialog(this, "Duplo Click");
+            JEmployee employee = listEmployee.getSelectedValue();
             
-            int id = listEmployee.getSelectedIndex();
-            ArrayList<JEmployee> list = (ArrayList<JEmployee>) JDbFacade.getInstance().readAllEmployees();
-            String email = list.get(id).getEmail();
-            String password = list.get(id).getPassword();
-            id = JEmployeeDAO.getEmployeeID(email, password);
-            JEmployee employee = JEmployeeDAO.getEmployeeByID(id);
-            
-            RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, 1, employee);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, employee);
             dialog.setVisible(true);
-
             mainFrame.setEnabled(false);
             
         }
     }//GEN-LAST:event_listEmployeeMouseClicked
 
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_DELETE){
-            JOptionPane.showMessageDialog(this, "Delete");
-            
-            int id = listEmployee.getSelectedIndex();
-            ArrayList<JEmployee> list = (ArrayList<JEmployee>) JDbFacade.getInstance().readAllEmployees();
-            String email = list.get(id).getEmail();
-            String password = list.get(id).getPassword();
-            id = JEmployeeDAO.getEmployeeID(email, password);
-            
+        if(evt.getKeyCode() == KeyEvent.VK_DELETE){            
+            int id = listEmployee.getSelectedValue().getId();
             JEmployeeDAO.deleteEmployee(id);
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
+
+    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

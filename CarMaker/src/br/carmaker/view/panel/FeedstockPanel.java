@@ -103,7 +103,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
 
     private void btnAddFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddFeedstockMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 1, EMenuItem.FEEDSTOCK, 0, null);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 1, EMenuItem.FEEDSTOCK);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);

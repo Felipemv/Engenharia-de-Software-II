@@ -5,7 +5,12 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JCar;
 import br.carmaker.model.JEmployee;
+import br.carmaker.model.JFeedstock;
+import br.carmaker.model.JOrder;
+import br.carmaker.model.abstracts.AAffiliate;
+import br.carmaker.model.abstracts.ABaseEntity;
 import br.carmaker.model.enums.EMenuItem;
 import java.awt.Frame;
 import java.io.File;
@@ -19,45 +24,38 @@ public class RegisterDialog extends javax.swing.JDialog {
 
     /**
      * Creates new form RegisterDialog
+     *
      * @param parent frame que chamou a dialog (MainFrame nesse caso).
-     * @param modal indica se a tela que chamou a dialog continuará executando enquanto a dialog está aberta.
+     * @param modal indica se a tela que chamou a dialog continuará executando
+     * enquanto a dialog está aberta.
      * @param panel indica qual painel do card layout será executado.
-     * @param header é o Enum que indica a entidade que será cadastrada ou editada.
+     * @param header é o Enum que indica a entidade que será cadastrada ou
+     * editada.
      * @param operation é o tipo de operação da tela (0-cadastro, 1-edição).
      * @param employee se caso for uma edição, qual o employee a ser editado.
      */
-    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, int operation, JEmployee employee) {
+    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header) {
         super(parent, modal);
         initComponents();
-        if(operation == 0){
-            lblHeader.setText("Cadastro de "+ header.getMenuItem() + ":");
-            
-            this.parent = parent;
-        
-            employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
-            feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
-            carDialog = new CarDialog(this, parent);                //Dialog 2
-            affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
-            orderDialog = new OrderDialog(this, parent);            //Dialog 4
-            
-        }else{
-            lblHeader.setText("Edição de " + header.getMenuItem() + ":");
-            
-            this.parent = parent;
-        
-            employeeDialog = new EmployeeDialog(this, parent, employee);      //Dialog 0
-            feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
-            carDialog = new CarDialog(this, parent);                //Dialog 2
-            affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
-            orderDialog = new OrderDialog(this, parent);            //Dialog 4
-        
-        }
-        
-        
-        
-        
-        
-        selectMenuItem(panel);
+
+        this.parent = parent;
+        this.header = header;
+        this.panel = panel;
+
+        setRegisterPanel();
+        setHeader();
+    }
+
+    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, ABaseEntity entity) {
+        super(parent, modal);
+        initComponents();
+
+        this.parent = parent;
+        this.header = header;
+        this.panel = panel;
+
+        setEditPanel(entity);
+        setHeader();
     }
 
     /**
@@ -236,7 +234,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true, 0, EMenuItem.HOME, 0, null);
+                RegisterDialog dialog = new RegisterDialog(new javax.swing.JFrame(), true, 0, EMenuItem.HOME);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -261,32 +259,82 @@ public class RegisterDialog extends javax.swing.JDialog {
     private javax.swing.JPanel panelView;
     // End of variables declaration//GEN-END:variables
 
-    private Frame parent;
-    private File imagem;
-        
-    private void selectMenuItem(int panel) {
+    private JFrame parent;
+    private int operation;
+    private ABaseEntity entity;
+    private EMenuItem header;
+    private int panel;
+
+    private void setRegisterPanel() {
         panelView.removeAll();
-           
-            switch(panel){
-                case 0:
-                    panelView.add(employeeDialog);
-                    break;                    
-                case 1:
-                    panelView.add(feedstockDialog);                    
-                    break;                    
-                case 2:
-                    panelView.add(carDialog);
-                    break;                    
-                case 3:
-                    panelView.add(affiliateDialog);
-                    break;                    
-                case 4:
-                    panelView.add(orderDialog);
-                    break;                    
-                default:
-                    break;
-            }
+        switch (panel) {
+            case 0:
+                employeeDialog = new EmployeeDialog(this, parent);      //Dialog 0
+                panelView.add(employeeDialog);
+                break;
+            case 1:
+                feedstockDialog = new FeedstockDialog(this, parent);    //Dialog 1
+                panelView.add(feedstockDialog);
+                break;
+            case 2:
+                carDialog = new CarDialog(this, parent);                //Dialog 2
+                panelView.add(carDialog);
+                break;
+            case 3:
+                affiliateDialog = new AffiliateDialog(this, parent);    //Dialog 3
+                panelView.add(affiliateDialog);
+                break;
+            case 4:
+                orderDialog = new OrderDialog(this, parent);            //Dialog 4
+                panelView.add(orderDialog);
+                break;
+            default:
+                break;
+        }
         panelView.repaint();
         panelView.revalidate();
     }    
+
+    private void setEditPanel(ABaseEntity entity) {
+        panelView.removeAll();
+        
+        switch (panel) {
+            case 0:
+                employeeDialog = new EmployeeDialog(this, parent, (JEmployee) entity);      //Dialog 0
+                panelView.add(employeeDialog);
+                break;
+            case 1:
+                feedstockDialog = new FeedstockDialog(this, parent, (JFeedstock) entity);    //Dialog 1
+                panelView.add(feedstockDialog);
+                break;
+            case 2:
+                carDialog = new CarDialog(this, parent, (JCar) entity);                //Dialog 2
+                panelView.add(carDialog);
+                break;
+            case 3:
+                affiliateDialog = new AffiliateDialog(this, parent, (AAffiliate) entity);    //Dialog 3
+                panelView.add(affiliateDialog);
+                break;
+            case 4:
+                orderDialog = new OrderDialog(this, parent, (JOrder) entity);            //Dialog 4
+                panelView.add(orderDialog);
+                break;
+            default:
+                break;
+        }
+        panelView.repaint();
+        panelView.revalidate();
+    }
+    
+    private void setHeader() {
+        switch (operation) {
+            case 0:
+                lblHeader.setText("Cadastro de " + header.getMenuItem() + ":");
+                break;
+            case 1:
+                lblHeader.setText("Edição de " + header.getMenuItem() + ":");
+                break;
+        }
+
+    }
 }

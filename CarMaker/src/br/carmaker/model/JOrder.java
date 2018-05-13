@@ -1,9 +1,10 @@
 package br.carmaker.model;
 
+import br.carmaker.model.abstracts.ABaseEntity;
 import br.carmaker.model.enums.EDeliveryStatus;
 import java.util.Date;
 
-public class JOrder {	
+public class JOrder extends ABaseEntity{	
     private String protocol;
     private JCar car;
     private JFeedstock feedstock;

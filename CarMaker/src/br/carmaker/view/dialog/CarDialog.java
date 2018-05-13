@@ -24,6 +24,12 @@ public class CarDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
+    
+    public CarDialog(JDialog registerDialog, JFrame parent, JCar car) {
+        initComponents();        
+        this.registerDialog = registerDialog;
+        this.parent = parent;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

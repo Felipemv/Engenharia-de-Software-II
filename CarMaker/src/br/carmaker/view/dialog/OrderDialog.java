@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JOrder;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -18,6 +19,12 @@ public class OrderDialog extends javax.swing.JPanel {
      * Creates new form OrderDialog
      */
     public OrderDialog(JDialog registerDialog, JFrame parent) {
+        initComponents();
+        this.registerDialog = registerDialog;
+        this.parent = parent;
+    }
+    
+    public OrderDialog(JDialog registerDialog, JFrame parent, JOrder order) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;

@@ -167,21 +167,4 @@ public class JEmployeeDAO {
         }      
         return listEmployees;  
     }
-    
-    public static int getEmployeeID(String email, String password){
-        
-        List<JEmployee> listEmployees = new ArrayList<>();
-        listEmployees = getAllEmployees();
-        
-        for(int i = 0; i < listEmployees.size(); i++){
-            if(listEmployees.get(i).getEmail().equalsIgnoreCase(email)){
-                if(listEmployees.get(i).getPassword().equalsIgnoreCase(password))
-                {
-                    return listEmployees.get(i).getId();
-                }
-            }
-        }
-        
-        return -1;
-    }
 }

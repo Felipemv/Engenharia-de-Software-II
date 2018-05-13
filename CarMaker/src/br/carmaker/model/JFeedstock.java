@@ -1,6 +1,8 @@
 package br.carmaker.model;
 
-public class JFeedstock {	
+import br.carmaker.model.abstracts.ABaseEntity;
+
+public class JFeedstock extends ABaseEntity{	
     private String name;
     private JSupplier supplier;
     private int quantity;

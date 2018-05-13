@@ -1,6 +1,8 @@
 package br.carmaker.model;
 
-public class JCar {
+import br.carmaker.model.abstracts.ABaseEntity;
+
+public class JCar extends ABaseEntity{
     private String model;
     private int productionTime;
     private double costPrice;

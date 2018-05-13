@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.abstracts.AAffiliate;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -18,6 +19,12 @@ public class AffiliateDialog extends javax.swing.JPanel {
      * Creates new form AffiliateDialog
      */
     public AffiliateDialog(JDialog registerDialog, JFrame parent) {
+        initComponents();
+        this.registerDialog = registerDialog;
+        this.parent = parent;
+    }
+    
+    public AffiliateDialog(JDialog registerDialog, JFrame parent, AAffiliate affiliate) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;

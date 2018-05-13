@@ -50,22 +50,8 @@ public class EmployeeDialog extends javax.swing.JPanel {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
-        tfName.setText(employee.getName());
-        tfEmail.setText(employee.getEmail());
-        tfConfirmEmail.setText(employee.getEmail());
-        pfPassword.setText(employee.getPassword());
-        pfConfirmPassword.setText(employee.getPassword());
-        tfAddress.setText(employee.getAddress());
-        tfPhone.setText(employee.getPhone());
-        tfRegister.setText(employee.getRegisterNumber());
-        lblEmployeePhoto.setIcon(getUserImage(employee.getPhoto()));
-        if(employee.getRole().equals('0')) {
-            rbEmployee.setSelected(true);
-            rbManager.setSelected(false);
-        } else {
-            rbEmployee.setSelected(false);
-            rbManager.setSelected(true);
-        }
+        
+        setEmployee(employee);
         creating = false;
     }
 
@@ -496,10 +482,30 @@ public class EmployeeDialog extends javax.swing.JPanel {
             return getResizedImage(img);
         }
     }
+    
     private ImageIcon getResizedImage(Image img){
         int width = 112;
         int height = 150;
         
         return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
+    }
+    
+    private void setEmployee(JEmployee employee){
+        tfName.setText(employee.getName());
+        tfEmail.setText(employee.getEmail());
+        tfConfirmEmail.setText(employee.getEmail());
+        pfPassword.setText(employee.getPassword());
+        pfConfirmPassword.setText(employee.getPassword());
+        tfAddress.setText(employee.getAddress());
+        tfPhone.setText(employee.getPhone());
+        tfRegister.setText(employee.getRegisterNumber());
+        lblEmployeePhoto.setIcon(getUserImage(employee.getPhoto()));
+        if(employee.getRole() == EEmployeeType.Employee) {
+            rbEmployee.setSelected(true);
+            rbManager.setSelected(false);
+        } else {
+            rbEmployee.setSelected(false);
+            rbManager.setSelected(true);
+        }
     }
 }

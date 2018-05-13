@@ -277,7 +277,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void btnAddOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddOrdersMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.ORDERS, 0, null);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.ORDERS);
         dialog.setVisible(true);
 
         mainFrame.setEnabled(false);

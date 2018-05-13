@@ -25,6 +25,12 @@ public class FeedstockDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
+    
+    public FeedstockDialog(JDialog registerDialog, JFrame parent, JFeedstock feedstock) {
+        initComponents();
+        this.registerDialog = registerDialog;
+        this.parent = parent;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
