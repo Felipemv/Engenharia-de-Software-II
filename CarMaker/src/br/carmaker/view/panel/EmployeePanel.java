@@ -9,6 +9,7 @@ import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EMenuItem;
+import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.EmployeeList;
 import java.awt.event.KeyEvent;
@@ -130,27 +131,31 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES);
-        dialog.setVisible(true);
-        
         mainFrame.setEnabled(false);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES);
+        dialog.setVisible(true);        
+        initList();
     }//GEN-LAST:event_btnAddEmployeeMouseClicked
 
     private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
         if(evt.getClickCount() == 2){
             JEmployee employee = listEmployee.getSelectedValue();
             
-            RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.EMPLOYEES, employee);
-            dialog.setVisible(true);
             mainFrame.setEnabled(false);
-            
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES, employee);
+            dialog.setVisible(true);
+            initList();
         }
     }//GEN-LAST:event_listEmployeeMouseClicked
 
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_DELETE){            
             int id = listEmployee.getSelectedValue().getId();
-            JEmployeeDAO.deleteEmployee(id);
+            ConfirmDialog.showConfirmationMessage(mainFrame, "Confirmar exclusão do funcionário?", this);
+            if(ConfirmDialog.getUserChoice()){
+                JEmployeeDAO.deleteEmployee(id);
+                initList();
+            }            
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
 
@@ -170,9 +175,7 @@ public class EmployeePanel extends javax.swing.JPanel {
     private final JFrame mainFrame;
     
     public void initList(){
-        DefaultListModel<JEmployee> dlm = new DefaultListModel<>();
-        JEmployee employee = new JEmployee();
-        
+        DefaultListModel<JEmployee> dlm = new DefaultListModel<>();        
         List<JEmployee> list = JDbFacade.getInstance().readAllEmployees();
         
         for (int i = 0; i < list.size(); i++) {

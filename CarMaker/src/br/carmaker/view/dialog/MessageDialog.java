@@ -5,6 +5,10 @@
  */
 package br.carmaker.view.dialog;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Usuário
@@ -144,5 +148,12 @@ public class MessageDialog extends javax.swing.JDialog {
 
     public void configurarDialog(String headerText){
         lblHeaderText.setText(headerText);
+    }
+    
+    public static void showErrorMessage(String message, JPanel panel){
+        MessageDialog dialog = new MessageDialog(null, true);
+        dialog.configurarDialog(message);
+        panel.setEnabled(false);
+        dialog.setVisible(true); 
     }
 }

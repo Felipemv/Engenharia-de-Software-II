@@ -6,6 +6,8 @@
 package br.carmaker.view.dialog;
 
 import java.awt.Frame;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,8 +21,6 @@ public class ConfirmDialog extends javax.swing.JDialog {
     public ConfirmDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        userChoice = false;
-        this.parent = parent;
     }
 
     /**
@@ -110,18 +110,13 @@ public class ConfirmDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lblYesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblYesMouseClicked
-        if(logout){
-            System.exit(0);
-        }else{
-            userChoice = true;
-            parent.setEnabled(true);
-            dispose();
-        }
+        userChoice = true;
+        this.dispose();
     }//GEN-LAST:event_lblYesMouseClicked
 
     private void lblNotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNotMouseClicked
+        userChoice = false;
         this.dispose();
-        parent.setEnabled(true);
     }//GEN-LAST:event_lblNotMouseClicked
 
     /**
@@ -173,25 +168,36 @@ public class ConfirmDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblYes;
     // End of variables declaration//GEN-END:variables
     
-    private String headerText;
-    private boolean userChoice;
-    private boolean logout;
-    private Frame parent;
-
-    public void setHeaderText(String headerText) {
-        this.headerText = headerText;
+    private static boolean userChoice;
+    private static ConfirmDialog instance;
+    
+    public static synchronized ConfirmDialog getInstance(JFrame parent){
+        if(instance == null){
+            instance = new ConfirmDialog(parent, true);
+        }
+        return instance;
     }
     
-    public void setLogout(boolean logout){
-        this.logout = logout;
-    }
-
-    public boolean getUserChoice(){
+    public static boolean getUserChoice(){
+        instance = null;
         return userChoice;
     }
     
-    public void changeDialog(){
+    public void configDialog(String headerText){
         lblText.setText(headerText);
     }
-
+    
+    public static void showConfirmationMessage(JFrame parent, String message, JPanel panel){
+        ConfirmDialog dialog = ConfirmDialog.getInstance(parent);
+        dialog.configDialog(message);
+        panel.setEnabled(false);
+        dialog.setVisible(true); 
+    }
+    
+    public static void showConfirmationMessage(JFrame parent, String message){
+        ConfirmDialog dialog = ConfirmDialog.getInstance(parent);
+        dialog.configDialog(message);
+        parent.setEnabled(false);
+        dialog.setVisible(true);
+    }
 }

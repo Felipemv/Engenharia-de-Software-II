@@ -9,11 +9,13 @@ import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
+import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.panel.AffiliatePanel;
 import br.carmaker.view.panel.CarPanel;
 import br.carmaker.view.panel.EmployeePanel;
 import br.carmaker.view.panel.FeedstockPanel;
+import br.carmaker.view.panel.HomePanel;
 import br.carmaker.view.panel.OrderPanel;
 import br.carmaker.view.panel.ReportPanel;
 import java.awt.Color;
@@ -755,6 +757,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void selectMenuItem(JPanel panel, String labelName, JPanel menuItem) {
+               
         panelView.removeAll();
         panelView.add(panel);
         panelView.repaint();
@@ -772,15 +775,14 @@ public class MainFrame extends javax.swing.JFrame {
         
     }
 
-    private void logout() {
-        ConfirmDialog confirmDialog = new ConfirmDialog(this, false);
-
-        confirmDialog.setHeaderText("Confirmar saída do sistema?");
-        confirmDialog.changeDialog();
-        confirmDialog.setLogout(true);
-        confirmDialog.setVisible(true);
-
-        this.setEnabled(false);
+    private void logout() {        
+        ConfirmDialog.showConfirmationMessage(this, "Confirmar saída do sistema?");
+            if(ConfirmDialog.getUserChoice()){
+                this.dispose();
+                new LoginFrame().setVisible(true);
+            }else{
+                this.setEnabled(true);
+            }
     }
 
     private void setUserImage(byte[] photo) {
@@ -802,4 +804,6 @@ public class MainFrame extends javax.swing.JFrame {
         
         return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
+
+    
 }

@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -33,10 +33,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class EmployeeDialog extends javax.swing.JPanel {
 
     private boolean creating = true;
-    
-    
+
     /**
      * Creates new form employeeDialog
+     *
      * @param registerDialog
      */
     public EmployeeDialog(JDialog registerDialog, JFrame parent) {
@@ -45,12 +45,13 @@ public class EmployeeDialog extends javax.swing.JPanel {
         this.parent = parent;
         creating = true;
     }
-    
+
     public EmployeeDialog(JDialog registerDialog, JFrame parent, JEmployee employee) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
-        
+        this.employee = employee;
+
         setEmployee(employee);
         creating = false;
     }
@@ -128,19 +129,14 @@ public class EmployeeDialog extends javax.swing.JPanel {
         jLabel6.setText("Confirmar Senha:");
 
         tfName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfName.setText("asdf");
 
         tfEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfEmail.setText("asdf");
 
         tfConfirmEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfConfirmEmail.setText("asdfa");
 
         pfPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        pfPassword.setText("safdas");
 
         pfConfirmPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        pfConfirmPassword.setText("asdf");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -202,13 +198,10 @@ public class EmployeeDialog extends javax.swing.JPanel {
         jLabel10.setText("Cargo:");
 
         tfAddress.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfAddress.setText("asdfads");
 
         tfPhone.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfPhone.setText("asdfas");
 
         tfRegister.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfRegister.setText("asfd");
 
         rbManager.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rbManager.setText("Gerente");
@@ -356,39 +349,38 @@ public class EmployeeDialog extends javax.swing.JPanel {
     }//GEN-LAST:event_addPhotoMouseClicked
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        String name = tfName.getText();
-        String email = tfEmail.getText();
-        String confirmEmail = tfConfirmEmail.getText();
-        String password = new String(pfPassword.getPassword());
-        String confirmPassword = new String(pfConfirmPassword.getPassword());
-        String address = tfAddress.getText();
-        String phone = tfPhone.getText();
-        String register = tfRegister.getText();
-        EEmployeeType role = rbManager.isSelected() ? EEmployeeType.valueAt(1) :
-                EEmployeeType.valueAt(0);
-
-        if(validation()){
-            JEmployee employee = new JEmployee();
-            employee.setName(name);
-            employee.setEmail(email);
-            employee.setPassword(password);
-            employee.setAddress(address);
-            employee.setPhone(phone);
-            employee.setRegisterNumber(register);
-            employee.setRole(role);
-            employee.setPhoto(getImage());
-
-            if(creating) JDbFacade.getInstance().createEmployee(employee);
-            else JEmployeeDAO.editEmployee(employee, name);
-        }else{
-            MessageDialog dialog = new MessageDialog(null, false);
-            dialog.configurarDialog("Todos os campos são obrigatórios!");
-            this.setEnabled(false);
-            dialog.setVisible(true);
+        if(creating){
+            employee = new JEmployee();
         }
-        
-        registerDialog.dispose();
-        parent.setEnabled(true);
+        employee.setName(tfName.getText());
+        employee.setEmail(tfEmail.getText());
+        employee.setPassword(new String(pfPassword.getPassword()));
+        employee.setAddress(tfAddress.getText());
+        employee.setPhone(tfPhone.getText());
+        employee.setRegisterNumber(tfRegister.getText());
+        employee.setPhoto(getImage());
+
+        if (rbManager.isSelected()) {
+            employee.setRole(EEmployeeType.Manager);
+        } else if (rbEmployee.isSelected()) {
+            employee.setRole(EEmployeeType.Employee);
+        }
+
+        String confirmEmail = tfConfirmEmail.getText();
+        String confirmPassword = new String(pfConfirmPassword.getPassword());
+
+        if (validation(employee, confirmEmail, confirmPassword)) {
+            if (creating) {
+                if (JDbFacade.getInstance().createEmployee(employee, this)) {
+                    registerDialog.dispose();
+                    parent.setEnabled(true);
+                }
+            } else {
+                JEmployeeDAO.editEmployee(employee);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            }
+        }
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -427,51 +419,75 @@ public class EmployeeDialog extends javax.swing.JPanel {
     private javax.swing.JTextField tfPhone;
     private javax.swing.JTextField tfRegister;
     // End of variables declaration//GEN-END:variables
-    
+
     private final JDialog registerDialog;
     private final JFrame parent;
     private File image;
-    
-    public boolean validation(){
+    private JEmployee employee;
+
+    public boolean validation(JEmployee employee, String email, String password) {
+        if (!employee.getEmail().equals(email)) {
+            MessageDialog.showErrorMessage("Os emails assinalados são diferentes!", this);
+            return false;
+        }
+
+        if (!employee.getPassword().equals(password)) {
+            MessageDialog.showErrorMessage("As senhas assinaladas são diferentes!", this);
+            return false;
+        }
+
+        if (employee.getName().trim().length() == 0
+                || employee.getEmail().trim().length() == 0
+                || employee.getAddress().trim().length() == 0
+                || employee.getPhone().trim().length() == 0
+                || employee.getRegisterNumber().trim().length() == 0
+                || employee.getRole() == null) {
+
+            MessageDialog.showErrorMessage("Todos os campos são obrigatórios!", this);
+            return false;
+        }
+
         return true;
     }
-    
-    public byte[] getImage(){
-        try {
-            BufferedImage img = ImageIO.read(image);
-            
-            
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(img, "png", baos);
-            InputStream is = new ByteArrayInputStream(baos.toByteArray());
-            
-            return baos.toByteArray();
-        } catch (IOException ex) {
-            Logger.getLogger(RegisterDialog.class.getName()).log(Level.SEVERE, null, ex);
+
+    public byte[] getImage() {
+        if (image != null) {
+            try {
+                BufferedImage img = ImageIO.read(image);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(img, "png", baos);
+                InputStream is = new ByteArrayInputStream(baos.toByteArray());
+
+                return baos.toByteArray();
+            } catch (IOException ex) {
+                Logger.getLogger(RegisterDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }
-    
-    public void setUserImage(File image){
-        
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(image);
-        } catch (IOException ex) {
-            Logger.getLogger(EmployeeDialog.class.getName()).log(Level.SEVERE, null, ex);
+
+    public void setUserImage(File image) {
+
+        if (image != null) {
+            BufferedImage img = null;
+            try {
+                img = ImageIO.read(image);
+            } catch (IOException ex) {
+                Logger.getLogger(EmployeeDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            int width = lblEmployeePhoto.getWidth();
+            int height = lblEmployeePhoto.getHeight();
+
+            if (img != null) {
+                Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+                lblEmployeePhoto.setIcon(new ImageIcon(resizedImage));
+            }
         }
-        
-        int width = lblEmployeePhoto.getWidth();
-        int height = lblEmployeePhoto.getHeight();
-        
-        if(img != null){
-            Image resizedImage = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            lblEmployeePhoto.setIcon(new ImageIcon(resizedImage));
-        }
-        
     }
-    
-    private ImageIcon getUserImage(byte[] image){
+
+    private ImageIcon getUserImage(byte[] image) {
         if (image != null) {
             ImageIcon img = new ImageIcon(image);
             Image im = img.getImage();
@@ -482,15 +498,15 @@ public class EmployeeDialog extends javax.swing.JPanel {
             return getResizedImage(img);
         }
     }
-    
-    private ImageIcon getResizedImage(Image img){
-        int width = 112;
-        int height = 150;
-        
+
+    private ImageIcon getResizedImage(Image img) {
+        int width = 150;
+        int height = 200;
+
         return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
-    
-    private void setEmployee(JEmployee employee){
+
+    private void setEmployee(JEmployee employee) {
         tfName.setText(employee.getName());
         tfEmail.setText(employee.getEmail());
         tfConfirmEmail.setText(employee.getEmail());
@@ -500,7 +516,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
         tfPhone.setText(employee.getPhone());
         tfRegister.setText(employee.getRegisterNumber());
         lblEmployeePhoto.setIcon(getUserImage(employee.getPhoto()));
-        if(employee.getRole() == EEmployeeType.Employee) {
+        if (employee.getRole() == EEmployeeType.Employee) {
             rbEmployee.setSelected(true);
             rbManager.setSelected(false);
         } else {

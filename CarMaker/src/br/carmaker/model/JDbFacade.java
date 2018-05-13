@@ -8,6 +8,7 @@ package br.carmaker.model;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.LoginDAO;
 import java.util.List;
+import javax.swing.JPanel;
 
 /**
  *
@@ -29,8 +30,8 @@ public class JDbFacade {
         return JEmployeeDAO.getEmployeeByID(id);
     }
     
-    public void createEmployee(JEmployee employee){
-        JEmployeeDAO.insertEmployee(employee);
+    public boolean createEmployee(JEmployee employee, JPanel panel){
+        return JEmployeeDAO.insertEmployee(employee, panel);
     }
     
     public List<JEmployee> readAllEmployees(){

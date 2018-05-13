@@ -252,7 +252,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="asdf"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfEmail">
@@ -260,7 +259,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="asdf"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="tfConfirmEmail">
@@ -268,7 +266,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="asdfa"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="pfPassword">
@@ -276,7 +273,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="safdas"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="pfConfirmPassword">
@@ -284,7 +280,6 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Trebuchet MS" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="asdf"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -328,7 +323,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="asdfads"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfPhone">
@@ -336,7 +330,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="asdfas"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfRegister">
@@ -344,7 +337,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="asfd"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbManager">
