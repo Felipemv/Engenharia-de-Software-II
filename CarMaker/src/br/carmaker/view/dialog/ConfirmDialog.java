@@ -167,34 +167,34 @@ public class ConfirmDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblText;
     private javax.swing.JLabel lblYes;
     // End of variables declaration//GEN-END:variables
-    
+
     private static boolean userChoice;
     private static ConfirmDialog instance;
-    
-    public static synchronized ConfirmDialog getInstance(JFrame parent){
-        if(instance == null){
+
+    public static synchronized ConfirmDialog getInstance(JFrame parent) {
+        if (instance == null) {
             instance = new ConfirmDialog(parent, true);
         }
         return instance;
     }
-    
-    public static boolean getUserChoice(){
+
+    public static boolean getUserChoice() {
         instance = null;
         return userChoice;
     }
-    
-    public void configDialog(String headerText){
+
+    public void configDialog(String headerText) {
         lblText.setText(headerText);
     }
-    
-    public static void showConfirmationMessage(JFrame parent, String message, JPanel panel){
+
+    public static void showConfirmationMessage(JFrame parent, String message, JPanel panel) {
         ConfirmDialog dialog = ConfirmDialog.getInstance(parent);
         dialog.configDialog(message);
         panel.setEnabled(false);
-        dialog.setVisible(true); 
+        dialog.setVisible(true);
     }
-    
-    public static void showConfirmationMessage(JFrame parent, String message){
+
+    public static void showConfirmationMessage(JFrame parent, String message) {
         ConfirmDialog dialog = ConfirmDialog.getInstance(parent);
         dialog.configDialog(message);
         parent.setEnabled(false);

@@ -13,7 +13,6 @@ import javax.swing.JFrame;
  */
 public class ReportPanel extends javax.swing.JPanel {
 
-    
     /**
      * Creates new form ReportPanel
      */

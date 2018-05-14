@@ -20,13 +20,13 @@ public class CarDialog extends javax.swing.JPanel {
      * Creates new form CarDialog
      */
     public CarDialog(JDialog registerDialog, JFrame parent) {
-        initComponents();        
+        initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
-    
+
     public CarDialog(JDialog registerDialog, JFrame parent, JCar car) {
-        initComponents();        
+        initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
@@ -170,13 +170,12 @@ public class CarDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        
 
-        if(validation()){
+        if (validation()) {
             JCar car = new JCar();
 
             JDbFacade.getInstance().createCar(car);
-        }else{
+        } else {
             MessageDialog dialog = new MessageDialog(null, false);
             dialog.configurarDialog("Todos os campos são obrigatórios!");
             this.setEnabled(false);
@@ -209,7 +208,7 @@ public class CarDialog extends javax.swing.JPanel {
 
     private final JDialog registerDialog;
     private final JFrame parent;
-    
+
     private boolean validation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

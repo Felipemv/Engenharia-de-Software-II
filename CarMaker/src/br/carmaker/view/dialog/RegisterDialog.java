@@ -8,9 +8,9 @@ package br.carmaker.view.dialog;
 import br.carmaker.model.JCar;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.JFeedstock;
-import br.carmaker.model.JOrder;
 import br.carmaker.model.abstracts.AAffiliate;
 import br.carmaker.model.abstracts.ABaseEntity;
+import br.carmaker.model.abstracts.AOrder;
 import br.carmaker.model.enums.EMenuItem;
 import java.awt.Frame;
 import java.io.File;
@@ -293,11 +293,11 @@ public class RegisterDialog extends javax.swing.JDialog {
         }
         panelView.repaint();
         panelView.revalidate();
-    }    
+    }
 
     private void setEditPanel(ABaseEntity entity) {
         panelView.removeAll();
-        
+
         switch (panel) {
             case 0:
                 employeeDialog = new EmployeeDialog(this, parent, (JEmployee) entity);      //Dialog 0
@@ -316,7 +316,7 @@ public class RegisterDialog extends javax.swing.JDialog {
                 panelView.add(affiliateDialog);
                 break;
             case 4:
-                orderDialog = new OrderDialog(this, parent, (JOrder) entity);            //Dialog 4
+                orderDialog = new OrderDialog(this, parent, (AOrder) entity);            //Dialog 4
                 panelView.add(orderDialog);
                 break;
             default:
@@ -325,7 +325,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         panelView.repaint();
         panelView.revalidate();
     }
-    
+
     private void setHeader() {
         switch (operation) {
             case 0:

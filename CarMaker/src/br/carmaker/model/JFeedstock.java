@@ -2,7 +2,8 @@ package br.carmaker.model;
 
 import br.carmaker.model.abstracts.ABaseEntity;
 
-public class JFeedstock extends ABaseEntity{	
+public class JFeedstock extends ABaseEntity {
+
     private String name;
     private JSupplier supplier;
     private int quantity;
@@ -38,5 +39,5 @@ public class JFeedstock extends ABaseEntity{
 
     public void setCost(double cost) {
         this.cost = cost;
-    }        
+    }
 }

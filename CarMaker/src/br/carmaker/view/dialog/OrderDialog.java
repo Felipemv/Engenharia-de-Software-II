@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
-import br.carmaker.model.JOrder;
+import br.carmaker.model.abstracts.AOrder;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -23,8 +23,8 @@ public class OrderDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
-    
-    public OrderDialog(JDialog registerDialog, JFrame parent, JOrder order) {
+
+    public OrderDialog(JDialog registerDialog, JFrame parent, AOrder order) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
@@ -111,7 +111,7 @@ public class OrderDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        
+
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -126,7 +126,7 @@ public class OrderDialog extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelFooter;
     // End of variables declaration//GEN-END:variables
-   
+
     private final JDialog registerDialog;
     private final JFrame parent;
 }

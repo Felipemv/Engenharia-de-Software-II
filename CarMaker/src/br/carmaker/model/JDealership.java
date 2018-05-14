@@ -3,7 +3,8 @@ package br.carmaker.model;
 import br.carmaker.model.abstracts.AAffiliate;
 import br.carmaker.model.enums.EDealershipType;
 
-public class JDealership extends AAffiliate{
+public class JDealership extends AAffiliate {
+
     private EDealershipType type;
 
     public EDealershipType getType() {
@@ -13,5 +14,5 @@ public class JDealership extends AAffiliate{
     public void setType(EDealershipType type) {
         this.type = type;
     }
-    
+
 }

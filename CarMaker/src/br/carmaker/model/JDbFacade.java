@@ -15,26 +15,27 @@ import javax.swing.JPanel;
  * @author Usuário
  */
 public class JDbFacade {
+
     private static LoginDAO login;
-    
+
     private static final JDbFacade sInstance = null;
-    
-    public static JDbFacade getInstance(){
-        if(sInstance == null){
+
+    public static JDbFacade getInstance() {
+        if (sInstance == null) {
             return new JDbFacade();
         }
         return sInstance;
     }
-    
-    public JEmployee readEmployeeByID(int id){
+
+    public JEmployee readEmployeeByID(int id) {
         return JEmployeeDAO.getEmployeeByID(id);
     }
-    
-    public boolean createEmployee(JEmployee employee, JPanel panel){
+
+    public boolean createEmployee(JEmployee employee, JPanel panel) {
         return JEmployeeDAO.insertEmployee(employee, panel);
     }
-    
-    public List<JEmployee> readAllEmployees(){
+
+    public List<JEmployee> readAllEmployees() {
         return JEmployeeDAO.getAllEmployees();
     }
 

@@ -17,7 +17,7 @@ public class CarMaker {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -28,9 +28,9 @@ public class CarMaker {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         LoginFrame frame = new LoginFrame();
         frame.setVisible(true);
     }
-    
+
 }

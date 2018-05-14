@@ -10,6 +10,7 @@ package br.carmaker.model.abstracts;
  * @author Usuário
  */
 public abstract class ABaseEntity {
+
     private int id;
 
     public int getId() {

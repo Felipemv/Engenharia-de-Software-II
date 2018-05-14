@@ -22,15 +22,15 @@ public enum EDealershipType {
             return "Exclusiva";
         }
     };
-    
+
     private int dealershipType;
-    
-    EDealershipType (int dealershipType) {
+
+    EDealershipType(int dealershipType) {
         this.dealershipType = dealershipType;
     }
-    
+
     public int getDealershipType() {
         return this.dealershipType;
     }
-    
+
 }

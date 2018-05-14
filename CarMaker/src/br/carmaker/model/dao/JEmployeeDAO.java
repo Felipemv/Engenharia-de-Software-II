@@ -5,11 +5,11 @@
  */
 package br.carmaker.model.dao;
 
+import br.carmaker.model.dao.abstracts.ABaseEntityDAO;
 import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.view.dialog.MessageDialog;
-import br.carmaker.view.list.EmployeeList;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,10 +25,9 @@ import javax.swing.JPanel;
  *
  * @author Usuário
  */
-public class JEmployeeDAO {
+public class JEmployeeDAO extends ABaseEntityDAO {
 
     private static final String TABLE_NAME = "employee";
-    private static final String ID = "id";
     private static final String NAME = "name";
     private static final String ADDRESS = "address";
     private static final String PHONE = "phone";
@@ -103,7 +102,7 @@ public class JEmployeeDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "UPDATE "+TABLE_NAME+" SET " + NAME + " = ?, " + ADDRESS + " = ?, "
+        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + " = ?, " + ADDRESS + " = ?, "
                 + PHONE + " = ?, " + REGISTER + " = ?, " + ROLE + " = ?, " + EMAIL + " = ?, "
                 + PASSWORD + " = ?, " + PHOTO + " = ? WHERE " + ID + " = ?";
 

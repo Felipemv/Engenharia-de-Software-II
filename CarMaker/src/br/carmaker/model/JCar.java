@@ -2,7 +2,8 @@ package br.carmaker.model;
 
 import br.carmaker.model.abstracts.ABaseEntity;
 
-public class JCar extends ABaseEntity{
+public class JCar extends ABaseEntity {
+
     private String model;
     private int productionTime;
     private double costPrice;
@@ -48,6 +49,5 @@ public class JCar extends ABaseEntity{
     public void setColor(String color) {
         this.color = color;
     }
-    
-    
+
 }

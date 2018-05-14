@@ -39,9 +39,9 @@ public class LoginDAO {
         ResultSet rs = null;
 
         try {//
-            stmt = connection.prepareStatement("SELECT * FROM "+TABLE_NAME
-                    + " WHERE "+EMAIL+"='"+email+"' AND "+PASS+"='"
-                    + password +"'");
+            stmt = connection.prepareStatement("SELECT * FROM " + TABLE_NAME
+                    + " WHERE " + EMAIL + "='" + email + "' AND " + PASS + "='"
+                    + password + "'");
 
             rs = stmt.executeQuery();
             if (rs == null) {
@@ -49,11 +49,11 @@ public class LoginDAO {
             }
             int i = -1;
             while (rs.next()) {
-                i = rs.getInt(ID);                                
-            }            
+                i = rs.getInt(ID);
+            }
             return i;
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);           
+            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return -1;
     }

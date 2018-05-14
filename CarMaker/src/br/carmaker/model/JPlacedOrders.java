@@ -11,7 +11,8 @@ import br.carmaker.model.abstracts.AOrder;
  *
  * @author felipe
  */
-public class JPlacedOrders extends AOrder{
+public class JPlacedOrders extends AOrder {
+
     private JFeedstock feedstock;
 
     public JFeedstock getFeedstock() {

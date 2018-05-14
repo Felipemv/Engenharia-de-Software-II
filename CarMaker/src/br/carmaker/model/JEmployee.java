@@ -12,8 +12,8 @@ import br.carmaker.model.enums.EEmployeeType;
  *
  * @author Usuário
  */
-public class JEmployee extends ABaseEntity{
-    
+public class JEmployee extends ABaseEntity {
+
     private String name;
     private String address;
     private String phone;
@@ -86,7 +86,5 @@ public class JEmployee extends ABaseEntity{
     public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
-    
-    
-    
+
 }

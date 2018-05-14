@@ -27,6 +27,7 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form EmployeePanel
+     *
      * @param frame frame principal que chamou o dialog (MainFrame)
      */
     public EmployeePanel(JFrame frame) {
@@ -126,21 +127,21 @@ public class EmployeePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listEmployeeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEmployeeValueChanged
-        
+
     }//GEN-LAST:event_listEmployeeValueChanged
 
     private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
         this.setEnabled(false);
         mainFrame.setEnabled(false);
         RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES);
-        dialog.setVisible(true);        
+        dialog.setVisible(true);
         initList();
     }//GEN-LAST:event_btnAddEmployeeMouseClicked
 
     private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
-        if(evt.getClickCount() == 2){
+        if (evt.getClickCount() == 2) {
             JEmployee employee = listEmployee.getSelectedValue();
-            
+
             mainFrame.setEnabled(false);
             RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES, employee);
             dialog.setVisible(true);
@@ -149,13 +150,13 @@ public class EmployeePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_listEmployeeMouseClicked
 
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_DELETE){            
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             int id = listEmployee.getSelectedValue().getId();
             ConfirmDialog.showConfirmationMessage(mainFrame, "Confirmar exclusão do funcionário?", this);
-            if(ConfirmDialog.getUserChoice()){
+            if (ConfirmDialog.getUserChoice()) {
                 JEmployeeDAO.deleteEmployee(id);
                 initList();
-            }            
+            }
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
 
@@ -173,15 +174,15 @@ public class EmployeePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private final JFrame mainFrame;
-    
-    public void initList(){
-        DefaultListModel<JEmployee> dlm = new DefaultListModel<>();        
+
+    public void initList() {
+        DefaultListModel<JEmployee> dlm = new DefaultListModel<>();
         List<JEmployee> list = JDbFacade.getInstance().readAllEmployees();
-        
+
         for (int i = 0; i < list.size(); i++) {
             dlm.addElement(list.get(i));
-        }            
-               
+        }
+
         listEmployee.setModel(dlm);
         listEmployee.setCellRenderer(new EmployeeList());
     }

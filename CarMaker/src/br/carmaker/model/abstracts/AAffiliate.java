@@ -1,6 +1,7 @@
 package br.carmaker.model.abstracts;
 
-public abstract class AAffiliate extends ABaseEntity{
+public abstract class AAffiliate extends ABaseEntity {
+
     private String name;
     private String address;
     private String cnpj;
@@ -28,6 +29,5 @@ public abstract class AAffiliate extends ABaseEntity{
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-    
-    
+
 }

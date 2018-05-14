@@ -110,7 +110,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddFeedstockMouseClicked
 
     private void listFeedstockValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listFeedstockValueChanged
-        
+
     }//GEN-LAST:event_listFeedstockValueChanged
 
 
@@ -128,14 +128,14 @@ public class FeedstockPanel extends javax.swing.JPanel {
         DefaultListModel<JFeedstock> dlm = new DefaultListModel();
         for (int i = 0; i < 10; i++) {
             JSupplier supplier = new JSupplier();
-            supplier.setName("Fornecedor " + (i+1));
-            
+            supplier.setName("Fornecedor " + (i + 1));
+
             JFeedstock feedstock = new JFeedstock();
             feedstock.setName("Escapamento");
             feedstock.setQuantity(300);
             feedstock.setCost(400);
             feedstock.setSupplier(supplier);
-            
+
             dlm.addElement(feedstock);
         }
         listFeedstock.setModel(dlm);

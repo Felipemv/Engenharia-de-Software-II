@@ -125,24 +125,24 @@ public class CarPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
 
     private void initList() {
-        
+
         DefaultListModel<JCar> dlm = new DefaultListModel<>();
-        
+
         for (int i = 0; i < 10; i++) {
             JCar car = new JCar();
-        
+
             car.setModel("Fiat uno");
             car.setCostPrice(5000);
             car.setProductionTime(20);
             car.setSalePrice(7000);
             car.setColor("Prata");
-            
+
             dlm.addElement(car);
         }
-        
+
         listCars.setModel(dlm);
         listCars.setCellRenderer(new CarList());
-        
+
     }
 
 }

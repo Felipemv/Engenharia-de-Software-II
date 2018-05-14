@@ -32,6 +32,7 @@ public class OrderPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form OrderPanel
+     *
      * @param frame
      */
     public OrderPanel(JFrame frame) {
@@ -284,14 +285,14 @@ public class OrderPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddOrdersMouseClicked
 
     private void listRecievedOrdersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listRecievedOrdersKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_DELETE){
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             JOptionPane.showMessageDialog(this, "DELETE");
         }
     }//GEN-LAST:event_listRecievedOrdersKeyPressed
 
     private void listRecievedOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listRecievedOrdersMouseClicked
-        if(evt.getClickCount() == 2){
-          JOptionPane.showMessageDialog(this, "Duplo Click");
+        if (evt.getClickCount() == 2) {
+            JOptionPane.showMessageDialog(this, "Duplo Click");
         }
     }//GEN-LAST:event_listRecievedOrdersMouseClicked
 
@@ -324,18 +325,18 @@ public class OrderPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
 
     private void initTables() {
-        
+
         DefaultListModel dlmR = new DefaultListModel();
         for (int i = 1; i <= 40; i++) {
             JCar car = new JCar();
             car.setModel("Uno");
-            
+
             JShippingCompany shippingCompany = new JShippingCompany();
-            shippingCompany.setName("Transportadora "+ i);
-            
+            shippingCompany.setName("Transportadora " + i);
+
             JDealership dealership = new JDealership();
             dealership.setName("Concessionária " + i);
-            
+
             JRecievedOrders recievedOrder = new JRecievedOrders();
             recievedOrder.setProtocol("123456");
             recievedOrder.setCar(car);
@@ -343,30 +344,30 @@ public class OrderPanel extends javax.swing.JPanel {
             recievedOrder.setShippingCompany(shippingCompany);
             recievedOrder.setExpectedDate(new Date());
             recievedOrder.setStatus(EDeliveryStatus.ON_TIME);
-            
+
             dlmR.addElement(recievedOrder);
         }
-        
+
         listRecievedOrders.setModel(dlmR);
         listRecievedOrders.setCellRenderer(new RecievedOrderList());
-        
+
         DefaultListModel dlmP = new DefaultListModel();
         for (int i = 1; i <= 40; i++) {
             JFeedstock feedstock = new JFeedstock();
-            feedstock.setName("Matéria-prima " +i);
-            
+            feedstock.setName("Matéria-prima " + i);
+
             JSupplier supplier = new JSupplier();
             supplier.setName("Fornecedor " + i);
-            
+
             JPlacedOrders placedOrders = new JPlacedOrders();
             placedOrders.setProtocol("123456");
             placedOrders.setFeedstock(feedstock);
             placedOrders.setExpectedDate(new Date());
             placedOrders.setStatus(EDeliveryStatus.ON_TIME);
-            
+
             dlmP.addElement(placedOrders);
         }
-        
+
         listPlacedOrders.setModel(dlmP);
         listPlacedOrders.setCellRenderer(new PlacedOrderList());
     }

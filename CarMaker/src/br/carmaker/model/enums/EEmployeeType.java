@@ -10,15 +10,15 @@ package br.carmaker.model.enums;
  * @author Usuário
  */
 public enum EEmployeeType {
-    Employee(0){        
+    Employee(0) {
         @Override
-        public String toString(){
+        public String toString() {
             return "Funcionário";
         }
     },
-    Manager(1){
+    Manager(1) {
         @Override
-        public String toString(){
+        public String toString() {
             return "Gerente";
         }
     };
@@ -28,12 +28,12 @@ public enum EEmployeeType {
     EEmployeeType(int status) {
         this.userType = status;
     }
-    
-    public static EEmployeeType valueAt(int value){
-       return values()[value];
+
+    public static EEmployeeType valueAt(int value) {
+        return values()[value];
     }
 
     public int getUserType() {
         return userType;
-    }   
+    }
 }

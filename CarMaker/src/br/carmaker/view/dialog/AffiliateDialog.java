@@ -23,7 +23,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
-    
+
     public AffiliateDialog(JDialog registerDialog, JFrame parent, AAffiliate affiliate) {
         initComponents();
         this.registerDialog = registerDialog;
@@ -314,7 +314,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        
+
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -324,13 +324,13 @@ public class AffiliateDialog extends javax.swing.JPanel {
 
     private void cbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeActionPerformed
         int selection = cbType.getSelectedIndex();
-        
-        panelView.removeAll();        
-        if(selection == 1){         
-            panelView.add(panelShippingCompany);        
-        }else if (selection == 2){
+
+        panelView.removeAll();
+        if (selection == 1) {
+            panelView.add(panelShippingCompany);
+        } else if (selection == 2) {
             panelView.add(panelDealership);
-        }else{
+        } else {
             panelView.add(panelSupplier);
         }
         panelView.repaint();

@@ -160,23 +160,23 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void tfUserCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfUserCaretUpdate
         lblUserError.setVisible(false);
     }//GEN-LAST:event_tfUserCaretUpdate
 
     private void tfUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfUserKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             login();
         }
     }//GEN-LAST:event_tfUserKeyPressed
 
     private void tfPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPasswordKeyPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             login();
         }
     }//GEN-LAST:event_tfPasswordKeyPressed
-   
+
     private void tfPasswordCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPasswordCaretUpdate
         lblUserError.setVisible(false);
     }//GEN-LAST:event_tfPasswordCaretUpdate
@@ -233,17 +233,17 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField tfPassword;
     private javax.swing.JTextField tfUser;
     // End of variables declaration//GEN-END:variables
-    
-    private void login(){
+
+    private void login() {
         String user = tfUser.getText();
         String password = new String(tfPassword.getPassword());
-        
+
         int id = Login.getInstance().validate(user, password);
-        
-        if(id != -1){
+
+        if (id != -1) {
             new MainFrame(id).setVisible(true);
             this.dispose();
-        }else{
+        } else {
             lblUserError.setVisible(true);
         }
     }

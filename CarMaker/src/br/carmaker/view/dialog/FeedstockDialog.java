@@ -25,7 +25,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
     }
-    
+
     public FeedstockDialog(JDialog registerDialog, JFrame parent, JFeedstock feedstock) {
         initComponents();
         this.registerDialog = registerDialog;
@@ -170,13 +170,12 @@ public class FeedstockDialog extends javax.swing.JPanel {
         String amount = spnAmount.getValue().toString();
         String price = tfPrice.getText();
         JSupplier supplier = (JSupplier) cbSupplier.getSelectedItem();
-        
 
-        if(validation()){           
+        if (validation()) {
             JFeedstock feedstock = new JFeedstock();
 
             JDbFacade.getInstance().createFeedstock(feedstock);
-        }else{
+        } else {
             MessageDialog dialog = new MessageDialog(null, false);
             dialog.configurarDialog("Todos os campos são obrigatórios!");
             this.setEnabled(false);
@@ -207,7 +206,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
 
     private final JDialog registerDialog;
     private final JFrame parent;
-    
+
     private boolean validation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

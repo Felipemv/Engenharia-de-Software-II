@@ -8,10 +8,10 @@ public enum EAffiliate {
     private String affiliate;
 
     EAffiliate(String status) {
-            this.affiliate = affiliate;
+        this.affiliate = affiliate;
     }
 
     public String getAffiliate() {
-            return this.affiliate;
+        return this.affiliate;
     }
 }

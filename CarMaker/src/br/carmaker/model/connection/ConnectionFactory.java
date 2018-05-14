@@ -18,46 +18,47 @@ import java.util.logging.Logger;
  * @author Usuário
  */
 public class ConnectionFactory {
+
     private static final String DRIVER = "com.mysql.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/db_carmaker";
     private static final String USER = "root";
     private static final String PASSWORD = "root";
-    
-    public static Connection getConnection(){
+
+    public static Connection getConnection() {
         try {
             Class.forName(DRIVER);
             return DriverManager.getConnection(URL, USER, PASSWORD);
-        
+
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException("Erro na conexão: ", e);
         }
     }
-    
-    public static void closeConnection(Connection connection){
+
+    public static void closeConnection(Connection connection) {
         try {
-            if(connection != null){
+            if (connection != null) {
                 connection.close();
             }
         } catch (SQLException e) {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    public static void closeConnection(Connection connection, PreparedStatement stmt){        
+
+    public static void closeConnection(Connection connection, PreparedStatement stmt) {
         closeConnection(connection);
         try {
-            if(stmt != null){
+            if (stmt != null) {
                 stmt.close();
             }
         } catch (SQLException e) {
             Logger.getLogger(ConnectionFactory.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
-    public static void closeConnection(Connection connection, PreparedStatement stmt, ResultSet rs){        
+
+    public static void closeConnection(Connection connection, PreparedStatement stmt, ResultSet rs) {
         closeConnection(connection, stmt);
         try {
-            if(rs != null){
+            if (rs != null) {
                 rs.close();
             }
         } catch (SQLException e) {

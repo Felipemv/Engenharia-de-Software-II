@@ -5,8 +5,6 @@
  */
 package br.carmaker.model.abstracts;
 
-import br.carmaker.model.JCar;
-import br.carmaker.model.JFeedstock;
 import br.carmaker.model.enums.EDeliveryStatus;
 import java.util.Date;
 
@@ -14,7 +12,8 @@ import java.util.Date;
  *
  * @author felipe
  */
-public abstract class AOrder {
+public abstract class AOrder extends ABaseEntity{
+
     private String protocol;
     private EDeliveryStatus status;
     private Date expectedDate;
@@ -42,6 +41,5 @@ public abstract class AOrder {
     public void setExpectedDate(Date expectedDate) {
         this.expectedDate = expectedDate;
     }
-    
-    
+
 }

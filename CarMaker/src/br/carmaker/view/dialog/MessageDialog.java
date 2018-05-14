@@ -22,7 +22,7 @@ public class MessageDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -146,14 +146,14 @@ public class MessageDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblOk;
     // End of variables declaration//GEN-END:variables
 
-    public void configurarDialog(String headerText){
+    public void configurarDialog(String headerText) {
         lblHeaderText.setText(headerText);
     }
-    
-    public static void showErrorMessage(String message, JPanel panel){
+
+    public static void showErrorMessage(String message, JPanel panel) {
         MessageDialog dialog = new MessageDialog(null, true);
         dialog.configurarDialog(message);
         panel.setEnabled(false);
-        dialog.setVisible(true); 
+        dialog.setVisible(true);
     }
 }

@@ -349,7 +349,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
     }//GEN-LAST:event_addPhotoMouseClicked
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        if(creating){
+        if (creating) {
             employee = new JEmployee();
         }
         employee.setName(tfName.getText());

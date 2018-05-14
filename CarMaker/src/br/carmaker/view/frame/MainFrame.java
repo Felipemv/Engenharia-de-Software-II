@@ -36,6 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainFrame
+     *
      * @param id número de identificação do usuário
      */
     public MainFrame(int id) {
@@ -49,7 +50,7 @@ public class MainFrame extends javax.swing.JFrame {
         panelCardAffiliate = new AffiliatePanel(this);
         panelCardOrder = new OrderPanel(this);
         panelCardReport = new ReportPanel(this);
-      
+
         menuText = new ArrayList<>();
         menuText.add(lblHome);
         menuText.add(lblEmployees);
@@ -58,21 +59,21 @@ public class MainFrame extends javax.swing.JFrame {
         menuText.add(lblAffiliates);
         menuText.add(lblOrders);
         menuText.add(lblReports);
-        
+
         selectMenuItem(panelCardHome, EMenuItem.HOME.getMenuItem(), menuHome);
-        
+
         JEmployee employee = JDbFacade.getInstance().readEmployeeByID(id);
-        lblUser.setText("Bem vindo, "+ employee.getName());
+        lblUser.setText("Bem vindo, " + employee.getName());
         setUserImage(employee.getPhoto());
-        
-        if(employee.getRole() != EEmployeeType.Manager){
+
+        if (employee.getRole() != EEmployeeType.Manager) {
             menuEmployees.setVisible(false);
             menuAffiliates.setVisible(false);
         }
-        
+
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -744,7 +745,7 @@ public class MainFrame extends javax.swing.JFrame {
     private String selectedMenuItem;
     private final Color sidebar;
     private final List<JLabel> menuText;
-    
+
     private void panelMenuHover(JPanel panel, int mouseState, String labelName) {
         //Mouse entered
         if (mouseState == 1) {
@@ -757,36 +758,36 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void selectMenuItem(JPanel panel, String labelName, JPanel menuItem) {
-               
+
         panelView.removeAll();
         panelView.add(panel);
         panelView.repaint();
         panelView.revalidate();
-             
+
         for (int i = 0; i < menuText.size(); i++) {
-            JLabel jl = menuText.get(i);            
-            if(jl.getText().equals(labelName)){                
+            JLabel jl = menuText.get(i);
+            if (jl.getText().equals(labelName)) {
                 selectedMenuItem = labelName;
                 jl.getParent().setBackground(Color.black);
-            }else{
+            } else {
                 jl.getParent().setBackground(sidebar);
             }
-        }  
-        
+        }
+
     }
 
-    private void logout() {        
+    private void logout() {
         ConfirmDialog.showConfirmationMessage(this, "Confirmar saída do sistema?");
-            if(ConfirmDialog.getUserChoice()){
-                this.dispose();
-                new LoginFrame().setVisible(true);
-            }else{
-                this.setEnabled(true);
-            }
+        if (ConfirmDialog.getUserChoice()) {
+            this.dispose();
+            new LoginFrame().setVisible(true);
+        } else {
+            this.setEnabled(true);
+        }
     }
 
     private void setUserImage(byte[] photo) {
-        
+
         if (photo != null) {
             ImageIcon img = new ImageIcon(photo);
             Image im = img.getImage();
@@ -795,15 +796,14 @@ public class MainFrame extends javax.swing.JFrame {
         } else {
             Image img = new ImageIcon(getClass().getResource("/image/user_default.png")).getImage();
             lblUserPicture.setIcon(getResizedImage(img));
-        } 
+        }
     }
 
     private Icon getResizedImage(Image img) {
         int width = 80;
         int height = 60;
-        
+
         return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
-    
 }
