@@ -32,8 +32,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class EmployeeDialog extends javax.swing.JPanel {
 
-    private boolean creating = true;
-
     /**
      * Creates new form employeeDialog
      *
@@ -52,7 +50,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
         this.parent = parent;
         this.employee = employee;
 
-        setEmployee(employee);
+        setEmployee();
         creating = false;
     }
 
@@ -376,7 +374,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
                     parent.setEnabled(true);
                 }
             } else {
-                JEmployeeDAO.editEmployee(employee);
+                JDbFacade.getInstance().editEmployee(employee);
                 registerDialog.dispose();
                 parent.setEnabled(true);
             }
@@ -424,15 +422,16 @@ public class EmployeeDialog extends javax.swing.JPanel {
     private final JFrame parent;
     private File image;
     private JEmployee employee;
+    private boolean creating = true;
 
     public boolean validation(JEmployee employee, String email, String password) {
         if (!employee.getEmail().equals(email)) {
-            MessageDialog.showErrorMessage("Os emails assinalados são diferentes!", this);
+            MessageDialog.showMessage("Os emails assinalados são diferentes!", this);
             return false;
         }
 
         if (!employee.getPassword().equals(password)) {
-            MessageDialog.showErrorMessage("As senhas assinaladas são diferentes!", this);
+            MessageDialog.showMessage("As senhas assinaladas são diferentes!", this);
             return false;
         }
 
@@ -443,7 +442,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 || employee.getRegisterNumber().trim().length() == 0
                 || employee.getRole() == null) {
 
-            MessageDialog.showErrorMessage("Todos os campos são obrigatórios!", this);
+            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
             return false;
         }
 
@@ -506,7 +505,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
         return new ImageIcon(img.getScaledInstance(width, height, Image.SCALE_SMOOTH));
     }
 
-    private void setEmployee(JEmployee employee) {
+    private void setEmployee() {
         tfName.setText(employee.getName());
         tfEmail.setText(employee.getEmail());
         tfConfirmEmail.setText(employee.getEmail());

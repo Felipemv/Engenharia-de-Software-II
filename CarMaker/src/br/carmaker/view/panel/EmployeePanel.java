@@ -7,17 +7,14 @@ package br.carmaker.view.panel;
 
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
-import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.EmployeeList;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -69,11 +66,6 @@ public class EmployeePanel extends javax.swing.JPanel {
                 listEmployeeKeyPressed(evt);
             }
         });
-        listEmployee.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listEmployeeValueChanged(evt);
-            }
-        });
         jScrollPane1.setViewportView(listEmployee);
 
         btnAddEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -81,11 +73,6 @@ public class EmployeePanel extends javax.swing.JPanel {
         btnAddEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAddEmployeeMouseClicked(evt);
-            }
-        });
-        btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddEmployeeActionPerformed(evt);
             }
         });
 
@@ -126,10 +113,6 @@ public class EmployeePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listEmployeeValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listEmployeeValueChanged
-
-    }//GEN-LAST:event_listEmployeeValueChanged
-
     private void btnAddEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEmployeeMouseClicked
         this.setEnabled(false);
         mainFrame.setEnabled(false);
@@ -154,15 +137,11 @@ public class EmployeePanel extends javax.swing.JPanel {
             int id = listEmployee.getSelectedValue().getId();
             ConfirmDialog.showConfirmationMessage(mainFrame, "Confirmar exclusão do funcionário?", this);
             if (ConfirmDialog.getUserChoice()) {
-                JEmployeeDAO.deleteEmployee(id);
+                JDbFacade.getInstance().deleteEmployee(id);
                 initList();
             }
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
-
-    private void btnAddEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEmployeeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddEmployeeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

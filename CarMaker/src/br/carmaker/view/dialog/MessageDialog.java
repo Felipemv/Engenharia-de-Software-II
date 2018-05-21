@@ -150,7 +150,7 @@ public class MessageDialog extends javax.swing.JDialog {
         lblHeaderText.setText(headerText);
     }
 
-    public static void showErrorMessage(String message, JPanel panel) {
+    public static void showMessage(String message, JPanel panel) {
         MessageDialog dialog = new MessageDialog(null, true);
         dialog.configurarDialog(message);
         panel.setEnabled(false);

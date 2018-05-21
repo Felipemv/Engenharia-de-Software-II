@@ -5,6 +5,7 @@
  */
 package br.carmaker.model;
 
+import br.carmaker.model.dao.JCarDAO;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.LoginDAO;
 import java.util.List;
@@ -27,10 +28,8 @@ public class JDbFacade {
         return sInstance;
     }
 
-    public JEmployee readEmployeeByID(int id) {
-        return JEmployeeDAO.getEmployeeByID(id);
-    }
-
+    //CRUD de Funcionários
+    
     public boolean createEmployee(JEmployee employee, JPanel panel) {
         return JEmployeeDAO.insertEmployee(employee, panel);
     }
@@ -38,12 +37,34 @@ public class JDbFacade {
     public List<JEmployee> readAllEmployees() {
         return JEmployeeDAO.getAllEmployees();
     }
-
-    public void createFeedstock(JFeedstock feedstock) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public JEmployee readEmployeeByID(int id) {
+        return JEmployeeDAO.getEmployeeByID(id);
+    }
+    
+    public void editEmployee(JEmployee employee){
+        JEmployeeDAO.editEmployee(employee);
+    }
+    
+    public void deleteEmployee(int id){
+        JEmployeeDAO.deleteEmployee(id);
     }
 
-    public void createCar(JCar car) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    //CRUD de Carros
+    
+    public boolean createCar(JCar car, JPanel panel) {
+        return JCarDAO.insertCar(car, panel);
+    }
+
+    public List<JCar> readAllCars() {
+        return JCarDAO.getAllCars();
+    }
+    
+    public void editCar(JCar car){
+        JCarDAO.editCar(car);
+    }
+    
+    public void deleteCar(int id){
+        JCarDAO.deleteCar(id);
     }
 }

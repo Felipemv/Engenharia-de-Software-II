@@ -23,12 +23,17 @@ public class CarDialog extends javax.swing.JPanel {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        creating = true;
     }
 
     public CarDialog(JDialog registerDialog, JFrame parent, JCar car) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        this.car = car;
+        
+        setCar();
+        creating = false;
     }
 
     /**
@@ -106,6 +111,8 @@ public class CarDialog extends javax.swing.JPanel {
 
         jLabel5.setText("Cor:");
 
+        spnProductionTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
         cbColor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preto", "Branco", "Prata", "Amarelo", "Azul", "Vermelho", "Verde" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -170,11 +177,26 @@ public class CarDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        if (creating) {
+            car = new JCar();
+        }
+        car.setModel(tfModel.getText());
+        car.setProductionTime((int) spnProductionTime.getValue());
+        car.setCostPrice(Double.parseDouble(tfCostPrice.getText()));
+        car.setSalePrice(Double.parseDouble(tfSalePrice.getText()));
+        car.setColor((String) cbColor.getSelectedItem());
 
-        if (validation()) {
-            JCar car = new JCar();
-
-            JDbFacade.getInstance().createCar(car);
+        if (validation(car)) {
+            if (creating) {
+                if (JDbFacade.getInstance().createCar(car, this)) {
+                    registerDialog.dispose();
+                    parent.setEnabled(true);
+                }
+            } else {
+                JDbFacade.getInstance().editCar(car);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            }
         } else {
             MessageDialog dialog = new MessageDialog(null, false);
             dialog.configurarDialog("Todos os campos são obrigatórios!");
@@ -208,8 +230,27 @@ public class CarDialog extends javax.swing.JPanel {
 
     private final JDialog registerDialog;
     private final JFrame parent;
+    private JCar car;
+    private boolean creating = true;
 
-    private boolean validation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean validation(JCar car) {
+        if (car.getModel().trim().length() == 0
+                || car.getProductionTime() <= 0
+                || car.getCostPrice() <= 0
+                || car.getSalePrice() <= 0
+                || car.getColor().trim().length() == 0) {
+
+            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
+            return false;
+        }
+        return true;
+    }
+
+    private void setCar() {
+        tfModel.setText(car.getModel());
+        spnProductionTime.setValue(car.getProductionTime());
+        tfCostPrice.setText(Double.toString(car.getCostPrice()));
+        tfSalePrice.setText(Double.toString(car.getSalePrice()));
+        cbColor.setSelectedItem(car.getColor());
     }
 }

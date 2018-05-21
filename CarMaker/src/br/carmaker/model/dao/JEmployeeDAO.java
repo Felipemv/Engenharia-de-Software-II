@@ -88,13 +88,14 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
             stmt.execute();
         } catch (MySQLIntegrityConstraintViolationException i) {
-            MessageDialog.showErrorMessage("Número de registro já foi utilizado", panel);
+            MessageDialog.showMessage("Número de registro já foi utilizado", panel);
             return false;
         } catch (SQLException ex) {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
+        MessageDialog.showMessage("Carro adicionado com sucesso", panel);
         return true;
     }
 
@@ -105,9 +106,6 @@ public class JEmployeeDAO extends ABaseEntityDAO {
         String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + " = ?, " + ADDRESS + " = ?, "
                 + PHONE + " = ?, " + REGISTER + " = ?, " + ROLE + " = ?, " + EMAIL + " = ?, "
                 + PASSWORD + " = ?, " + PHOTO + " = ? WHERE " + ID + " = ?";
-
-//        String sql = "UPDATE employee SET name = ?, address = ?, phone = ?, register = ?,"
-//                + " role = ?, email = ?, pass = ?, photo = ? WHERE id = ?";
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, employee.getName());

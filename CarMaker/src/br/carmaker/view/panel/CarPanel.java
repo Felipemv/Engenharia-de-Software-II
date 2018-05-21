@@ -6,9 +6,14 @@
 package br.carmaker.view.panel;
 
 import br.carmaker.model.JCar;
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EMenuItem;
+import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.CarList;
+import java.awt.event.KeyEvent;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.ListCellRenderer;
@@ -24,7 +29,7 @@ public class CarPanel extends javax.swing.JPanel {
      */
     public CarPanel(JFrame frame) {
         initComponents();
-        //initList();
+        initList();
         this.mainFrame = frame;
     }
 
@@ -49,9 +54,14 @@ public class CarPanel extends javax.swing.JPanel {
         jLabel8.setText("Lista de Carros:");
 
         listCars.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listCars.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listCarsValueChanged(evt);
+        listCars.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listCarsMouseClicked(evt);
+            }
+        });
+        listCars.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listCarsKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(listCars);
@@ -101,17 +111,35 @@ public class CarPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listCarsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listCarsValueChanged
-
-    }//GEN-LAST:event_listCarsValueChanged
-
     private void btnAddCarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddCarsMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 2, EMenuItem.CARS);
-        dialog.setVisible(true);
-
         mainFrame.setEnabled(false);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, true, 2, EMenuItem.CARS);
+        dialog.setVisible(true);
+        initList();        
     }//GEN-LAST:event_btnAddCarsMouseClicked
+
+    private void listCarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCarsMouseClicked
+        if (evt.getClickCount() == 2) {
+            JCar car = listCars.getSelectedValue();
+
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 2, EMenuItem.CARS, car);
+            dialog.setVisible(true);
+            initList();
+        }
+    }//GEN-LAST:event_listCarsMouseClicked
+
+    private void listCarsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listCarsKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int id = listCars.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, "Confirmar exclusão do carro?", this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteCar(id);
+                initList();
+            }
+        }
+    }//GEN-LAST:event_listCarsKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -125,19 +153,11 @@ public class CarPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
 
     private void initList() {
-
         DefaultListModel<JCar> dlm = new DefaultListModel<>();
+        List<JCar> list = JDbFacade.getInstance().readAllCars();
 
-        for (int i = 0; i < 10; i++) {
-            JCar car = new JCar();
-
-            car.setModel("Fiat uno");
-            car.setCostPrice(5000);
-            car.setProductionTime(20);
-            car.setSalePrice(7000);
-            car.setColor("Prata");
-
-            dlm.addElement(car);
+        for (int i = 0; i < list.size(); i++) {
+            dlm.addElement(list.get(i));
         }
 
         listCars.setModel(dlm);
