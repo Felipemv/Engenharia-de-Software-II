@@ -5,6 +5,8 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.JSupplier;
 import br.carmaker.model.abstracts.AAffiliate;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -49,14 +51,14 @@ public class AffiliateDialog extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cbType = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        tfCnpj = new javax.swing.JTextField();
+        tfAddress = new javax.swing.JTextField();
+        tfName = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         panelView = new javax.swing.JPanel();
         panelSupplier = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        tfLeadTime = new javax.swing.JTextField();
         panelShippingCompany = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
@@ -128,11 +130,11 @@ public class AffiliateDialog extends javax.swing.JPanel {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        tfCnpj.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        tfAddress.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        tfName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,10 +149,10 @@ public class AffiliateDialog extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfAddress, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfCnpj, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cbType, javax.swing.GroupLayout.Alignment.TRAILING, 0, 549, Short.MAX_VALUE)
-                    .addComponent(jTextField3))
+                    .addComponent(tfName))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -159,15 +161,15 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -180,7 +182,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel6.setText("Lead time: ");
 
-        jTextField5.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        tfLeadTime.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout panelSupplierLayout = new javax.swing.GroupLayout(panelSupplier);
         panelSupplier.setLayout(panelSupplierLayout);
@@ -190,7 +192,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfLeadTime, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelSupplierLayout.setVerticalGroup(
@@ -198,7 +200,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
             .addGroup(panelSupplierLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfLeadTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addContainerGap(194, Short.MAX_VALUE))
         );
@@ -314,7 +316,25 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        int selection = cbType.getSelectedIndex();
 
+        switch (selection) {
+            case 0:
+                if (creating)   saveSupplier();
+                else            editSupplier();
+                break;
+            case 1:
+                if (creating)   saveShippingCompany();
+                else            editShippingCompany();                
+                break;
+            case 2:
+                if (creating)   saveDealership();
+                else            editDealership();                
+                break;
+            default:
+                MessageDialog.showMessage("Erro! Nenhuma afiliada selecionada!", this);
+                break;
+        }
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -326,12 +346,16 @@ public class AffiliateDialog extends javax.swing.JPanel {
         int selection = cbType.getSelectedIndex();
 
         panelView.removeAll();
-        if (selection == 1) {
-            panelView.add(panelShippingCompany);
-        } else if (selection == 2) {
-            panelView.add(panelDealership);
-        } else {
-            panelView.add(panelSupplier);
+        switch (selection) {
+            case 1:
+                panelView.add(panelShippingCompany);
+                break;
+            case 2:
+                panelView.add(panelDealership);
+                break;
+            default:
+                panelView.add(panelSupplier);
+                break;
         }
         panelView.repaint();
         panelView.revalidate();
@@ -355,19 +379,58 @@ public class AffiliateDialog extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel panelDealership;
     private javax.swing.JPanel panelFooter;
     private javax.swing.JPanel panelShippingCompany;
     private javax.swing.JPanel panelSupplier;
     private javax.swing.JPanel panelView;
+    private javax.swing.JTextField tfAddress;
+    private javax.swing.JTextField tfCnpj;
+    private javax.swing.JTextField tfLeadTime;
+    private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 
     private final JDialog registerDialog;
     private final JFrame parent;
+    private final boolean creating = true;
+
+    private void saveSupplier() {
+        JSupplier supplier = new JSupplier();
+        supplier.setName(tfName.getText());
+        supplier.setAddress(tfAddress.getText());
+        supplier.setCnpj(tfCnpj.getText());
+        supplier.setLeadTime(Integer.parseInt(tfCnpj.getText()));
+        
+        if(supplierValidation(supplier)){
+            JDbFacade.getInstance().createSupplier(supplier, this);
+        }
+    }
+
+    private void saveShippingCompany() {
+    }
+
+    private void saveDealership() {
+    }
+
+    private void editSupplier() {
+    }
+
+    private void editShippingCompany() {
+    }
+
+    private void editDealership() {
+    }
+
+    private boolean supplierValidation(JSupplier supplier) {
+        if(supplier.getName().trim().length() == 0
+                || supplier.getAddress().trim().length() == 0
+                || supplier.getCnpj().trim().length() == 0
+                || supplier.getLeadTime() == 0){
+            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
+            return false;
+        }
+        return true;
+    }
 }

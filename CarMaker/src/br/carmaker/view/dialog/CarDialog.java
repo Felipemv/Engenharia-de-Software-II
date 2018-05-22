@@ -197,11 +197,6 @@ public class CarDialog extends javax.swing.JPanel {
                 registerDialog.dispose();
                 parent.setEnabled(true);
             }
-        } else {
-            MessageDialog dialog = new MessageDialog(null, false);
-            dialog.configurarDialog("Todos os campos são obrigatórios!");
-            this.setEnabled(false);
-            dialog.setVisible(true);
         }
     }//GEN-LAST:event_btnSaveMouseClicked
 

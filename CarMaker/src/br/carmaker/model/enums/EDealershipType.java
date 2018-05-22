@@ -18,6 +18,7 @@ public enum EDealershipType {
         }
     },
     EXCLUSIVE(1) {
+        @Override
         public String toString() {
             return "Exclusiva";
         }
@@ -29,8 +30,17 @@ public enum EDealershipType {
         this.dealershipType = dealershipType;
     }
 
-    public int getDealershipType() {
+    public int getDealershipIntType() {
         return this.dealershipType;
     }
-
+    
+    public static EDealershipType valueOf(int value){
+        for (int i = 0; i < values().length; i++) {
+            if(values()[i].getDealershipIntType() == value){
+                return values()[i];
+            }
+        }
+        
+        return EDealershipType.GENERAL;
+    }
 }

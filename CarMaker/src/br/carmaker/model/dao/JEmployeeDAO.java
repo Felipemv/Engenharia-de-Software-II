@@ -62,7 +62,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
                 employee.setPhoto(rs.getBytes(PHOTO));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return employee;
     }
@@ -95,7 +95,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             return false;
         }
 
-        MessageDialog.showMessage("Carro adicionado com sucesso", panel);
+        MessageDialog.showMessage("Funcionário adicionado com sucesso", panel);
         return true;
     }
 
@@ -168,7 +168,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
                 listEmployees.add(employee);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listEmployees;
     }

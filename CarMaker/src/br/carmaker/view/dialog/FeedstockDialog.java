@@ -24,12 +24,14 @@ public class FeedstockDialog extends javax.swing.JPanel {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        creating = true;
     }
 
     public FeedstockDialog(JDialog registerDialog, JFrame parent, JFeedstock feedstock) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        creating = false;
     }
 
     /**
@@ -206,7 +208,9 @@ public class FeedstockDialog extends javax.swing.JPanel {
 
     private final JDialog registerDialog;
     private final JFrame parent;
-
+    private JFeedstock feedstock;
+    private boolean creating = true;
+    
     private boolean validation() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

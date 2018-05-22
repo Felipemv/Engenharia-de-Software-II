@@ -49,7 +49,7 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt.setString(5, car.getColor());
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
@@ -84,7 +84,7 @@ public class JCarDAO extends ABaseEntityDAO {
                 listCars.add(car);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listCars;
     }
@@ -108,7 +108,7 @@ public class JCarDAO extends ABaseEntityDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -122,7 +122,7 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt = connection.prepareStatement(sql);
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

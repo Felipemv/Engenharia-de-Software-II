@@ -6,7 +6,11 @@
 package br.carmaker.model;
 
 import br.carmaker.model.dao.JCarDAO;
+import br.carmaker.model.dao.JDealershipDAO;
 import br.carmaker.model.dao.JEmployeeDAO;
+import br.carmaker.model.dao.JFeedstockDAO;
+import br.carmaker.model.dao.JShippingCompanyDAO;
+import br.carmaker.model.dao.JSupplierDAO;
 import br.carmaker.model.dao.LoginDAO;
 import java.util.List;
 import javax.swing.JPanel;
@@ -16,8 +20,6 @@ import javax.swing.JPanel;
  * @author Usuário
  */
 public class JDbFacade {
-
-    private static LoginDAO login;
 
     private static final JDbFacade sInstance = null;
 
@@ -66,5 +68,81 @@ public class JDbFacade {
     
     public void deleteCar(int id){
         JCarDAO.deleteCar(id);
+    }
+    
+    //CRUD de Matérias-primas
+    
+    public void createFeedstock(JFeedstock feedstock, JPanel panel){
+        JFeedstockDAO.insertFeedstock(feedstock, panel);
+    }
+    
+    public List<JFeedstock> readAllFeedstocks(){
+        return JFeedstockDAO.getAllFeedstocks();
+    }
+    
+    public boolean editFeedstock(JFeedstock feedstock){
+        return JFeedstockDAO.editFeedstock(feedstock);
+    }
+    
+    public boolean deleteFeedstock(int id){
+        return JFeedstockDAO.deleteFeedstock(id);
+    }
+    
+    //CRUD de Fornecedores
+
+    public void createSupplier(JSupplier supplier, JPanel panel) {
+        JSupplierDAO.insertSupplier(supplier, panel);
+    }
+    
+    public JSupplier readSupplierById(int id){
+        return JSupplierDAO.getSupplierById(id);
+    }
+    
+    public List<JSupplier> readAllSuppliers(){
+        return JSupplierDAO.getAllSuppliers();
+    }
+    
+    public boolean editSupplier(JSupplier supplier){
+        return JSupplierDAO.editSupplier(supplier);
+    }
+    
+    public boolean deleteSupplier(int id){
+        return JSupplierDAO.deleteSupplier(id);
+    }
+    
+    //CRUD de Transportadoras
+    
+    public void createShippingCompany(JShippingCompany shippingCompany, JPanel panel) {
+        JShippingCompanyDAO.insertShippingCompany(shippingCompany, panel);
+    }
+    
+    public List<JShippingCompany> readAllShippingCompanies(){
+        return JShippingCompanyDAO.getAllShippingCompanies();
+    }
+    
+    public boolean editShippingCompany(JShippingCompany shippingCompany){
+        return JShippingCompanyDAO.editShippingCompany(shippingCompany);
+    }
+    
+    public boolean deleteShippingCompany(int id){
+        return JShippingCompanyDAO.deleteShippingCompany(id);
+    }
+    
+    //CRUD de Concessionárias
+    
+    public void createDealership(JDealership dealership, JPanel panel) {
+        JDealershipDAO.insertDealership(dealership, panel);
+    }
+    
+    public List<JDealership> readAllDealerships(){
+        return JDealershipDAO.getAllDealerships();
+    }
+    
+    public boolean editDealership(JDealership dealership){
+        return JDealershipDAO.editDealership(dealership);
+    }
+    
+    public boolean deleteDealership(int id){
+        return JDealershipDAO.deleteDealership(id);
     }
 }
