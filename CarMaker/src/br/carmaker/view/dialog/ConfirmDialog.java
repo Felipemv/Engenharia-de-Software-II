@@ -34,34 +34,28 @@ public class ConfirmDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         lblText = new javax.swing.JLabel();
-        lblYes = new javax.swing.JLabel();
-        lblNot = new javax.swing.JLabel();
+        lblYes = new javax.swing.JButton();
+        lblNot = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(29, 32, 38));
 
-        lblText.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        lblText.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         lblText.setForeground(new java.awt.Color(255, 255, 255));
         lblText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblText.setText("Confirmar saída do sistema?");
 
-        lblYes.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        lblYes.setForeground(new java.awt.Color(255, 255, 255));
-        lblYes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblYes.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         lblYes.setText("Sim");
-        lblYes.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         lblYes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblYesMouseClicked(evt);
             }
         });
 
-        lblNot.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        lblNot.setForeground(new java.awt.Color(255, 255, 255));
-        lblNot.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNot.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         lblNot.setText("Não");
-        lblNot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         lblNot.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblNotMouseClicked(evt);
@@ -72,15 +66,16 @@ public class ConfirmDialog extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(133, Short.MAX_VALUE)
-                .addComponent(lblYes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                .addComponent(lblNot, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblYes)
+                        .addGap(113, 113, 113)
+                        .addComponent(lblNot)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblText, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -89,9 +84,9 @@ public class ConfirmDialog extends javax.swing.JDialog {
                 .addComponent(lblText, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblYes, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNot, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8))
+                    .addComponent(lblYes)
+                    .addComponent(lblNot))
+                .addGap(3, 3, 3))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,15 +104,15 @@ public class ConfirmDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblYesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblYesMouseClicked
-        userChoice = true;
-        this.dispose();
-    }//GEN-LAST:event_lblYesMouseClicked
-
     private void lblNotMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNotMouseClicked
         userChoice = false;
         this.dispose();
     }//GEN-LAST:event_lblNotMouseClicked
+
+    private void lblYesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblYesMouseClicked
+        userChoice = true;
+        this.dispose();
+    }//GEN-LAST:event_lblYesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -163,9 +158,9 @@ public class ConfirmDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblNot;
+    private javax.swing.JButton lblNot;
     private javax.swing.JLabel lblText;
-    private javax.swing.JLabel lblYes;
+    private javax.swing.JButton lblYes;
     // End of variables declaration//GEN-END:variables
 
     private static boolean userChoice;

@@ -44,7 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
         selectedMenuItem = EMenuItem.HOME.getMenuItem();
         sidebar = panelSideBar.getBackground();
 
-        panelCardEmployee = new EmployeePanel(this);
+        panelCardEmployee = new EmployeePanel(this, id);
         panelCardFeedstock = new FeedstockPanel(this);
         panelCardCar = new CarPanel(this);
         panelCardAffiliate = new AffiliatePanel(this);

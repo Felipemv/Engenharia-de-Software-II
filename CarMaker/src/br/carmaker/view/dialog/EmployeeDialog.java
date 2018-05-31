@@ -63,6 +63,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgRole = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
         photoPanel = new javax.swing.JPanel();
         lblEmployeePhoto = new javax.swing.JLabel();
@@ -201,10 +202,13 @@ public class EmployeeDialog extends javax.swing.JPanel {
 
         tfRegister.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
+        bgRole.add(rbManager);
         rbManager.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rbManager.setText("Gerente");
 
+        bgRole.add(rbEmployee);
         rbEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rbEmployee.setSelected(true);
         rbEmployee.setText("Vendedor");
 
         addPhoto.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -389,6 +393,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPhoto;
+    private javax.swing.ButtonGroup bgRole;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel10;

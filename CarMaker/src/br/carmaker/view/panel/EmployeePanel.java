@@ -9,7 +9,9 @@ import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.ConfirmDialog;
+import br.carmaker.view.dialog.MessageDialog;
 import br.carmaker.view.dialog.RegisterDialog;
+import br.carmaker.view.frame.LoginFrame;
 import br.carmaker.view.list.EmployeeList;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -27,10 +29,11 @@ public class EmployeePanel extends javax.swing.JPanel {
      *
      * @param frame frame principal que chamou o dialog (MainFrame)
      */
-    public EmployeePanel(JFrame frame) {
+    public EmployeePanel(JFrame frame, int idUser) {
         initComponents();
         initList();
         this.mainFrame = frame;
+        this.idUser = idUser;
     }
 
     /**
@@ -124,11 +127,19 @@ public class EmployeePanel extends javax.swing.JPanel {
     private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
         if (evt.getClickCount() == 2) {
             JEmployee employee = listEmployee.getSelectedValue();
-
+            
             mainFrame.setEnabled(false);
             RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES, employee);
             dialog.setVisible(true);
             initList();
+            
+            if(employee.getId() == idUser){
+                MessageDialog.showMessage("Você alterou o próprio cadastro, "
+                        + "reinicie o sistema para que seus dados sejam atualizados.", 
+                            "Reiniciar sistema", this);
+                mainFrame.dispose();
+                new LoginFrame().setVisible(true);
+            }
         }
     }//GEN-LAST:event_listEmployeeMouseClicked
 
@@ -153,6 +164,8 @@ public class EmployeePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private final JFrame mainFrame;
+    private final int idUser;
+
 
     public void initList() {
         DefaultListModel<JEmployee> dlm = new DefaultListModel<>();

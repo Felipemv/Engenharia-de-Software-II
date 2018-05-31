@@ -178,10 +178,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
 
             //JDbFacade.getInstance().createFeedstock(feedstock);
         } else {
-            MessageDialog dialog = new MessageDialog(null, false);
-            dialog.configurarDialog("Todos os campos são obrigatórios!");
-            this.setEnabled(false);
-            dialog.setVisible(true);
+            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
         }
     }//GEN-LAST:event_btnSaveMouseClicked
 
