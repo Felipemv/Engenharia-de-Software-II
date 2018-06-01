@@ -34,7 +34,7 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
     private static final String AMOUNT = "amount";
     private static final String FLEET = "fleet";
 
-    public static boolean insertShippingCompany(JShippingCompany shippingCompany, JPanel panel) {
+    public static boolean insertShippingCompany(JShippingCompany shippingCompany) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -54,8 +54,6 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
             Logger.getLogger(JShippingCompanyDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
-        MessageDialog.showMessage("Transportadora adicionada com sucesso", panel);
         return true;
     }
 

@@ -33,7 +33,7 @@ public class JFeedstockDAO extends ABaseEntityDAO {
     private static final String QUANTITY = "quantity";
     private static final String COST = "cost";
     
-    public static boolean insertFeedstock(JFeedstock feedstock, JPanel panel) {
+    public static boolean insertFeedstock(JFeedstock feedstock) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -52,8 +52,6 @@ public class JFeedstockDAO extends ABaseEntityDAO {
             Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-
-        MessageDialog.showMessage("Matéria-prima adicionada com sucesso", panel);
         return true;
     }
     

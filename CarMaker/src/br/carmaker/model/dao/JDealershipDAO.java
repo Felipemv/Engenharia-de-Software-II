@@ -34,7 +34,7 @@ public class JDealershipDAO extends AAffiliateDAO {
     private static final String TABLE_NAME = "dealership";
     private static final String TYPE = "type";
     
-    public static boolean insertDealership(JDealership dealership, JPanel panel) {
+    public static boolean insertDealership(JDealership dealership) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -54,7 +54,6 @@ public class JDealershipDAO extends AAffiliateDAO {
             return false;
         }
 
-        MessageDialog.showMessage("Concessionária adicionada com sucesso", panel);
         return true;
     }
 

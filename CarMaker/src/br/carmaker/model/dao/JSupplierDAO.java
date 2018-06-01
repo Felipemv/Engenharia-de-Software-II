@@ -31,7 +31,7 @@ public class JSupplierDAO extends AAffiliateDAO {
     private final static String TABLE_NAME = "supplier";
     private static final String LEAD_TIME = "lead_time";
 
-    public static boolean insertSupplier(JSupplier supplier, JPanel panel) {
+    public static boolean insertSupplier(JSupplier supplier) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -51,7 +51,6 @@ public class JSupplierDAO extends AAffiliateDAO {
             return false;
         }
 
-        MessageDialog.showMessage("Fornecedor adicionado com sucesso", panel);
         return true;
     }
 

@@ -196,6 +196,11 @@ public class MessageDialog extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
     }
 
+    /**
+     *
+     * @param message Apresenta a mensagem que será mostrada no dialog.
+     * @param panel Indica o painel que será desabilitado quando o dialog for mostrado.
+     */
     public static void showMessage(String message, JPanel panel) {
         MessageDialog dialog = new MessageDialog(null, true);
         dialog.configurarDialog(message, "Ok");
@@ -203,6 +208,12 @@ public class MessageDialog extends javax.swing.JDialog {
         dialog.setVisible(true);
     }
     
+    /**
+     *
+     * @param message Apresenta a mensagem que será mostrada no dialog.
+     * @param okButton Mensagem que será colocada no botão de confirmação
+     * @param panel Indica o painel que será desabilitado quando o dialog for mostrado.
+     */
     public static void showMessage(String message, String okButton, JPanel panel) {
         MessageDialog dialog = new MessageDialog(null, true);
         dialog.configurarDialog(message, okButton);

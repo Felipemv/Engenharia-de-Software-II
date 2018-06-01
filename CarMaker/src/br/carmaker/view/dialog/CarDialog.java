@@ -6,6 +6,7 @@
 package br.carmaker.view.dialog;
 
 import br.carmaker.model.JCar;
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -188,14 +189,21 @@ public class CarDialog extends javax.swing.JPanel {
 
         if (validation(car)) {
             if (creating) {
-                if (JDbFacade.getInstance().createCar(car, this)) {
+                if (JDbFacade.getInstance().createCar(car)) {
+                    MessageDialog.showMessage(JConstants.SUCCESS_CREATE_CAR, this);
                     registerDialog.dispose();
                     parent.setEnabled(true);
+                }else{
+                    MessageDialog.showMessage(JConstants.FAILURE_CREATE_CAR, this);
                 }
             } else {
-                JDbFacade.getInstance().editCar(car);
-                registerDialog.dispose();
-                parent.setEnabled(true);
+                if(JDbFacade.getInstance().editCar(car)){
+                    MessageDialog.showMessage(JConstants.SUCCESS_EDIT_CAR, this);
+                    registerDialog.dispose();
+                    parent.setEnabled(true);
+                }else{
+                    MessageDialog.showMessage(JConstants.FAILURE_EDIT_CAR, this);
+                }
             }
         }
     }//GEN-LAST:event_btnSaveMouseClicked
@@ -235,7 +243,7 @@ public class CarDialog extends javax.swing.JPanel {
                 || car.getSalePrice() <= 0
                 || car.getColor().trim().length() == 0) {
 
-            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
             return false;
         }
         return true;

@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.panel;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.enums.EMenuItem;
@@ -134,9 +135,8 @@ public class EmployeePanel extends javax.swing.JPanel {
             initList();
             
             if(employee.getId() == idUser){
-                MessageDialog.showMessage("Você alterou o próprio cadastro, "
-                        + "reinicie o sistema para que seus dados sejam atualizados.", 
-                            "Reiniciar sistema", this);
+                MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM, 
+                            JConstants.BUTTON_RESTART_SYSTEM, this);
                 mainFrame.dispose();
                 new LoginFrame().setVisible(true);
             }
@@ -146,7 +146,7 @@ public class EmployeePanel extends javax.swing.JPanel {
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             int id = listEmployee.getSelectedValue().getId();
-            ConfirmDialog.showConfirmationMessage(mainFrame, "Confirmar exclusão do funcionário?", this);
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_EMPLOYEE, this);
             if (ConfirmDialog.getUserChoice()) {
                 JDbFacade.getInstance().deleteEmployee(id);
                 initList();

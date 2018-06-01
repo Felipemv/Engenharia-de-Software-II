@@ -6,6 +6,7 @@
 package br.carmaker.model.dao;
 
 import br.carmaker.model.JCar;
+import br.carmaker.model.JConstants;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.ABaseEntityDAO;
 import br.carmaker.view.dialog.MessageDialog;
@@ -32,7 +33,7 @@ public class JCarDAO extends ABaseEntityDAO {
     private static final String SALE_PRICE = "sale_price";
     private static final String COLOR = "color";
 
-    public static boolean insertCar(JCar car, JPanel panel) {
+    public static boolean insertCar(JCar car) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -49,11 +50,9 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt.setString(5, car.getColor());
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
-        MessageDialog.showMessage("Carro adicionado com sucesso", panel);
         return true;
     }
 
@@ -89,7 +88,7 @@ public class JCarDAO extends ABaseEntityDAO {
         return listCars;
     }
 
-    public static void editCar(JCar car) {
+    public static boolean editCar(JCar car) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -105,14 +104,15 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt.setString(5, car.getColor());
             stmt.setInt(6, car.getId());
             
-
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
 
-    public static void deleteCar(int id) {
+    public static boolean deleteCar(int id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -123,7 +123,8 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
-
 }

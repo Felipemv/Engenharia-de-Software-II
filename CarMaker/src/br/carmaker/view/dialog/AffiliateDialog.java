@@ -5,9 +5,13 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
+import br.carmaker.model.JDealership;
+import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.abstracts.AAffiliate;
+import br.carmaker.model.enums.EDealershipType;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -41,6 +45,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgDealershipType = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         panelFooter = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
@@ -61,13 +66,13 @@ public class AffiliateDialog extends javax.swing.JPanel {
         tfLeadTime = new javax.swing.JTextField();
         panelShippingCompany = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        spnAmount = new javax.swing.JSpinner();
+        spnFleet = new javax.swing.JSpinner();
         panelDealership = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbGeneral = new javax.swing.JRadioButton();
+        rbExclusive = new javax.swing.JRadioButton();
 
         panelFooter.setBackground(new java.awt.Color(37, 37, 39));
 
@@ -210,12 +215,12 @@ public class AffiliateDialog extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel5.setText("Quantidade por entrega: ");
 
-        jTextField4.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel7.setText("Tamanho da frota: ");
 
-        jTextField6.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        spnAmount.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+
+        spnFleet.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout panelShippingCompanyLayout = new javax.swing.GroupLayout(panelShippingCompany);
         panelShippingCompany.setLayout(panelShippingCompanyLayout);
@@ -226,10 +231,10 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 .addGroup(panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(18, 38, Short.MAX_VALUE)
                 .addGroup(panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
-                    .addComponent(jTextField4))
+                    .addComponent(spnAmount, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+                    .addComponent(spnFleet))
                 .addContainerGap())
         );
         panelShippingCompanyLayout.setVerticalGroup(
@@ -237,12 +242,12 @@ public class AffiliateDialog extends javax.swing.JPanel {
             .addGroup(panelShippingCompanyLayout.createSequentialGroup()
                 .addGroup(panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spnAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 152, Short.MAX_VALUE))
+                    .addComponent(spnFleet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 170, Short.MAX_VALUE))
         );
 
         panelView.add(panelShippingCompany, "card3");
@@ -250,11 +255,14 @@ public class AffiliateDialog extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel8.setText("Tipo: ");
 
-        jRadioButton1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jRadioButton1.setText("Geral");
+        bgDealershipType.add(rbGeneral);
+        rbGeneral.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rbGeneral.setSelected(true);
+        rbGeneral.setText("Geral");
 
-        jRadioButton2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jRadioButton2.setText("Exclusiva");
+        bgDealershipType.add(rbExclusive);
+        rbExclusive.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rbExclusive.setText("Exclusiva");
 
         javax.swing.GroupLayout panelDealershipLayout = new javax.swing.GroupLayout(panelDealership);
         panelDealership.setLayout(panelDealershipLayout);
@@ -264,9 +272,9 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton1)
+                .addComponent(rbGeneral)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton2)
+                .addComponent(rbExclusive)
                 .addGap(403, 403, 403))
         );
         panelDealershipLayout.setVerticalGroup(
@@ -275,8 +283,8 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbGeneral)
+                    .addComponent(rbExclusive))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
 
@@ -320,16 +328,25 @@ public class AffiliateDialog extends javax.swing.JPanel {
 
         switch (selection) {
             case 0:
-                if (creating)   saveSupplier();
-                else            editSupplier();
+                if (creating) {
+                    saveSupplier();
+                } else {
+                    editSupplier();
+                }
                 break;
             case 1:
-                if (creating)   saveShippingCompany();
-                else            editShippingCompany();                
+                if (creating) {
+                    saveShippingCompany();
+                } else {
+                    editShippingCompany();
+                }
                 break;
             case 2:
-                if (creating)   saveDealership();
-                else            editDealership();                
+                if (creating) {
+                    saveDealership();
+                } else {
+                    editDealership();
+                }
                 break;
             default:
                 MessageDialog.showMessage("Erro! Nenhuma afiliada selecionada!", this);
@@ -363,6 +380,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgDealershipType;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbType;
@@ -376,16 +394,16 @@ public class AffiliateDialog extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel panelDealership;
     private javax.swing.JPanel panelFooter;
     private javax.swing.JPanel panelShippingCompany;
     private javax.swing.JPanel panelSupplier;
     private javax.swing.JPanel panelView;
+    private javax.swing.JRadioButton rbExclusive;
+    private javax.swing.JRadioButton rbGeneral;
+    private javax.swing.JSpinner spnAmount;
+    private javax.swing.JSpinner spnFleet;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfCnpj;
     private javax.swing.JTextField tfLeadTime;
@@ -398,37 +416,154 @@ public class AffiliateDialog extends javax.swing.JPanel {
 
     private void saveSupplier() {
         JSupplier supplier = new JSupplier();
+
         supplier.setName(tfName.getText());
         supplier.setAddress(tfAddress.getText());
         supplier.setCnpj(tfCnpj.getText());
         supplier.setLeadTime(Integer.parseInt(tfCnpj.getText()));
-        
-        if(supplierValidation(supplier)){
-            JDbFacade.getInstance().createSupplier(supplier, this);
+
+        if (supplierValidation(supplier)) {
+            if (JDbFacade.getInstance().createSupplier(supplier)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_CREATE_SUPPLIER, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_CREATE_SUPPLIER, this);
+            }
         }
     }
 
     private void saveShippingCompany() {
+        JShippingCompany shippingCompany = new JShippingCompany();
+
+        shippingCompany.setName(tfName.getText());
+        shippingCompany.setAddress(tfAddress.getText());
+        shippingCompany.setCnpj(tfCnpj.getText());
+        shippingCompany.setAmount((int) spnAmount.getValue());
+        shippingCompany.setFleet((int) spnFleet.getValue());
+
+        if (shippingCompanyValidation(shippingCompany)) {
+            if (JDbFacade.getInstance().createShippingCompany(shippingCompany)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_CREATE_SHIPPING_COMPANY, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_CREATE_SHIPPING_COMPANY, this);
+            }
+        }
     }
 
     private void saveDealership() {
+        JDealership dealership = new JDealership();
+
+        dealership.setName(tfName.getText());
+        dealership.setAddress(tfAddress.getText());
+        dealership.setCnpj(tfCnpj.getText());
+
+        if (rbGeneral.isSelected()) {
+            dealership.setType(EDealershipType.GENERAL);
+        } else if (rbExclusive.isSelected()) {
+            dealership.setType(EDealershipType.EXCLUSIVE);
+        }
+        if (dealershipValidation(dealership)) {
+            if (JDbFacade.getInstance().createDealership(dealership)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_CREATE_DEALERSHIP, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_CREATE_DEALERSHIP, this);
+            }
+        }
     }
 
     private void editSupplier() {
+        JSupplier supplier = new JSupplier();
+
+        supplier.setName(tfName.getText());
+        supplier.setAddress(tfAddress.getText());
+        supplier.setCnpj(tfCnpj.getText());
+
+        if (supplierValidation(supplier)) {
+            if (JDbFacade.getInstance().editSupplier(supplier)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_EDIT_SUPPLIER, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_EDIT_SUPPLIER, this);
+            }
+        }
     }
 
     private void editShippingCompany() {
+        JShippingCompany shippingCompany = new JShippingCompany();
+
+        shippingCompany.setName(tfName.getText());
+        shippingCompany.setAddress(tfAddress.getText());
+        shippingCompany.setCnpj(tfCnpj.getText());
+
+        if (shippingCompanyValidation(shippingCompany)) {
+            if (JDbFacade.getInstance().editShippingCompany(shippingCompany)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_EDIT_SHIPPING_COMPANY, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_EDIT_SHIPPING_COMPANY, this);
+            }
+        }
     }
 
     private void editDealership() {
+        JDealership dealership = new JDealership();
+
+        dealership.setName(tfName.getText());
+        dealership.setAddress(tfAddress.getText());
+        dealership.setCnpj(tfCnpj.getText());
+
+        if (rbGeneral.isSelected()) {
+            dealership.setType(EDealershipType.GENERAL);
+        } else if (rbExclusive.isSelected()) {
+            dealership.setType(EDealershipType.EXCLUSIVE);
+        }
+        if (dealershipValidation(dealership)) {
+            if (JDbFacade.getInstance().editDealership(dealership)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_EDIT_DEALERSHIP, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_EDIT_DEALERSHIP, this);
+            }
+        }
     }
 
     private boolean supplierValidation(JSupplier supplier) {
-        if(supplier.getName().trim().length() == 0
+        if (supplier.getName().trim().length() == 0
                 || supplier.getAddress().trim().length() == 0
                 || supplier.getCnpj().trim().length() == 0
-                || supplier.getLeadTime() == 0){
-            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
+                || supplier.getLeadTime() == 0) {
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean shippingCompanyValidation(JShippingCompany shippingCompany) {
+        if (shippingCompany.getName().trim().length() == 0
+                || shippingCompany.getAddress().trim().length() == 0
+                || shippingCompany.getCnpj().trim().length() == 0
+                || shippingCompany.getAmount() == 0
+                || shippingCompany.getFleet()== 0) {
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean dealershipValidation(JDealership dealership) {
+        if (dealership.getName().trim().length() == 0
+                || dealership.getAddress().trim().length() == 0
+                || dealership.getCnpj().trim().length() == 0
+                || dealership.getType() == null) {
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
             return false;
         }
         return true;

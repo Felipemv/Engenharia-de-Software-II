@@ -67,7 +67,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
         return employee;
     }
 
-    public static boolean insertEmployee(JEmployee employee, JPanel panel) {
+    public static boolean insertEmployee(JEmployee employee) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -87,19 +87,15 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             stmt.setBytes(8, employee.getPhoto());
 
             stmt.execute();
-        } catch (MySQLIntegrityConstraintViolationException i) {
-            MessageDialog.showMessage("Número de registro já foi utilizado", panel);
-            return false;
         } catch (SQLException ex) {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
-        MessageDialog.showMessage("Funcionário adicionado com sucesso", panel);
         return true;
     }
 
-    public static void editEmployee(JEmployee employee) {
+    public static boolean editEmployee(JEmployee employee) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -121,10 +117,12 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        return true;
     }
 
-    public static void deleteEmployee(int id) {
+    public static boolean deleteEmployee(int id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
@@ -135,7 +133,10 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
+        
+        return true;
     }
 
     public static List<JEmployee> getAllEmployees() {
@@ -171,5 +172,25 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listEmployees;
+    }
+    
+    public static boolean registerExists(String register) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt;
+        ResultSet rs;
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + REGISTER + "=" + register;
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            if(rs.first()){
+                return true;
+            }
+        } catch (SQLException ex) {
+            return true;
+        }
+        return false;
     }
 }

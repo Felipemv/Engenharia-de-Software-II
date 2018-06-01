@@ -5,9 +5,9 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
-import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EEmployeeType;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -16,7 +16,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -35,7 +34,8 @@ public class EmployeeDialog extends javax.swing.JPanel {
     /**
      * Creates new form employeeDialog
      *
-     * @param registerDialog
+     * @param registerDialog Dialog de registro
+     * @param parent Frame principal que será bloqueado enquanto o dialog estiver visível
      */
     public EmployeeDialog(JDialog registerDialog, JFrame parent) {
         initComponents();
@@ -343,7 +343,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
         fileChooser.addChoosableFileFilter(filter);
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
-        fileChooser.setCurrentDirectory(new File("C:\\Users\\Usuário\\Desktop"));
+        fileChooser.setCurrentDirectory(new File(JConstants.DEFAULT_CHOOSER_IMAGE_LOCATION));
         fileChooser.showOpenDialog(this);
 
         image = fileChooser.getSelectedFile();
@@ -373,14 +373,21 @@ public class EmployeeDialog extends javax.swing.JPanel {
 
         if (validation(employee, confirmEmail, confirmPassword)) {
             if (creating) {
-                if (JDbFacade.getInstance().createEmployee(employee, this)) {
+                if (JDbFacade.getInstance().createEmployee(employee)) {
+                    MessageDialog.showMessage(JConstants.SUCCESS_CREATE_EMPLOYEE, this);
                     registerDialog.dispose();
                     parent.setEnabled(true);
+                }else{
+                    MessageDialog.showMessage(JConstants.FAILURE_CREATE_EMPLOYEE, this);
                 }
             } else {
-                JDbFacade.getInstance().editEmployee(employee);
-                registerDialog.dispose();
-                parent.setEnabled(true);
+                if (JDbFacade.getInstance().editEmployee(employee)) {
+                    MessageDialog.showMessage(JConstants.SUCCESS_EDIT_EMPLOYEE, this);
+                    registerDialog.dispose();
+                    parent.setEnabled(true);
+                }else{
+                    MessageDialog.showMessage(JConstants.FAILURE_EDIT_EMPLOYEE, this);
+                }
             }
         }
     }//GEN-LAST:event_btnSaveMouseClicked
@@ -431,12 +438,12 @@ public class EmployeeDialog extends javax.swing.JPanel {
 
     public boolean validation(JEmployee employee, String email, String password) {
         if (!employee.getEmail().equals(email)) {
-            MessageDialog.showMessage("Os emails assinalados são diferentes!", this);
+            MessageDialog.showMessage(JConstants.LABEL_DIFFERENT_EMAILS, this);
             return false;
         }
 
         if (!employee.getPassword().equals(password)) {
-            MessageDialog.showMessage("As senhas assinaladas são diferentes!", this);
+            MessageDialog.showMessage(JConstants.LABEL_DIFFERENT_PASSWORDS, this);
             return false;
         }
 
@@ -447,7 +454,14 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 || employee.getRegisterNumber().trim().length() == 0
                 || employee.getRole() == null) {
 
-            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
+            return false;
+        }
+        
+        if(JDbFacade.getInstance().registerExists(employee.getRegisterNumber())){
+            MessageDialog.showMessage(JConstants.LABEL_REGISTER_EXISTS, this);
+            tfRegister.setText("");
+            tfRegister.grabFocus();
             return false;
         }
 
@@ -498,7 +512,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
             return getResizedImage(im);
 
         } else {
-            Image img = new ImageIcon(getClass().getResource("/image/user_default.png")).getImage();
+            Image img = new ImageIcon(getClass().getResource(JConstants.DEFAULT_USER_IMAGE)).getImage();
             return getResizedImage(img);
         }
     }
