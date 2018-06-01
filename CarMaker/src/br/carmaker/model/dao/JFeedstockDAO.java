@@ -10,7 +10,6 @@ import br.carmaker.model.JFeedstock;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.ABaseEntityDAO;
 import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
-import br.carmaker.view.dialog.MessageDialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /**
  *
@@ -29,7 +27,6 @@ public class JFeedstockDAO extends ABaseEntityDAO {
 
     private static final String TABLE_NAME = "feedstock";
     private static final String NAME = "name";
-    private static final String SUPPLIER = "supplier_id";
     private static final String QUANTITY = "quantity";
     private static final String COST = "cost";
     
@@ -37,15 +34,20 @@ public class JFeedstockDAO extends ABaseEntityDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + "," + SUPPLIER + ", "
-                + QUANTITY + ", " + COST + ") VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + ","
+                + QUANTITY + ", " + COST + ") VALUES (?, ?, ?)";
 
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, feedstock.getName());
-            stmt.setInt(2, feedstock.getSupplier().getId());
-            stmt.setInt(3, feedstock.getQuantity());
-            stmt.setDouble(4, feedstock.getCost());
+            stmt.setInt(2, feedstock.getQuantity());
+            stmt.setDouble(3, feedstock.getCost());
+            
+            for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
+                int feedstock_id = feedstock.getId();
+                int supplier_id = feedstock.getSuppliers().get(i);
+                JDbFacade.getInstance().createSupplierToFeedstock(feedstock_id, supplier_id);
+            }
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -74,9 +76,11 @@ public class JFeedstockDAO extends ABaseEntityDAO {
 
                 feedstock.setId(rs.getInt(ID));
                 feedstock.setName(rs.getString(NAME));
-                feedstock.setSupplier(JDbFacade.getInstance().readSupplierById(rs.getInt(SUPPLIER)));
                 feedstock.setQuantity(rs.getInt(QUANTITY));
                 feedstock.setCost(rs.getDouble(COST));
+                
+                List<Integer> suppliers = JDbFacade.getInstance().readSupplierByFeedstock(feedstock.getId());
+                feedstock.setSuppliers(suppliers);
 
                 listFeedstock.add(feedstock);
             }
@@ -90,17 +94,23 @@ public class JFeedstockDAO extends ABaseEntityDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + SUPPLIER
-                + "=?," + QUANTITY + "=?," + COST + "=? WHERE " + ID + "=?";
+        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + QUANTITY 
+                + "=?," + COST + "=? WHERE " + ID + "=?";
 
         try {
             stmt = connection.prepareStatement(sql);
 
             stmt.setString(1, feedstock.getName());
-            stmt.setInt(2, feedstock.getSupplier().getId());
-            stmt.setInt(3, feedstock.getQuantity());
-            stmt.setDouble(4, feedstock.getCost());
-            stmt.setInt(5, feedstock.getId());
+            stmt.setInt(2, feedstock.getQuantity());
+            stmt.setDouble(3, feedstock.getCost());
+            stmt.setInt(4, feedstock.getId());
+            
+            for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
+                int feedstock_id = feedstock.getId();
+                int supplier_id = feedstock.getSuppliers().get(i);
+                
+                JDbFacade.getInstance().editSupplierOfAFeedstock(feedstock_id, supplier_id);
+            }
 
             return stmt.execute();
 

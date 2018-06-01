@@ -1,11 +1,13 @@
 package br.carmaker.model;
 
 import br.carmaker.model.abstracts.ABaseEntity;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JFeedstock extends ABaseEntity {
 
     private String name;
-    private JSupplier supplier;
+    private List<Integer> suppliers;
     private int quantity;
     private double cost;
 
@@ -17,12 +19,12 @@ public class JFeedstock extends ABaseEntity {
         this.name = name;
     }
 
-    public JSupplier getSupplier() {
-        return supplier;
+    public List<Integer> getSuppliers() {
+        return suppliers;
     }
 
-    public void setSupplier(JSupplier supplier) {
-        this.supplier = supplier;
+    public void setSuppliers(List<Integer> suppliers) {
+        this.suppliers = suppliers;
     }
 
     public int getQuantity() {

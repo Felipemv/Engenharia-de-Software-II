@@ -128,15 +128,15 @@ public class EmployeePanel extends javax.swing.JPanel {
     private void listEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listEmployeeMouseClicked
         if (evt.getClickCount() == 2) {
             JEmployee employee = listEmployee.getSelectedValue();
-            
+
             mainFrame.setEnabled(false);
             RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES, employee);
             dialog.setVisible(true);
             initList();
-            
-            if(employee.getId() == idUser){
-                MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM, 
-                            JConstants.BUTTON_RESTART_SYSTEM, this);
+
+            if (employee.getId() == idUser) {
+                MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM,
+                        JConstants.BUTTON_RESTART_SYSTEM, this);
                 mainFrame.dispose();
                 new LoginFrame().setVisible(true);
             }
@@ -146,10 +146,15 @@ public class EmployeePanel extends javax.swing.JPanel {
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             int id = listEmployee.getSelectedValue().getId();
-            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_EMPLOYEE, this);
-            if (ConfirmDialog.getUserChoice()) {
-                JDbFacade.getInstance().deleteEmployee(id);
-                initList();
+
+            if (idUser == id) {
+                MessageDialog.showMessage(JConstants.LABEL_CANT_DELETE_OWN_USER, this);
+            } else {
+                ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_EMPLOYEE, this);
+                if (ConfirmDialog.getUserChoice()) {
+                    JDbFacade.getInstance().deleteEmployee(id);
+                    initList();
+                }
             }
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
@@ -165,7 +170,6 @@ public class EmployeePanel extends javax.swing.JPanel {
 
     private final JFrame mainFrame;
     private final int idUser;
-
 
     public void initList() {
         DefaultListModel<JEmployee> dlm = new DefaultListModel<>();

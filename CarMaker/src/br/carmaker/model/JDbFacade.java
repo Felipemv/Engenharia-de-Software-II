@@ -9,6 +9,7 @@ import br.carmaker.model.dao.JCarDAO;
 import br.carmaker.model.dao.JDealershipDAO;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.JFeedstockDAO;
+import br.carmaker.model.dao.JFeedstockHasSupplierDAO;
 import br.carmaker.model.dao.JShippingCompanyDAO;
 import br.carmaker.model.dao.JSupplierDAO;
 import java.util.List;
@@ -50,8 +51,8 @@ public class JDbFacade {
         return JEmployeeDAO.deleteEmployee(id);
     }
     
-    public boolean registerExists(String register){
-        return JEmployeeDAO.registerExists(register);
+    public boolean registerExists(String register, int id){
+        return JEmployeeDAO.registerExists(register, id);
     }
 
     //CRUD de Carros
@@ -110,6 +111,20 @@ public class JDbFacade {
     
     public boolean deleteSupplier(int id){
         return JSupplierDAO.deleteSupplier(id);
+    }
+    
+    //CRUD de Matérias-primas e Fornecedoras (Relação M-N)
+    
+    public boolean createSupplierToFeedstock(int feedstock_id, int supplier_id){
+        return JFeedstockHasSupplierDAO.insertSupplierToFeedstock(feedstock_id, supplier_id);
+    }
+    
+    public List<Integer> readSupplierByFeedstock(int feedstock_id){
+        return JFeedstockHasSupplierDAO.getSuppliersByFeedstockId(feedstock_id);
+    }
+    
+    public boolean editSupplierOfAFeedstock(int feedstock_id, int supplier_id){
+        return JFeedstockHasSupplierDAO.editSupplierOfAFeedstock(feedstock_id, supplier_id);
     }
     
     //CRUD de Transportadoras

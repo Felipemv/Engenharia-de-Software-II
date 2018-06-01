@@ -90,9 +90,9 @@
                       <Component id="lblSupplier" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblAmount" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="lblAmount" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -118,7 +118,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Trebuchet MS" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Fornecedor: "/>
+            <Property name="text" type="java.lang.String" value="Fornecedor(es): "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">

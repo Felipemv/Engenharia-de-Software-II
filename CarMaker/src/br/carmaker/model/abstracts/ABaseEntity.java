@@ -12,6 +12,7 @@ package br.carmaker.model.abstracts;
 public abstract class ABaseEntity {
 
     private int id;
+    private int deleted;
 
     public int getId() {
         return id;
@@ -19,5 +20,13 @@ public abstract class ABaseEntity {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 }

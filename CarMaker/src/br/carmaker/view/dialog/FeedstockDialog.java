@@ -5,9 +5,13 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import br.carmaker.model.JSupplier;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -25,6 +29,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
         creating = true;
+        initSuppliersList();
     }
 
     public FeedstockDialog(JDialog registerDialog, JFrame parent, JFeedstock feedstock) {
@@ -32,6 +37,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
         creating = false;
+        initSuppliersList();
     }
 
     /**
@@ -48,10 +54,17 @@ public class FeedstockDialog extends javax.swing.JPanel {
         tfName = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         spnAmount = new javax.swing.JSpinner();
-        cbSupplier = new javax.swing.JComboBox<>();
         tfPrice = new javax.swing.JTextField();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listAvailable = new javax.swing.JList<>();
+        btnSelectSupplier = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        btnRemoveSupplier = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listSelected = new javax.swing.JList<>();
         panelFooter = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -62,12 +75,84 @@ public class FeedstockDialog extends javax.swing.JPanel {
 
         jLabel3.setText("Preço por lote: ");
 
-        jLabel4.setText("Fornecedor:");
-
         spnAmount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spnAmount.setRequestFocusEnabled(false);
 
-        cbSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fornecedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 1, 12))); // NOI18N
+
+        jLabel4.setText("Disponíveis:");
+
+        listAvailable.setModel(dlmAvailable);
+        listAvailable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(listAvailable);
+
+        btnSelectSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/add.png"))); // NOI18N
+        btnSelectSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSelectSupplierMouseClicked(evt);
+            }
+        });
+
+        jLabel5.setText("Selecionados:");
+
+        btnRemoveSupplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/remove.png"))); // NOI18N
+        btnRemoveSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRemoveSupplierMouseClicked(evt);
+            }
+        });
+
+        listSelected.setModel(dlmSelected);
+        listSelected.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(listSelected);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSelectSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemoveSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnRemoveSupplier, btnSelectSupplier});
+
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(btnSelectSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoveSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnRemoveSupplier, btnSelectSupplier});
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jScrollPane1, jScrollPane2});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,17 +161,20 @@ public class FeedstockDialog extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addGap(30, 30, 30)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfName)
-                    .addComponent(spnAmount)
-                    .addComponent(cbSupplier, 0, 533, Short.MAX_VALUE)
-                    .addComponent(tfPrice))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addGap(30, 30, 30)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfPrice)
+                            .addComponent(spnAmount)
+                            .addComponent(tfName))
+                        .addGap(24, 24, 24))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,19 +183,17 @@ public class FeedstockDialog extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(spnAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(cbSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(182, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         panelFooter.setBackground(new java.awt.Color(37, 37, 39));
@@ -171,14 +257,13 @@ public class FeedstockDialog extends javax.swing.JPanel {
         String name = tfName.getText();
         String amount = spnAmount.getValue().toString();
         String price = tfPrice.getText();
-        JSupplier supplier = (JSupplier) cbSupplier.getSelectedItem();
 
-        if (validation()) {
+        if (validation(new JFeedstock(), 0)) {
             JFeedstock feedstock = new JFeedstock();
 
             //JDbFacade.getInstance().createFeedstock(feedstock);
         } else {
-            MessageDialog.showMessage("Todos os campos são obrigatórios!", this);
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
         }
     }//GEN-LAST:event_btnSaveMouseClicked
 
@@ -187,16 +272,45 @@ public class FeedstockDialog extends javax.swing.JPanel {
         parent.setEnabled(true);
     }//GEN-LAST:event_btnCancelMouseClicked
 
+    private void btnSelectSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSelectSupplierMouseClicked
+        if(listSelected.getModel().getSize() == 2){
+            MessageDialog.showMessage(JConstants.LABEL_TWO_SUPPLIERS_ONLY, this);
+        }else{
+            int index = listAvailable.getSelectedIndex();
+            if(index != -1){
+                addSupplier(index);
+            }else{
+                MessageDialog.showMessage(JConstants.LABEL_NO_ITEM_SELECTED, this);
+            }
+        }
+    }//GEN-LAST:event_btnSelectSupplierMouseClicked
+
+    private void btnRemoveSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRemoveSupplierMouseClicked
+        int index = listSelected.getSelectedIndex();
+        if(index != -1){
+            removeSupplier(index);
+        }else{
+            MessageDialog.showMessage(JConstants.LABEL_NO_ITEM_SELECTED, this);
+        }
+    }//GEN-LAST:event_btnRemoveSupplierMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnRemoveSupplier;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> cbSupplier;
+    private javax.swing.JButton btnSelectSupplier;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList<String> listAvailable;
+    private javax.swing.JList<String> listSelected;
     private javax.swing.JPanel panelFooter;
     private javax.swing.JSpinner spnAmount;
     private javax.swing.JTextField tfName;
@@ -207,8 +321,81 @@ public class FeedstockDialog extends javax.swing.JPanel {
     private final JFrame parent;
     private JFeedstock feedstock;
     private boolean creating = true;
+    private List<JSupplier> availableSp;
+    private List<JSupplier> selectedSp;
+    private DefaultListModel dlmAvailable = new DefaultListModel();
+    private DefaultListModel dlmSelected = new DefaultListModel();
     
-    private boolean validation() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private boolean validation(JFeedstock feedstock, int id) {
+        if(feedstock.getName().trim().length() == 0 || feedstock.getCost() == 0
+                || feedstock.getQuantity() == 0){
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
+            return false;
+        }
+        
+        if(feedstock.getSuppliers().isEmpty()){
+            MessageDialog.showMessage(JConstants.LABEL_NEED_ONE_SUPPLIER, this);
+            return false;
+        }
+        return true;
+    }
+
+    private void initSuppliersList() {
+        dlmAvailable = (DefaultListModel) listAvailable.getModel();
+        dlmAvailable.clear();
+        
+        availableSp = JDbFacade.getInstance().readAllSuppliers();
+        selectedSp = new ArrayList<>();
+        
+        if(availableSp != null){
+            for (int i = 0; i < availableSp.size(); i++) {
+                dlmAvailable.addElement(availableSp.get(i).getName());
+            }
+        }
+        listAvailable.setModel(dlmAvailable);
+    }
+    
+    private void addSupplier(int index){
+        selectedSp.add(availableSp.get(index));
+        availableSp.remove(index);
+        
+        dlmSelected = (DefaultListModel) listSelected.getModel();
+        dlmAvailable = (DefaultListModel) listAvailable.getModel();
+        
+        dlmSelected.clear();
+        dlmAvailable.clear();
+        
+        for (int i = 0; i < availableSp.size(); i++) {
+            dlmAvailable.addElement(availableSp.get(i).getName());
+        }
+        
+        for (int i = 0; i < selectedSp.size(); i++) {
+            dlmSelected.addElement(selectedSp.get(i).getName());
+        }
+        
+        listSelected.setModel(dlmSelected);
+        listAvailable.setModel(dlmAvailable);
+    }
+    
+    private void removeSupplier(int index){
+        availableSp.add(selectedSp.get(index));
+        selectedSp.remove(index);
+        
+        dlmSelected = (DefaultListModel) listSelected.getModel();
+        dlmAvailable = (DefaultListModel) listAvailable.getModel();
+        
+        dlmSelected.clear();
+        dlmAvailable.clear();
+        
+        for (int i = 0; i < selectedSp.size(); i++) {
+            dlmSelected.addElement(selectedSp.get(i).getName());
+        }
+        
+        for (int i = 0; i < availableSp.size(); i++) {
+            dlmAvailable.addElement(availableSp.get(i).getName());
+        }
+        
+        listSelected.setModel(dlmSelected);
+        listAvailable.setModel(dlmAvailable);
     }
 }

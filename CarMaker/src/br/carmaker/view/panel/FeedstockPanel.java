@@ -10,6 +10,7 @@ import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.FeedstockList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
@@ -127,16 +128,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
     private void initList() {
         DefaultListModel<JFeedstock> dlm = new DefaultListModel();
         for (int i = 0; i < 10; i++) {
-            JSupplier supplier = new JSupplier();
-            supplier.setName("Fornecedor " + (i + 1));
-
-            JFeedstock feedstock = new JFeedstock();
-            feedstock.setName("Escapamento");
-            feedstock.setQuantity(300);
-            feedstock.setCost(400);
-            feedstock.setSupplier(supplier);
-
-            dlm.addElement(feedstock);
+            
         }
         listFeedstock.setModel(dlm);
         listFeedstock.setCellRenderer(new FeedstockList());

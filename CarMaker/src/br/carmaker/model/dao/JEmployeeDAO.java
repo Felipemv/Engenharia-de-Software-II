@@ -44,7 +44,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
         JEmployee employee = new JEmployee();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=1";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -174,7 +174,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
         return listEmployees;
     }
     
-    public static boolean registerExists(String register) {
+    public static boolean registerExists(String register, int id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
         ResultSet rs;
@@ -186,6 +186,9 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
             rs = stmt.executeQuery();
             if(rs.first()){
+                if(rs.getInt(ID) == id){
+                    return false;
+                }
                 return true;
             }
         } catch (SQLException ex) {

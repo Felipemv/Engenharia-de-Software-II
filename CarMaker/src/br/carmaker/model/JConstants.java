@@ -89,10 +89,14 @@ public abstract class JConstants {
     public static final String LABEL_ALL_FIELDS_REQUIRED = "Todos os campos são obrigatórios!";
     public static final String LABEL_DIFFERENT_EMAILS = "Os emails assinalados são diferentes!";
     public static final String LABEL_DIFFERENT_PASSWORDS = "As senhas assinaladas são diferentes!";
-    public static final String LABEL_REGISTER_EXISTS = "Número de registro já foi utilizado";
+    public static final String LABEL_REGISTER_EXISTS = "Número de registro já foi utilizado.";
+    public static final String LABEL_CANT_DELETE_OWN_USER = "Você não pode deletar seu próprio usuário do sistema.";
+    public static final String LABEL_NEED_ONE_SUPPLIER = "Você precisa adicionar no mínimo um fornecedor.";
+    public static final String LABEL_NO_ITEM_SELECTED = "Ops! Nenhum item foi selecionado!";
     public static final String LABEL_OK = "OK";
     public static final String LABEL_YES = "Sim";
     public static final String LABEL_NO = "Não";
+    public static final String LABEL_TWO_SUPPLIERS_ONLY = "São permitidos somente dois fornecedores para cada matéria prima.";
     
 //    Mensagens gerais
     public static final String DEFAULT_USER_IMAGE = "/image/user_default.png";

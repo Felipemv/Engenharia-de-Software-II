@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.list;
 
+import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import java.awt.Component;
 import javax.swing.JList;
@@ -49,7 +50,7 @@ public class FeedstockList extends javax.swing.JPanel implements ListCellRendere
         jLabel1.setText("Nome: ");
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel2.setText("Fornecedor: ");
+        jLabel2.setText("Fornecedor(es): ");
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel3.setText("Quantidade por lote: ");
@@ -100,7 +101,7 @@ public class FeedstockList extends javax.swing.JPanel implements ListCellRendere
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(lblAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -145,9 +146,15 @@ public class FeedstockList extends javax.swing.JPanel implements ListCellRendere
             JFeedstock value, int index, boolean isSelected, boolean hasFocus) {
         
         lblName.setText(value.getName());
-        lblSupplier.setText(value.getSupplier().getName());
         lblAmount.setText(Integer.toString(value.getQuantity()));
         lblCost.setText("R$" + String.format("%.2f", value.getCost()).replace(".", ","));
+        
+        String supplier = JDbFacade.getInstance().readSupplierById(value.getSuppliers().get(0)).getName();
+        if(value.getSuppliers().size() == 2){
+            supplier = ", " + JDbFacade.getInstance().readSupplierById(value.getSuppliers().get(0)).getName();
+        }
+        
+        lblSupplier.setText(supplier);
         
         return this;
     }

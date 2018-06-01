@@ -458,7 +458,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
             return false;
         }
         
-        if(JDbFacade.getInstance().registerExists(employee.getRegisterNumber())){
+        if(JDbFacade.getInstance().registerExists(employee.getRegisterNumber(), employee.getId())){
             MessageDialog.showMessage(JConstants.LABEL_REGISTER_EXISTS, this);
             tfRegister.setText("");
             tfRegister.grabFocus();
