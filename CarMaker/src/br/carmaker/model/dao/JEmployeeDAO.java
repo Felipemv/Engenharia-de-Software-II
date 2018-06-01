@@ -44,7 +44,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
         JEmployee employee = new JEmployee();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=1";
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=0";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -126,7 +126,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
+        String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
-        
+
         return true;
     }
 
@@ -147,7 +147,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
         List<JEmployee> listEmployees = new ArrayList<>();
         JEmployee employee;
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DELETED + "=0";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -173,7 +173,7 @@ public class JEmployeeDAO extends ABaseEntityDAO {
         }
         return listEmployees;
     }
-    
+
     public static boolean registerExists(String register, int id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
@@ -185,8 +185,8 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             stmt = connection.prepareStatement(sql);
 
             rs = stmt.executeQuery();
-            if(rs.first()){
-                if(rs.getInt(ID) == id){
+            if (rs.first()) {
+                if (rs.getInt(ID) == id) {
                     return false;
                 }
                 return true;

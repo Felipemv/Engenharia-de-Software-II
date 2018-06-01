@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS recieved_order (
 )  ENGINE=INNODB;
 
 insert INTO employee(name, address, phone, register, role, email, pass) 
-	value('rafael', 'a', '1', '123', 1, 'rafael@', '123');
+	value('rafael', 'a', '1', '123', 0, 'rafael@', '123');
     
 insert INTO employee(name, address, phone, register, role, email, pass) 
 	value('felipe', 'b', '2', '345', 0, 'felipe@', '123');

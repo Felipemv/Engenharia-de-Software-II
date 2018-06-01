@@ -40,12 +40,25 @@ public class AffiliatePanel extends javax.swing.JPanel {
         listShippingCompany = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        panelSuppliers = new javax.swing.JPanel();
+        lblNameSup = new javax.swing.JLabel();
+        lblAddressSup = new javax.swing.JLabel();
+        lblCnpjSup = new javax.swing.JLabel();
+        lblLeadTimeSup = new javax.swing.JLabel();
+        panelShippingCompany = new javax.swing.JPanel();
+        lblNameSC = new javax.swing.JLabel();
+        lblAddressSC = new javax.swing.JLabel();
+        lblCnpjSC = new javax.swing.JLabel();
+        lblAmountSC = new javax.swing.JLabel();
+        lblFleetSC = new javax.swing.JLabel();
+        panelDealership = new javax.swing.JPanel();
+        lblTypeD = new javax.swing.JLabel();
+        lblCnpjD = new javax.swing.JLabel();
+        lblAddressD = new javax.swing.JLabel();
+        lblNameD = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -69,54 +82,159 @@ public class AffiliatePanel extends javax.swing.JPanel {
         jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(jList3);
 
-        jLabel1.setText("jLabel1");
+        lblNameSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblNameSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNameSup.setText("Nome");
+        lblNameSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+        lblAddressSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblAddressSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAddressSup.setText("Endereço");
+        lblAddressSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblCnpjSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblCnpjSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCnpjSup.setText("CNPJ");
+        lblCnpjSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblLeadTimeSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblLeadTimeSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLeadTimeSup.setText("Lead Time");
+        lblLeadTimeSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout panelSuppliersLayout = new javax.swing.GroupLayout(panelSuppliers);
+        panelSuppliers.setLayout(panelSuppliersLayout);
+        panelSuppliersLayout.setHorizontalGroup(
+            panelSuppliersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSuppliersLayout.createSequentialGroup()
+                .addComponent(lblNameSup, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblAddressSup, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblCnpjSup, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblLeadTimeSup, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+        panelSuppliersLayout.setVerticalGroup(
+            panelSuppliersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSuppliersLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelSuppliersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNameSup)
+                    .addComponent(lblAddressSup)
+                    .addComponent(lblCnpjSup)
+                    .addComponent(lblLeadTimeSup)))
         );
 
-        jLabel2.setText("jLabel1");
+        lblNameSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblNameSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNameSC.setText("Nome");
+        lblNameSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblNameSC.setMaximumSize(new java.awt.Dimension(70, 19));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 0, Short.MAX_VALUE))
+        lblAddressSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblAddressSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAddressSC.setText("Endereço");
+        lblAddressSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblAddressSC.setMaximumSize(new java.awt.Dimension(80, 19));
+        lblAddressSC.setMinimumSize(new java.awt.Dimension(80, 19));
+
+        lblCnpjSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblCnpjSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCnpjSC.setText("CNPJ");
+        lblCnpjSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblCnpjSC.setMinimumSize(new java.awt.Dimension(120, 19));
+
+        lblAmountSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblAmountSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAmountSC.setText("Quantidade");
+        lblAmountSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblAmountSC.setMinimumSize(new java.awt.Dimension(75, 19));
+
+        lblFleetSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblFleetSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFleetSC.setText("Frota");
+        lblFleetSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lblFleetSC.setMinimumSize(new java.awt.Dimension(75, 19));
+
+        javax.swing.GroupLayout panelShippingCompanyLayout = new javax.swing.GroupLayout(panelShippingCompany);
+        panelShippingCompany.setLayout(panelShippingCompanyLayout);
+        panelShippingCompanyLayout.setHorizontalGroup(
+            panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShippingCompanyLayout.createSequentialGroup()
+                .addComponent(lblNameSC, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblAddressSC, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblCnpjSC, javax.swing.GroupLayout.PREFERRED_SIZE, 104, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblAmountSC, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lblFleetSC, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 2, Short.MAX_VALUE))
+        panelShippingCompanyLayout.setVerticalGroup(
+            panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(lblNameSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblCnpjSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAmountSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblAddressSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblFleetSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jLabel3.setText("jLabel1");
+        lblTypeD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblTypeD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTypeD.setText("Tipo");
+        lblTypeD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 0, Short.MAX_VALUE))
+        lblCnpjD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblCnpjD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCnpjD.setText("CNPJ");
+        lblCnpjD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblAddressD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblAddressD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblAddressD.setText("Endereço");
+        lblAddressD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        lblNameD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        lblNameD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNameD.setText("Nome");
+        lblNameD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        javax.swing.GroupLayout panelDealershipLayout = new javax.swing.GroupLayout(panelDealership);
+        panelDealership.setLayout(panelDealershipLayout);
+        panelDealershipLayout.setHorizontalGroup(
+            panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDealershipLayout.createSequentialGroup()
+                .addComponent(lblNameD, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblAddressD, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblCnpjD, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(lblTypeD, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 2, Short.MAX_VALUE))
+        panelDealershipLayout.setVerticalGroup(
+            panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDealershipLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNameD)
+                    .addComponent(lblAddressD)
+                    .addComponent(lblCnpjD)
+                    .addComponent(lblTypeD)))
         );
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Fornecedores");
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Transportadoras");
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Concessionárias");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,17 +242,43 @@ public class AffiliatePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
+                .addComponent(btnAddAffiliates)
+                .addGap(6, 6, 6))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-                        .addComponent(btnAddAffiliates))
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(panelSuppliers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDealership, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,18 +287,24 @@ public class AffiliatePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddAffiliates))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                .addGap(24, 24, 24)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                .addGap(30, 30, 30)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelDealership, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -170,19 +320,32 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAffiliates;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JList<String> jList3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblAddressD;
+    private javax.swing.JLabel lblAddressSC;
+    private javax.swing.JLabel lblAddressSup;
+    private javax.swing.JLabel lblAmountSC;
+    private javax.swing.JLabel lblCnpjD;
+    private javax.swing.JLabel lblCnpjSC;
+    private javax.swing.JLabel lblCnpjSup;
+    private javax.swing.JLabel lblFleetSC;
+    private javax.swing.JLabel lblLeadTimeSup;
+    private javax.swing.JLabel lblNameD;
+    private javax.swing.JLabel lblNameSC;
+    private javax.swing.JLabel lblNameSup;
+    private javax.swing.JLabel lblTypeD;
     private javax.swing.JList<String> listShippingCompany;
     private javax.swing.JList<String> listSupplier;
+    private javax.swing.JPanel panelDealership;
+    private javax.swing.JPanel panelShippingCompany;
+    private javax.swing.JPanel panelSuppliers;
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;

@@ -5,11 +5,13 @@
  */
 package br.carmaker.view.panel;
 
+import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.FeedstockList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -126,10 +128,14 @@ public class FeedstockPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
 
     private void initList() {
+        
+        List<JFeedstock> list = JDbFacade.getInstance().readAllFeedstocks();
         DefaultListModel<JFeedstock> dlm = new DefaultListModel();
+        
         for (int i = 0; i < 10; i++) {
-            
+            dlm.addElement(list.get(i));
         }
+        
         listFeedstock.setModel(dlm);
         listFeedstock.setCellRenderer(new FeedstockList());
     }
