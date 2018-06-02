@@ -15,7 +15,7 @@ import javax.swing.ListCellRenderer;
  *
  * @author felipe
  */
-public class FeedstockList extends javax.swing.JPanel implements ListCellRenderer<JFeedstock>{
+public class FeedstockList extends javax.swing.JPanel implements ListCellRenderer<JFeedstock> {
 
     /**
      * Creates new form FeedstockList
@@ -142,20 +142,23 @@ public class FeedstockList extends javax.swing.JPanel implements ListCellRendere
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends JFeedstock> list, 
+    public Component getListCellRendererComponent(JList<? extends JFeedstock> list,
             JFeedstock value, int index, boolean isSelected, boolean hasFocus) {
-        
+
         lblName.setText(value.getName());
         lblAmount.setText(Integer.toString(value.getQuantity()));
         lblCost.setText("R$" + String.format("%.2f", value.getCost()).replace(".", ","));
-        
-        String supplier = JDbFacade.getInstance().readSupplierById(value.getSuppliers().get(0)).getName();
-        if(value.getSuppliers().size() == 2){
-            supplier = ", " + JDbFacade.getInstance().readSupplierById(value.getSuppliers().get(0)).getName();
+
+        String supplier = "";
+        for (int i = 0; i < value.getSuppliers().size(); i++) {
+            int id = value.getSuppliers().get(i);
+            if(i > 0){
+                supplier += ", ";
+            }
+            supplier += JDbFacade.getInstance().readSupplierById(id).getName();
         }
-        
         lblSupplier.setText(supplier);
-        
+
         return this;
     }
 }

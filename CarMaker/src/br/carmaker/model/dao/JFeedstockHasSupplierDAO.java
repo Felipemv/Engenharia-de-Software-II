@@ -21,15 +21,16 @@ import java.util.logging.Logger;
  * @author felipe
  */
 public class JFeedstockHasSupplierDAO {
+
     private static final String TABLE_NAME = "feedstock_has_supplier";
     private static final String FEEDSTOCK_ID = "feedstock_id";
     private static final String SUPPLIER_ID = "supplier_id";
-    
+
     public static boolean insertSupplierToFeedstock(int feedstock_id, int supplier_id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "INSERT INTO " + TABLE_NAME + "(" + FEEDSTOCK_ID + "," 
+        String sql = "INSERT INTO " + TABLE_NAME + "(" + FEEDSTOCK_ID + ","
                 + SUPPLIER_ID + ") VALUES (?, ?)";
 
         try {
@@ -44,21 +45,20 @@ public class JFeedstockHasSupplierDAO {
         }
         return true;
     }
-    
+
     public static List<Integer> getSuppliersByFeedstockId(int feedstock_id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
         ResultSet rs;
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + FEEDSTOCK_ID 
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + FEEDSTOCK_ID
                 + "=" + feedstock_id;
-        
+
         List<Integer> suppliers = new ArrayList<>();
 
         try {
             stmt = connection.prepareStatement(sql);
 
-            
             rs = stmt.executeQuery();
             while (rs.next()) {
                 suppliers.add(rs.getInt(SUPPLIER_ID));
@@ -68,24 +68,33 @@ public class JFeedstockHasSupplierDAO {
         }
         return suppliers;
     }
-    
-    public static boolean editSupplierOfAFeedstock(int feedstock_id, int supplier_id) {
+
+    private static boolean deleteSupplierofAFeedstock(int feedstock_id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET " + SUPPLIER_ID + "=? WHERE " + FEEDSTOCK_ID + "=?";
-
-        try {
+        String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + FEEDSTOCK_ID + "=" + feedstock_id;
+        try{
             stmt = connection.prepareStatement(sql);
-
-            stmt.setInt(1, supplier_id);
-            stmt.setInt(2, feedstock_id);
-
-            return stmt.execute();
-
+            
+            stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JFeedstockHasSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+        return true;
+    }
+
+    public static boolean editSuppliersOfAFeedstock(int feedstock_id, List<Integer> suppliers) {
+        if(!deleteSupplierofAFeedstock(feedstock_id)){
+            return false;
+        }
+        
+        for (int i = 0; i < suppliers.size(); i++) {
+            if(!insertSupplierToFeedstock(feedstock_id, suppliers.get(i))){
+                return false;
+            }
+        }
+        return true;
     }
 }

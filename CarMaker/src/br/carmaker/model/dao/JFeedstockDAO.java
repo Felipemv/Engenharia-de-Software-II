@@ -94,8 +94,8 @@ public class JFeedstockDAO extends ABaseEntityDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + QUANTITY 
-                + "=?," + COST + "=? WHERE " + ID + "=?";
+        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?, " + QUANTITY 
+                + "=?, " + COST + "=? WHERE " + ID + "=?";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -107,17 +107,17 @@ public class JFeedstockDAO extends ABaseEntityDAO {
             
             for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
                 int feedstock_id = feedstock.getId();
-                int supplier_id = feedstock.getSuppliers().get(i);
                 
-                JDbFacade.getInstance().editSupplierOfAFeedstock(feedstock_id, supplier_id);
+                JDbFacade.getInstance().editSupplierOfAFeedstock(feedstock_id, feedstock.getSuppliers());
             }
 
-            return stmt.execute();
+            stmt.execute();
 
         } catch (SQLException ex) {
             Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+        return true;
     }
     
     public static boolean deleteFeedstock(int id) {

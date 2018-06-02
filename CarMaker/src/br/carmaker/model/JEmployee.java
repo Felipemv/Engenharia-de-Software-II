@@ -22,6 +22,7 @@ public class JEmployee extends ABaseEntity {
     private String email;
     private String password;
     private byte[] photo;
+    private boolean online;
 
     public String getName() {
         return name;
@@ -87,4 +88,11 @@ public class JEmployee extends ABaseEntity {
         this.photo = photo;
     }
 
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
+    }
 }

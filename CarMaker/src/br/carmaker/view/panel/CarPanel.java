@@ -6,6 +6,7 @@
 package br.carmaker.view.panel;
 
 import br.carmaker.model.JCar;
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EMenuItem;
@@ -133,7 +134,7 @@ public class CarPanel extends javax.swing.JPanel {
     private void listCarsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listCarsKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             int id = listCars.getSelectedValue().getId();
-            ConfirmDialog.showConfirmationMessage(mainFrame, "Confirmar exclusão do carro?", this);
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_CAR, this);
             if (ConfirmDialog.getUserChoice()) {
                 JDbFacade.getInstance().deleteCar(id);
                 initList();

@@ -9,6 +9,7 @@ import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.enums.EEmployeeType;
+import br.carmaker.view.frame.LoginFrame;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -382,9 +383,18 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 }
             } else {
                 if (JDbFacade.getInstance().editEmployee(employee)) {
-                    MessageDialog.showMessage(JConstants.SUCCESS_EDIT_EMPLOYEE, this);
-                    registerDialog.dispose();
+                    if(employee.isOnline()){
+                        MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM, 
+                                JConstants.BUTTON_RESTART_SYSTEM, this);
+                        registerDialog.dispose();
+                        parent.dispose();
+                        new LoginFrame().setVisible(true);
+                    }else{
+                       MessageDialog.showMessage(JConstants.SUCCESS_EDIT_EMPLOYEE, this); 
+                       registerDialog.dispose();
                     parent.setEnabled(true);
+                    }
+                    
                 }else{
                     MessageDialog.showMessage(JConstants.FAILURE_EDIT_EMPLOYEE, this);
                 }

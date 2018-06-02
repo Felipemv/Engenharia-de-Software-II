@@ -5,12 +5,15 @@
  */
 package br.carmaker.view.panel;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EMenuItem;
+import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.FeedstockList;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -27,7 +30,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
      */
     public FeedstockPanel(JFrame frame) {
         initComponents();
-        //initList();
+        initList();
         this.mainFrame = frame;
     }
 
@@ -60,9 +63,14 @@ public class FeedstockPanel extends javax.swing.JPanel {
         });
 
         listFeedstock.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listFeedstock.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listFeedstockValueChanged(evt);
+        listFeedstock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listFeedstockMouseClicked(evt);
+            }
+        });
+        listFeedstock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listFeedstockKeyPressed(evt);
             }
         });
         jScrollPane1.setViewportView(listFeedstock);
@@ -112,9 +120,27 @@ public class FeedstockPanel extends javax.swing.JPanel {
         mainFrame.setEnabled(false);
     }//GEN-LAST:event_btnAddFeedstockMouseClicked
 
-    private void listFeedstockValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listFeedstockValueChanged
+    private void listFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listFeedstockMouseClicked
+        if (evt.getClickCount() == 2) {
+            JFeedstock feedstock = listFeedstock.getSelectedValue();
+            
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 1, EMenuItem.FEEDSTOCK, feedstock);
+            dialog.setVisible(true);
+            initList();
+        }
+    }//GEN-LAST:event_listFeedstockMouseClicked
 
-    }//GEN-LAST:event_listFeedstockValueChanged
+    private void listFeedstockKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listFeedstockKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int id = listFeedstock.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_FEEDSTOCK, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteFeedstock(id);
+                initList();
+            }
+        }
+    }//GEN-LAST:event_listFeedstockKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -132,7 +158,7 @@ public class FeedstockPanel extends javax.swing.JPanel {
         List<JFeedstock> list = JDbFacade.getInstance().readAllFeedstocks();
         DefaultListModel<JFeedstock> dlm = new DefaultListModel();
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < list.size(); i++) {
             dlm.addElement(list.get(i));
         }
         
