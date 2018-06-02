@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS feedstock_has_supplier (
     FOREIGN KEY(supplier_id) REFERENCES supplier(id)
 ) ENGINE INNODB;
 
-
 CREATE TABLE IF NOT EXISTS placed_order (
     id INT NOT NULL AUTO_INCREMENT,
     protocol VARCHAR(45) NOT NULL,
@@ -106,16 +105,58 @@ CREATE TABLE IF NOT EXISTS recieved_order (
         REFERENCES shipping_company (id)
 )  ENGINE=INNODB;
 
-insert INTO employee(name, address, phone, register, role, email, pass) 
-	value('rafael', 'a', '1', '123', 0, 'rafael@', '123');
+#Exemplos de funcionários
+INSERT INTO employee(name, address, phone, register, role, email, pass) 
+	VALUES('Rafael', 'a', '1', '123', 0, 'rafael@', '123');
     
-insert INTO employee(name, address, phone, register, role, email, pass) 
-	value('felipe', 'b', '2', '345', 0, 'felipe@', '123');
+INSERT INTO employee(name, address, phone, register, role, email, pass) 
+	VALUES('Felipe', 'b', '2', '345', 0, 'felipe@', '123');
+    
+#Exemplos de carros
+INSERT INTO car (model, production_time, cost_price, sale_price, color)
+	VALUES('Fiat UNO', 12, 2000.00, 5000.00, 'Black');
     
 INSERT INTO car (model, production_time, cost_price, sale_price, color)
-	values('Fiat UNO', 12, 2000.00, 5000.00, 'Black');
+	VALUES('Fusca', 15, 8000.00, 10000.00, 'Azul');
     
-SELECT 
-    *
-FROM
-    employee;
+#Exemplos de fornecedores    
+INSERT INTO supplier(lead_time, name, address, cnpj)
+	VALUES(8, 'Fornecedor 1', 'Rua X - nº 1, Bairro A', '15615615665');
+    
+INSERT INTO supplier(lead_time, name, address, cnpj)
+	VALUES(10, 'Fornecedor 2', 'Rua Y - nº 2, Bairro B', '454214489144');
+    
+INSERT INTO supplier(lead_time, name, address, cnpj)
+	VALUES(12, 'Fornecedor 3', 'Rua Z - nº 3, Bairro C', '16516512020');
+    
+#Exemplos de concessionárias    
+INSERT INTO dealership(type, name, address, cnpj)
+	VALUES(0, 'Concessionária 1', 'Rua X - nº 1, Bairro A', '15615615665');
+    
+INSERT INTO dealership(type, name, address, cnpj)
+	VALUES(1, 'Concessionária 2', 'Rua Y - nº 2, Bairro B', '454214489144');
+    
+INSERT INTO dealership(type, name, address, cnpj)
+	VALUES(1, 'Concessionária 3', 'Rua Z - nº 3, Bairro C', '16516512020');
+    
+#Exemplos de transportadoras    
+INSERT INTO shipping_company(amount, fleet, name, address, cnpj)
+	VALUES(8, 10, 'Transportadora 1', 'Rua X - nº 1, Bairro A', '15615615665');
+    
+INSERT INTO shipping_company(amount, fleet, name, address, cnpj)
+	VALUES(10, 20, 'Transportadora 2', 'Rua Y - nº 2, Bairro B', '454214489144');
+    
+INSERT INTO shipping_company(amount, fleet, name, address, cnpj)
+	VALUES(12, 30, 'Transportadora 3', 'Rua Z - nº 3, Bairro C', '16516512020');
+    
+#Exemplo de Matéria-prima
+INSERT INTO feedstock(name, quantity, cost)
+	VALUES('Pneu', 8000, 120);
+    
+#Exemplo de Matéria-prima
+INSERT INTO feedstock(name, quantity, cost)
+	VALUES('Parachoque', 8000, 200);    
+
+#Exemplo de Matéria-prima
+INSERT INTO feedstock(name, quantity, cost)
+	VALUES('Bancos', 4000, 120);    
