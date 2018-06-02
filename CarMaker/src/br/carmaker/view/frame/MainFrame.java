@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.frame;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
@@ -777,7 +778,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void logout() {
-        ConfirmDialog.showConfirmationMessage(this, "Confirmar saída do sistema?");
+        ConfirmDialog.showConfirmationMessage(this, JConstants.LABEL_CONFIRM_LOGOUT);
         if (ConfirmDialog.getUserChoice()) {
             this.dispose();
             new LoginFrame().setVisible(true);

@@ -64,7 +64,7 @@ public class JCarDAO extends ABaseEntityDAO {
         List<JCar> listCars = new ArrayList<>();
         JCar car;
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DELETED + "=0";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -103,7 +103,7 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt.setDouble(4, car.getSalePrice());
             stmt.setString(5, car.getColor());
             stmt.setInt(6, car.getId());
-            
+
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -116,7 +116,7 @@ public class JCarDAO extends ABaseEntityDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
+        String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
         try {
             stmt = connection.prepareStatement(sql);

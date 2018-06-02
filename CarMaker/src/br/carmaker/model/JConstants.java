@@ -83,7 +83,7 @@ public abstract class JConstants {
 //    * 2* = Mensagem
     
     public static final String LABEL_RESTART_SYSTEM = "Você alterou o próprio cadastro, reinicie o sistema para que seus dados sejam atualizados.";
-    public static final String LABEL_CONFIRM_LOGOUT = "Confirmar Saída do Sistema";
+    public static final String LABEL_CONFIRM_LOGOUT = "Confirmar Saída do Sistema?";
     public static final String BUTTON_RESTART_SYSTEM = "Reiniciar Sistema";
     
     public static final String LABEL_ALL_FIELDS_REQUIRED = "Todos os campos são obrigatórios!";

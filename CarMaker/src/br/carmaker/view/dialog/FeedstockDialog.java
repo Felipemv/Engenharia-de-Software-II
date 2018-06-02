@@ -36,8 +36,10 @@ public class FeedstockDialog extends javax.swing.JPanel {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        this.feedstock = feedstock;
         creating = false;
-        initSuppliersList();
+        
+        setFeedstock();
     }
 
     /**
@@ -133,9 +135,9 @@ public class FeedstockDialog extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -254,16 +256,37 @@ public class FeedstockDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
-        String name = tfName.getText();
-        String amount = spnAmount.getValue().toString();
-        String price = tfPrice.getText();
+        if (creating) {
+            feedstock = new JFeedstock();
+        }
+        feedstock.setName(tfName.getText());
+        feedstock.setQuantity((int) spnAmount.getValue());
+        feedstock.setCost(Double.parseDouble(tfPrice.getText()));
+        
+        List<Integer> sup = new ArrayList<>();
+        for (int i = 0; i < selectedSp.size(); i++) {
+            sup.add(selectedSp.get(i).getId());
+        }
+        feedstock.setSuppliers(sup);
 
-        if (validation(new JFeedstock(), 0)) {
-            JFeedstock feedstock = new JFeedstock();
-
-            //JDbFacade.getInstance().createFeedstock(feedstock);
-        } else {
-            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
+        if (validation()) {
+            if(creating){
+                if(JDbFacade.getInstance().createFeedstock(feedstock)){
+                    MessageDialog.showMessage(JConstants.SUCCESS_CREATE_FEEDSTOCK, this);
+                    registerDialog.dispose();
+                    parent.setEnabled(true);
+                }else{
+                    MessageDialog.showMessage(JConstants.FAILURE_CREATE_FEEDSTOCK, this);
+                }
+            }else{
+                if(JDbFacade.getInstance().editFeedstock(feedstock)){
+                    MessageDialog.showMessage(JConstants.SUCCESS_EDIT_FEEDSTOCK, this);
+                    registerDialog.dispose();
+                    parent.setEnabled(true);
+                }else{
+                    MessageDialog.showMessage(JConstants.FAILURE_EDIT_FEEDSTOCK, this);
+                }
+            }
         }
     }//GEN-LAST:event_btnSaveMouseClicked
 
@@ -326,7 +349,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
     private DefaultListModel dlmAvailable = new DefaultListModel();
     private DefaultListModel dlmSelected = new DefaultListModel();
     
-    private boolean validation(JFeedstock feedstock, int id) {
+    private boolean validation() {
         if(feedstock.getName().trim().length() == 0 || feedstock.getCost() == 0
                 || feedstock.getQuantity() == 0){
             MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
@@ -397,5 +420,38 @@ public class FeedstockDialog extends javax.swing.JPanel {
         
         listSelected.setModel(dlmSelected);
         listAvailable.setModel(dlmAvailable);
+    }
+
+    private void setFeedstock() {
+        tfName.setText(feedstock.getName());
+        spnAmount.setValue(feedstock.getQuantity());
+        tfPrice.setText(Double.toString(feedstock.getCost()));
+       
+        dlmAvailable = (DefaultListModel) listAvailable.getModel();
+        dlmAvailable.clear();
+        
+        availableSp = JDbFacade.getInstance().readAllSuppliers();
+        selectedSp = new ArrayList<>();
+        
+        for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
+            JSupplier sup =  JDbFacade.getInstance().readSupplierById(feedstock.getSuppliers().get(i));
+            //Remove os indices que já foram utilizados pela matéria-prima selecionada
+            for (int j = 0; j < availableSp.size(); j++) {
+                if(availableSp.get(j).getId() == sup.getId()){
+                    availableSp.remove(j);
+                }
+            }
+            
+            selectedSp.add(sup);
+            dlmSelected.addElement(sup.getName());
+        }
+        
+        if(availableSp != null){
+            for (int i = 0; i < availableSp.size(); i++) {
+                dlmAvailable.addElement(availableSp.get(i).getName());
+            }
+        }
+        listAvailable.setModel(dlmAvailable);
+        listSelected.setModel(dlmSelected);
     }
 }

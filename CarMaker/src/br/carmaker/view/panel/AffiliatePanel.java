@@ -5,8 +5,17 @@
  */
 package br.carmaker.view.panel;
 
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.JDealership;
+import br.carmaker.model.JShippingCompany;
+import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
+import br.carmaker.view.list.DealershipList;
+import br.carmaker.view.list.ShippingCompanyList;
+import br.carmaker.view.list.SupplierList;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +30,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
     public AffiliatePanel(JFrame frame) {
         initComponents();
         this.mainFrame = frame;
+        initLists();
     }
 
     /**
@@ -39,7 +49,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         listShippingCompany = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        listDealership = new javax.swing.JList<>();
         panelSuppliers = new javax.swing.JPanel();
         lblNameSup = new javax.swing.JLabel();
         lblAddressSup = new javax.swing.JLabel();
@@ -74,13 +84,16 @@ public class AffiliatePanel extends javax.swing.JPanel {
         jLabel8.setText("Lista de Afiliadas: ");
 
         listSupplier.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listSupplier.setCellRenderer(new SupplierList());
         jScrollPane1.setViewportView(listSupplier);
 
         listShippingCompany.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listShippingCompany.setCellRenderer(new ShippingCompanyList());
         jScrollPane2.setViewportView(listShippingCompany);
 
-        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane3.setViewportView(jList3);
+        listDealership.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listDealership.setCellRenderer(new DealershipList());
+        jScrollPane3.setViewportView(listDealership);
 
         lblNameSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         lblNameSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -324,7 +337,6 @@ public class AffiliatePanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -341,12 +353,45 @@ public class AffiliatePanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblNameSC;
     private javax.swing.JLabel lblNameSup;
     private javax.swing.JLabel lblTypeD;
-    private javax.swing.JList<String> listShippingCompany;
-    private javax.swing.JList<String> listSupplier;
+    private javax.swing.JList<JDealership> listDealership;
+    private javax.swing.JList<JShippingCompany> listShippingCompany;
+    private javax.swing.JList<JSupplier> listSupplier;
     private javax.swing.JPanel panelDealership;
     private javax.swing.JPanel panelShippingCompany;
     private javax.swing.JPanel panelSuppliers;
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
+
+    private void initLists() {
+        //Lista de Fornecedores
+        DefaultListModel<JSupplier> dlmSupplier = new DefaultListModel<>();
+        List<JSupplier> sup = JDbFacade.getInstance().readAllSuppliers();
+
+        for (int i = 0; i < sup.size(); i++) {
+            dlmSupplier.addElement(sup.get(i));
+        }
+
+        listSupplier.setModel(dlmSupplier);
+        
+        //Lista de Transportadoras
+        DefaultListModel<JShippingCompany> dlmSC = new DefaultListModel<>();
+        List<JShippingCompany> sc = JDbFacade.getInstance().readAllShippingCompanies();
+
+        for (int i = 0; i < sc.size(); i++) {
+            dlmSC.addElement(sc.get(i));
+        }
+
+        listShippingCompany.setModel(dlmSC);
+        
+        //Lista de Concessionárias
+        DefaultListModel<JDealership> dlmDealership = new DefaultListModel<>();
+        List<JDealership> dealerships = JDbFacade.getInstance().readAllDealerships();
+
+        for (int i = 0; i < dealerships.size(); i++) {
+            dlmDealership.addElement(dealerships.get(i));
+        }
+
+        listDealership.setModel(dlmDealership);
+    }
 }

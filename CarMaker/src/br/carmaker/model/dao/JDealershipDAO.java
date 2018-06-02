@@ -65,7 +65,7 @@ public class JDealershipDAO extends AAffiliateDAO {
         List<JDealership> listDealership = new ArrayList<>();
         JDealership dealership;
 
-        String sql = "SELECT * FROM " + TABLE_NAME;
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DELETED + "=0";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -116,7 +116,7 @@ public class JDealershipDAO extends AAffiliateDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
 
-        String sql = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + "=" + id;
+        String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
         try {
             stmt = connection.prepareStatement(sql);

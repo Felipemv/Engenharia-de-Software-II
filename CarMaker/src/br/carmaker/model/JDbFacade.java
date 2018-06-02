@@ -123,8 +123,8 @@ public class JDbFacade {
         return JFeedstockHasSupplierDAO.getSuppliersByFeedstockId(feedstock_id);
     }
     
-    public boolean editSupplierOfAFeedstock(int feedstock_id, int supplier_id){
-        return JFeedstockHasSupplierDAO.editSupplierOfAFeedstock(feedstock_id, supplier_id);
+    public boolean editSupplierOfAFeedstock(int feedstock_id, List<Integer> suppliers){
+        return JFeedstockHasSupplierDAO.editSuppliersOfAFeedstock(feedstock_id, suppliers);
     }
     
     //CRUD de Transportadoras

@@ -31,8 +31,6 @@ public class RegisterDialog extends javax.swing.JDialog {
      * @param panel indica qual painel do card layout será executado.
      * @param header é o Enum que indica a entidade que será cadastrada ou
      * editada.
-     * @param operation é o tipo de operação da tela (0-cadastro, 1-edição).
-     * @param employee se caso for uma edição, qual o employee a ser editado.
      */
     public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header) {
         super(parent, modal);

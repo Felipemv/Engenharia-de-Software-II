@@ -29,6 +29,7 @@ public class EmployeePanel extends javax.swing.JPanel {
      * Creates new form EmployeePanel
      *
      * @param frame frame principal que chamou o dialog (MainFrame)
+     * @param idUser id do usuário que realizou o login
      */
     public EmployeePanel(JFrame frame, int idUser) {
         initComponents();
@@ -129,32 +130,26 @@ public class EmployeePanel extends javax.swing.JPanel {
         if (evt.getClickCount() == 2) {
             JEmployee employee = listEmployee.getSelectedValue();
 
+            if (employee.getId() == idUser) {
+                employee.setOnline(true);
+            } else {
+                employee.setOnline(false);
+            }
+
             mainFrame.setEnabled(false);
             RegisterDialog dialog = new RegisterDialog(mainFrame, true, 0, EMenuItem.EMPLOYEES, employee);
             dialog.setVisible(true);
             initList();
-
-            if (employee.getId() == idUser) {
-                MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM,
-                        JConstants.BUTTON_RESTART_SYSTEM, this);
-                mainFrame.dispose();
-                new LoginFrame().setVisible(true);
-            }
         }
     }//GEN-LAST:event_listEmployeeMouseClicked
 
     private void listEmployeeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listEmployeeKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             int id = listEmployee.getSelectedValue().getId();
-
-            if (idUser == id) {
-                MessageDialog.showMessage(JConstants.LABEL_CANT_DELETE_OWN_USER, this);
-            } else {
-                ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_EMPLOYEE, this);
-                if (ConfirmDialog.getUserChoice()) {
-                    JDbFacade.getInstance().deleteEmployee(id);
-                    initList();
-                }
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_EMPLOYEE, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteEmployee(id);
+                initList();
             }
         }
     }//GEN-LAST:event_listEmployeeKeyPressed
