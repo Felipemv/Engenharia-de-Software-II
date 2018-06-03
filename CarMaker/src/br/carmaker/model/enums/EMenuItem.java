@@ -10,22 +10,62 @@ package br.carmaker.model.enums;
  * @author Usuário
  */
 public enum EMenuItem {
-    HOME("Início"),
-    EMPLOYEES("Funcionários"),
-    CARS("Carros"),
-    FEEDSTOCK("Matérias-primas"),
-    AFFILIATES("Afiliadas"),
-    ORDERS("Pedidos"),
-    REPORT("Relatório"),
-    LOGOUT("Sair");
+    HOME(0){
+        @Override
+        public String toString() {
+            return "Início";
+        }
+    },
+    EMPLOYEES(1){
+        @Override
+        public String toString() {
+            return "Funcionários";
+        }
+    },
+    CARS(2){
+        @Override
+        public String toString() {
+            return "Carros";
+        }
+    },
+    FEEDSTOCK(3){
+        @Override
+        public String toString() {
+            return "Matérias-primas";
+        }
+    },
+    AFFILIATES(4){
+        @Override
+        public String toString() {
+            return "Afiliadas";
+        }
+    },
+    ORDERS(5){
+        @Override
+        public String toString() {
+            return "Pedidos";
+        }
+    },
+    REPORT(6){
+        @Override
+        public String toString() {
+            return "Relatório";
+        }
+    },
+    LOGOUT(7){
+        @Override
+        public String toString() {
+            return "Sair";
+        }
+    };
 
-    private final String menuItem;
+    private final int menuItem;
 
-    EMenuItem(String menuItem) {
+    EMenuItem(int menuItem) {
         this.menuItem = menuItem;
     }
     
-    public String getMenuItem(){
+    public int getMenuItem(){
         return menuItem;
     }
 

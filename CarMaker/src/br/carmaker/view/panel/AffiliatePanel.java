@@ -9,6 +9,7 @@ import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.JSupplier;
+import br.carmaker.model.enums.EAffiliate;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.DealershipList;
@@ -44,31 +45,18 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         btnAddAffiliates = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
+        cardPanel = new javax.swing.JPanel();
+        supplierPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listSupplier = new javax.swing.JList<>();
+        shippingCompanyPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listShippingCompany = new javax.swing.JList<>();
+        dealershipPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         listDealership = new javax.swing.JList<>();
-        panelSuppliers = new javax.swing.JPanel();
-        lblNameSup = new javax.swing.JLabel();
-        lblAddressSup = new javax.swing.JLabel();
-        lblCnpjSup = new javax.swing.JLabel();
-        lblLeadTimeSup = new javax.swing.JLabel();
-        panelShippingCompany = new javax.swing.JPanel();
-        lblNameSC = new javax.swing.JLabel();
-        lblAddressSC = new javax.swing.JLabel();
-        lblCnpjSC = new javax.swing.JLabel();
-        lblAmountSC = new javax.swing.JLabel();
-        lblFleetSC = new javax.swing.JLabel();
-        panelDealership = new javax.swing.JPanel();
-        lblTypeD = new javax.swing.JLabel();
-        lblCnpjD = new javax.swing.JLabel();
-        lblAddressD = new javax.swing.JLabel();
-        lblNameD = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -83,171 +71,90 @@ public class AffiliatePanel extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
         jLabel8.setText("Lista de Afiliadas: ");
 
+        cardPanel.setLayout(new java.awt.CardLayout());
+
         listSupplier.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listSupplier.setCellRenderer(new SupplierList());
         jScrollPane1.setViewportView(listSupplier);
+
+        javax.swing.GroupLayout supplierPanelLayout = new javax.swing.GroupLayout(supplierPanel);
+        supplierPanel.setLayout(supplierPanelLayout);
+        supplierPanelLayout.setHorizontalGroup(
+            supplierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(supplierPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        supplierPanelLayout.setVerticalGroup(
+            supplierPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(supplierPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        cardPanel.add(supplierPanel, "card4");
 
         listShippingCompany.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listShippingCompany.setCellRenderer(new ShippingCompanyList());
         jScrollPane2.setViewportView(listShippingCompany);
 
+        javax.swing.GroupLayout shippingCompanyPanelLayout = new javax.swing.GroupLayout(shippingCompanyPanel);
+        shippingCompanyPanel.setLayout(shippingCompanyPanelLayout);
+        shippingCompanyPanelLayout.setHorizontalGroup(
+            shippingCompanyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(shippingCompanyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        shippingCompanyPanelLayout.setVerticalGroup(
+            shippingCompanyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(shippingCompanyPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        cardPanel.add(shippingCompanyPanel, "card3");
+
         listDealership.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listDealership.setCellRenderer(new DealershipList());
+        listDealership.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listDealershipMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(listDealership);
 
-        lblNameSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblNameSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNameSup.setText("Nome");
-        lblNameSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblAddressSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblAddressSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddressSup.setText("Endereço");
-        lblAddressSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblCnpjSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblCnpjSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCnpjSup.setText("CNPJ");
-        lblCnpjSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblLeadTimeSup.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblLeadTimeSup.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLeadTimeSup.setText("Lead Time");
-        lblLeadTimeSup.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout panelSuppliersLayout = new javax.swing.GroupLayout(panelSuppliers);
-        panelSuppliers.setLayout(panelSuppliersLayout);
-        panelSuppliersLayout.setHorizontalGroup(
-            panelSuppliersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSuppliersLayout.createSequentialGroup()
-                .addComponent(lblNameSup, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblAddressSup, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblCnpjSup, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblLeadTimeSup, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout dealershipPanelLayout = new javax.swing.GroupLayout(dealershipPanel);
+        dealershipPanel.setLayout(dealershipPanelLayout);
+        dealershipPanelLayout.setHorizontalGroup(
+            dealershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dealershipPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        panelSuppliersLayout.setVerticalGroup(
-            panelSuppliersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSuppliersLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panelSuppliersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNameSup)
-                    .addComponent(lblAddressSup)
-                    .addComponent(lblCnpjSup)
-                    .addComponent(lblLeadTimeSup)))
+        dealershipPanelLayout.setVerticalGroup(
+            dealershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dealershipPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        lblNameSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblNameSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNameSC.setText("Nome");
-        lblNameSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblNameSC.setMaximumSize(new java.awt.Dimension(70, 19));
+        cardPanel.add(dealershipPanel, "card2");
 
-        lblAddressSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblAddressSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddressSC.setText("Endereço");
-        lblAddressSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblAddressSC.setMaximumSize(new java.awt.Dimension(80, 19));
-        lblAddressSC.setMinimumSize(new java.awt.Dimension(80, 19));
+        jLabel1.setText("Selecione uma afiliada: ");
 
-        lblCnpjSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblCnpjSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCnpjSC.setText("CNPJ");
-        lblCnpjSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblCnpjSC.setMinimumSize(new java.awt.Dimension(120, 19));
-
-        lblAmountSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblAmountSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAmountSC.setText("Quantidade");
-        lblAmountSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblAmountSC.setMinimumSize(new java.awt.Dimension(75, 19));
-
-        lblFleetSC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblFleetSC.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFleetSC.setText("Frota");
-        lblFleetSC.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        lblFleetSC.setMinimumSize(new java.awt.Dimension(75, 19));
-
-        javax.swing.GroupLayout panelShippingCompanyLayout = new javax.swing.GroupLayout(panelShippingCompany);
-        panelShippingCompany.setLayout(panelShippingCompanyLayout);
-        panelShippingCompanyLayout.setHorizontalGroup(
-            panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShippingCompanyLayout.createSequentialGroup()
-                .addComponent(lblNameSC, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblAddressSC, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblCnpjSC, javax.swing.GroupLayout.PREFERRED_SIZE, 104, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblAmountSC, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(lblFleetSC, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
-        panelShippingCompanyLayout.setVerticalGroup(
-            panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShippingCompanyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lblNameSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblCnpjSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblAmountSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblAddressSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblFleetSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        lblTypeD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblTypeD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTypeD.setText("Tipo");
-        lblTypeD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblCnpjD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblCnpjD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCnpjD.setText("CNPJ");
-        lblCnpjD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblAddressD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblAddressD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblAddressD.setText("Endereço");
-        lblAddressD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        lblNameD.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblNameD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblNameD.setText("Nome");
-        lblNameD.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        javax.swing.GroupLayout panelDealershipLayout = new javax.swing.GroupLayout(panelDealership);
-        panelDealership.setLayout(panelDealershipLayout);
-        panelDealershipLayout.setHorizontalGroup(
-            panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDealershipLayout.createSequentialGroup()
-                .addComponent(lblNameD, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblAddressD, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblCnpjD, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblTypeD, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        panelDealershipLayout.setVerticalGroup(
-            panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDealershipLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNameD)
-                    .addComponent(lblAddressD)
-                    .addComponent(lblCnpjD)
-                    .addComponent(lblTypeD)))
-        );
-
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Fornecedores");
-
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("Transportadoras");
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Concessionárias");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fornecedor", "Transportadora", "Concessionária" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -255,43 +162,20 @@ public class AffiliatePanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(384, 384, 384))
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 290, Short.MAX_VALUE)
-                .addComponent(btnAddAffiliates)
-                .addGap(6, 6, 6))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(panelSuppliers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelDealership, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAddAffiliates))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -301,23 +185,11 @@ public class AffiliatePanel extends javax.swing.JPanel {
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAddAffiliates))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addGap(12, 12, 12)
-                .addComponent(jLabel5)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelDealership, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addComponent(cardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -330,41 +202,64 @@ public class AffiliatePanel extends javax.swing.JPanel {
         mainFrame.setEnabled(false);
     }//GEN-LAST:event_btnAddAffiliatesMouseClicked
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        int index = jComboBox1.getSelectedIndex();
+        cardPanel.removeAll();
+        
+        switch(index){
+            case 1:
+                cardPanel.add(shippingCompanyPanel);
+                break;
+            case 2:
+                cardPanel.add(dealershipPanel);
+                break;
+            default:
+                cardPanel.add(supplierPanel);
+                break;
+        }
+        
+        cardPanel.repaint();
+        cardPanel.revalidate();
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void listDealershipMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listDealershipMouseClicked
+        if (evt.getClickCount() == 2) {
+            JDealership dealership = listDealership.getSelectedValue();
+
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, EMenuItem.CARS, dealership, EAffiliate.DEALERSHIP);
+            dialog.setVisible(true);
+            initDealershipList();
+        }
+    }//GEN-LAST:event_listDealershipMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddAffiliates;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel cardPanel;
+    private javax.swing.JPanel dealershipPanel;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblAddressD;
-    private javax.swing.JLabel lblAddressSC;
-    private javax.swing.JLabel lblAddressSup;
-    private javax.swing.JLabel lblAmountSC;
-    private javax.swing.JLabel lblCnpjD;
-    private javax.swing.JLabel lblCnpjSC;
-    private javax.swing.JLabel lblCnpjSup;
-    private javax.swing.JLabel lblFleetSC;
-    private javax.swing.JLabel lblLeadTimeSup;
-    private javax.swing.JLabel lblNameD;
-    private javax.swing.JLabel lblNameSC;
-    private javax.swing.JLabel lblNameSup;
-    private javax.swing.JLabel lblTypeD;
     private javax.swing.JList<JDealership> listDealership;
     private javax.swing.JList<JShippingCompany> listShippingCompany;
     private javax.swing.JList<JSupplier> listSupplier;
-    private javax.swing.JPanel panelDealership;
-    private javax.swing.JPanel panelShippingCompany;
-    private javax.swing.JPanel panelSuppliers;
+    private javax.swing.JPanel shippingCompanyPanel;
+    private javax.swing.JPanel supplierPanel;
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
 
     private void initLists() {
-        //Lista de Fornecedores
+        initSupplierList();
+        initShippingCompanyList();
+        initDealershipList();
+    }
+
+    private void initSupplierList() {
         DefaultListModel<JSupplier> dlmSupplier = new DefaultListModel<>();
         List<JSupplier> sup = JDbFacade.getInstance().readAllSuppliers();
 
@@ -373,9 +268,10 @@ public class AffiliatePanel extends javax.swing.JPanel {
         }
 
         listSupplier.setModel(dlmSupplier);
-        
-        //Lista de Transportadoras
-        DefaultListModel<JShippingCompany> dlmSC = new DefaultListModel<>();
+    }
+
+    private void initShippingCompanyList() {
+       DefaultListModel<JShippingCompany> dlmSC = new DefaultListModel<>();
         List<JShippingCompany> sc = JDbFacade.getInstance().readAllShippingCompanies();
 
         for (int i = 0; i < sc.size(); i++) {
@@ -383,8 +279,9 @@ public class AffiliatePanel extends javax.swing.JPanel {
         }
 
         listShippingCompany.setModel(dlmSC);
-        
-        //Lista de Concessionárias
+    }
+
+    private void initDealershipList() {
         DefaultListModel<JDealership> dlmDealership = new DefaultListModel<>();
         List<JDealership> dealerships = JDbFacade.getInstance().readAllDealerships();
 
@@ -394,4 +291,6 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         listDealership.setModel(dlmDealership);
     }
+    
+    
 }

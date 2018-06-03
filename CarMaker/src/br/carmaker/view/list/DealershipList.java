@@ -5,6 +5,7 @@
  */
 package br.carmaker.view.list;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDealership;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.enums.EDealershipType;
@@ -36,65 +37,74 @@ public class DealershipList extends javax.swing.JPanel implements ListCellRender
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblType = new javax.swing.JLabel();
-        lblName = new javax.swing.JLabel();
         lblCnpj = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
+        lblType = new javax.swing.JLabel();
 
-        lblType.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblType.setText("Tipo");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.white));
 
-        lblName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblName.setText("Nome");
-
-        lblCnpj.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblCnpj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCnpj.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblCnpj.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCnpj.setText("CNPJ");
 
-        lblAddress.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblName.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblName.setText("Nome");
+
+        lblAddress.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblAddress.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblAddress.setText("Endereço");
+
+        lblType.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblType.setText("Tipo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblType, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                    .addComponent(lblType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName)
-                    .addComponent(lblAddress)
+                    .addComponent(lblAddress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCnpj)
                     .addComponent(lblType))
-                .addGap(0, 0, 0))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,10 +121,15 @@ public class DealershipList extends javax.swing.JPanel implements ListCellRender
     public Component getListCellRendererComponent(JList<? extends JDealership> list, 
             JDealership value, int index, boolean isSelected, boolean hasFocus) {
        
-        lblName.setText(value.getName());
-        lblAddress.setText(value.getAddress());
-        lblCnpj.setText(value.getCnpj());
-        lblType.setText(value.getType().toString());
+        String name = "<html><strong>" + JConstants.NAME + ": </strong>" + value.getName() + "</html>";
+        String address = "<html><strong>" + JConstants.ADDRESS + ": </strong>" + value.getAddress() + "</html>";
+        String cnpj = "<html><strong>" + JConstants.CNPJ + ": </strong>" + value.getCnpj() + "</html>";
+        String type = "<html><strong>" + JConstants.TYPE + ": </strong>" + value.getType().toString() + "</html>";
+        
+        lblName.setText(name);
+        lblAddress.setText(address);
+        lblCnpj.setText(cnpj);
+        lblType.setText(type);
         
         if(isSelected){
             jPanel1.setBackground(Color.yellow);

@@ -8,9 +8,12 @@ package br.carmaker.view.dialog;
 import br.carmaker.model.JCar;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.JFeedstock;
+import br.carmaker.model.JShippingCompany;
+import br.carmaker.model.JSupplier;
 import br.carmaker.model.abstracts.AAffiliate;
 import br.carmaker.model.abstracts.ABaseEntity;
 import br.carmaker.model.abstracts.AOrder;
+import br.carmaker.model.enums.EAffiliate;
 import br.carmaker.model.enums.EMenuItem;
 import java.awt.Frame;
 import java.io.File;
@@ -44,13 +47,28 @@ public class RegisterDialog extends javax.swing.JDialog {
         setHeader();
     }
 
-    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, ABaseEntity entity) {
+    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, 
+            ABaseEntity entity) {
         super(parent, modal);
         initComponents();
 
         this.parent = parent;
         this.header = header;
         this.panel = panel;
+
+        setEditPanel(entity);
+        setHeader();
+    }
+    
+    public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, 
+            ABaseEntity entity, EAffiliate entityType) {
+        super(parent, modal);
+        initComponents();
+
+        this.parent = parent;
+        this.header = header;
+        this.panel = panel;
+        this.entityType = entityType;
 
         setEditPanel(entity);
         setHeader();
@@ -258,10 +276,11 @@ public class RegisterDialog extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private JFrame parent;
-    private int operation;
+    private boolean creating;
     private ABaseEntity entity;
     private EMenuItem header;
     private int panel;
+    private EAffiliate entityType;
 
     private void setRegisterPanel() {
         panelView.removeAll();
@@ -310,7 +329,7 @@ public class RegisterDialog extends javax.swing.JDialog {
                 panelView.add(carDialog);
                 break;
             case 3:
-                affiliateDialog = new AffiliateDialog(this, parent, (AAffiliate) entity);    //Dialog 3
+                affiliateDialog = new AffiliateDialog(this, parent, (AAffiliate) entity, entityType);    //Dialog 3
                 panelView.add(affiliateDialog);
                 break;
             case 4:
@@ -325,14 +344,27 @@ public class RegisterDialog extends javax.swing.JDialog {
     }
 
     private void setHeader() {
-        switch (operation) {
-            case 0:
-                lblHeader.setText("Cadastro de " + header.getMenuItem() + ":");
-                break;
-            case 1:
-                lblHeader.setText("Edição de " + header.getMenuItem() + ":");
-                break;
+        String headerText = "";
+        if(creating){
+            headerText += "Cadastro de ";
+        }else{
+            headerText +="Edição de ";
         }
-
+        
+        if(header == EMenuItem.AFFILIATES){
+            if(entity instanceof JSupplier){
+                entityType = EAffiliate.SUPPLIER;
+                headerText += EAffiliate.SUPPLIER.toString();
+            }else if(entity instanceof JShippingCompany){
+                entityType = EAffiliate.SHIPPING_COMPANY;
+                headerText += EAffiliate.SHIPPING_COMPANY.toString();
+            }else{
+                entityType = EAffiliate.DEALERSHIP;
+                headerText += EAffiliate.DEALERSHIP.toString();
+            }
+        }
+      
+        headerText += ":";
+        lblHeader.setText(headerText);
     }
 }

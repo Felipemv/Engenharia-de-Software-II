@@ -42,7 +42,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame(int id) {
         initComponents();
-        selectedMenuItem = EMenuItem.HOME.getMenuItem();
+        selectedMenuItem = EMenuItem.HOME.toString();
         sidebar = panelSideBar.getBackground();
 
         panelCardEmployee = new EmployeePanel(this, id);
@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
         menuText.add(lblOrders);
         menuText.add(lblReports);
 
-        selectMenuItem(panelCardHome, EMenuItem.HOME.getMenuItem(), menuHome);
+        selectMenuItem(panelCardHome, EMenuItem.HOME.toString(), menuHome);
 
         JEmployee employee = JDbFacade.getInstance().readEmployeeByID(id);
         lblUser.setText("Bem vindo, " + employee.getName());
@@ -189,7 +189,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblHome.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblHome.setForeground(new java.awt.Color(255, 255, 255));
-        lblHome.setText(EMenuItem.HOME.getMenuItem());
+        lblHome.setText(EMenuItem.HOME.toString());
         menuHome.add(lblHome, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgHome.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -212,7 +212,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblEmployees.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblEmployees.setForeground(new java.awt.Color(255, 255, 255));
-        lblEmployees.setText(EMenuItem.EMPLOYEES.getMenuItem());
+        lblEmployees.setText(EMenuItem.EMPLOYEES.toString());
         menuEmployees.add(lblEmployees, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgEmployees.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -239,7 +239,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblFeedstock.setForeground(new java.awt.Color(255, 255, 255));
-        lblFeedstock.setText(EMenuItem.FEEDSTOCK.getMenuItem());
+        lblFeedstock.setText(EMenuItem.FEEDSTOCK.toString());
         menuFeedstock.add(lblFeedstock, new org.netbeans.lib.awtextra.AbsoluteConstraints(71, 0, 170, 50));
 
         menuCars.setBackground(new java.awt.Color(29, 32, 38));
@@ -258,7 +258,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblCars.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblCars.setForeground(new java.awt.Color(255, 255, 255));
-        lblCars.setText(EMenuItem.CARS.getMenuItem());
+        lblCars.setText(EMenuItem.CARS.toString());
         menuCars.add(lblCars, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgCars.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -281,7 +281,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblAffiliates.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblAffiliates.setForeground(new java.awt.Color(255, 255, 255));
-        lblAffiliates.setText(EMenuItem.AFFILIATES.getMenuItem());
+        lblAffiliates.setText(EMenuItem.AFFILIATES.toString());
         menuAffiliates.add(lblAffiliates, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgAffiliates.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -304,7 +304,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblOrders.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblOrders.setForeground(new java.awt.Color(255, 255, 255));
-        lblOrders.setText(EMenuItem.ORDERS.getMenuItem());
+        lblOrders.setText(EMenuItem.ORDERS.toString());
         menuOrders.add(lblOrders, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgOrders.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -327,7 +327,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblReports.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblReports.setForeground(new java.awt.Color(255, 255, 255));
-        lblReports.setText(EMenuItem.REPORT.getMenuItem());
+        lblReports.setText(EMenuItem.REPORT.toString());
         menuReport.add(lblReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgReports.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -350,7 +350,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         lblLogout.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblLogout.setForeground(new java.awt.Color(255, 255, 255));
-        lblLogout.setText(EMenuItem.LOGOUT.getMenuItem());
+        lblLogout.setText(EMenuItem.LOGOUT.toString());
         menuLogout.add(lblLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 0, 170, 50));
 
         lblImgLogout.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -568,79 +568,79 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHomeMouseClicked
-        selectMenuItem(panelCardHome, EMenuItem.HOME.getMenuItem(), menuHome);
+        selectMenuItem(panelCardHome, EMenuItem.HOME.toString(), menuHome);
     }//GEN-LAST:event_menuHomeMouseClicked
 
     private void menuHomeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHomeMouseEntered
-        panelMenuHover(menuHome, 1, EMenuItem.HOME.getMenuItem());
+        panelMenuHover(menuHome, 1, EMenuItem.HOME.toString());
     }//GEN-LAST:event_menuHomeMouseEntered
 
     private void menuHomeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuHomeMouseExited
-        panelMenuHover(menuHome, 0, EMenuItem.HOME.getMenuItem());
+        panelMenuHover(menuHome, 0, EMenuItem.HOME.toString());
     }//GEN-LAST:event_menuHomeMouseExited
 
     private void menuEmployeesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEmployeesMouseClicked
-        selectMenuItem(panelCardEmployee, EMenuItem.EMPLOYEES.getMenuItem(), menuEmployees);
+        selectMenuItem(panelCardEmployee, EMenuItem.EMPLOYEES.toString(), menuEmployees);
     }//GEN-LAST:event_menuEmployeesMouseClicked
 
     private void menuEmployeesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEmployeesMouseEntered
-        panelMenuHover(menuEmployees, 1, EMenuItem.EMPLOYEES.getMenuItem());
+        panelMenuHover(menuEmployees, 1, EMenuItem.EMPLOYEES.toString());
     }//GEN-LAST:event_menuEmployeesMouseEntered
 
     private void menuEmployeesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEmployeesMouseExited
-        panelMenuHover(menuEmployees, 0, EMenuItem.EMPLOYEES.getMenuItem());
+        panelMenuHover(menuEmployees, 0, EMenuItem.EMPLOYEES.toString());
     }//GEN-LAST:event_menuEmployeesMouseExited
 
     private void menuCarsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCarsMouseClicked
-        selectMenuItem(panelCardCar, EMenuItem.CARS.getMenuItem(), menuCars);
+        selectMenuItem(panelCardCar, EMenuItem.CARS.toString(), menuCars);
     }//GEN-LAST:event_menuCarsMouseClicked
 
     private void menuCarsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCarsMouseEntered
-        panelMenuHover(menuCars, 1, EMenuItem.CARS.getMenuItem());
+        panelMenuHover(menuCars, 1, EMenuItem.CARS.toString());
     }//GEN-LAST:event_menuCarsMouseEntered
 
     private void menuCarsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCarsMouseExited
-        panelMenuHover(menuCars, 0, EMenuItem.CARS.getMenuItem());
+        panelMenuHover(menuCars, 0, EMenuItem.CARS.toString());
     }//GEN-LAST:event_menuCarsMouseExited
 
     private void menuFeedstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFeedstockMouseClicked
-        selectMenuItem(panelCardFeedstock, EMenuItem.FEEDSTOCK.getMenuItem(), menuFeedstock);
+        selectMenuItem(panelCardFeedstock, EMenuItem.FEEDSTOCK.toString(), menuFeedstock);
     }//GEN-LAST:event_menuFeedstockMouseClicked
 
     private void menuOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOrdersMouseClicked
-        selectMenuItem(panelCardOrder, EMenuItem.ORDERS.getMenuItem(), menuOrders);
+        selectMenuItem(panelCardOrder, EMenuItem.ORDERS.toString(), menuOrders);
     }//GEN-LAST:event_menuOrdersMouseClicked
 
     private void menuOrdersMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOrdersMouseEntered
-        panelMenuHover(menuOrders, 1, EMenuItem.ORDERS.getMenuItem());
+        panelMenuHover(menuOrders, 1, EMenuItem.ORDERS.toString());
     }//GEN-LAST:event_menuOrdersMouseEntered
 
     private void menuOrdersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuOrdersMouseExited
-        panelMenuHover(menuOrders, 0, EMenuItem.ORDERS.getMenuItem());
+        panelMenuHover(menuOrders, 0, EMenuItem.ORDERS.toString());
     }//GEN-LAST:event_menuOrdersMouseExited
 
     private void menuAffiliatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAffiliatesMouseClicked
-        selectMenuItem(panelCardAffiliate, EMenuItem.AFFILIATES.getMenuItem(), menuAffiliates);
+        selectMenuItem(panelCardAffiliate, EMenuItem.AFFILIATES.toString(), menuAffiliates);
     }//GEN-LAST:event_menuAffiliatesMouseClicked
 
     private void menuAffiliatesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAffiliatesMouseEntered
-        panelMenuHover(menuAffiliates, 1, EMenuItem.AFFILIATES.getMenuItem());
+        panelMenuHover(menuAffiliates, 1, EMenuItem.AFFILIATES.toString());
     }//GEN-LAST:event_menuAffiliatesMouseEntered
 
     private void menuAffiliatesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAffiliatesMouseExited
-        panelMenuHover(menuAffiliates, 0, EMenuItem.AFFILIATES.getMenuItem());
+        panelMenuHover(menuAffiliates, 0, EMenuItem.AFFILIATES.toString());
     }//GEN-LAST:event_menuAffiliatesMouseExited
 
     private void menuReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportMouseClicked
-        selectMenuItem(panelCardReport, EMenuItem.REPORT.getMenuItem(), menuReport);
+        selectMenuItem(panelCardReport, EMenuItem.REPORT.toString(), menuReport);
     }//GEN-LAST:event_menuReportMouseClicked
 
     private void menuReportMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportMouseEntered
-        panelMenuHover(menuReport, 1, EMenuItem.REPORT.getMenuItem());
+        panelMenuHover(menuReport, 1, EMenuItem.REPORT.toString());
     }//GEN-LAST:event_menuReportMouseEntered
 
     private void menuReportMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportMouseExited
-        panelMenuHover(menuReport, 0, EMenuItem.REPORT.getMenuItem());
+        panelMenuHover(menuReport, 0, EMenuItem.REPORT.toString());
     }//GEN-LAST:event_menuReportMouseExited
 
     private void menuLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuLogoutMouseClicked

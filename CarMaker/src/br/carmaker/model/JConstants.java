@@ -101,5 +101,12 @@ public abstract class JConstants {
 //    Mensagens gerais
     public static final String DEFAULT_USER_IMAGE = "/image/user_default.png";
     public static final String DEFAULT_CHOOSER_IMAGE_LOCATION = "C:\\Users\\Usuário\\Desktop";
-    
+    public static final String NAME = "Nome";
+    public static final String ADDRESS = "Endereço";
+    public static final String CNPJ = "Cnpj";
+    public static final String LEAD_TIME = "Lead Time";
+    public static final String AMOUNT = "Quantidade";
+    public static final String FLEET = "Frota";
+    public static final String TYPE = "Tipo";
+  
 }

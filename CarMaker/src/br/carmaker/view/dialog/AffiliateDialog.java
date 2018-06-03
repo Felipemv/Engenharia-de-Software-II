@@ -11,6 +11,7 @@ import br.carmaker.model.JDealership;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.abstracts.AAffiliate;
+import br.carmaker.model.enums.EAffiliate;
 import br.carmaker.model.enums.EDealershipType;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -30,10 +31,13 @@ public class AffiliateDialog extends javax.swing.JPanel {
         this.parent = parent;
     }
 
-    public AffiliateDialog(JDialog registerDialog, JFrame parent, AAffiliate affiliate) {
+    public AffiliateDialog(JDialog registerDialog, JFrame parent, AAffiliate affiliate, EAffiliate entityType) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        this.affiliate = affiliate;
+        this.entityType = entityType;
+        setEntity();
     }
 
     /**
@@ -360,22 +364,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelMouseClicked
 
     private void cbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeActionPerformed
-        int selection = cbType.getSelectedIndex();
-
-        panelView.removeAll();
-        switch (selection) {
-            case 1:
-                panelView.add(panelShippingCompany);
-                break;
-            case 2:
-                panelView.add(panelDealership);
-                break;
-            default:
-                panelView.add(panelSupplier);
-                break;
-        }
-        panelView.repaint();
-        panelView.revalidate();
+        changeCard();
     }//GEN-LAST:event_cbTypeActionPerformed
 
 
@@ -413,9 +402,14 @@ public class AffiliateDialog extends javax.swing.JPanel {
     private final JDialog registerDialog;
     private final JFrame parent;
     private final boolean creating = true;
+    private EAffiliate entityType;
+    private AAffiliate affiliate;
+    private JSupplier supplier;
+    private JShippingCompany shippingCompany;
+    private JDealership dealership;
 
     private void saveSupplier() {
-        JSupplier supplier = new JSupplier();
+        supplier = new JSupplier();
 
         supplier.setName(tfName.getText());
         supplier.setAddress(tfAddress.getText());
@@ -434,7 +428,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void saveShippingCompany() {
-        JShippingCompany shippingCompany = new JShippingCompany();
+        shippingCompany = new JShippingCompany();
 
         shippingCompany.setName(tfName.getText());
         shippingCompany.setAddress(tfAddress.getText());
@@ -454,7 +448,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void saveDealership() {
-        JDealership dealership = new JDealership();
+        dealership = new JDealership();
 
         dealership.setName(tfName.getText());
         dealership.setAddress(tfAddress.getText());
@@ -477,7 +471,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void editSupplier() {
-        JSupplier supplier = new JSupplier();
+        supplier = new JSupplier();
 
         supplier.setName(tfName.getText());
         supplier.setAddress(tfAddress.getText());
@@ -495,7 +489,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void editShippingCompany() {
-        JShippingCompany shippingCompany = new JShippingCompany();
+        shippingCompany = new JShippingCompany();
 
         shippingCompany.setName(tfName.getText());
         shippingCompany.setAddress(tfAddress.getText());
@@ -513,7 +507,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void editDealership() {
-        JDealership dealership = new JDealership();
+        dealership = new JDealership();
 
         dealership.setName(tfName.getText());
         dealership.setAddress(tfAddress.getText());
@@ -551,7 +545,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 || shippingCompany.getAddress().trim().length() == 0
                 || shippingCompany.getCnpj().trim().length() == 0
                 || shippingCompany.getAmount() == 0
-                || shippingCompany.getFleet()== 0) {
+                || shippingCompany.getFleet() == 0) {
             MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
             return false;
         }
@@ -567,5 +561,76 @@ public class AffiliateDialog extends javax.swing.JPanel {
             return false;
         }
         return true;
+    }
+
+    private void setEntity() {
+        switch (entityType) {
+            case SUPPLIER:
+                setSupplier();
+                break;
+            case SHIPPING_COMPANY:
+                setShippingCompany();
+                break;
+            case DEALERSHIP:
+                setDealership();
+                break;
+        }
+        cbType.setEnabled(false);
+        changeCard();
+    }
+
+    private void setSupplier() {
+        cbType.setSelectedIndex(0);
+        supplier = (JSupplier) affiliate;
+
+        tfName.setText(supplier.getName());
+        tfAddress.setText(supplier.getAddress());
+        tfCnpj.setText(supplier.getCnpj());
+        tfLeadTime.setText(Integer.toString(supplier.getLeadTime()));
+    }
+
+    private void setShippingCompany() {
+        cbType.setSelectedIndex(1);
+        shippingCompany = (JShippingCompany) affiliate;
+
+        tfName.setText(shippingCompany.getName());
+        tfAddress.setText(shippingCompany.getAddress());
+        tfCnpj.setText(shippingCompany.getCnpj());
+        spnAmount.setValue(shippingCompany.getAmount());
+        spnFleet.setValue(shippingCompany.getFleet());
+    }
+
+    private void setDealership() {
+        cbType.setSelectedIndex(2);
+        dealership = (JDealership) affiliate;
+
+        tfName.setText(dealership.getName());
+        tfAddress.setText(dealership.getAddress());
+        tfCnpj.setText(dealership.getCnpj());
+
+        if (dealership.getType() == EDealershipType.EXCLUSIVE) {
+            rbExclusive.setSelected(true);
+        } else {
+            rbGeneral.setSelected(true);
+        }
+    }
+
+    private void changeCard() {
+        int selection = cbType.getSelectedIndex();
+
+        panelView.removeAll();
+        switch (selection) {
+            case 1:
+                panelView.add(panelShippingCompany);
+                break;
+            case 2:
+                panelView.add(panelDealership);
+                break;
+            default:
+                panelView.add(panelSupplier);
+                break;
+        }
+        panelView.repaint();
+        panelView.revalidate();
     }
 }

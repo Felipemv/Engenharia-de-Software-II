@@ -1,17 +1,34 @@
 package br.carmaker.model.enums;
 
 public enum EAffiliate {
-    DEALERSHIP("Concessionaria"),
-    SHIPPING_COMPANY("Transportadpra"),
-    SUPPLIER("Fornecedor");
+    DEALERSHIP(0){
+        @Override
+        public String toString() {
+            return "Concessionaria";
+        }
+    },
+    
+    SHIPPING_COMPANY(1){
+        @Override
+        public String toString() {
+            return "Transportadora";
+        }
+    },
+    
+    SUPPLIER(2){
+        @Override
+        public String toString() {
+            return "Fornecedor";
+        }
+    };
 
-    private String affiliate;
+    private final int status;
 
-    EAffiliate(String status) {
-        this.affiliate = affiliate;
+    EAffiliate(int status) {
+        this.status = status;
     }
 
-    public String getAffiliate() {
-        return this.affiliate;
+    public int getAffiliate() {
+        return this.status;
     }
 }
