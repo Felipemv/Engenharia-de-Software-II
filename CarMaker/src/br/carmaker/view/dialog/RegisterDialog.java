@@ -364,6 +364,8 @@ public class RegisterDialog extends javax.swing.JDialog {
                 entityType = EAffiliate.DEALERSHIP;
                 headerText += EAffiliate.DEALERSHIP.toString();
             }
+        }else{
+            headerText += header.toString();
         }
       
         headerText += ":";
