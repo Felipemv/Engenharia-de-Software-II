@@ -93,6 +93,7 @@ public abstract class JConstants {
     public static final String LABEL_CANT_DELETE_OWN_USER = "Você não pode deletar seu próprio usuário do sistema.";
     public static final String LABEL_NEED_ONE_SUPPLIER = "Você precisa adicionar no mínimo um fornecedor.";
     public static final String LABEL_NO_ITEM_SELECTED = "Ops! Nenhum item foi selecionado!";
+    public static final String LABEL_NO_AFFILIATE_SELECTED = "Ops! Nenhuma afiliada selecionada!";
     public static final String LABEL_OK = "OK";
     public static final String LABEL_YES = "Sim";
     public static final String LABEL_NO = "Não";

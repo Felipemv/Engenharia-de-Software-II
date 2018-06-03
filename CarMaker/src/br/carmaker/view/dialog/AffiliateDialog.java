@@ -353,7 +353,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 }
                 break;
             default:
-                MessageDialog.showMessage("Erro! Nenhuma afiliada selecionada!", this);
+                MessageDialog.showMessage(JConstants.LABEL_NO_AFFILIATE_SELECTED, this);
                 break;
         }
     }//GEN-LAST:event_btnSaveMouseClicked

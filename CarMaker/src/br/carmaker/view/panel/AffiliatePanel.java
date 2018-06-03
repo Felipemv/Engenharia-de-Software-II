@@ -5,16 +5,19 @@
  */
 package br.carmaker.view.panel;
 
+import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EAffiliate;
 import br.carmaker.model.enums.EMenuItem;
+import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.DealershipList;
 import br.carmaker.view.list.ShippingCompanyList;
 import br.carmaker.view.list.SupplierList;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -75,6 +78,16 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         listSupplier.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listSupplier.setCellRenderer(new SupplierList());
+        listSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listSupplierMouseClicked(evt);
+            }
+        });
+        listSupplier.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listSupplierKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(listSupplier);
 
         javax.swing.GroupLayout supplierPanelLayout = new javax.swing.GroupLayout(supplierPanel);
@@ -98,6 +111,16 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         listShippingCompany.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listShippingCompany.setCellRenderer(new ShippingCompanyList());
+        listShippingCompany.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listShippingCompanyMouseClicked(evt);
+            }
+        });
+        listShippingCompany.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listShippingCompanyKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(listShippingCompany);
 
         javax.swing.GroupLayout shippingCompanyPanelLayout = new javax.swing.GroupLayout(shippingCompanyPanel);
@@ -124,6 +147,11 @@ public class AffiliatePanel extends javax.swing.JPanel {
         listDealership.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listDealershipMouseClicked(evt);
+            }
+        });
+        listDealership.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listDealershipKeyPressed(evt);
             }
         });
         jScrollPane3.setViewportView(listDealership);
@@ -227,11 +255,69 @@ public class AffiliatePanel extends javax.swing.JPanel {
             JDealership dealership = listDealership.getSelectedValue();
 
             mainFrame.setEnabled(false);
-            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, EMenuItem.CARS, dealership, EAffiliate.DEALERSHIP);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, 
+                    EMenuItem.AFFILIATES, dealership, EAffiliate.DEALERSHIP);
             dialog.setVisible(true);
             initDealershipList();
         }
     }//GEN-LAST:event_listDealershipMouseClicked
+
+    private void listShippingCompanyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listShippingCompanyMouseClicked
+        if (evt.getClickCount() == 2) {
+            JShippingCompany shippingCompany = listShippingCompany.getSelectedValue();
+
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, 
+                    EMenuItem.AFFILIATES, shippingCompany, EAffiliate.SHIPPING_COMPANY);
+            dialog.setVisible(true);
+            initDealershipList();
+        }
+    }//GEN-LAST:event_listShippingCompanyMouseClicked
+
+    private void listSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSupplierMouseClicked
+        if (evt.getClickCount() == 2) {
+            JSupplier supplier = listSupplier.getSelectedValue();
+
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, 
+                    EMenuItem.AFFILIATES, supplier, EAffiliate.SUPPLIER);
+            dialog.setVisible(true);
+            initDealershipList();
+        }
+    }//GEN-LAST:event_listSupplierMouseClicked
+
+    private void listSupplierKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listSupplierKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int id = listSupplier.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_SUPPLIER, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteSupplier(id);
+                initSupplierList();
+            }
+        }
+    }//GEN-LAST:event_listSupplierKeyPressed
+
+    private void listShippingCompanyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listShippingCompanyKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int id = listSupplier.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_SHIPPING_COMPANY, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteShippingCompany(id);
+                initShippingCompanyList();
+            }
+        }
+    }//GEN-LAST:event_listShippingCompanyKeyPressed
+
+    private void listDealershipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listDealershipKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int id = listSupplier.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_DEALERSHIP, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteDealership(id);
+                initDealershipList();
+            }
+        }
+    }//GEN-LAST:event_listDealershipKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -43,16 +43,17 @@ public class JFeedstockDAO extends ABaseEntityDAO {
             stmt.setInt(2, feedstock.getQuantity());
             stmt.setDouble(3, feedstock.getCost());
             
-            for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
-                int feedstock_id = feedstock.getId();
-                int supplier_id = feedstock.getSuppliers().get(i);
-                JDbFacade.getInstance().createSupplierToFeedstock(feedstock_id, supplier_id);
-            }
-
             stmt.execute();
         } catch (SQLException ex) {
             Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
+        }
+        
+        int feedstock_id = lastId();
+        
+        for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
+            int supplier_id = feedstock.getSuppliers().get(i);
+            JDbFacade.getInstance().createSupplierToFeedstock(feedstock_id, supplier_id);
         }
         return true;
     }
@@ -110,7 +111,6 @@ public class JFeedstockDAO extends ABaseEntityDAO {
                 
                 JDbFacade.getInstance().editSupplierOfAFeedstock(feedstock_id, feedstock.getSuppliers());
             }
-
             stmt.execute();
 
         } catch (SQLException ex) {
@@ -134,4 +134,28 @@ public class JFeedstockDAO extends ABaseEntityDAO {
             return false;
         }
     }
+    
+    private static int lastId(){
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        int id = -1;
+
+        String sql = "SELECT MAX("+ID+") AS "+ID+" FROM " + TABLE_NAME + " WHERE " + DELETED + "=0";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            if (rs.first()) {
+               id = rs.getInt(ID);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        ConnectionFactory.closeConnection(connection, stmt, rs);
+        return id;
+    } 
 }

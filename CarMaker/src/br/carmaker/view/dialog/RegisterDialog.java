@@ -55,8 +55,9 @@ public class RegisterDialog extends javax.swing.JDialog {
         this.parent = parent;
         this.header = header;
         this.panel = panel;
+        this.entity = entity;
 
-        setEditPanel(entity);
+        setEditPanel();
         setHeader();
     }
     
@@ -69,8 +70,9 @@ public class RegisterDialog extends javax.swing.JDialog {
         this.header = header;
         this.panel = panel;
         this.entityType = entityType;
+        this.entity = entity;
 
-        setEditPanel(entity);
+        setEditPanel();
         setHeader();
     }
 
@@ -312,7 +314,7 @@ public class RegisterDialog extends javax.swing.JDialog {
         panelView.revalidate();
     }
 
-    private void setEditPanel(ABaseEntity entity) {
+    private void setEditPanel() {
         panelView.removeAll();
 
         switch (panel) {

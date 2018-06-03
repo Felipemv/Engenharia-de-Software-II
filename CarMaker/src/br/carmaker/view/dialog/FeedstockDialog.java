@@ -275,6 +275,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
                     MessageDialog.showMessage(JConstants.SUCCESS_CREATE_FEEDSTOCK, this);
                     registerDialog.dispose();
                     parent.setEnabled(true);
+                    
                 }else{
                     MessageDialog.showMessage(JConstants.FAILURE_CREATE_FEEDSTOCK, this);
                 }
