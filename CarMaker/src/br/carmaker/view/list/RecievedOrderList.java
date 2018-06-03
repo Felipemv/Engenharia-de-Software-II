@@ -5,7 +5,12 @@
  */
 package br.carmaker.view.list;
 
+import br.carmaker.model.JCar;
+import br.carmaker.model.JConstants;
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.JDealership;
 import br.carmaker.model.JRecievedOrders;
+import br.carmaker.model.JShippingCompany;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
@@ -42,41 +47,37 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
         lblStatus = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
 
-        lblProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblProtocol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.white));
+
+        lblProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblProtocol.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblProtocol.setText("Protocolo");
-        lblProtocol.setBorder(null);
         lblProtocol.setMaximumSize(new java.awt.Dimension(70, 19));
 
-        lblCar.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblCar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCar.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblCar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCar.setText("Carro");
-        lblCar.setBorder(null);
         lblCar.setMaximumSize(new java.awt.Dimension(80, 19));
         lblCar.setMinimumSize(new java.awt.Dimension(80, 19));
 
-        lblShippingCompany.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblShippingCompany.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblShippingCompany.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblShippingCompany.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblShippingCompany.setText("Transportadora");
-        lblShippingCompany.setBorder(null);
         lblShippingCompany.setMinimumSize(new java.awt.Dimension(120, 19));
 
-        lblDealership.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblDealership.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDealership.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblDealership.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblDealership.setText("Concessionária");
-        lblDealership.setBorder(null);
         lblDealership.setMinimumSize(new java.awt.Dimension(120, 19));
 
-        lblStatus.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStatus.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblStatus.setText("Status");
-        lblStatus.setBorder(null);
         lblStatus.setMinimumSize(new java.awt.Dimension(75, 19));
 
-        lblDate.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblDate.setText("Data");
-        lblDate.setBorder(null);
         lblDate.setMinimumSize(new java.awt.Dimension(75, 19));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -84,38 +85,53 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblCar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblDealership, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDealership, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lblProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblDealership, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDealership, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -134,15 +150,25 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
     public Component getListCellRendererComponent(JList<? extends JRecievedOrders> list, 
             JRecievedOrders value, int index, boolean isSelected, boolean hasFocus) {
         
-        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        lblProtocol.setText(value.getProtocol());
-        lblCar.setText(value.getCar().getModel());
-        lblShippingCompany.setText(value.getShippingCompany().getName());
-        lblDealership.setText(value.getDealership().getName());
-        lblStatus.setText(value.getStatus().toString());
-        lblDate.setText(sdf.format(value.getExpectedDate()));
+//        JCar car = JDbFacade.getInstance().readCarById(value.getCar());
+//        JShippingCompany sc = JDbFacade.getInstance().readShippingCompanyById(value.getShippingCompany());
+//        JDealership ds = JDbFacade.getInstance().readDealershipById(value.getDealership());
+        
+        String protocol = "<html><strong>" + JConstants.PROTOCOL + ": </strong>" + value.getProtocol()+ "</html>";
+        String car = "<html><strong>" + JConstants.CAR + ": </strong>" + "Carro" + "</html>";
+        String shippingCompany = "<html><strong>" + JConstants.SHIPPING_COMPANY + ": </strong>" + "Transportadora" + "</html>";
+        String dealership = "<html><strong>" + JConstants.DEALERSHIP + ": </strong>" + "Concessionária" + "</html>";
+        String status = "<html><strong>" + JConstants.STATUS + ": </strong>" + value.getStatus().toString() + "</html>";
+        String date = "<html><strong>" + JConstants.DATE + ": </strong>" + sdf.format(value.getExpectedDate()) + "</html>";
+        
+        lblProtocol.setText(protocol);
+        lblCar.setText(car);
+        lblShippingCompany.setText(shippingCompany);
+        lblDealership.setText(dealership);
+        lblStatus.setText(status);
+        lblDate.setText(date);
         
         if(isSelected){
             jPanel2.setBackground(Color.yellow);

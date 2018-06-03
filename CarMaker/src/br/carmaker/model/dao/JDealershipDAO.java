@@ -56,6 +56,33 @@ public class JDealershipDAO extends AAffiliateDAO {
 
         return true;
     }
+    
+    public static JDealership getDealershipById(int id) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        JDealership dealership = new JDealership();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=0";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                dealership.setId(id);
+                dealership.setAddress(rs.getString(ADDRESS));
+                dealership.setName(rs.getString(NAME));
+                dealership.setCnpj(rs.getString(CNPJ));
+                dealership.setType(EDealershipType.valueOf(rs.getInt(TYPE)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
+        return dealership;
+    }
 
     public static List<JDealership> getAllDealerships() {
         Connection connection = ConnectionFactory.getConnection();

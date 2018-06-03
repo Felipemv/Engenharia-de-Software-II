@@ -56,6 +56,34 @@ public class JCarDAO extends ABaseEntityDAO {
         return true;
     }
 
+    public static JCar getCarById(int id) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        JCar car = new JCar();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=0";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                car.setId(id);
+                car.setModel(rs.getString(MODEL));
+                car.setCostPrice(rs.getDouble(COST_PRICE));
+                car.setSalePrice(rs.getDouble(SALE_PRICE));
+                car.setProductionTime(rs.getInt(PRODUCTION_TIME));
+                car.setColor(rs.getString(COLOR));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
+        return car;
+    }
+    
     public static List<JCar> getAllCars() {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;

@@ -5,7 +5,10 @@
  */
 package br.carmaker.view.list;
 
+import br.carmaker.model.JConstants;
+import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JPlacedOrders;
+import br.carmaker.model.JSupplier;
 import java.awt.Color;
 import java.awt.Component;
 import java.text.SimpleDateFormat;
@@ -37,77 +40,89 @@ public class PlacedOrderList extends javax.swing.JPanel implements
 
         jPanel2 = new javax.swing.JPanel();
         lblProtocol = new javax.swing.JLabel();
-        lblFeedstock = new javax.swing.JLabel();
         lblSupplier = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
+        lblFeedstock = new javax.swing.JLabel();
 
-        lblProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblProtocol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.white));
+
+        lblProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblProtocol.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblProtocol.setText("Protocolo");
-        lblProtocol.setBorder(null);
         lblProtocol.setMaximumSize(new java.awt.Dimension(70, 19));
 
-        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblFeedstock.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFeedstock.setText("Matéria-prima");
-        lblFeedstock.setBorder(null);
-        lblFeedstock.setMaximumSize(new java.awt.Dimension(80, 19));
-        lblFeedstock.setMinimumSize(new java.awt.Dimension(80, 19));
-
-        lblSupplier.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblSupplier.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSupplier.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblSupplier.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblSupplier.setText("Fornecedora");
-        lblSupplier.setBorder(null);
         lblSupplier.setMinimumSize(new java.awt.Dimension(120, 19));
 
-        lblStatus.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblStatus.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblStatus.setText("Status");
-        lblStatus.setBorder(null);
         lblStatus.setMinimumSize(new java.awt.Dimension(75, 19));
 
-        lblDate.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblDate.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblDate.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblDate.setText("Data");
-        lblDate.setBorder(null);
         lblDate.setMinimumSize(new java.awt.Dimension(75, 19));
+
+        lblFeedstock.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblFeedstock.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lblFeedstock.setText("Matéria-prima");
+        lblFeedstock.setMaximumSize(new java.awt.Dimension(80, 19));
+        lblFeedstock.setMinimumSize(new java.awt.Dimension(80, 19));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblFeedstock, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addComponent(lblDate, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblProtocol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblSupplier, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(lblFeedstock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(lblProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblFeedstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFeedstock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -126,11 +141,19 @@ public class PlacedOrderList extends javax.swing.JPanel implements
             JPlacedOrders value, int index, boolean isSelected, boolean hasFocus) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        lblProtocol.setText(value.getProtocol());
-        lblFeedstock.setText(value.getFeedstock().getName());
-        lblSupplier.setText(value.getFeedstock().getName());
-        lblStatus.setText(value.getStatus().toString());
-        lblDate.setText(sdf.format(value.getExpectedDate()));
+        //JSupplier supplier = JDbFacade.getInstance().readSupplierById(value.getSupplier());
+        
+        String protocol = "<html><strong>" + JConstants.PROTOCOL + ": </strong>" + value.getProtocol()+ "</html>";
+        String feedstock = "<html><strong>" + JConstants.FEEDSTOCK + ": </strong>" + value.getFeedstock().getName()+ "</html>";
+        String sup = "<html><strong>" + JConstants.SUPPLIER + ": </strong>" + "Supplier" + "</html>";
+        String status = "<html><strong>" + JConstants.STATUS + ": </strong>" + value.getStatus().toString() + "</html>";
+        String date = "<html><strong>" + JConstants.DATE + ": </strong>" + sdf.format(value.getExpectedDate()) + "</html>";
+        
+        lblProtocol.setText(protocol);
+        lblFeedstock.setText(feedstock);
+        lblSupplier.setText(sup);
+        lblStatus.setText(status);
+        lblDate.setText(date);
         
         if(isSelected){
             jPanel2.setBackground(Color.yellow);

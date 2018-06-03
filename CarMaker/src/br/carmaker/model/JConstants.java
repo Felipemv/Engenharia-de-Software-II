@@ -5,6 +5,9 @@
  */
 package br.carmaker.model;
 
+import br.carmaker.model.enums.EAffiliate;
+import br.carmaker.model.enums.EMenuItem;
+
 /**
  * A classe centraliza todas as mensagens e constantes utilizadas no software.
  * O nome das mensagens seguem o seguinte padrão: 1_2_3
@@ -109,5 +112,13 @@ public abstract class JConstants {
     public static final String AMOUNT = "Quantidade";
     public static final String FLEET = "Frota";
     public static final String TYPE = "Tipo";
+    public static final String PROTOCOL = "Protocolo";
+    public static final String FEEDSTOCK = "Matéria-prima";
+    public static final String SUPPLIER = "Fornecedor";
+    public static final String STATUS = "Status";
+    public static final String DATE = "Data";
+    public static final String SHIPPING_COMPANY = "Transportadora";
+    public static final String DEALERSHIP = "Concessionária";
+    public static final String CAR = "Carro";
   
 }

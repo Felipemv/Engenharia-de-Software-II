@@ -61,6 +61,10 @@ public class JDbFacade {
         return JCarDAO.insertCar(car);
     }
 
+    public JCar readCarById(int car) {
+        return JCarDAO.getCarById(car);
+    }
+
     public List<JCar> readAllCars() {
         return JCarDAO.getAllCars();
     }
@@ -133,6 +137,10 @@ public class JDbFacade {
         return JShippingCompanyDAO.insertShippingCompany(shippingCompany);
     }
     
+    public JShippingCompany readShippingCompanyById(int shippingCompany) {
+        return JShippingCompanyDAO.getShippingCompanyById(shippingCompany);
+    }
+    
     public List<JShippingCompany> readAllShippingCompanies(){
         return JShippingCompanyDAO.getAllShippingCompanies();
     }
@@ -149,6 +157,10 @@ public class JDbFacade {
     
     public boolean createDealership(JDealership dealership) {
         return JDealershipDAO.insertDealership(dealership);
+    }
+    
+    public JDealership readDealershipById(int dealership){
+        return JDealershipDAO.getDealershipById(dealership);
     }
     
     public List<JDealership> readAllDealerships(){

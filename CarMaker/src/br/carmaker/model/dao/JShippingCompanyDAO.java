@@ -5,6 +5,7 @@
  */
 package br.carmaker.model.dao;
 
+import br.carmaker.model.JCar;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.connection.ConnectionFactory;
@@ -12,6 +13,7 @@ import br.carmaker.model.dao.abstracts.AAffiliateDAO;
 import static br.carmaker.model.dao.abstracts.AAffiliateDAO.ADDRESS;
 import static br.carmaker.model.dao.abstracts.AAffiliateDAO.CNPJ;
 import static br.carmaker.model.dao.abstracts.AAffiliateDAO.NAME;
+import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.DELETED;
 import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
 import br.carmaker.view.dialog.MessageDialog;
 import java.sql.Connection;
@@ -57,6 +59,34 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
         return true;
     }
 
+    public static JShippingCompany getShippingCompanyById(int id) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        JShippingCompany sc = new JShippingCompany();
+
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=0";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                sc.setId(id);
+                sc.setAddress(rs.getString(ADDRESS));
+                sc.setName(rs.getString(NAME));
+                sc.setCnpj(rs.getString(CNPJ));
+                sc.setAmount(rs.getInt(AMOUNT));
+                sc.setFleet(rs.getInt(FLEET));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
+        return sc;
+    }
+    
     public static List<JShippingCompany> getAllShippingCompanies() {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;

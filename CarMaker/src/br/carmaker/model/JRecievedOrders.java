@@ -4,31 +4,31 @@ import br.carmaker.model.abstracts.AOrder;
 
 public class JRecievedOrders extends AOrder {
 
-    private JCar car;
-    private JDealership dealership;
-    private JShippingCompany shippingCompany;
+    private int car;
+    private int dealership;
+    private int shippingCompany;
 
-    public JCar getCar() {
+    public int getCar() {
         return car;
     }
 
-    public void setCar(JCar car) {
+    public void setCar(int car) {
         this.car = car;
     }
 
-    public JDealership getDealership() {
+    public int getDealership() {
         return dealership;
     }
 
-    public void setDealership(JDealership dealership) {
+    public void setDealership(int dealership) {
         this.dealership = dealership;
     }
 
-    public JShippingCompany getShippingCompany() {
+    public int getShippingCompany() {
         return shippingCompany;
     }
 
-    public void setShippingCompany(JShippingCompany shippingCompany) {
+    public void setShippingCompany(int shippingCompany) {
         this.shippingCompany = shippingCompany;
     }
 }
