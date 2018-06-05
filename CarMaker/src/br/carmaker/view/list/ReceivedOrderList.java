@@ -9,7 +9,7 @@ import br.carmaker.model.JCar;
 import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
-import br.carmaker.model.JRecievedOrders;
+import br.carmaker.model.JReceivedOrders;
 import br.carmaker.model.JShippingCompany;
 import java.awt.Color;
 import java.awt.Component;
@@ -21,12 +21,12 @@ import javax.swing.ListCellRenderer;
  *
  * @author felipe
  */
-public class RecievedOrderList extends javax.swing.JPanel implements ListCellRenderer<JRecievedOrders> {
+public class ReceivedOrderList extends javax.swing.JPanel implements ListCellRenderer<JReceivedOrders> {
 
     /**
      * Creates new form RecievedOrderList
      */
-    public RecievedOrderList() {
+    public ReceivedOrderList() {
         initComponents();
     }
 
@@ -147,25 +147,20 @@ public class RecievedOrderList extends javax.swing.JPanel implements ListCellRen
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends JRecievedOrders> list, 
-            JRecievedOrders value, int index, boolean isSelected, boolean hasFocus) {
+    public Component getListCellRendererComponent(JList<? extends JReceivedOrders> list, 
+            JReceivedOrders value, int index, boolean isSelected, boolean hasFocus) {
         
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        
-//        JCar car = JDbFacade.getInstance().readCarById(value.getCar());
-//        JShippingCompany sc = JDbFacade.getInstance().readShippingCompanyById(value.getShippingCompany());
-//        JDealership ds = JDbFacade.getInstance().readDealershipById(value.getDealership());
-        
+        SimpleDateFormat sdf = new SimpleDateFormat(JConstants.DATE_FORMAT);
         String protocol = "<html><strong>" + JConstants.PROTOCOL + ": </strong>" + value.getProtocol()+ "</html>";
         String car = "<html><strong>" + JConstants.CAR + ": </strong>" + "Carro" + "</html>";
-        String shippingCompany = "<html><strong>" + JConstants.SHIPPING_COMPANY + ": </strong>" + "Transportadora" + "</html>";
-        String dealership = "<html><strong>" + JConstants.DEALERSHIP + ": </strong>" + "Concessionária" + "</html>";
+        String sc = "<html><strong>" + JConstants.SHIPPING_COMPANY + ": </strong>" + value.getDealership().getShippingCompany().getName() + "</html>";
+        String dealership = "<html><strong>" + JConstants.DEALERSHIP + ": </strong>" + value.getDealership().getName() + "</html>";
         String status = "<html><strong>" + JConstants.STATUS + ": </strong>" + value.getStatus().toString() + "</html>";
         String date = "<html><strong>" + JConstants.DATE + ": </strong>" + sdf.format(value.getExpectedDate()) + "</html>";
         
         lblProtocol.setText(protocol);
         lblCar.setText(car);
-        lblShippingCompany.setText(shippingCompany);
+        lblShippingCompany.setText(sc);
         lblDealership.setText(dealership);
         lblStatus.setText(status);
         lblDate.setText(date);

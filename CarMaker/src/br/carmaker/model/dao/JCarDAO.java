@@ -26,12 +26,12 @@ import javax.swing.JPanel;
  */
 public class JCarDAO extends ABaseEntityDAO {
 
-    private static final String TABLE_NAME = "car";
-    private static final String MODEL = "model";
-    private static final String PRODUCTION_TIME = "production_time";
-    private static final String COST_PRICE = "cost_price";
-    private static final String SALE_PRICE = "sale_price";
-    private static final String COLOR = "color";
+    public static final String TABLE_NAME = "car";
+    public static final String MODEL = "model";
+    public static final String PRODUCTION_TIME = "production_time";
+    public static final String COST_PRICE = "cost_price";
+    public static final String SALE_PRICE = "sale_price";
+    public static final String COLOR = "color";
 
     public static boolean insertCar(JCar car) {
         Connection connection = ConnectionFactory.getConnection();

@@ -12,6 +12,6 @@ package br.carmaker.model.dao.abstracts;
 public class AAffiliateDAO extends ABaseEntityDAO {
 
     public static final String NAME = "name";
-    public static final String ADDRESS = "address";
-    public static final String CNPJ = "cnpj";
+    protected static final String ADDRESS = "address";
+    protected static final String CNPJ = "cnpj";
 }

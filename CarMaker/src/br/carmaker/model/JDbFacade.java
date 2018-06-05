@@ -10,6 +10,7 @@ import br.carmaker.model.dao.JDealershipDAO;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.JFeedstockDAO;
 import br.carmaker.model.dao.JFeedstockHasSupplierDAO;
+import br.carmaker.model.dao.JReceivedOrdersDAO;
 import br.carmaker.model.dao.JShippingCompanyDAO;
 import br.carmaker.model.dao.JSupplierDAO;
 import java.util.List;
@@ -61,8 +62,8 @@ public class JDbFacade {
         return JCarDAO.insertCar(car);
     }
 
-    public JCar readCarById(int car) {
-        return JCarDAO.getCarById(car);
+    public JCar readCarById(int id) {
+        return JCarDAO.getCarById(id);
     }
 
     public List<JCar> readAllCars() {
@@ -137,8 +138,8 @@ public class JDbFacade {
         return JShippingCompanyDAO.insertShippingCompany(shippingCompany);
     }
     
-    public JShippingCompany readShippingCompanyById(int shippingCompany) {
-        return JShippingCompanyDAO.getShippingCompanyById(shippingCompany);
+    public JShippingCompany readShippingCompanyById(int id) {
+        return JShippingCompanyDAO.getShippingCompanyById(id);
     }
     
     public List<JShippingCompany> readAllShippingCompanies(){
@@ -159,8 +160,8 @@ public class JDbFacade {
         return JDealershipDAO.insertDealership(dealership);
     }
     
-    public JDealership readDealershipById(int dealership){
-        return JDealershipDAO.getDealershipById(dealership);
+    public JDealership readDealershipById(int id){
+        return JDealershipDAO.getDealershipById(id);
     }
     
     public List<JDealership> readAllDealerships(){
@@ -173,5 +174,27 @@ public class JDbFacade {
     
     public boolean deleteDealership(int id){
         return JDealershipDAO.deleteDealership(id);
+    }
+    
+    //CRUD de pedidos recebidos
+    
+    public boolean createReceivedOrder(JReceivedOrders order) {
+        return JReceivedOrdersDAO.insertReceivedOrder(order);
+    }
+    
+    public JReceivedOrders readReceivedOrderById(int id){
+        return JReceivedOrdersDAO.getReceivedOrderById(id);
+    }
+    
+    public List<JReceivedOrders> readAllReceivedOrders(){
+        return JReceivedOrdersDAO.getAllReceivedOrders();
+    }
+    
+    public boolean editReceivedOrder(JReceivedOrders order){
+        return JReceivedOrdersDAO.editReceivedOrder(order);
+    }
+    
+    public boolean deleteReceivedOrder(int id){
+        return JReceivedOrdersDAO.deleteReceivedOrder(id);
     }
 }

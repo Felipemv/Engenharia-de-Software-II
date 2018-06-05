@@ -11,7 +11,7 @@ package br.carmaker.model.dao.abstracts;
  */
 public class AOrderDAO extends ABaseEntityDAO {
 
-    private static final String PROTOCOL = "protocol";
-    private static final String STATUS = "status";
-    private static final String EXPECTED_DATE = "expectedDate";
+    protected static final String PROTOCOL = "protocol";
+    protected static final String STATUS = "status";
+    protected static final String EXPECTED_DATE = "expected_date";
 }

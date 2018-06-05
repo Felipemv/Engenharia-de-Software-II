@@ -5,17 +5,10 @@
  */
 package br.carmaker.model.dao;
 
-import br.carmaker.model.JCar;
 import br.carmaker.model.JShippingCompany;
-import br.carmaker.model.JSupplier;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.AAffiliateDAO;
-import static br.carmaker.model.dao.abstracts.AAffiliateDAO.ADDRESS;
-import static br.carmaker.model.dao.abstracts.AAffiliateDAO.CNPJ;
 import static br.carmaker.model.dao.abstracts.AAffiliateDAO.NAME;
-import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.DELETED;
-import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
-import br.carmaker.view.dialog.MessageDialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /**
  *
@@ -32,7 +24,7 @@ import javax.swing.JPanel;
  */
 public class JShippingCompanyDAO extends AAffiliateDAO {
 
-    private static final String TABLE_NAME = "shipping_company";
+    public static final String TABLE_NAME = "shipping_company";
     private static final String AMOUNT = "amount";
     private static final String FLEET = "fleet";
 

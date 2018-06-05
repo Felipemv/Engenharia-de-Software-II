@@ -32,6 +32,11 @@ public class RegisterDialog extends javax.swing.JDialog {
      * @param modal indica se a tela que chamou a dialog continuará executando
      * enquanto a dialog está aberta.
      * @param panel indica qual painel do card layout será executado.
+     * 0 - Employee, 
+     * 1 - Feedstock,
+     * 2 - Car,
+     * 3 - Affiliate,
+     * 4 - Order
      * @param header é o Enum que indica a entidade que será cadastrada ou
      * editada.
      */
@@ -47,6 +52,19 @@ public class RegisterDialog extends javax.swing.JDialog {
         setHeader();
     }
 
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param panel indica qual painel do card layout será executado.
+     * 0 - Employee, 
+     * 1 - Feedstock,
+     * 2 - Car,
+     * 3 - Affiliate,
+     * 4 - Order
+     * @param header
+     * @param entity
+     */
     public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, 
             ABaseEntity entity) {
         super(parent, modal);
@@ -61,6 +79,20 @@ public class RegisterDialog extends javax.swing.JDialog {
         setHeader();
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param panel indica qual painel do card layout será executado.
+     * 0 - Employee, 
+     * 1 - Feedstock,
+     * 2 - Car,
+     * 3 - Affiliate,
+     * 4 - Order
+     * @param header
+     * @param entity
+     * @param entityType
+     */
     public RegisterDialog(JFrame parent, boolean modal, int panel, EMenuItem header, 
             ABaseEntity entity, EAffiliate entityType) {
         super(parent, modal);

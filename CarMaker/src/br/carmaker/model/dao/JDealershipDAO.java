@@ -6,15 +6,10 @@
 package br.carmaker.model.dao;
 
 import br.carmaker.model.JDealership;
-import br.carmaker.model.JSupplier;
+import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.AAffiliateDAO;
-import static br.carmaker.model.dao.abstracts.AAffiliateDAO.ADDRESS;
-import static br.carmaker.model.dao.abstracts.AAffiliateDAO.CNPJ;
-import static br.carmaker.model.dao.abstracts.AAffiliateDAO.NAME;
-import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
 import br.carmaker.model.enums.EDealershipType;
-import br.carmaker.view.dialog.MessageDialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /**
  *
@@ -31,9 +25,15 @@ import javax.swing.JPanel;
  */
 public class JDealershipDAO extends AAffiliateDAO {
 
-    private static final String TABLE_NAME = "dealership";
+    protected static final String TABLE_NAME = "dealership";
+    protected static final String SC_ID = "shipping_company_id";
     private static final String TYPE = "type";
-    
+
+    private static final String D_ID = "d_id";
+    private static final String D_NAME = "d_name";
+    private static final String SCOMP_ID = "sc_id";
+    private static final String SCOMP_NAME = "sc_name";
+
     public static boolean insertDealership(JDealership dealership) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
@@ -46,6 +46,7 @@ public class JDealershipDAO extends AAffiliateDAO {
             stmt.setString(1, dealership.getName());
             stmt.setString(2, dealership.getAddress());
             stmt.setString(3, dealership.getCnpj());
+            stmt.setInt(3, dealership.getShippingCompany().getId());
             stmt.setInt(4, dealership.getType().getDealershipIntType());
 
             stmt.execute();
@@ -56,7 +57,7 @@ public class JDealershipDAO extends AAffiliateDAO {
 
         return true;
     }
-    
+
     public static JDealership getDealershipById(int id) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
@@ -64,7 +65,21 @@ public class JDealershipDAO extends AAffiliateDAO {
 
         JDealership dealership = new JDealership();
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=" + id + " AND " + DELETED + "=0";
+        String sql = "SELECT " + TABLE_NAME + "." + ID + " AS '" + D_ID + "',"
+                + TABLE_NAME + "." + NAME + " AS '" + D_NAME + "',"
+                + TABLE_NAME + "." + ADDRESS + ", "
+                + TABLE_NAME + "." + CNPJ + ", "
+                + TABLE_NAME + "." + TYPE + ", "
+                + JShippingCompanyDAO.TABLE_NAME + "." + ID + " AS '" + SCOMP_ID + "', "
+                + JShippingCompanyDAO.TABLE_NAME + "." + NAME + " AS '" + SCOMP_NAME + "', "
+                + " FROM " + TABLE_NAME;
+
+        sql += " INNER JOIN " + JShippingCompanyDAO.TABLE_NAME + " ON "
+                + JShippingCompanyDAO.TABLE_NAME + "." + ID + "=" + TABLE_NAME + "." + ID;
+
+        sql += " WHERE " + TABLE_NAME
+                + "." + ID + "= 0 AND " + TABLE_NAME
+                + "." + DELETED + " AND " + JShippingCompanyDAO.TABLE_NAME + "." + DELETED + "= 0";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -76,6 +91,7 @@ public class JDealershipDAO extends AAffiliateDAO {
                 dealership.setName(rs.getString(NAME));
                 dealership.setCnpj(rs.getString(CNPJ));
                 dealership.setType(EDealershipType.valueOf(rs.getInt(TYPE)));
+                dealership.setShippingCompany(new JShippingCompany(rs.getInt(SCOMP_ID), rs.getString(SCOMP_NAME)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +108,21 @@ public class JDealershipDAO extends AAffiliateDAO {
         List<JDealership> listDealership = new ArrayList<>();
         JDealership dealership;
 
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DELETED + "=0";
+        String sql = "SELECT " + TABLE_NAME + "." + ID + ", "
+                + TABLE_NAME + "." + NAME + ", "
+                + TABLE_NAME + "." + ADDRESS + ", "
+                + TABLE_NAME + "." + CNPJ + ", "
+                + TABLE_NAME + "." + TYPE + ", "
+                + JShippingCompanyDAO.TABLE_NAME + "." + ID + " AS " + SCOMP_ID + ", "
+                + JShippingCompanyDAO.TABLE_NAME + "." + NAME + " AS " + SCOMP_NAME;
+
+        sql += " FROM " + TABLE_NAME;
+
+        sql += " INNER JOIN " + JShippingCompanyDAO.TABLE_NAME + " ON "
+                + JShippingCompanyDAO.TABLE_NAME + "." + ID + "="
+                + TABLE_NAME + "." + SC_ID;
+
+        sql += " WHERE " + TABLE_NAME + "." + DELETED + "=0";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -106,6 +136,7 @@ public class JDealershipDAO extends AAffiliateDAO {
                 dealership.setAddress(rs.getString(ADDRESS));
                 dealership.setCnpj(rs.getString(CNPJ));
                 dealership.setType(EDealershipType.valueOf(rs.getInt(TYPE)));
+                dealership.setShippingCompany(new JShippingCompany(rs.getInt(SCOMP_ID), rs.getString(SCOMP_NAME)));
 
                 listDealership.add(dealership);
             }
@@ -120,7 +151,7 @@ public class JDealershipDAO extends AAffiliateDAO {
         PreparedStatement stmt;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + ADDRESS
-                + "=?," + CNPJ + "=?," + TYPE + "=? WHERE " + ID + "=?";
+                + "=?," + CNPJ + "=?," + TYPE + "=?, " + SC_ID + "=? WHERE " + ID + "=?";
 
         try {
             stmt = connection.prepareStatement(sql);
@@ -129,7 +160,8 @@ public class JDealershipDAO extends AAffiliateDAO {
             stmt.setString(2, dealership.getAddress());
             stmt.setString(3, dealership.getCnpj());
             stmt.setInt(4, dealership.getType().getDealershipIntType());
-            stmt.setInt(5, dealership.getId());
+            stmt.setInt(5, dealership.getShippingCompany().getId());
+            stmt.setInt(6, dealership.getId());
 
             return stmt.execute();
 

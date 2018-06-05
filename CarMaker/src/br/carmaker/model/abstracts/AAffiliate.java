@@ -2,7 +2,7 @@ package br.carmaker.model.abstracts;
 
 public abstract class AAffiliate extends ABaseEntity {
 
-    private String name;
+    protected String name;
     private String address;
     private String cnpj;
 

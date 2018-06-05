@@ -11,8 +11,8 @@ package br.carmaker.model.abstracts;
  */
 public abstract class ABaseEntity {
 
-    private int id;
-    private int deleted;
+    protected int id;
+    protected int deleted;
 
     public int getId() {
         return id;

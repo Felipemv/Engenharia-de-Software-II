@@ -5,9 +5,27 @@
  */
 package br.carmaker.view.dialog;
 
+import br.carmaker.model.JCar;
+import br.carmaker.model.JConstants;
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.JDealership;
+import br.carmaker.model.JReceivedOrders;
+import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.abstracts.AOrder;
+import br.carmaker.model.enums.EDeliveryStatus;
+import java.awt.Color;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -17,17 +35,24 @@ public class OrderDialog extends javax.swing.JPanel {
 
     /**
      * Creates new form OrderDialog
+     *
+     * @param registerDialog
+     * @param parent
      */
     public OrderDialog(JDialog registerDialog, JFrame parent) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        this.creating = true;
+        setReceivedOrdersData();
     }
 
     public OrderDialog(JDialog registerDialog, JFrame parent, AOrder order) {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        this.creating = false;
+        setReceivedOrdersData();
     }
 
     /**
@@ -43,6 +68,37 @@ public class OrderDialog extends javax.swing.JPanel {
         panelFooter = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbType = new javax.swing.JComboBox<>();
+        panelCard = new javax.swing.JPanel();
+        panelReceived = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        cbDealership = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        lblShippingCompany = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        cbCar = new javax.swing.JComboBox<>();
+        panelPlaced = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox4 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox5 = new javax.swing.JComboBox<>();
+        tfProtocol = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        MaskFormatter maskFormat = new MaskFormatter();
+        String mask = "##/##/####";
+
+        try{
+            maskFormat.setMask(mask);
+            maskFormat.setPlaceholderCharacter(' ');
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        tfDate = new javax.swing.JFormattedTextField(maskFormat);
+        btnArrival = new javax.swing.JButton();
 
         panelFooter.setBackground(new java.awt.Color(37, 37, 39));
 
@@ -85,18 +141,213 @@ public class OrderDialog extends javax.swing.JPanel {
                 .addGap(25, 25, 25))
         );
 
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel1.setText("Protocolo: ");
+
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel2.setText("Data: ");
+
+        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pedidos Recebidos", "Pedidos Realizados" }));
+        cbType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTypeActionPerformed(evt);
+            }
+        });
+
+        panelCard.setLayout(new java.awt.CardLayout());
+
+        panelReceived.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel3.setText("Concessionária: ");
+
+        cbDealership.setModel(cbmDealership);
+        cbDealership.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDealershipActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel4.setText("Transportadora: ");
+
+        lblShippingCompany.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel6.setText("Carro: ");
+
+        cbCar.setModel(cbmCar);
+        cbCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelReceivedLayout = new javax.swing.GroupLayout(panelReceived);
+        panelReceived.setLayout(panelReceivedLayout);
+        panelReceivedLayout.setHorizontalGroup(
+            panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReceivedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelReceivedLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbDealership, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReceivedLayout.createSequentialGroup()
+                        .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblShippingCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbCar, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        panelReceivedLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbCar, cbDealership, lblShippingCompany});
+
+        panelReceivedLayout.setVerticalGroup(
+            panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReceivedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbDealership, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(cbCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+
+        panelCard.add(panelReceived, "card2");
+
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel7.setText("Matéria-prima: ");
+
+        jComboBox4.setModel(cbmFeedstock);
+
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel8.setText("Fornecedor: ");
+
+        jComboBox5.setModel(cbmSupplier);
+
+        javax.swing.GroupLayout panelPlacedLayout = new javax.swing.GroupLayout(panelPlaced);
+        panelPlaced.setLayout(panelPlacedLayout);
+        panelPlacedLayout.setHorizontalGroup(
+            panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPlacedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addGap(32, 32, 32)
+                .addGroup(panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox4, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox5, 0, 620, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelPlacedLayout.setVerticalGroup(
+            panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPlacedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(166, Short.MAX_VALUE))
+        );
+
+        panelCard.add(panelPlaced, "card3");
+
+        tfProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        tfProtocol.setText("123456789");
+
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel9.setText("Status: ");
+
+        lblStatus.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel11.setText("Selecione um tipo de pedido: ");
+
+        tfDate.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfDateCaretUpdate(evt);
+            }
+        });
+
+        btnArrival.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        btnArrival.setText("Já chegou");
+        btnArrival.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArrivalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelFooter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel9))
+                        .addGap(44, 44, 44)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfProtocol)
+                            .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(tfDate)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnArrival))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 431, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(tfProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfDate)
+                    .addComponent(btnArrival)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfDate, tfProtocol});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -111,7 +362,27 @@ public class OrderDialog extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        int selection = cbType.getSelectedIndex();
 
+        switch (selection) {
+            case 0:
+                if (creating) {
+                    saveRecievedOrders();
+                } else {
+                    editRecievedOrders();
+                }
+                break;
+            case 1:
+                if (creating) {
+                    savePlacedOrders();
+                } else {
+                    editPlacedOrders();
+                }
+                break;
+            default:
+                MessageDialog.showMessage(JConstants.LABEL_NO_ORDER_SELECTED, this);
+                break;
+        }
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
@@ -119,14 +390,253 @@ public class OrderDialog extends javax.swing.JPanel {
         parent.setEnabled(true);
     }//GEN-LAST:event_btnCancelMouseClicked
 
+    private void cbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeActionPerformed
+        int index = cbType.getSelectedIndex();
+
+        panelCard.removeAll();
+
+        switch (index) {
+            case 1:
+                panelCard.add(panelPlaced);
+                break;
+            default:
+                panelCard.add(panelReceived);
+                setReceivedOrdersData();
+                break;
+        }
+        panelCard.repaint();
+        panelCard.revalidate();
+    }//GEN-LAST:event_cbTypeActionPerformed
+
+    private void cbDealershipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDealershipActionPerformed
+        int index = cbDealership.getSelectedIndex();
+        if (index != -1) {
+            dealership = listD.get(index);
+            setShippingCompany(index);
+        }
+    }//GEN-LAST:event_cbDealershipActionPerformed
+
+    private void cbCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCarActionPerformed
+        int index = cbCar.getSelectedIndex();
+        if (index != -1) {
+            car = listC.get(index);
+        }
+    }//GEN-LAST:event_cbCarActionPerformed
+
+    private void tfDateCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfDateCaretUpdate
+        if (tfDate.getText().trim().length() < 10) {
+            lblStatus.setText("");
+            status = null;
+        } else {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(JConstants.DATE_FORMAT);
+            try {
+                Date date = dateFormat.parse(tfDate.getText());
+                long time = date.getTime();
+                long today = System.currentTimeMillis();
+                long oneDayInMillis = 1000*60*60*24; //Segundo * Minuto * Hora * Dia
+                
+                if (today < time) {
+                    lblStatus.setText(EDeliveryStatus.ON_TIME.toString());
+                    lblStatus.setForeground(new Color(16, 139, 14));
+                    status = EDeliveryStatus.ON_TIME;
+                } else if (today >= time && today < time + oneDayInMillis) {
+                    lblStatus.setText(EDeliveryStatus.SCHEDULED_ARRIVAL.toString());
+                    lblStatus.setForeground(Color.ORANGE);
+                    status = EDeliveryStatus.SCHEDULED_ARRIVAL;
+                } else {
+                    lblStatus.setText(EDeliveryStatus.LATE.toString());
+                    lblStatus.setForeground(Color.RED);
+                    status = EDeliveryStatus.LATE;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_tfDateCaretUpdate
+
+    private void btnArrivalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArrivalActionPerformed
+        if(tfDate.getText().trim().length() == 10){
+            SimpleDateFormat dateFormat = new SimpleDateFormat(JConstants.DATE_FORMAT);
+            try {
+                Date date = dateFormat.parse(tfDate.getText());
+                long time = date.getTime();
+                long today = System.currentTimeMillis();
+                long oneDayInMillis = 1000*60*60*24; //Segundo * Minuto * Hora * Dia
+                
+                if (today < time) {
+                    lblStatus.setText(EDeliveryStatus.IN_ADVANCE.toString());
+                    lblStatus.setForeground(new Color(16, 139, 14));
+                    status = EDeliveryStatus.IN_ADVANCE;
+                } else if (today >= time && today < time + oneDayInMillis) {
+                    lblStatus.setText(EDeliveryStatus.ACCOMPLISHED.toString());
+                    lblStatus.setForeground(Color.YELLOW);
+                    status = EDeliveryStatus.ACCOMPLISHED;
+                } else {
+                    lblStatus.setText(EDeliveryStatus.ARRIVED_LATE.toString());
+                    lblStatus.setForeground(Color.RED);
+                    status = EDeliveryStatus.ARRIVED_LATE;
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            status = null;
+        }
+    }//GEN-LAST:event_btnArrivalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnArrival;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cbCar;
+    private javax.swing.JComboBox<String> cbDealership;
+    private javax.swing.JComboBox<String> cbType;
+    private javax.swing.JComboBox<String> jComboBox4;
+    private javax.swing.JComboBox<String> jComboBox5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblShippingCompany;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JPanel panelCard;
     private javax.swing.JPanel panelFooter;
+    private javax.swing.JPanel panelPlaced;
+    private javax.swing.JPanel panelReceived;
+    private javax.swing.JFormattedTextField tfDate;
+    private javax.swing.JTextField tfProtocol;
     // End of variables declaration//GEN-END:variables
 
     private final JDialog registerDialog;
     private final JFrame parent;
+    private boolean creating;
+    private EDeliveryStatus status;
+    private JReceivedOrders recievedOrders;
+    private JCar car;
+    private JDealership dealership;
+    private List<JDealership> listD = new ArrayList<>();
+    private List<JCar> listC = new ArrayList<>();
+    private DefaultComboBoxModel cbmCar = new DefaultComboBoxModel();
+    private DefaultComboBoxModel cbmDealership = new DefaultComboBoxModel();
+    private DefaultComboBoxModel cbmFeedstock = new DefaultComboBoxModel();
+    private DefaultComboBoxModel cbmSupplier = new DefaultComboBoxModel();
+
+    private void saveRecievedOrders() {
+        recievedOrders = new JReceivedOrders();
+        DateFormat formatter = new SimpleDateFormat(JConstants.DATE_FORMAT);
+
+        recievedOrders.setProtocol(tfProtocol.getText());
+        try {
+            recievedOrders.setExpectedDate(formatter.parse(tfDate.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        recievedOrders.setStatus(status);
+        recievedOrders.setCar(car);
+        recievedOrders.setDealership(dealership);
+
+        if (receivedOrdersValidation()) {
+            if (JDbFacade.getInstance().createReceivedOrder(recievedOrders)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_CREATE_ORDER, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_CREATE_ORDER, this);
+            }
+        }
+    }
+
+    private void savePlacedOrders() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void editRecievedOrders() {
+        recievedOrders = new JReceivedOrders();
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        recievedOrders.setProtocol(tfProtocol.getText());
+        try {
+            recievedOrders.setExpectedDate((Date) formatter.parse(tfDate.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        recievedOrders.setProtocol(tfProtocol.getText());
+        recievedOrders.setStatus(status);
+        recievedOrders.setCar(car);
+        recievedOrders.setDealership(dealership);
+
+        if (receivedOrdersValidation()) {
+            if (JDbFacade.getInstance().editReceivedOrder(recievedOrders)) {
+                MessageDialog.showMessage(JConstants.SUCCESS_EDIT_ORDER, this);
+                registerDialog.dispose();
+                parent.setEnabled(true);
+            } else {
+                MessageDialog.showMessage(JConstants.FAILURE_EDIT_ORDER, this);
+            }
+        }
+    }
+
+    private void editPlacedOrders() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private boolean receivedOrdersValidation() {
+        if (tfProtocol.getText().trim().length() == 0
+                || tfDate.getText().trim().length() < 10
+                || cbDealership.getSelectedIndex() == -1
+                || cbCar.getSelectedIndex() == -1
+                || status == null) {
+            MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
+            return false;
+        }
+        return true;
+    }
+
+    private void setReceivedOrdersData() {
+        setCars();
+        setDealerships();
+    }
+
+    private void setCars() {
+        cbmCar = (DefaultComboBoxModel) cbCar.getModel();
+        cbmCar.removeAllElements();
+
+        listC = JDbFacade.getInstance().readAllCars();
+        for (int i = 0; i < listC.size(); i++) {
+            cbmCar.addElement(listC.get(i).getModel());
+        }
+
+        cbCar.setModel(cbmCar);
+    }
+
+    private void setDealerships() {
+        cbmDealership = (DefaultComboBoxModel) cbDealership.getModel();
+        cbmDealership.removeAllElements();
+        listD.clear();
+
+        listD = JDbFacade.getInstance().readAllDealerships();
+        for (int i = 0; i < listD.size(); i++) {
+            cbmDealership.addElement(listD.get(i).getName());
+        }
+
+        cbDealership.setModel(cbmDealership);
+        if (!listD.isEmpty()) {
+            cbDealership.setSelectedIndex(0);
+            setShippingCompany(0);
+        }
+    }
+
+    private void setShippingCompany(int index) {
+        JShippingCompany scomp = listD.get(index).getShippingCompany();
+        lblShippingCompany.setText(scomp.getName());
+    }
 }

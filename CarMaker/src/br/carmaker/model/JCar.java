@@ -9,6 +9,15 @@ public class JCar extends ABaseEntity {
     private double costPrice;
     private double salePrice;
     private String color;
+    
+    public JCar() {
+        return;
+    }
+    
+    public JCar(int id, String model){
+        this.id = id;
+        this.model = model;
+    }
 
     public String getModel() {
         return model;

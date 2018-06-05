@@ -5,24 +5,22 @@
  */
 package br.carmaker.view.panel;
 
-import br.carmaker.model.JCar;
-import br.carmaker.model.JDealership;
+import br.carmaker.model.JConstants;
+import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import br.carmaker.model.JPlacedOrders;
-import br.carmaker.model.JRecievedOrders;
-import br.carmaker.model.JShippingCompany;
+import br.carmaker.model.JReceivedOrders;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.enums.EDeliveryStatus;
 import br.carmaker.model.enums.EMenuItem;
+import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.dialog.RegisterDialog;
 import br.carmaker.view.list.PlacedOrderList;
-import br.carmaker.view.list.RecievedOrderList;
+import br.carmaker.view.list.ReceivedOrderList;
 import java.awt.event.KeyEvent;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,7 +35,7 @@ public class OrderPanel extends javax.swing.JPanel {
      */
     public OrderPanel(JFrame frame) {
         initComponents();
-        initTables();
+        initLists();
         this.mainFrame = frame;
     }
 
@@ -55,9 +53,9 @@ public class OrderPanel extends javax.swing.JPanel {
         btnAddOrders = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cardPanel = new javax.swing.JPanel();
-        panelRecievedOrders = new javax.swing.JPanel();
+        panelReceivedOrders = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listRecievedOrders = new javax.swing.JList<>();
+        listReceivedOrders = new javax.swing.JList<>();
         panelPlacedOrders = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listPlacedOrders = new javax.swing.JList<>();
@@ -82,38 +80,38 @@ public class OrderPanel extends javax.swing.JPanel {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
-        listRecievedOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        listRecievedOrders.setMinimumSize(new java.awt.Dimension(541, 600));
-        listRecievedOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+        listReceivedOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listReceivedOrders.setMinimumSize(new java.awt.Dimension(541, 600));
+        listReceivedOrders.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                listRecievedOrdersMouseClicked(evt);
+                listReceivedOrdersMouseClicked(evt);
             }
         });
-        listRecievedOrders.addKeyListener(new java.awt.event.KeyAdapter() {
+        listReceivedOrders.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                listRecievedOrdersKeyPressed(evt);
+                listReceivedOrdersKeyPressed(evt);
             }
         });
-        jScrollPane1.setViewportView(listRecievedOrders);
+        jScrollPane1.setViewportView(listReceivedOrders);
 
-        javax.swing.GroupLayout panelRecievedOrdersLayout = new javax.swing.GroupLayout(panelRecievedOrders);
-        panelRecievedOrders.setLayout(panelRecievedOrdersLayout);
-        panelRecievedOrdersLayout.setHorizontalGroup(
-            panelRecievedOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRecievedOrdersLayout.createSequentialGroup()
+        javax.swing.GroupLayout panelReceivedOrdersLayout = new javax.swing.GroupLayout(panelReceivedOrders);
+        panelReceivedOrders.setLayout(panelReceivedOrdersLayout);
+        panelReceivedOrdersLayout.setHorizontalGroup(
+            panelReceivedOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReceivedOrdersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelRecievedOrdersLayout.setVerticalGroup(
-            panelRecievedOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelRecievedOrdersLayout.createSequentialGroup()
+        panelReceivedOrdersLayout.setVerticalGroup(
+            panelReceivedOrdersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelReceivedOrdersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        cardPanel.add(panelRecievedOrders, "card3");
+        cardPanel.add(panelReceivedOrders, "card3");
 
         listPlacedOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(listPlacedOrders);
@@ -189,23 +187,35 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void btnAddOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddOrdersMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 0, EMenuItem.ORDERS);
+        mainFrame.setEnabled(false);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, true, 4, EMenuItem.ORDERS);
         dialog.setVisible(true);
 
-        mainFrame.setEnabled(false);
+        mainFrame.setEnabled(true);
+        initLists();
     }//GEN-LAST:event_btnAddOrdersMouseClicked
 
-    private void listRecievedOrdersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listRecievedOrdersKeyPressed
+    private void listReceivedOrdersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listReceivedOrdersKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            JOptionPane.showMessageDialog(this, "DELETE");
+            int id = listReceivedOrders.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_ORDER, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deleteReceivedOrder(id);
+                initReceivedOrdersList();
+            }
         }
-    }//GEN-LAST:event_listRecievedOrdersKeyPressed
+    }//GEN-LAST:event_listReceivedOrdersKeyPressed
 
-    private void listRecievedOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listRecievedOrdersMouseClicked
+    private void listReceivedOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listReceivedOrdersMouseClicked
         if (evt.getClickCount() == 2) {
-            JOptionPane.showMessageDialog(this, "Duplo Click");
+            JReceivedOrders order = listReceivedOrders.getSelectedValue();
+
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 4, EMenuItem.ORDERS, order);
+            dialog.setVisible(true);
+            initReceivedOrdersList();
         }
-    }//GEN-LAST:event_listRecievedOrdersMouseClicked
+    }//GEN-LAST:event_listReceivedOrdersMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int index = jComboBox1.getSelectedIndex();
@@ -217,7 +227,7 @@ public class OrderPanel extends javax.swing.JPanel {
                 cardPanel.add(panelPlacedOrders);
                 break;
             default:
-                cardPanel.add(panelRecievedOrders);
+                cardPanel.add(panelReceivedOrders);
                 break;
         }
         
@@ -236,33 +246,31 @@ public class OrderPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<JPlacedOrders> listPlacedOrders;
-    private javax.swing.JList<JRecievedOrders> listRecievedOrders;
+    private javax.swing.JList<br.carmaker.model.JReceivedOrders> listReceivedOrders;
     private javax.swing.JPanel panelPlacedOrders;
-    private javax.swing.JPanel panelRecievedOrders;
+    private javax.swing.JPanel panelReceivedOrders;
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
 
-    private void initTables() {
+    private void initLists() {
+        initReceivedOrdersList();
+        initPlacedOrdersList();
+    }
 
+    private void initReceivedOrdersList() {
         DefaultListModel dlmR = new DefaultListModel();
-        for (int i = 1; i <= 40; i++) {
-            
-
-            JRecievedOrders recievedOrder = new JRecievedOrders();
-            recievedOrder.setProtocol("123456");
-            recievedOrder.setCar(1);
-            recievedOrder.setDealership(2);
-            recievedOrder.setShippingCompany(3);
-            recievedOrder.setExpectedDate(new Date());
-            recievedOrder.setStatus(EDeliveryStatus.ON_TIME);
-
-            dlmR.addElement(recievedOrder);
+        List<JReceivedOrders> orders = JDbFacade.getInstance().readAllReceivedOrders();
+        
+        for (int i = 0; i < orders.size(); i++) {
+            dlmR.addElement(orders.get(i));
         }
 
-        listRecievedOrders.setModel(dlmR);
-        listRecievedOrders.setCellRenderer(new RecievedOrderList());
+        listReceivedOrders.setModel(dlmR);
+        listReceivedOrders.setCellRenderer(new ReceivedOrderList());
+    }
 
+    private void initPlacedOrdersList() {
         DefaultListModel dlmP = new DefaultListModel();
         for (int i = 1; i <= 40; i++) {
             JFeedstock feedstock = new JFeedstock();
@@ -274,7 +282,7 @@ public class OrderPanel extends javax.swing.JPanel {
             JPlacedOrders placedOrders = new JPlacedOrders();
             placedOrders.setProtocol("123456");
             placedOrders.setFeedstock(feedstock);
-            placedOrders.setExpectedDate(new Date());
+            //placedOrders.setExpectedDate((java.sql.Date) new Date());
             placedOrders.setStatus(EDeliveryStatus.ON_TIME);
 
             dlmP.addElement(placedOrders);
@@ -283,4 +291,6 @@ public class OrderPanel extends javax.swing.JPanel {
         listPlacedOrders.setModel(dlmP);
         listPlacedOrders.setCellRenderer(new PlacedOrderList());
     }
+    
+   
 }

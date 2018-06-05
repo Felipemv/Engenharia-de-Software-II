@@ -6,7 +6,6 @@
 package br.carmaker.model.dao;
 
 import br.carmaker.model.connection.ConnectionFactory;
-import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

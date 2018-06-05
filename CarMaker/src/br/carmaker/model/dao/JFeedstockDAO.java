@@ -9,7 +9,6 @@ import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.ABaseEntityDAO;
-import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

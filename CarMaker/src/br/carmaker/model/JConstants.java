@@ -30,6 +30,7 @@ public abstract class JConstants {
     public static final String SUCCESS_CREATE_SUPPLIER = "Fornecedor criado com sucesso!";
     public static final String SUCCESS_CREATE_DEALERSHIP = "Concessionária criada com sucesso!";
     public static final String SUCCESS_CREATE_SHIPPING_COMPANY = "Transportadora criada com sucesso!";
+    public static final String SUCCESS_CREATE_ORDER = "Pedido criado com sucesso!";
     
     public static final String FAILURE_CREATE_EMPLOYEE = "Falha ao criar funcionário!";
     public static final String FAILURE_CREATE_CAR = "Falha ao criar funcionário!";
@@ -37,6 +38,7 @@ public abstract class JConstants {
     public static final String FAILURE_CREATE_SUPPLIER = "Falha ao criar fornecedor!";
     public static final String FAILURE_CREATE_DEALERSHIP = "Falha ao criar concessionária!";
     public static final String FAILURE_CREATE_SHIPPING_COMPANY = "Falha ao criar transportadora!";
+    public static final String FAILURE_CREATE_ORDER = "Falha ao criar pedido!";
     
     public static final String SUCCESS_EDIT_EMPLOYEE = "Funcionário editado com sucesso!";
     public static final String SUCCESS_EDIT_CAR = "Carro editado com sucesso!";
@@ -44,6 +46,7 @@ public abstract class JConstants {
     public static final String SUCCESS_EDIT_SUPPLIER = "Fornecedor editado com sucesso!";
     public static final String SUCCESS_EDIT_DEALERSHIP = "Concessionária editada com sucesso!";
     public static final String SUCCESS_EDIT_SHIPPING_COMPANY = "Transportadora editada com sucesso!";
+    public static final String SUCCESS_EDIT_ORDER = "Pedido editado com sucesso!";
     
     public static final String FAILURE_EDIT_EMPLOYEE = "Falha ao editar funcionário!";
     public static final String FAILURE_EDIT_CAR = "Falha ao editar carro!";
@@ -51,6 +54,7 @@ public abstract class JConstants {
     public static final String FAILURE_EDIT_SUPPLIER = "Falha ao editar fornecedor!";
     public static final String FAILURE_EDIT_DEALERSHIP = "Falha ao editar concessionária!";
     public static final String FAILURE_EDIT_SHIPPING_COMPANY = "Falha ao editar transportadora!";
+    public static final String FAILURE_EDIT_ORDER = "Falha ao editar pedido!";
     
     public static final String SUCCESS_DELETE_EMPLOYEE = "Funcionário deletado com sucesso!";
     public static final String SUCCESS_DELETE_CAR = "Carro deletado com sucesso!";
@@ -58,6 +62,7 @@ public abstract class JConstants {
     public static final String SUCCESS_DELETE_SUPPLIER = "Fornecedor deletado com sucesso!";
     public static final String SUCCESS_DELETE_DEALERSHIP = "Concessionária deletada com sucesso!";
     public static final String SUCCESS_DELETE_SHIPPING_COMPANY = "Transportadora deletada com sucesso!";
+    public static final String SUCCESS_DELETE_ORDER = "Pedido deletado com sucesso!";
     
     public static final String FAILURE_DELETE_EMPLOYEE = "Falha ao deletar funcionário!";
     public static final String FAILURE_DELETE_CAR = "Falha ao deletar carro!";
@@ -65,6 +70,7 @@ public abstract class JConstants {
     public static final String FAILURE_DELETE_SUPPLIER = "Falha ao deletar fornecedor!";
     public static final String FAILURE_DELETE_DEALERSHIP = "Falha ao deletar concessionária!";
     public static final String FAILURE_DELETE_SHIPPING_COMPANY = "Falha ao deletar transportadora!"; 
+    public static final String FAILURE_DELETE_ORDER = "Falha ao deletar pedido!"; 
     
     public static final String CONFIRM_DELETE_EMPLOYEE = "Confirmar exclusão do funcionário?";
     public static final String CONFIRM_DELETE_CAR = "Confirmar exclusão do carro?";
@@ -72,6 +78,7 @@ public abstract class JConstants {
     public static final String CONFIRM_DELETE_SUPPLIER = "Confirmar exclusão do fornecedor?";
     public static final String CONFIRM_DELETE_DEALERSHIP = "Confirmar exclusão da concessionária?";
     public static final String CONFIRM_DELETE_SHIPPING_COMPANY = "Confirmar exclusão da transportadora?";
+    public static final String CONFIRM_DELETE_ORDER = "Confirmar exclusão do pedido?";
     
     public static final String CONFIRM_EDIT_EMPLOYEE = "Confirmar edição do funcionário?";
     public static final String CONFIRM_EDIT_CAR = "Confirmar edição do carro?";
@@ -79,6 +86,7 @@ public abstract class JConstants {
     public static final String CONFIRM_EDIT_SUPPLIER = "Confirmar edição do fornecedor?";
     public static final String CONFIRM_EDIT_DEALERSHIP = "Confirmar edição da concessionária?";
     public static final String CONFIRM_EDIT_SHIPPING_COMPANY = "Confirmar edição da transportadora?";
+    public static final String CONFIRM_EDIT_ORDER = "Confirmar edição do pedido?";
     
 //    Mensagens do sistema
 //    O nome das seguintes mensagens seguem o seguinte padrão: 1_2_3
@@ -96,6 +104,7 @@ public abstract class JConstants {
     public static final String LABEL_CANT_DELETE_OWN_USER = "Você não pode deletar seu próprio usuário do sistema.";
     public static final String LABEL_NEED_ONE_SUPPLIER = "Você precisa adicionar no mínimo um fornecedor.";
     public static final String LABEL_NO_ITEM_SELECTED = "Ops! Nenhum item foi selecionado!";
+    public static final String LABEL_NO_ORDER_SELECTED = "Ops! Nenhum tipo de pedido foi selecionado!";
     public static final String LABEL_NO_AFFILIATE_SELECTED = "Ops! Nenhuma afiliada selecionada!";
     public static final String LABEL_OK = "OK";
     public static final String LABEL_YES = "Sim";
@@ -120,5 +129,6 @@ public abstract class JConstants {
     public static final String SHIPPING_COMPANY = "Transportadora";
     public static final String DEALERSHIP = "Concessionária";
     public static final String CAR = "Carro";
-  
+    public static String DATE_FORMAT = "dd/MM/yyyy";
+    
 }

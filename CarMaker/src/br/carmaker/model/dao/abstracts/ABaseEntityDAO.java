@@ -11,6 +11,6 @@ package br.carmaker.model.dao.abstracts;
  */
 public class ABaseEntityDAO {
 
-    public static final String ID = "id";
-    public static final String DELETED = "deleted";
+    protected static final String ID = "id";
+    protected static final String DELETED = "deleted";
 }

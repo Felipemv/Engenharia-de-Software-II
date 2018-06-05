@@ -5,13 +5,9 @@
  */
 package br.carmaker.model.dao;
 
-import br.carmaker.model.JEmployee;
 import br.carmaker.model.JSupplier;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.AAffiliateDAO;
-import static br.carmaker.model.dao.abstracts.ABaseEntityDAO.ID;
-import br.carmaker.model.enums.EEmployeeType;
-import br.carmaker.view.dialog.MessageDialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /**
  *
