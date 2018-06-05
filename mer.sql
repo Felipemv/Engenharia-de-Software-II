@@ -66,16 +66,6 @@ CREATE TABLE IF NOT EXISTS placed_order (
         REFERENCES feedstock (id)
 )  ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS dealership (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(45) NOT NULL,
-    address VARCHAR(45) NOT NULL,
-    cnpj VARCHAR(45) NOT NULL,
-    type int not null,    
-    deleted int NOT NULL DEFAULT 0, 
-    PRIMARY KEY (id)    
-)  ENGINE=INNODB;
-
 CREATE TABLE IF NOT EXISTS shipping_company (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(45) NOT NULL,
@@ -87,27 +77,36 @@ CREATE TABLE IF NOT EXISTS shipping_company (
     PRIMARY KEY (id)
 )  ENGINE=INNODB;
 
-CREATE TABLE IF NOT EXISTS recieved_order (
+CREATE TABLE IF NOT EXISTS dealership (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(45) NOT NULL,
+    address VARCHAR(45) NOT NULL,
+    cnpj VARCHAR(45) NOT NULL,
+    type int not null,
+    shipping_company_id INT NOT NULL,
+    deleted int NOT NULL DEFAULT 0, 
+    PRIMARY KEY (id),
+    FOREIGN KEY(shipping_company_id) REFERENCES shipping_company (id)
+)  ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS received_order (
     id INT NOT NULL AUTO_INCREMENT,
     protocol VARCHAR(45) NOT NULL,
     status VARCHAR(45) NOT NULL,
     expected_date DATE NOT NULL,
     car_id INT NOT NULL,
     dealership_id INT NOT NULL,
-    shipping_company_id INT NOT NULL,
-    deleted int NOT NULL, 
+    deleted int NOT NULL DEFAULT 0, 
     PRIMARY KEY (id),
     FOREIGN KEY (car_id)
         REFERENCES car (id),
     FOREIGN KEY (dealership_id)
-        REFERENCES dealership (id),
-    FOREIGN KEY (shipping_company_id)
-        REFERENCES shipping_company (id)
+        REFERENCES dealership (id)
 )  ENGINE=INNODB;
 
 #Exemplos de funcionários
 INSERT INTO employee(name, address, phone, register, role, email, pass) 
-	VALUES('Rafael', 'a', '1', '123', 0, 'rafael@', '123');
+	VALUES('Rafael', 'a', '1', '123', 1, 'rafael@', '123');
     
 INSERT INTO employee(name, address, phone, register, role, email, pass) 
 	VALUES('Felipe', 'b', '2', '345', 0, 'felipe@', '123');
@@ -128,17 +127,7 @@ INSERT INTO supplier(lead_time, name, address, cnpj)
     
 INSERT INTO supplier(lead_time, name, address, cnpj)
 	VALUES(12, 'Fornecedor 3', 'Rua Z - nº 3, Bairro C', '16516512020');
-    
-#Exemplos de concessionárias    
-INSERT INTO dealership(type, name, address, cnpj)
-	VALUES(0, 'Concessionária 1', 'Rua X - nº 1, Bairro A', '15615615665');
-    
-INSERT INTO dealership(type, name, address, cnpj)
-	VALUES(1, 'Concessionária 2', 'Rua Y - nº 2, Bairro B', '454214489144');
-    
-INSERT INTO dealership(type, name, address, cnpj)
-	VALUES(1, 'Concessionária 3', 'Rua Z - nº 3, Bairro C', '16516512020');
-    
+
 #Exemplos de transportadoras    
 INSERT INTO shipping_company(amount, fleet, name, address, cnpj)
 	VALUES(8, 10, 'Transportadora 1', 'Rua X - nº 1, Bairro A', '15615615665');
@@ -148,6 +137,16 @@ INSERT INTO shipping_company(amount, fleet, name, address, cnpj)
     
 INSERT INTO shipping_company(amount, fleet, name, address, cnpj)
 	VALUES(12, 30, 'Transportadora 3', 'Rua Z - nº 3, Bairro C', '16516512020');
+    
+#Exemplos de concessionárias    
+INSERT INTO dealership(type, name, address, cnpj, shipping_company_id)
+	VALUES(0, 'Concessionária 1', 'Rua X - nº 1, Bairro A', '15615615665', 1);
+    
+INSERT INTO dealership(type, name, address, cnpj, shipping_company_id)
+	VALUES(1, 'Concessionária 2', 'Rua Y - nº 2, Bairro B', '454214489144', 2);
+    
+INSERT INTO dealership(type, name, address, cnpj, shipping_company_id)
+	VALUES(1, 'Concessionária 3', 'Rua Z - nº 3, Bairro C', '16516512020', 3);
     
 #Exemplo de Matéria-prima
 INSERT INTO feedstock(name, quantity, cost)
@@ -159,4 +158,47 @@ INSERT INTO feedstock(name, quantity, cost)
 
 #Exemplo de Matéria-prima
 INSERT INTO feedstock(name, quantity, cost)
-	VALUES('Bancos', 4000, 120);    
+	VALUES('Bancos', 4000, 120);
+    
+SELECT 
+    dealership.id AS 'd_id',
+    dealership.name AS 'd_name',
+    dealership.address,
+    dealership.cnpj,
+    dealership.type,
+    shipping_company.id AS 'sc_id',
+    shipping_company.name AS 'sc_name'
+FROM
+    dealership
+        INNER JOIN
+    shipping_company ON shipping_company.id = dealership.shipping_company_id
+WHERE
+    dealership.id = 0 AND dealership.deleted
+        AND shipping_company.deleted = 0;
+        
+SELECT 
+    received_order.id,
+    received_order.protocol,
+    received_order.expected_date,
+    car.id AS 'car_id',
+    car.model AS 'model',
+    dealership.id AS 'dealership_id',
+    dealership.name AS 'name'
+FROM
+    received_order
+        INNER JOIN
+    car ON car.id = received_order.car_id
+        INNER JOIN
+    dealership ON dealership.id = received_order.dealership_id
+WHERE
+    received_order.deleted = 0;
+    
+SELECT 
+    received_order.id,
+    received_order.protocol,
+    received_order.expected_date
+    
+FROM
+    received_order
+WHERE
+    received_order.deleted = 0;
