@@ -100,6 +100,8 @@ public abstract class JConstants {
     public static final String LABEL_ALL_FIELDS_REQUIRED = "Todos os campos são obrigatórios!";
     public static final String LABEL_DIFFERENT_EMAILS = "Os emails assinalados são diferentes!";
     public static final String LABEL_DIFFERENT_PASSWORDS = "As senhas assinaladas são diferentes!";
+    public static final String LABEL_INVALID_EMAIL = "Email inválido!";
+    public static final String LABEL_INVALID_PHONE = "Telefone inválido!";
     public static final String LABEL_REGISTER_EXISTS = "Número de registro já foi utilizado.";
     public static final String LABEL_CANT_DELETE_OWN_USER = "Você não pode deletar seu próprio usuário do sistema.";
     public static final String LABEL_NEED_ONE_SUPPLIER = "Você precisa adicionar no mínimo um fornecedor.";
@@ -130,5 +132,5 @@ public abstract class JConstants {
     public static final String DEALERSHIP = "Concessionária";
     public static final String CAR = "Carro";
     public static String DATE_FORMAT = "dd/MM/yyyy";
-    
+        
 }

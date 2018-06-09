@@ -152,7 +152,7 @@ public class ReceivedOrderList extends javax.swing.JPanel implements ListCellRen
         
         SimpleDateFormat sdf = new SimpleDateFormat(JConstants.DATE_FORMAT);
         String protocol = "<html><strong>" + JConstants.PROTOCOL + ": </strong>" + value.getProtocol()+ "</html>";
-        String car = "<html><strong>" + JConstants.CAR + ": </strong>" + "Carro" + "</html>";
+        String car = "<html><strong>" + JConstants.CAR + ": </strong>" + value.getCar().getModel() + "</html>";
         String sc = "<html><strong>" + JConstants.SHIPPING_COMPANY + ": </strong>" + value.getDealership().getShippingCompany().getName() + "</html>";
         String dealership = "<html><strong>" + JConstants.DEALERSHIP + ": </strong>" + value.getDealership().getName() + "</html>";
         String status = "<html><strong>" + JConstants.STATUS + ": </strong>" + value.getStatus().toString() + "</html>";

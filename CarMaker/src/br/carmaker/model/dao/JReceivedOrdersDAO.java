@@ -99,6 +99,20 @@ public class JReceivedOrdersDAO extends AOrderDAO {
                 order.setDealership(new JDealership(rs.getInt(DEALERSHIP_ID), rs.getString(NAME)));
                 order.setStatus(EDeliveryStatus.valueOf(rs.getInt(STATUS)));
                 order.setExpectedDate(rs.getDate(EXPECTED_DATE));
+                
+                switch(order.getStatus()){
+                    case ARRIVED_LATE:
+                        order.setDelivered(true);
+                        break;
+                    case ACCOMPLISHED:
+                        order.setDelivered(true);
+                        break;
+                    case IN_ADVANCE:
+                        order.setDelivered(true);
+                        break;
+                    default:
+                        order.setDelivered(false);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(JReceivedOrders.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,6 +175,20 @@ public class JReceivedOrdersDAO extends AOrderDAO {
                 dealership.setShippingCompany(sc);
                 order.setDealership(dealership);
                 
+                switch(order.getStatus()){
+                    case ARRIVED_LATE:
+                        order.setDelivered(true);
+                        break;
+                    case ACCOMPLISHED:
+                        order.setDelivered(true);
+                        break;
+                    case IN_ADVANCE:
+                        order.setDelivered(true);
+                        break;
+                    default:
+                        order.setDelivered(false);
+                }
+                
                 listOrders.add(order);
             }
         } catch (SQLException ex) {
@@ -173,28 +201,30 @@ public class JReceivedOrdersDAO extends AOrderDAO {
     public static boolean editReceivedOrder(JReceivedOrders order) {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt;
-
-        String sql = "UPDATE " + TABLE_NAME + " SET " + PROTOCOL + "=?, " + STATUS
-                + "=?, " + EXPECTED_DATE + "=?, " + CAR_ID + "=?, " + DEALERSHIP_ID
-                + "=? WHERE " + ID + "=?";
-
+        
+        String sql = "UPDATE " + TABLE_NAME;
+        
+        sql += " SET " + PROTOCOL + "=?, " + EXPECTED_DATE + "=?, " + STATUS + "=?, "
+                + CAR_ID + "=?, " + DEALERSHIP_ID + "=?";
+        
+        sql += " WHERE " + ID + "=?";
+        
         try {
             stmt = connection.prepareStatement(sql);
-
-            stmt = connection.prepareStatement(sql);
+            
             stmt.setString(1, order.getProtocol());
-            stmt.setInt(2, order.getStatus().getStatus());
-            stmt.setDate(3, (Date) order.getExpectedDate());
+            stmt.setDate(2, new java.sql.Date(order.getExpectedDate().getTime()));
+            stmt.setInt(3, order.getStatus().getStatus());
             stmt.setInt(4, order.getCar().getId());
             stmt.setInt(5, order.getDealership().getId());
             stmt.setInt(6, order.getId());
-
+            
             stmt.execute();
-
         } catch (SQLException ex) {
-            Logger.getLogger(JReceivedOrders.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JReceivedOrdersDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+        
         ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }

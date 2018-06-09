@@ -14,9 +14,10 @@ import java.util.Date;
  */
 public abstract class AOrder extends ABaseEntity{
 
-    private String protocol;
-    private EDeliveryStatus status;
-    private Date expectedDate;
+    protected String protocol;
+    protected EDeliveryStatus status;
+    protected Date expectedDate;
+    protected boolean delivered;
 
     public String getProtocol() {
         return protocol;
@@ -41,5 +42,15 @@ public abstract class AOrder extends ABaseEntity{
     public void setExpectedDate(Date expectedDate) {
         this.expectedDate = expectedDate;
     }
+
+    public boolean isDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(boolean delivered) {
+        this.delivered = delivered;
+    }
+    
+    
 
 }

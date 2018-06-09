@@ -9,11 +9,14 @@ import br.carmaker.model.JCar;
 import br.carmaker.model.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
+import br.carmaker.model.JPlacedOrders;
 import br.carmaker.model.JReceivedOrders;
 import br.carmaker.model.JShippingCompany;
 import br.carmaker.model.abstracts.AOrder;
 import br.carmaker.model.enums.EDeliveryStatus;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -52,7 +55,7 @@ public class OrderDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
         this.creating = false;
-        setReceivedOrdersData();
+        setOrder(order);
     }
 
     /**
@@ -88,17 +91,8 @@ public class OrderDialog extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         lblStatus = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        MaskFormatter maskFormat = new MaskFormatter();
-        String mask = "##/##/####";
-
-        try{
-            maskFormat.setMask(mask);
-            maskFormat.setPlaceholderCharacter(' ');
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        tfDate = new javax.swing.JFormattedTextField(maskFormat);
-        btnArrival = new javax.swing.JButton();
+        dateChooser = new com.toedter.calendar.JDateChooser();
+        chBDelivered = new javax.swing.JCheckBox();
 
         panelFooter.setBackground(new java.awt.Color(37, 37, 39));
 
@@ -222,7 +216,7 @@ public class OrderDialog extends javax.swing.JPanel {
                 .addGroup(panelReceivedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(cbCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
         panelCard.add(panelReceived, "card2");
@@ -263,13 +257,12 @@ public class OrderDialog extends javax.swing.JPanel {
                 .addGroup(panelPlacedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         panelCard.add(panelPlaced, "card3");
 
         tfProtocol.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        tfProtocol.setText("123456789");
 
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel9.setText("Status: ");
@@ -279,17 +272,17 @@ public class OrderDialog extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel11.setText("Selecione um tipo de pedido: ");
 
-        tfDate.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                tfDateCaretUpdate(evt);
+        dateChooser.setDateFormatString(JConstants.DATE_FORMAT);
+        dateChooser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                dateChooserPropertyChange(evt);
             }
         });
 
-        btnArrival.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        btnArrival.setText("Já chegou");
-        btnArrival.addActionListener(new java.awt.event.ActionListener() {
+        chBDelivered.setText("Entregue");
+        chBDelivered.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnArrivalActionPerformed(evt);
+                chBDeliveredActionPerformed(evt);
             }
         });
 
@@ -313,9 +306,9 @@ public class OrderDialog extends javax.swing.JPanel {
                             .addComponent(tfProtocol)
                             .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfDate)
+                                .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnArrival))))
+                                .addComponent(chBDelivered, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -329,10 +322,10 @@ public class OrderDialog extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(tfProtocol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfDate)
-                    .addComponent(btnArrival)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chBDelivered))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
@@ -347,7 +340,12 @@ public class OrderDialog extends javax.swing.JPanel {
                 .addComponent(panelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfDate, tfProtocol});
+        dateChooser.getCalendarButton().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae){
+
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -423,75 +421,34 @@ public class OrderDialog extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cbCarActionPerformed
 
-    private void tfDateCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfDateCaretUpdate
-        if (tfDate.getText().trim().length() < 10) {
-            lblStatus.setText("");
-            status = null;
+    private void dateChooserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dateChooserPropertyChange
+        Date date = dateChooser.getDate();
+        if (date != null) {
+            if (!creating) {
+                if (date != receivedOrder.getExpectedDate()) {
+                    setStatusByDate(date);
+                }
+            }else{
+                setStatusByDate(date);
+            }
         } else {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(JConstants.DATE_FORMAT);
-            try {
-                Date date = dateFormat.parse(tfDate.getText());
-                long time = date.getTime();
-                long today = System.currentTimeMillis();
-                long oneDayInMillis = 1000*60*60*24; //Segundo * Minuto * Hora * Dia
-                
-                if (today < time) {
-                    lblStatus.setText(EDeliveryStatus.ON_TIME.toString());
-                    lblStatus.setForeground(new Color(16, 139, 14));
-                    status = EDeliveryStatus.ON_TIME;
-                } else if (today >= time && today < time + oneDayInMillis) {
-                    lblStatus.setText(EDeliveryStatus.SCHEDULED_ARRIVAL.toString());
-                    lblStatus.setForeground(Color.ORANGE);
-                    status = EDeliveryStatus.SCHEDULED_ARRIVAL;
-                } else {
-                    lblStatus.setText(EDeliveryStatus.LATE.toString());
-                    lblStatus.setForeground(Color.RED);
-                    status = EDeliveryStatus.LATE;
-                }
-            } catch (ParseException ex) {
-                Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        }
-    }//GEN-LAST:event_tfDateCaretUpdate
-
-    private void btnArrivalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArrivalActionPerformed
-        if(tfDate.getText().trim().length() == 10){
-            SimpleDateFormat dateFormat = new SimpleDateFormat(JConstants.DATE_FORMAT);
-            try {
-                Date date = dateFormat.parse(tfDate.getText());
-                long time = date.getTime();
-                long today = System.currentTimeMillis();
-                long oneDayInMillis = 1000*60*60*24; //Segundo * Minuto * Hora * Dia
-                
-                if (today < time) {
-                    lblStatus.setText(EDeliveryStatus.IN_ADVANCE.toString());
-                    lblStatus.setForeground(new Color(16, 139, 14));
-                    status = EDeliveryStatus.IN_ADVANCE;
-                } else if (today >= time && today < time + oneDayInMillis) {
-                    lblStatus.setText(EDeliveryStatus.ACCOMPLISHED.toString());
-                    lblStatus.setForeground(Color.YELLOW);
-                    status = EDeliveryStatus.ACCOMPLISHED;
-                } else {
-                    lblStatus.setText(EDeliveryStatus.ARRIVED_LATE.toString());
-                    lblStatus.setForeground(Color.RED);
-                    status = EDeliveryStatus.ARRIVED_LATE;
-                }
-            } catch (ParseException ex) {
-                Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
             status = null;
         }
-    }//GEN-LAST:event_btnArrivalActionPerformed
+
+    }//GEN-LAST:event_dateChooserPropertyChange
+
+    private void chBDeliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chBDeliveredActionPerformed
+        changeStatus();
+    }//GEN-LAST:event_chBDeliveredActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnArrival;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbCar;
     private javax.swing.JComboBox<String> cbDealership;
     private javax.swing.JComboBox<String> cbType;
+    private javax.swing.JCheckBox chBDelivered;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JLabel jLabel1;
@@ -510,15 +467,16 @@ public class OrderDialog extends javax.swing.JPanel {
     private javax.swing.JPanel panelFooter;
     private javax.swing.JPanel panelPlaced;
     private javax.swing.JPanel panelReceived;
-    private javax.swing.JFormattedTextField tfDate;
     private javax.swing.JTextField tfProtocol;
     // End of variables declaration//GEN-END:variables
 
     private final JDialog registerDialog;
     private final JFrame parent;
     private boolean creating;
+    private boolean delivered;
     private EDeliveryStatus status;
-    private JReceivedOrders recievedOrders;
+    private JReceivedOrders receivedOrder;
+    private JPlacedOrders placedOrder;
     private JCar car;
     private JDealership dealership;
     private List<JDealership> listD = new ArrayList<>();
@@ -529,21 +487,16 @@ public class OrderDialog extends javax.swing.JPanel {
     private DefaultComboBoxModel cbmSupplier = new DefaultComboBoxModel();
 
     private void saveRecievedOrders() {
-        recievedOrders = new JReceivedOrders();
-        DateFormat formatter = new SimpleDateFormat(JConstants.DATE_FORMAT);
+        receivedOrder = new JReceivedOrders();
 
-        recievedOrders.setProtocol(tfProtocol.getText());
-        try {
-            recievedOrders.setExpectedDate(formatter.parse(tfDate.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        recievedOrders.setStatus(status);
-        recievedOrders.setCar(car);
-        recievedOrders.setDealership(dealership);
+        receivedOrder.setProtocol(tfProtocol.getText());
+        receivedOrder.setExpectedDate(dateChooser.getDate());
+        receivedOrder.setStatus(status);
+        receivedOrder.setCar(car);
+        receivedOrder.setDealership(dealership);
 
         if (receivedOrdersValidation()) {
-            if (JDbFacade.getInstance().createReceivedOrder(recievedOrders)) {
+            if (JDbFacade.getInstance().createReceivedOrder(receivedOrder)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_CREATE_ORDER, this);
                 registerDialog.dispose();
                 parent.setEnabled(true);
@@ -558,24 +511,15 @@ public class OrderDialog extends javax.swing.JPanel {
     }
 
     private void editRecievedOrders() {
-        recievedOrders = new JReceivedOrders();
-
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-
-        recievedOrders.setProtocol(tfProtocol.getText());
-        try {
-            recievedOrders.setExpectedDate((Date) formatter.parse(tfDate.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(OrderDialog.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        recievedOrders.setProtocol(tfProtocol.getText());
-        recievedOrders.setStatus(status);
-        recievedOrders.setCar(car);
-        recievedOrders.setDealership(dealership);
+        receivedOrder.setProtocol(tfProtocol.getText());
+        receivedOrder.setExpectedDate(dateChooser.getDate());
+        receivedOrder.setProtocol(tfProtocol.getText());
+        receivedOrder.setStatus(status);
+        receivedOrder.setCar(car);
+        receivedOrder.setDealership(dealership);
 
         if (receivedOrdersValidation()) {
-            if (JDbFacade.getInstance().editReceivedOrder(recievedOrders)) {
+            if (JDbFacade.getInstance().editReceivedOrder(receivedOrder)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_EDIT_ORDER, this);
                 registerDialog.dispose();
                 parent.setEnabled(true);
@@ -591,7 +535,7 @@ public class OrderDialog extends javax.swing.JPanel {
 
     private boolean receivedOrdersValidation() {
         if (tfProtocol.getText().trim().length() == 0
-                || tfDate.getText().trim().length() < 10
+                || dateChooser.getDate() == null
                 || cbDealership.getSelectedIndex() == -1
                 || cbCar.getSelectedIndex() == -1
                 || status == null) {
@@ -639,4 +583,102 @@ public class OrderDialog extends javax.swing.JPanel {
         JShippingCompany scomp = listD.get(index).getShippingCompany();
         lblShippingCompany.setText(scomp.getName());
     }
+
+    private void setOrder(AOrder order) {
+        if (order instanceof JReceivedOrders) {
+            receivedOrder = (JReceivedOrders) order;
+            cbType.setSelectedIndex(0);
+            cbType.setEnabled(false);
+            setReceivedOrder();
+        } else {
+            placedOrder = (JPlacedOrders) order;
+            cbType.setSelectedIndex(1);
+            cbType.setEnabled(false);
+            setPlacedOrder();
+        }
+
+    }
+
+    private void setReceivedOrder() {
+        setReceivedOrdersData();
+        tfProtocol.setText(receivedOrder.getProtocol());
+        dateChooser.setDate((receivedOrder.getExpectedDate()));
+        status = receivedOrder.getStatus();
+        lblStatus.setText(status.toString());
+        delivered = receivedOrder.isDelivered();
+
+        cbDealership.setSelectedIndex(0);
+        for (int i = 0; i < listD.size(); i++) {
+            if (listD.get(i).getId() == receivedOrder.getDealership().getId()) {
+                cbDealership.setSelectedIndex(i);
+                break;
+            }
+        }
+
+        cbmCar.setSelectedItem(0);
+        for (int i = 0; i < listC.size(); i++) {
+            if (listC.get(i).getId() == receivedOrder.getCar().getId()) {
+                cbCar.setSelectedIndex(i);
+                break;
+            }
+        }
+
+        lblShippingCompany.setText(receivedOrder.getDealership().getShippingCompany().getName());
+        if (receivedOrder.isDelivered()) {
+            chBDelivered.setSelected(true);
+        }
+    }
+
+    private void setPlacedOrder() {
+        setPlacedOrdersData();
+    }
+
+    private void setPlacedOrdersData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void changeStatus() {
+        Date date = dateChooser.getDate();
+        if (date != null) {
+            if (chBDelivered.isSelected()) {
+                delivered = true;
+            } else {
+                delivered = false;
+            }
+            setStatusByDate(date);
+        }
+    }
+
+    private void setStatusByDate(Date date) {
+        long time = date.getTime();
+        long today = System.currentTimeMillis();
+        long oneDayInMillis = 1000 * 60 * 60 * 24; //Segundo * Minuto * Hora * Dia
+        if (today < time) {
+            lblStatus.setForeground(new Color(16, 139, 14));
+            if (delivered) {
+                status = EDeliveryStatus.IN_ADVANCE;
+            } else {
+                status = EDeliveryStatus.ON_TIME;
+            }
+
+        } else if (today >= time && today < time + oneDayInMillis) {
+            lblStatus.setForeground(new Color(16, 139, 14));
+
+            if (delivered) {
+                status = EDeliveryStatus.ACCOMPLISHED;
+            } else {
+                status = EDeliveryStatus.SCHEDULED_ARRIVAL;
+            }
+        } else {
+            lblStatus.setForeground(Color.RED);
+
+            if (delivered) {
+                status = EDeliveryStatus.ARRIVED_LATE;
+            } else {
+                status = EDeliveryStatus.LATE;
+            }
+        }
+        lblStatus.setText(status.toString());
+    }
+
 }

@@ -25,6 +25,7 @@ import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -36,7 +37,8 @@ public class EmployeeDialog extends javax.swing.JPanel {
      * Creates new form employeeDialog
      *
      * @param registerDialog Dialog de registro
-     * @param parent Frame principal que será bloqueado enquanto o dialog estiver visível
+     * @param parent Frame principal que será bloqueado enquanto o dialog
+     * estiver visível
      */
     public EmployeeDialog(JDialog registerDialog, JFrame parent) {
         initComponents();
@@ -83,16 +85,25 @@ public class EmployeeDialog extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         tfAddress = new javax.swing.JTextField();
-        tfPhone = new javax.swing.JTextField();
         tfRegister = new javax.swing.JTextField();
-        rbManager = new javax.swing.JRadioButton();
-        rbEmployee = new javax.swing.JRadioButton();
         addPhoto = new javax.swing.JButton();
         panelFooter = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        MaskFormatter maskFormat = new MaskFormatter();
+        String mask = "(##) #####-####";
+
+        try{
+            maskFormat.setMask(mask);
+            maskFormat.setPlaceholderCharacter(' ');
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        tfPhone = new javax.swing.JFormattedTextField(maskFormat);
+        jLabel10 = new javax.swing.JLabel();
+        rbManager = new javax.swing.JRadioButton();
+        rbEmployee = new javax.swing.JRadioButton();
 
         jPanel2.setBackground(new java.awt.Color(220, 220, 220));
 
@@ -194,23 +205,9 @@ public class EmployeeDialog extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel9.setText("Registro:");
 
-        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel10.setText("Cargo:");
-
         tfAddress.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
-        tfPhone.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-
         tfRegister.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-
-        bgRole.add(rbManager);
-        rbManager.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rbManager.setText("Gerente");
-
-        bgRole.add(rbEmployee);
-        rbEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        rbEmployee.setSelected(true);
-        rbEmployee.setText("Vendedor");
 
         addPhoto.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         addPhoto.setText("Adicionar Foto");
@@ -253,7 +250,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
         );
         panelFooterLayout.setVerticalGroup(
             panelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFooterLayout.createSequentialGroup()
+            .addGroup(panelFooterLayout.createSequentialGroup()
                 .addContainerGap(25, Short.MAX_VALUE)
                 .addGroup(panelFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -261,27 +258,28 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 .addGap(25, 25, 25))
         );
 
+        tfPhone.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                tfPhoneCaretUpdate(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jLabel10.setText("Cargo:");
+
+        bgRole.add(rbManager);
+        rbManager.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rbManager.setText("Gerente");
+
+        bgRole.add(rbEmployee);
+        rbEmployee.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rbEmployee.setSelected(true);
+        rbEmployee.setText("Vendedor");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rbManager)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbEmployee))
-                    .addComponent(tfAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                    .addComponent(tfPhone)
-                    .addComponent(tfRegister))
-                .addGap(44, 44, 44))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -292,6 +290,24 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 .addGap(38, 38, 38))
             .addComponent(jSeparator1)
             .addComponent(panelFooter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(rbManager)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbEmployee))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(tfAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                        .addComponent(tfRegister)
+                        .addComponent(tfPhone)))
+                .addGap(44, 44, 44))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,20 +327,22 @@ public class EmployeeDialog extends javax.swing.JPanel {
                     .addComponent(tfAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(tfRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(tfRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(rbManager)
                     .addComponent(rbEmployee))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelFooter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {tfAddress, tfPhone, tfRegister});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -378,24 +396,24 @@ public class EmployeeDialog extends javax.swing.JPanel {
                     MessageDialog.showMessage(JConstants.SUCCESS_CREATE_EMPLOYEE, this);
                     registerDialog.dispose();
                     parent.setEnabled(true);
-                }else{
+                } else {
                     MessageDialog.showMessage(JConstants.FAILURE_CREATE_EMPLOYEE, this);
                 }
             } else {
                 if (JDbFacade.getInstance().editEmployee(employee)) {
-                    if(employee.isOnline()){
-                        MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM, 
+                    if (employee.isOnline()) {
+                        MessageDialog.showMessage(JConstants.LABEL_RESTART_SYSTEM,
                                 JConstants.BUTTON_RESTART_SYSTEM, this);
                         registerDialog.dispose();
                         parent.dispose();
                         new LoginFrame().setVisible(true);
-                    }else{
-                       MessageDialog.showMessage(JConstants.SUCCESS_EDIT_EMPLOYEE, this); 
-                       registerDialog.dispose();
-                    parent.setEnabled(true);
+                    } else {
+                        MessageDialog.showMessage(JConstants.SUCCESS_EDIT_EMPLOYEE, this);
+                        registerDialog.dispose();
+                        parent.setEnabled(true);
                     }
-                    
-                }else{
+
+                } else {
                     MessageDialog.showMessage(JConstants.FAILURE_EDIT_EMPLOYEE, this);
                 }
             }
@@ -406,6 +424,10 @@ public class EmployeeDialog extends javax.swing.JPanel {
         registerDialog.dispose();
         parent.setEnabled(true);
     }//GEN-LAST:event_btnCancelMouseClicked
+
+    private void tfPhoneCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPhoneCaretUpdate
+        System.out.println(tfPhone.getText().trim().length());
+    }//GEN-LAST:event_tfPhoneCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -436,7 +458,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
     private javax.swing.JTextField tfConfirmEmail;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfPhone;
+    private javax.swing.JFormattedTextField tfPhone;
     private javax.swing.JTextField tfRegister;
     // End of variables declaration//GEN-END:variables
 
@@ -457,18 +479,28 @@ public class EmployeeDialog extends javax.swing.JPanel {
             return false;
         }
 
+        if (!employee.getEmail().contains("@") || !employee.getEmail().contains(".")){
+            MessageDialog.showMessage(JConstants.LABEL_INVALID_EMAIL, this);
+            return false;
+        }
+        
+        if (employee.getPhone().length() < 15){
+            MessageDialog.showMessage(JConstants.LABEL_INVALID_PHONE, this);
+            return false;
+        }
+            
+
         if (employee.getName().trim().length() == 0
                 || employee.getEmail().trim().length() == 0
                 || employee.getAddress().trim().length() == 0
-                || employee.getPhone().trim().length() == 0
                 || employee.getRegisterNumber().trim().length() == 0
                 || employee.getRole() == null) {
 
             MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
             return false;
         }
-        
-        if(JDbFacade.getInstance().registerExists(employee.getRegisterNumber(), employee.getId())){
+
+        if (JDbFacade.getInstance().registerExists(employee.getRegisterNumber(), employee.getId())) {
             MessageDialog.showMessage(JConstants.LABEL_REGISTER_EXISTS, this);
             tfRegister.setText("");
             tfRegister.grabFocus();
