@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS feedstock_has_supplier (
 CREATE TABLE IF NOT EXISTS placed_order (
     id INT NOT NULL AUTO_INCREMENT,
     protocol VARCHAR(45) NOT NULL,
-    status VARCHAR(45) NOT NULL,
+    delivery_status VARCHAR(45) NOT NULL,
     expected_date DATE NOT NULL,
     feedstock_id INT NOT NULL,
     deleted int NOT NULL DEFAULT 0, 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS dealership (
 CREATE TABLE IF NOT EXISTS received_order (
     id INT NOT NULL AUTO_INCREMENT,
     protocol VARCHAR(45) NOT NULL,
-    status VARCHAR(45) NOT NULL,
+    delivery_status VARCHAR(45) NOT NULL,
     expected_date DATE NOT NULL,
     car_id INT NOT NULL,
     dealership_id INT NOT NULL,
@@ -202,3 +202,15 @@ FROM
     received_order
 WHERE
     received_order.deleted = 0;
+
+SELECT * FROM received_order;
+
+UPDATE received_order SET protocol='123456', expected_date='2018-06-08', delivery_status=4, car_id=1, dealership_id=1;
+
+SELECT received_order.id, 
+received_order.protocol, 
+received_order.expected_date, 
+car.id AS 'car_id', 
+car.model AS 'model', 
+dealership.id AS 'dealership_id', 
+dealership.name AS 'name',shipping_company.id AS 'scomp_id', shipping_company.name AS 'scomp_name' FROM received_order INNER JOIN car ON car.id=received_order.car_id INNER JOIN dealership ON dealership.id=received_order.dealership_id INNER JOIN shipping_company ON dealership.shipping_company_id=shipping_company.id WHERE received_order.deleted=0;
