@@ -20,17 +20,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -49,6 +43,7 @@ public class OrderDialog extends javax.swing.JPanel {
         this.registerDialog = registerDialog;
         this.parent = parent;
         this.creating = true;
+
         setReceivedOrdersData();
     }
 
@@ -227,11 +222,21 @@ public class OrderDialog extends javax.swing.JPanel {
         jLabel7.setText("Matéria-prima: ");
 
         cbFeedstock.setModel(cbmFeedstock);
+        cbFeedstock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFeedstockActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel8.setText("Fornecedor: ");
 
         cbSupplier.setModel(cbmSupplier);
+        cbSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSupplierActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPlacedLayout = new javax.swing.GroupLayout(panelPlaced);
         panelPlaced.setLayout(panelPlacedLayout);
@@ -392,20 +397,16 @@ public class OrderDialog extends javax.swing.JPanel {
 
     private void cbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeActionPerformed
         int index = cbType.getSelectedIndex();
-
-        panelCard.removeAll();
-
         switch (index) {
             case 1:
                 panelCard.add(panelPlaced);
+                setPlacedOrdersData();
                 break;
             default:
                 panelCard.add(panelReceived);
                 setReceivedOrdersData();
                 break;
         }
-        panelCard.repaint();
-        panelCard.revalidate();
     }//GEN-LAST:event_cbTypeActionPerformed
 
     private void cbDealershipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDealershipActionPerformed
@@ -427,9 +428,19 @@ public class OrderDialog extends javax.swing.JPanel {
         Date date = dateChooser.getDate();
         if (date != null) {
             if (!creating) {
-                if (date != receivedOrder.getExpectedDate()) {
-                    setStatusByDate(date);
+                switch (orderType) {
+                    case 0:
+                        if (date != receivedOrder.getExpectedDate()) {
+                            setStatusByDate(date);
+                        }
+                        break;
+                    case 1:
+                        if (date != placedOrder.getExpectedDate()) {
+                            setStatusByDate(date);
+                        }
+                        break;
                 }
+
             } else {
                 setStatusByDate(date);
             }
@@ -442,6 +453,23 @@ public class OrderDialog extends javax.swing.JPanel {
     private void chBDeliveredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chBDeliveredActionPerformed
         changeStatus();
     }//GEN-LAST:event_chBDeliveredActionPerformed
+
+    private void cbFeedstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFeedstockActionPerformed
+        int index = cbFeedstock.getSelectedIndex();
+
+        if (index != -1) {
+            feedstock = listF.get(index);
+            setSuppliers();
+        }
+    }//GEN-LAST:event_cbFeedstockActionPerformed
+
+    private void cbSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSupplierActionPerformed
+        int index = cbSupplier.getSelectedIndex();
+
+        if (index != -1) {
+            supplier = listS.get(index);
+        }
+    }//GEN-LAST:event_cbSupplierActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
@@ -477,6 +505,7 @@ public class OrderDialog extends javax.swing.JPanel {
     private boolean creating;
     private boolean delivered;
     private EDeliveryStatus status;
+    private int orderType; //0 - Received, 1 - Placed
     private JReceivedOrders receivedOrder;
     private JPlacedOrders placedOrder;
     private JCar car;
@@ -518,10 +547,10 @@ public class OrderDialog extends javax.swing.JPanel {
         placedOrder.setProtocol(tfProtocol.getText());
         placedOrder.setExpectedDate(dateChooser.getDate());
         placedOrder.setStatus(status);
-        placedOrder.setFeedstock((JFeedstock) cbmFeedstock.getSelectedItem());
-        placedOrder.setSupplier(((JSupplier) cbmSupplier.getSelectedItem()));
+        placedOrder.setFeedstock(feedstock);
+        placedOrder.setSupplier(supplier);
 
-        if (receivedOrdersValidation()) {
+        if (placedOrdersValidation()) {
             if (JDbFacade.getInstance().createPlacedOrder(placedOrder)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_CREATE_ORDER, this);
                 registerDialog.dispose();
@@ -556,10 +585,10 @@ public class OrderDialog extends javax.swing.JPanel {
         placedOrder.setExpectedDate(dateChooser.getDate());
         placedOrder.setProtocol(tfProtocol.getText());
         placedOrder.setStatus(status);
-        placedOrder.setFeedstock((JFeedstock) cbmFeedstock.getSelectedItem());
-        placedOrder.setSupplier(((JSupplier) cbmSupplier.getSelectedItem()));
+        placedOrder.setFeedstock(feedstock);
+        placedOrder.setSupplier(supplier);
 
-        if (receivedOrdersValidation()) {
+        if (placedOrdersValidation()) {
             if (JDbFacade.getInstance().editPlacedOrder(placedOrder)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_EDIT_ORDER, this);
                 registerDialog.dispose();
@@ -595,11 +624,35 @@ public class OrderDialog extends javax.swing.JPanel {
     }
 
     private void setReceivedOrdersData() {
+        orderType = 0;
+
+        panelCard.removeAll();
+        panelCard.add(panelReceived);
+        panelCard.repaint();
+        panelCard.revalidate();
+
+        if (!creating) {
+            cbType.setSelectedIndex(0);
+            cbType.setEnabled(false);
+        }
+
         setCars();
         setDealerships();
     }
 
     private void setPlacedOrdersData() {
+        orderType = 1;
+
+        panelCard.removeAll();
+        panelCard.add(panelPlaced);
+        panelCard.repaint();
+        panelCard.revalidate();
+
+        if (!creating) {
+            cbType.setSelectedIndex(1);
+            cbType.setEnabled(false);
+        }
+
         setFeedstocks();
         setSuppliers();
     }
@@ -641,6 +694,7 @@ public class OrderDialog extends javax.swing.JPanel {
     private void setFeedstocks() {
         cbmFeedstock = (DefaultComboBoxModel) cbFeedstock.getModel();
         cbmFeedstock.removeAllElements();
+        listF.clear();
 
         listF = JDbFacade.getInstance().readAllFeedstocks();
         for (int i = 0; i < listF.size(); i++) {
@@ -648,21 +702,28 @@ public class OrderDialog extends javax.swing.JPanel {
         }
 
         cbFeedstock.setModel(cbmFeedstock);
+        if (!listF.isEmpty()) {
+            cbFeedstock.setSelectedIndex(0);
+        }
     }
 
     private void setSuppliers() {
         cbmSupplier = (DefaultComboBoxModel) cbSupplier.getModel();
         cbmSupplier.removeAllElements();
+        listS.clear();
 
         int index = cbFeedstock.getSelectedIndex();
         if (index != -1) {
-            listS = ((JFeedstock)cbFeedstock.getSelectedItem()).getSuppliers();
+            listS = (listF.get(index)).getSuppliers();
             for (int i = 0; i < listS.size(); i++) {
                 cbmSupplier.addElement(listS.get(i).getName());
             }
         }
 
         cbSupplier.setModel(cbmSupplier);
+        if (!listS.isEmpty()) {
+            cbSupplier.setSelectedIndex(0);
+        }
     }
 
     private void setOrder(AOrder order) {
@@ -677,7 +738,6 @@ public class OrderDialog extends javax.swing.JPanel {
             cbType.setEnabled(false);
             setPlacedOrder();
         }
-
     }
 
     private void setReceivedOrder() {
@@ -712,6 +772,7 @@ public class OrderDialog extends javax.swing.JPanel {
 
     private void setPlacedOrder() {
         setPlacedOrdersData();
+
         tfProtocol.setText(placedOrder.getProtocol());
         dateChooser.setDate((placedOrder.getExpectedDate()));
         status = placedOrder.getStatus();
@@ -727,12 +788,13 @@ public class OrderDialog extends javax.swing.JPanel {
         }
 
         cbSupplier.setSelectedItem(0);
-        for (int i = 0; i < listC.size(); i++) {
+        for (int i = 0; i < listS.size(); i++) {
             if (listS.get(i).getId() == placedOrder.getSupplier().getId()) {
                 cbSupplier.setSelectedIndex(i);
                 break;
             }
         }
+        
 
         if (placedOrder.isDelivered()) {
             chBDelivered.setSelected(true);

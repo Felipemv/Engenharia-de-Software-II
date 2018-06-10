@@ -114,6 +114,16 @@ public class OrderPanel extends javax.swing.JPanel {
         cardPanel.add(panelReceivedOrders, "card3");
 
         listPlacedOrders.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listPlacedOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listPlacedOrdersMouseClicked(evt);
+            }
+        });
+        listPlacedOrders.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                listPlacedOrdersKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(listPlacedOrders);
 
         javax.swing.GroupLayout panelPlacedOrdersLayout = new javax.swing.GroupLayout(panelPlacedOrders);
@@ -235,6 +245,28 @@ public class OrderPanel extends javax.swing.JPanel {
         cardPanel.revalidate();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
+    private void listPlacedOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listPlacedOrdersMouseClicked
+        if (evt.getClickCount() == 2) {
+            JPlacedOrders order = listPlacedOrders.getSelectedValue();
+
+            mainFrame.setEnabled(false);
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 4, EMenuItem.ORDERS, order);
+            dialog.setVisible(true);
+            initPlacedOrdersList();
+        }
+    }//GEN-LAST:event_listPlacedOrdersMouseClicked
+
+    private void listPlacedOrdersKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listPlacedOrdersKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            int id = listPlacedOrders.getSelectedValue().getId();
+            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_ORDER, this);
+            if (ConfirmDialog.getUserChoice()) {
+                JDbFacade.getInstance().deletePlacedOrder(id);
+                initPlacedOrdersList();
+            }
+        }
+    }//GEN-LAST:event_listPlacedOrdersKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddOrders;
@@ -272,20 +304,11 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void initPlacedOrdersList() {
         DefaultListModel dlmP = new DefaultListModel();
-        for (int i = 1; i <= 40; i++) {
-            JFeedstock feedstock = new JFeedstock();
-            feedstock.setName("Matéria-prima " + i);
-
-            JSupplier supplier = new JSupplier();
-            supplier.setName("Fornecedor " + i);
-
-            JPlacedOrders placedOrders = new JPlacedOrders();
-            placedOrders.setProtocol("123456");
-            placedOrders.setFeedstock(feedstock);
-            //placedOrders.setExpectedDate((java.sql.Date) new Date());
-            placedOrders.setStatus(EDeliveryStatus.ON_TIME);
-
-            dlmP.addElement(placedOrders);
+        
+        List<JPlacedOrders> orders = JDbFacade.getInstance().readAllPlacedOrders();
+        
+        for (int i = 0; i < orders.size(); i++) {
+            dlmP.addElement(orders.get(i));
         }
 
         listPlacedOrders.setModel(dlmP);

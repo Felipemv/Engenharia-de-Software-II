@@ -139,21 +139,20 @@ public class PlacedOrderList extends javax.swing.JPanel implements
     @Override
     public Component getListCellRendererComponent(JList<? extends JPlacedOrders> list, 
             JPlacedOrders value, int index, boolean isSelected, boolean hasFocus) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
-        //JSupplier supplier = JDbFacade.getInstance().readSupplierById(value.getSupplier());
+        SimpleDateFormat sdf = new SimpleDateFormat(JConstants.DATE_FORMAT);
         
         String protocol = "<html><strong>" + JConstants.PROTOCOL + ": </strong>" + value.getProtocol()+ "</html>";
         String feedstock = "<html><strong>" + JConstants.FEEDSTOCK + ": </strong>" + value.getFeedstock().getName()+ "</html>";
-        String sup = "<html><strong>" + JConstants.SUPPLIER + ": </strong>" + "Supplier" + "</html>";
+        String sup = "<html><strong>" + JConstants.SUPPLIER + ": </strong>" + value.getSupplier().getName() + "</html>";
         String status = "<html><strong>" + JConstants.STATUS + ": </strong>" + value.getStatus().toString() + "</html>";
-        //String date = "<html><strong>" + JConstants.DATE + ": </strong>" + sdf.format(value.getExpectedDate()) + "</html>";
+        String date = "<html><strong>" + JConstants.DATE + ": </strong>" + sdf.format(value.getExpectedDate()) + "</html>";
         
         lblProtocol.setText(protocol);
         lblFeedstock.setText(feedstock);
         lblSupplier.setText(sup);
         lblStatus.setText(status);
-        //lblDate.setText(date);
+        lblDate.setText(date);
         
         if(isSelected){
             jPanel2.setBackground(Color.yellow);
