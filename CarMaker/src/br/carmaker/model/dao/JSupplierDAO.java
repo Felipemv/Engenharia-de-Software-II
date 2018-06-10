@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class JSupplierDAO extends AAffiliateDAO {
 
-    private final static String TABLE_NAME = "supplier";
+    public final static String TABLE_NAME = "supplier";
     private static final String LEAD_TIME = "lead_time";
 
     public static boolean insertSupplier(JSupplier supplier) {

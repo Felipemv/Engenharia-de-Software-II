@@ -10,6 +10,7 @@ import br.carmaker.model.dao.JDealershipDAO;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.JFeedstockDAO;
 import br.carmaker.model.dao.JFeedstockHasSupplierDAO;
+import br.carmaker.model.dao.JPlacedOrdersDAO;
 import br.carmaker.model.dao.JReceivedOrdersDAO;
 import br.carmaker.model.dao.JShippingCompanyDAO;
 import br.carmaker.model.dao.JSupplierDAO;
@@ -124,11 +125,11 @@ public class JDbFacade {
         return JFeedstockHasSupplierDAO.insertSupplierToFeedstock(feedstock_id, supplier_id);
     }
     
-    public List<Integer> readSupplierByFeedstock(int feedstock_id){
+    public List<JSupplier> readSupplierByFeedstock(int feedstock_id){
         return JFeedstockHasSupplierDAO.getSuppliersByFeedstockId(feedstock_id);
     }
     
-    public boolean editSupplierOfAFeedstock(int feedstock_id, List<Integer> suppliers){
+    public boolean editSupplierOfAFeedstock(int feedstock_id, List<JSupplier> suppliers){
         return JFeedstockHasSupplierDAO.editSuppliersOfAFeedstock(feedstock_id, suppliers);
     }
     
@@ -196,5 +197,27 @@ public class JDbFacade {
     
     public boolean deleteReceivedOrder(int id){
         return JReceivedOrdersDAO.deleteReceivedOrder(id);
+    }
+    
+    //CRUD de pedidos recebidos
+    
+    public boolean createPlacedOrder(JPlacedOrders order) {
+        return JPlacedOrdersDAO.insertPlacedOrder(order);
+    }
+    
+    public JPlacedOrders readPlacedOrderById(int id){
+        return JPlacedOrdersDAO.getPlacedOrderById(id);
+    }
+    
+    public List<JPlacedOrders> readAllPlacedOrders(){
+        return JPlacedOrdersDAO.getAllPlacedOrders();
+    }
+    
+    public boolean editPlacedOrder(JPlacedOrders order){
+        return JPlacedOrdersDAO.editPlacedOrder(order);
+    }
+    
+    public boolean deletePlacedOrder(int id){
+        return JPlacedOrdersDAO.deletePlacedOrder(id);
     }
 }

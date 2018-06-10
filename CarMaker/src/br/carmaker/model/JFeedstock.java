@@ -7,7 +7,7 @@ import java.util.List;
 public class JFeedstock extends ABaseEntity {
 
     private String name;
-    private List<Integer> suppliers;
+    private List<JSupplier> suppliers;
     private int quantity;
     private double cost;
 
@@ -19,11 +19,11 @@ public class JFeedstock extends ABaseEntity {
         this.name = name;
     }
 
-    public List<Integer> getSuppliers() {
+    public List<JSupplier> getSuppliers() {
         return suppliers;
     }
 
-    public void setSuppliers(List<Integer> suppliers) {
+    public void setSuppliers(List<JSupplier> suppliers) {
         this.suppliers = suppliers;
     }
 

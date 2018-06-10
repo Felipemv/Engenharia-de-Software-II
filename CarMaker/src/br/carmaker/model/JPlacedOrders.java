@@ -14,7 +14,7 @@ import br.carmaker.model.abstracts.AOrder;
 public class JPlacedOrders extends AOrder {
 
     private JFeedstock feedstock;
-    private int supplier;
+    private JSupplier supplier;
 
     public JFeedstock getFeedstock() {
         return feedstock;
@@ -24,11 +24,11 @@ public class JPlacedOrders extends AOrder {
         this.feedstock = feedstock;
     }
     
-    public int getSupplier() {
+    public JSupplier getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(int supplier) {
+    public void setSupplier(JSupplier supplier) {
         this.supplier = supplier;
     }
 }

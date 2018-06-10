@@ -263,9 +263,9 @@ public class FeedstockDialog extends javax.swing.JPanel {
         feedstock.setQuantity((int) spnAmount.getValue());
         feedstock.setCost(Double.parseDouble(tfPrice.getText()));
         
-        List<Integer> sup = new ArrayList<>();
+        List<JSupplier> sup = new ArrayList<>();
         for (int i = 0; i < selectedSp.size(); i++) {
-            sup.add(selectedSp.get(i).getId());
+            sup.add(selectedSp.get(i));
         }
         feedstock.setSuppliers(sup);
 
@@ -435,7 +435,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
         selectedSp = new ArrayList<>();
         
         for (int i = 0; i < feedstock.getSuppliers().size(); i++) {
-            JSupplier sup =  JDbFacade.getInstance().readSupplierById(feedstock.getSuppliers().get(i));
+            JSupplier sup =  JDbFacade.getInstance().readSupplierById(feedstock.getSuppliers().get(i).getId());
             //Remove os indices que já foram utilizados pela matéria-prima selecionada
             for (int j = 0; j < availableSp.size(); j++) {
                 if(availableSp.get(j).getId() == sup.getId()){

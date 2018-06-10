@@ -151,7 +151,7 @@ public class FeedstockList extends javax.swing.JPanel implements ListCellRendere
 
         String supplier = "";
         for (int i = 0; i < value.getSuppliers().size(); i++) {
-            int id = value.getSuppliers().get(i);
+            int id = value.getSuppliers().get(i).getId();
             if(i > 0){
                 supplier += ", ";
             }
