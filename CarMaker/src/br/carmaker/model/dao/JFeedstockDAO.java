@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -39,7 +37,7 @@ public class JFeedstockDAO extends ABaseEntityDAO {
 
     public static boolean insertFeedstock(JFeedstock feedstock) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + ","
                 + QUANTITY + ", " + COST + ") VALUES (?, ?, ?)";
@@ -52,7 +50,7 @@ public class JFeedstockDAO extends ABaseEntityDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
 
@@ -62,13 +60,14 @@ public class JFeedstockDAO extends ABaseEntityDAO {
             int supplier_id = feedstock.getSuppliers().get(i).getId();
             JDbFacade.getInstance().createSupplierToFeedstock(feedstock_id, supplier_id);
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static List<JFeedstock> getAllFeedstocks() {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         List<JFeedstock> listFeedstock = new ArrayList<>();
         List<JSupplier> listSupplier = new ArrayList<>();
@@ -108,28 +107,28 @@ public class JFeedstockDAO extends ABaseEntityDAO {
                 supplier.setName(rs.getString(S_NAME));
 
                 listSupplier = mapFS.get(feedstock.getId());
-                if(listSupplier == null){
+                if (listSupplier == null) {
                     listSupplier = new ArrayList<>();
                 }
                 listSupplier.add(supplier);
                 mapFS.put(feedstock.getId(), listSupplier);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt, rs);
         }
-        
+
         List<JFeedstock> newFList = new ArrayList<>();
         for (Map.Entry map : mapFS.entrySet()) {
             JFeedstock f = new JFeedstock();
-            
+
             int key = (int) map.getKey();
             List<JSupplier> sup = (List<JSupplier>) map.getValue();
-            
+
             f.setId(key);
-            
+
             for (int i = 0; i < listFeedstock.size(); i++) {
                 JFeedstock fs = listFeedstock.get(i);
-                if(fs.getId() == key){
+                if (fs.getId() == key) {
                     f.setName(fs.getName());
                     f.setCost(fs.getCost());
                     f.setQuantity(fs.getQuantity());
@@ -144,7 +143,7 @@ public class JFeedstockDAO extends ABaseEntityDAO {
 
     public static boolean editFeedstock(JFeedstock feedstock) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?, " + QUANTITY
                 + "=?, " + COST + "=? WHERE " + ID + "=?";
@@ -165,25 +164,28 @@ public class JFeedstockDAO extends ABaseEntityDAO {
             stmt.execute();
 
         } catch (SQLException ex) {
-            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static boolean deleteFeedstock(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
         try {
             stmt = connection.prepareStatement(sql);
-            return stmt.execute();
+            stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
+        return true;
     }
 
     private static int lastId() {
@@ -203,9 +205,7 @@ public class JFeedstockDAO extends ABaseEntityDAO {
                 id = rs.getInt(ID);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JFeedstockDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         ConnectionFactory.closeConnection(connection, stmt, rs);
         return id;
     }

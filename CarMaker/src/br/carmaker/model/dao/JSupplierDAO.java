@@ -14,8 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +26,7 @@ public class JSupplierDAO extends AAffiliateDAO {
 
     public static boolean insertSupplier(JSupplier supplier) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + "," + ADDRESS + ", "
                 + CNPJ + ", " + LEAD_TIME + ") VALUES (?, ?, ?, ?)";
@@ -42,16 +40,16 @@ public class JSupplierDAO extends AAffiliateDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
-
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static JSupplier getSupplierById(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
         ResultSet rs;
 
         JSupplier supplier = new JSupplier();
@@ -72,15 +70,15 @@ public class JSupplierDAO extends AAffiliateDAO {
                 supplier.setLeadTime(rs.getInt(LEAD_TIME));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return supplier;
     }
 
     public static List<JSupplier> getAllSuppliers() {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         List<JSupplier> listSuppliers = new ArrayList<>();
         JSupplier supplier;
@@ -103,14 +101,14 @@ public class JSupplierDAO extends AAffiliateDAO {
                 listSuppliers.add(supplier);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
         return listSuppliers;
     }
 
     public static boolean editSupplier(JSupplier supplier) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + ADDRESS
                 + "=?," + CNPJ + "=?," + LEAD_TIME + "=? WHERE " + ID + "=?";
@@ -124,26 +122,30 @@ public class JSupplierDAO extends AAffiliateDAO {
             stmt.setInt(4, supplier.getLeadTime());
             stmt.setInt(5, supplier.getId());
 
-            return stmt.execute();
+            stmt.execute();
 
         } catch (SQLException ex) {
-            Logger.getLogger(JSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
+        return true;
     }
 
     public static boolean deleteSupplier(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
         try {
             stmt = connection.prepareStatement(sql);
-            return stmt.execute();
+            stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
+        return true;
     }
 }

@@ -10,8 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -38,23 +36,21 @@ public class LoginDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        try {//
+        int i = -1;
+
+        try {
             stmt = connection.prepareStatement("SELECT * FROM " + TABLE_NAME
                     + " WHERE " + EMAIL + "='" + email + "' AND " + PASS + "='"
                     + password + "'");
 
             rs = stmt.executeQuery();
-            if (rs == null) {
-                return -1;
-            }
-            int i = -1;
-            while (rs.next()) {
+            if (rs.first()) {
                 i = rs.getInt(ID);
             }
-            return i;
         } catch (SQLException ex) {
-            Logger.getLogger(LoginDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return -1;
+        
+        ConnectionFactory.closeConnection(connection, stmt);
+        return i;
     }
 }

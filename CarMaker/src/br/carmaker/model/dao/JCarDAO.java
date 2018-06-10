@@ -6,19 +6,14 @@
 package br.carmaker.model.dao;
 
 import br.carmaker.model.JCar;
-import br.carmaker.model.JConstants;
 import br.carmaker.model.connection.ConnectionFactory;
 import br.carmaker.model.dao.abstracts.ABaseEntityDAO;
-import br.carmaker.view.dialog.MessageDialog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /**
  *
@@ -35,7 +30,7 @@ public class JCarDAO extends ABaseEntityDAO {
 
     public static boolean insertCar(JCar car) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + MODEL + ","
                 + PRODUCTION_TIME + ", " + COST_PRICE + ", " + SALE_PRICE + ", "
@@ -50,9 +45,10 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt.setString(5, car.getColor());
             stmt.execute();
         } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
-
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
@@ -78,16 +74,16 @@ public class JCarDAO extends ABaseEntityDAO {
                 car.setColor(rs.getString(COLOR));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         ConnectionFactory.closeConnection(connection, stmt, rs);
         return car;
     }
-    
+
     public static List<JCar> getAllCars() {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         List<JCar> listCars = new ArrayList<>();
         JCar car;
@@ -111,14 +107,14 @@ public class JCarDAO extends ABaseEntityDAO {
                 listCars.add(car);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
         return listCars;
     }
 
     public static boolean editCar(JCar car) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + MODEL + " = ?, "
                 + PRODUCTION_TIME + " = ?, " + COST_PRICE + " = ?, "
@@ -134,15 +130,16 @@ public class JCarDAO extends ABaseEntityDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static boolean deleteCar(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
@@ -150,9 +147,10 @@ public class JCarDAO extends ABaseEntityDAO {
             stmt = connection.prepareStatement(sql);
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JCarDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 }

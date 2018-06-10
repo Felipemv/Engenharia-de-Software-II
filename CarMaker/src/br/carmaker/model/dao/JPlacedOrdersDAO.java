@@ -36,7 +36,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
 
     public static boolean insertPlacedOrder(JPlacedOrders order) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + PROTOCOL + "," + STATUS
                 + ", " + EXPECTED_DATE + ", " + FEEDSTOCK_ID + ", " + SUPPLIER_ID
@@ -52,6 +52,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
         ConnectionFactory.closeConnection(connection, stmt);
@@ -77,7 +78,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
                 + JSupplierDAO.TABLE_NAME + "." + JSupplierDAO.NAME + " AS '" + S_NAME + "', "
                 + " FROM " + TABLE_NAME;
 
-        sql += " INNER JOIN " + JFeedstockDAO.TABLE_NAME + " ON " 
+        sql += " INNER JOIN " + JFeedstockDAO.TABLE_NAME + " ON "
                 + JFeedstockDAO.TABLE_NAME + "." + JFeedstockDAO.ID + "="
                 + TABLE_NAME + "." + FEEDSTOCK_ID;
 
@@ -96,12 +97,12 @@ public class JPlacedOrdersDAO extends AOrderDAO {
                 order.setProtocol(rs.getString(PROTOCOL));
                 order.setStatus(EDeliveryStatus.valueOf(rs.getInt(STATUS)));
                 order.setExpectedDate(rs.getDate(EXPECTED_DATE));
-                
+
                 feedstock = new JFeedstock();
                 feedstock.setId(rs.getInt(F_ID));
                 feedstock.setName(rs.getString(F_NAME));
                 order.setFeedstock(feedstock);
-                
+
                 supplier = new JSupplier();
                 supplier.setId(rs.getInt(S_ID));
                 supplier.setName(rs.getString(S_NAME));
@@ -148,7 +149,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
                 + JSupplierDAO.TABLE_NAME + "." + JSupplierDAO.NAME + " AS '" + S_NAME + "'"
                 + " FROM " + TABLE_NAME;
 
-        sql += " INNER JOIN " + JFeedstockDAO.TABLE_NAME + " ON " 
+        sql += " INNER JOIN " + JFeedstockDAO.TABLE_NAME + " ON "
                 + JFeedstockDAO.TABLE_NAME + "." + JFeedstockDAO.ID + "="
                 + TABLE_NAME + "." + FEEDSTOCK_ID;
 
@@ -168,12 +169,12 @@ public class JPlacedOrdersDAO extends AOrderDAO {
                 order.setProtocol(rs.getString(PROTOCOL));
                 order.setStatus(EDeliveryStatus.valueOf(rs.getInt(STATUS)));
                 order.setExpectedDate(rs.getDate(EXPECTED_DATE));
-                
+
                 feedstock = new JFeedstock();
                 feedstock.setId(rs.getInt(F_ID));
                 feedstock.setName(rs.getString(F_NAME));
                 order.setFeedstock(feedstock);
-                
+
                 supplier = new JSupplier();
                 supplier.setId(rs.getInt(S_ID));
                 supplier.setName(rs.getString(S_NAME));
@@ -204,7 +205,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
 
     public static boolean editPlacedOrder(JPlacedOrders order) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME;
 
@@ -225,6 +226,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
 
@@ -234,7 +236,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
 
     public static boolean deletePlacedOrder(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
@@ -242,6 +244,7 @@ public class JPlacedOrdersDAO extends AOrderDAO {
             stmt = connection.prepareStatement(sql);
             stmt.execute();
         } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
 

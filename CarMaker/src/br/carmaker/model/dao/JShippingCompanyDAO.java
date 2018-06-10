@@ -15,8 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +28,7 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
 
     public static boolean insertShippingCompany(JShippingCompany shippingCompany) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + "," + ADDRESS + ", "
                 + CNPJ + ", " + AMOUNT + ", " + FLEET + ") VALUES (?, ?, ?, ?, ?)";
@@ -45,9 +43,10 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JShippingCompanyDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
@@ -73,7 +72,7 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
                 sc.setFleet(rs.getInt(FLEET));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt, rs);
         }
         ConnectionFactory.closeConnection(connection, stmt, rs);
         return sc;
@@ -81,8 +80,8 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
     
     public static List<JShippingCompany> getAllShippingCompanies() {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         List<JShippingCompany> listShippingCompany = new ArrayList<>();
         JShippingCompany shippingCompany;
@@ -106,14 +105,15 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
                 listShippingCompany.add(shippingCompany);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JShippingCompany.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
         return listShippingCompany;
     }
 
     public static boolean editShippingCompany(JShippingCompany shippingCompany) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + ADDRESS
                 + "=?," + CNPJ + "=?," + AMOUNT + "=?, " + FLEET + "=? WHERE " 
@@ -129,26 +129,30 @@ public class JShippingCompanyDAO extends AAffiliateDAO {
             stmt.setInt(5, shippingCompany.getFleet());
             stmt.setInt(6, shippingCompany.getId());
 
-            return stmt.execute();
+            stmt.execute();
 
         } catch (SQLException ex) {
-            Logger.getLogger(JShippingCompanyDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
+        return true;
     }
 
     public static boolean deleteShippingCompany(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
         try {
             stmt = connection.prepareStatement(sql);
-            return stmt.execute();
+            stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JShippingCompanyDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
+        return true;
     }
 }

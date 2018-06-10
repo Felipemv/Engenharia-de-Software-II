@@ -9,17 +9,12 @@ import br.carmaker.model.dao.abstracts.ABaseEntityDAO;
 import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.connection.ConnectionFactory;
-import br.carmaker.view.dialog.MessageDialog;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JPanel;
 
 /**
  *
@@ -39,8 +34,8 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
     public static JEmployee getEmployeeByID(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         JEmployee employee = new JEmployee();
 
@@ -62,14 +57,14 @@ public class JEmployeeDAO extends ABaseEntityDAO {
                 employee.setPhoto(rs.getBytes(PHOTO));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
         return employee;
     }
 
     public static boolean insertEmployee(JEmployee employee) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + "," + ADDRESS + ", "
                 + PHONE + ", " + REGISTER + ", " + ROLE + ", " + EMAIL + ", "
@@ -88,16 +83,16 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
-
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static boolean editEmployee(JEmployee employee) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + " = ?, " + ADDRESS + " = ?, "
                 + PHONE + " = ?, " + REGISTER + " = ?, " + ROLE + " = ?, " + EMAIL + " = ?, "
@@ -116,15 +111,16 @@ public class JEmployeeDAO extends ABaseEntityDAO {
 
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static boolean deleteEmployee(int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
+        PreparedStatement stmt = null;
 
         String sql = "UPDATE " + TABLE_NAME + " SET " + DELETED + "=1 WHERE " + ID + "=" + id;
 
@@ -132,17 +128,17 @@ public class JEmployeeDAO extends ABaseEntityDAO {
             stmt = connection.prepareStatement(sql);
             stmt.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ConnectionFactory.closeConnection(connection, stmt);
             return false;
         }
-
+        ConnectionFactory.closeConnection(connection, stmt);
         return true;
     }
 
     public static List<JEmployee> getAllEmployees() {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         List<JEmployee> listEmployees = new ArrayList<>();
         JEmployee employee;
@@ -169,15 +165,15 @@ public class JEmployeeDAO extends ABaseEntityDAO {
                 listEmployees.add(employee);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(JEmployeeDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
         return listEmployees;
     }
 
     public static boolean registerExists(String register, int id) {
         Connection connection = ConnectionFactory.getConnection();
-        PreparedStatement stmt;
-        ResultSet rs;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + REGISTER + "=" + register;
 
@@ -192,8 +188,10 @@ public class JEmployeeDAO extends ABaseEntityDAO {
                 return true;
             }
         } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection, stmt, rs);
             return true;
         }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
         return false;
     }
 }
