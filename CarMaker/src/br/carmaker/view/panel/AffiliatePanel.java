@@ -310,12 +310,18 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
     private void listDealershipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listDealershipKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            int id = listSupplier.getSelectedValue().getId();
-            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_DEALERSHIP, this);
-            if (ConfirmDialog.getUserChoice()) {
-                JDbFacade.getInstance().deleteDealership(id);
-                initDealershipList();
+            JSupplier s = listSupplier.getSelectedValue();
+            
+            if(s != null){
+                int id = s.getId();
+                ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_DEALERSHIP, this);
+                if (ConfirmDialog.getUserChoice()) {
+                    JDbFacade.getInstance().deleteDealership(id);
+                    initDealershipList();
+                }
             }
+            
+            
         }
     }//GEN-LAST:event_listDealershipKeyPressed
 

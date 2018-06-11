@@ -37,15 +37,15 @@ public class JDealershipDAO extends AAffiliateDAO {
         PreparedStatement stmt;
 
         String sql = "INSERT INTO " + TABLE_NAME + "(" + NAME + "," + ADDRESS + ", "
-                + CNPJ + ", " + TYPE + ") VALUES (?, ?, ?, ?)";
+                + CNPJ + ", " + TYPE + ", " + SC_ID + ") VALUES (?, ?, ?, ?, ?)";
 
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, dealership.getName());
             stmt.setString(2, dealership.getAddress());
             stmt.setString(3, dealership.getCnpj());
-            stmt.setInt(3, dealership.getShippingCompany().getId());
             stmt.setInt(4, dealership.getType().getDealershipIntType());
+            stmt.setInt(5, dealership.getShippingCompany().getId());
 
             stmt.execute();
         } catch (SQLException ex) {
@@ -146,8 +146,8 @@ public class JDealershipDAO extends AAffiliateDAO {
         Connection connection = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?," + ADDRESS
-                + "=?," + CNPJ + "=?," + TYPE + "=?, " + SC_ID + "=? WHERE " + ID + "=?";
+        String sql = "UPDATE " + TABLE_NAME + " SET " + NAME + "=?, " + ADDRESS
+                + "=?, " + CNPJ + "=?, " + TYPE + "=?, " + SC_ID + "=? WHERE " + ID + "=?";
 
         try {
             stmt = connection.prepareStatement(sql);

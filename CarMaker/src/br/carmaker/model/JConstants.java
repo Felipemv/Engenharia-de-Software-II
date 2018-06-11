@@ -117,8 +117,13 @@ public abstract class JConstants {
     public static final String DEFAULT_USER_IMAGE = "/image/user_default.png";
     public static final String DEFAULT_CHOOSER_IMAGE_LOCATION = "C:\\Users\\Usuário\\Desktop";
     public static final String NAME = "Nome";
+    public static final String EMAIL = "E-mail";
+    public static final String PHONE = "Telefone";
+    public static final String REGISTER = "Registro";
+    public static final String ROLE = "Cargo";
     public static final String ADDRESS = "Endereço";
     public static final String CNPJ = "Cnpj";
+    public static final String COST = "Custo";
     public static final String LEAD_TIME = "Lead Time";
     public static final String AMOUNT = "Quantidade";
     public static final String FLEET = "Frota";
@@ -131,6 +136,6 @@ public abstract class JConstants {
     public static final String SHIPPING_COMPANY = "Transportadora";
     public static final String DEALERSHIP = "Concessionária";
     public static final String CAR = "Carro";
-    public static String DATE_FORMAT = "dd/MM/yyyy";
-        
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    
 }

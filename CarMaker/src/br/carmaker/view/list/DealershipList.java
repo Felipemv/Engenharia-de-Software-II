@@ -7,8 +7,6 @@ package br.carmaker.view.list;
 
 import br.carmaker.model.JConstants;
 import br.carmaker.model.JDealership;
-import br.carmaker.model.JShippingCompany;
-import br.carmaker.model.enums.EDealershipType;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JList;
@@ -36,13 +34,14 @@ public class DealershipList extends javax.swing.JPanel implements ListCellRender
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelBackground = new javax.swing.JPanel();
         lblCnpj = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
         lblType = new javax.swing.JLabel();
+        lblShippingCompany = new javax.swing.JLabel();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.white));
+        panelBackground.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.black, java.awt.Color.white));
 
         lblCnpj.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblCnpj.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -60,34 +59,38 @@ public class DealershipList extends javax.swing.JPanel implements ListCellRender
         lblType.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblType.setText("Tipo");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        lblShippingCompany.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        lblShippingCompany.setText("Transportadora");
+
+        javax.swing.GroupLayout panelBackgroundLayout = new javax.swing.GroupLayout(panelBackground);
+        panelBackground.setLayout(panelBackgroundLayout);
+        panelBackgroundLayout.setHorizontalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                    .addComponent(lblType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblShippingCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(panelBackgroundLayout.createSequentialGroup()
+                        .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblType, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblCnpj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
+                            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelBackgroundLayout.setVerticalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblName)
-                    .addComponent(lblAddress))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCnpj)
-                    .addComponent(lblType))
+                .addComponent(lblName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCnpj)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAddress)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblShippingCompany)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblType)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -97,24 +100,25 @@ public class DealershipList extends javax.swing.JPanel implements ListCellRender
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblCnpj;
     private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblShippingCompany;
     private javax.swing.JLabel lblType;
+    private javax.swing.JPanel panelBackground;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -125,16 +129,28 @@ public class DealershipList extends javax.swing.JPanel implements ListCellRender
         String address = "<html><strong>" + JConstants.ADDRESS + ": </strong>" + value.getAddress() + "</html>";
         String cnpj = "<html><strong>" + JConstants.CNPJ + ": </strong>" + value.getCnpj() + "</html>";
         String type = "<html><strong>" + JConstants.TYPE + ": </strong>" + value.getType().toString() + "</html>";
+        String sComp = "<html><strong>" + JConstants.SHIPPING_COMPANY + ": </strong>" + value.getShippingCompany().getName() + "</html>";
         
         lblName.setText(name);
         lblAddress.setText(address);
         lblCnpj.setText(cnpj);
         lblType.setText(type);
+        lblShippingCompany.setText(sComp);
         
         if(isSelected){
-            jPanel1.setBackground(Color.yellow);
+            panelBackground.setBackground(new Color(29,32,38));
+            lblName.setForeground(Color.WHITE);
+            lblAddress.setForeground(Color.WHITE);
+            lblCnpj.setForeground(Color.WHITE);
+            lblType.setForeground(Color.WHITE);
+            lblShippingCompany.setForeground(Color.WHITE);
         }else{
-            jPanel1.setBackground(Color.white);
+            panelBackground.setBackground(new Color(245,245,246));
+            lblName.setForeground(Color.BLACK);
+            lblAddress.setForeground(Color.BLACK);
+            lblCnpj.setForeground(Color.BLACK);
+            lblType.setForeground(Color.BLACK);
+            lblShippingCompany.setForeground(Color.BLACK);
         }
         
         return this;

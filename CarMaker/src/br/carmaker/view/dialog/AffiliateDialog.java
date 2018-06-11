@@ -13,6 +13,10 @@ import br.carmaker.model.JSupplier;
 import br.carmaker.model.abstracts.AAffiliate;
 import br.carmaker.model.enums.EAffiliate;
 import br.carmaker.model.enums.EDealershipType;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -29,6 +33,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         initComponents();
         this.registerDialog = registerDialog;
         this.parent = parent;
+        this.creating = true;
     }
 
     public AffiliateDialog(JDialog registerDialog, JFrame parent, AAffiliate affiliate, EAffiliate entityType) {
@@ -37,6 +42,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         this.parent = parent;
         this.affiliate = affiliate;
         this.entityType = entityType;
+        this.creating = false;
         setEntity();
     }
 
@@ -77,6 +83,8 @@ public class AffiliateDialog extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         rbGeneral = new javax.swing.JRadioButton();
         rbExclusive = new javax.swing.JRadioButton();
+        cbSCompany = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         panelFooter.setBackground(new java.awt.Color(37, 37, 39));
 
@@ -268,18 +276,36 @@ public class AffiliateDialog extends javax.swing.JPanel {
         rbExclusive.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         rbExclusive.setText("Exclusiva");
 
+        cbSCompany.setModel(cbmSCompany);
+        cbSCompany.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSCompanyActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel9.setText("Transportadora: ");
+
         javax.swing.GroupLayout panelDealershipLayout = new javax.swing.GroupLayout(panelDealership);
         panelDealership.setLayout(panelDealershipLayout);
         panelDealershipLayout.setHorizontalGroup(
             panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDealershipLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rbGeneral)
-                .addGap(18, 18, 18)
-                .addComponent(rbExclusive)
-                .addGap(403, 403, 403))
+                .addGroup(panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDealershipLayout.createSequentialGroup()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelDealershipLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)))
+                .addGroup(panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDealershipLayout.createSequentialGroup()
+                        .addComponent(rbGeneral)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbExclusive))
+                    .addComponent(cbSCompany, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         panelDealershipLayout.setVerticalGroup(
             panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,7 +315,11 @@ public class AffiliateDialog extends javax.swing.JPanel {
                     .addComponent(jLabel8)
                     .addComponent(rbGeneral)
                     .addComponent(rbExclusive))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(panelDealershipLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbSCompany, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         panelView.add(panelDealership, "card4");
@@ -367,11 +397,20 @@ public class AffiliateDialog extends javax.swing.JPanel {
         changeCard();
     }//GEN-LAST:event_cbTypeActionPerformed
 
+    private void cbSCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSCompanyActionPerformed
+        int index = cbSCompany.getSelectedIndex();
+        
+        if(index != -1){
+            sc = listSC.get(index);
+        }
+    }//GEN-LAST:event_cbSCompanyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgDealershipType;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cbSCompany;
     private javax.swing.JComboBox<String> cbType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -381,6 +420,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
@@ -401,12 +441,15 @@ public class AffiliateDialog extends javax.swing.JPanel {
 
     private final JDialog registerDialog;
     private final JFrame parent;
-    private final boolean creating = true;
+    private boolean creating = true;
     private EAffiliate entityType;
     private AAffiliate affiliate;
     private JSupplier supplier;
     private JShippingCompany shippingCompany;
     private JDealership dealership;
+    private DefaultComboBoxModel<String> cbmSCompany = new DefaultComboBoxModel<>();
+    private List<JShippingCompany> listSC = new ArrayList<>();
+    private JShippingCompany sc;
 
     private void saveSupplier() {
         supplier = new JSupplier();
@@ -416,7 +459,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         supplier.setCnpj(tfCnpj.getText());
         supplier.setLeadTime(Integer.parseInt(tfCnpj.getText()));
 
-        if (supplierValidation(supplier)) {
+        if (supplierValidation()) {
             if (JDbFacade.getInstance().createSupplier(supplier)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_CREATE_SUPPLIER, this);
                 registerDialog.dispose();
@@ -436,7 +479,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         shippingCompany.setAmount((int) spnAmount.getValue());
         shippingCompany.setFleet((int) spnFleet.getValue());
 
-        if (shippingCompanyValidation(shippingCompany)) {
+        if (shippingCompanyValidation()) {
             if (JDbFacade.getInstance().createShippingCompany(shippingCompany)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_CREATE_SHIPPING_COMPANY, this);
                 registerDialog.dispose();
@@ -453,13 +496,14 @@ public class AffiliateDialog extends javax.swing.JPanel {
         dealership.setName(tfName.getText());
         dealership.setAddress(tfAddress.getText());
         dealership.setCnpj(tfCnpj.getText());
+        dealership.setShippingCompany(sc);
 
         if (rbGeneral.isSelected()) {
             dealership.setType(EDealershipType.GENERAL);
         } else if (rbExclusive.isSelected()) {
             dealership.setType(EDealershipType.EXCLUSIVE);
         }
-        if (dealershipValidation(dealership)) {
+        if (dealershipValidation()) {
             if (JDbFacade.getInstance().createDealership(dealership)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_CREATE_DEALERSHIP, this);
                 registerDialog.dispose();
@@ -477,7 +521,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         supplier.setAddress(tfAddress.getText());
         supplier.setCnpj(tfCnpj.getText());
 
-        if (supplierValidation(supplier)) {
+        if (supplierValidation()) {
             if (JDbFacade.getInstance().editSupplier(supplier)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_EDIT_SUPPLIER, this);
                 registerDialog.dispose();
@@ -495,7 +539,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         shippingCompany.setAddress(tfAddress.getText());
         shippingCompany.setCnpj(tfCnpj.getText());
 
-        if (shippingCompanyValidation(shippingCompany)) {
+        if (shippingCompanyValidation()) {
             if (JDbFacade.getInstance().editShippingCompany(shippingCompany)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_EDIT_SHIPPING_COMPANY, this);
                 registerDialog.dispose();
@@ -512,13 +556,14 @@ public class AffiliateDialog extends javax.swing.JPanel {
         dealership.setName(tfName.getText());
         dealership.setAddress(tfAddress.getText());
         dealership.setCnpj(tfCnpj.getText());
+        dealership.setShippingCompany(sc);
 
         if (rbGeneral.isSelected()) {
             dealership.setType(EDealershipType.GENERAL);
         } else if (rbExclusive.isSelected()) {
             dealership.setType(EDealershipType.EXCLUSIVE);
         }
-        if (dealershipValidation(dealership)) {
+        if (dealershipValidation()) {
             if (JDbFacade.getInstance().editDealership(dealership)) {
                 MessageDialog.showMessage(JConstants.SUCCESS_EDIT_DEALERSHIP, this);
                 registerDialog.dispose();
@@ -529,7 +574,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         }
     }
 
-    private boolean supplierValidation(JSupplier supplier) {
+    private boolean supplierValidation() {
         if (supplier.getName().trim().length() == 0
                 || supplier.getAddress().trim().length() == 0
                 || supplier.getCnpj().trim().length() == 0
@@ -540,7 +585,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         return true;
     }
 
-    private boolean shippingCompanyValidation(JShippingCompany shippingCompany) {
+    private boolean shippingCompanyValidation() {
         if (shippingCompany.getName().trim().length() == 0
                 || shippingCompany.getAddress().trim().length() == 0
                 || shippingCompany.getCnpj().trim().length() == 0
@@ -552,11 +597,12 @@ public class AffiliateDialog extends javax.swing.JPanel {
         return true;
     }
 
-    private boolean dealershipValidation(JDealership dealership) {
+    private boolean dealershipValidation() {
         if (dealership.getName().trim().length() == 0
                 || dealership.getAddress().trim().length() == 0
                 || dealership.getCnpj().trim().length() == 0
-                || dealership.getType() == null) {
+                || dealership.getType() == null
+                || dealership.getShippingCompany() == null) {
             MessageDialog.showMessage(JConstants.LABEL_ALL_FIELDS_REQUIRED, this);
             return false;
         }
@@ -613,6 +659,15 @@ public class AffiliateDialog extends javax.swing.JPanel {
         } else {
             rbGeneral.setSelected(true);
         }
+        
+        loadShippingCompanies();
+        
+        for (int i = 0; i < listSC.size(); i++) {
+            if(listSC.get(i).getId() == dealership.getShippingCompany().getId()){
+                cbSCompany.setSelectedIndex(i);
+                break;
+            }
+        }
     }
 
     private void changeCard() {
@@ -625,6 +680,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
                 break;
             case 2:
                 panelView.add(panelDealership);
+                loadShippingCompanies();
                 break;
             default:
                 panelView.add(panelSupplier);
@@ -632,5 +688,22 @@ public class AffiliateDialog extends javax.swing.JPanel {
         }
         panelView.repaint();
         panelView.revalidate();
+    }
+
+    private void loadShippingCompanies() {
+        cbmSCompany = (DefaultComboBoxModel<String>) cbSCompany.getModel();
+        cbmSCompany.removeAllElements();
+        
+        listSC.clear();
+        listSC = JDbFacade.getInstance().readAllShippingCompanies();
+        
+        for (int i = 0; i < listSC.size(); i++) {
+            cbmSCompany.addElement(listSC.get(i).getName());
+        }
+        
+        if(!listSC.isEmpty()){
+            cbSCompany.setSelectedIndex(0);
+            sc = listSC.get(0);
+        }
     }
 }

@@ -6,6 +6,8 @@
 package br.carmaker.view.list;
 
 import br.carmaker.model.JCar;
+import br.carmaker.model.JConstants;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -32,20 +34,15 @@ public class CarList extends javax.swing.JPanel implements ListCellRenderer<JCar
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelBackground = new javax.swing.JPanel();
         lblModel = new javax.swing.JLabel();
         lblProductionTime = new javax.swing.JLabel();
         lblCostPrice = new javax.swing.JLabel();
         lblSalePrice = new javax.swing.JLabel();
         lblColor = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        panelBackground.setBackground(new java.awt.Color(255, 255, 255));
+        panelBackground.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
 
         lblModel.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblModel.setText("Modelo");
@@ -62,73 +59,36 @@ public class CarList extends javax.swing.JPanel implements ListCellRenderer<JCar
         lblColor.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         lblColor.setText("Cor");
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel1.setText("Modelo: ");
-
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel2.setText("Tempo de Produção: ");
-
-        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel3.setText("Preço de Custo: ");
-
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel4.setText("Preço de Venda: ");
-
-        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel5.setText("Cor: ");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelBackgroundLayout = new javax.swing.GroupLayout(panelBackground);
+        panelBackground.setLayout(panelBackgroundLayout);
+        panelBackgroundLayout.setHorizontalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblProductionTime))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblSalePrice))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblColor))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblModel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCostPrice)))
-                .addGap(0, 242, Short.MAX_VALUE))
+                .addGroup(panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblModel, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblColor, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSalePrice, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCostPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProductionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+
+        panelBackgroundLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblColor, lblCostPrice, lblModel, lblProductionTime, lblSalePrice});
+
+        panelBackgroundLayout.setVerticalGroup(
+            panelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBackgroundLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblModel)
-                    .addComponent(jLabel1))
+                .addComponent(lblModel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblProductionTime)
-                    .addComponent(jLabel2))
+                .addComponent(lblProductionTime)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCostPrice)
-                    .addComponent(jLabel3))
+                .addComponent(lblCostPrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSalePrice)
-                    .addComponent(jLabel4))
+                .addComponent(lblSalePrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblColor)
-                    .addComponent(jLabel5))
+                .addComponent(lblColor)
                 .addContainerGap())
         );
 
@@ -138,41 +98,58 @@ public class CarList extends javax.swing.JPanel implements ListCellRenderer<JCar
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblColor;
     private javax.swing.JLabel lblCostPrice;
     private javax.swing.JLabel lblModel;
     private javax.swing.JLabel lblProductionTime;
     private javax.swing.JLabel lblSalePrice;
+    private javax.swing.JPanel panelBackground;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public Component getListCellRendererComponent(JList<? extends JCar> list, 
             JCar value, int index, boolean isSelected, boolean hasFocus) {
         
-        lblModel.setText(value.getModel());
-        lblProductionTime.setText(Integer.toString(value.getProductionTime()));
-        lblCostPrice.setText("R$" + String.format("%.2f", value.getCostPrice()).replace(".", ","));
-        lblSalePrice.setText("R$" + String.format("%.2f", value.getSalePrice()).replace(".", ","));
-        lblColor.setText(value.getModel());
+        String model = "<html><strong>" + JConstants.PROTOCOL + ": </strong>" + value.getModel()+ "</html>";
+        String prodTime = "<html><strong>" + JConstants.FEEDSTOCK + ": </strong>" + value.getProductionTime()+ "</html>";
+        String cost = "<html><strong>" + JConstants.SUPPLIER + ": </strong>" + "R$" + String.format("%.2f", value.getCostPrice()).replace(".", ",") + "</html>";
+        String sale = "<html><strong>" + JConstants.STATUS + ": </strong>" + "R$" + String.format("%.2f", value.getSalePrice()).replace(".", ",") + "</html>";
+        String color = "<html><strong>" + JConstants.DATE + ": </strong>" + value.getColor() + "</html>";
+        
+        lblModel.setText(model);
+        lblProductionTime.setText(prodTime);
+        lblCostPrice.setText(cost);
+        lblSalePrice.setText(sale);
+        lblColor.setText(color);
+        
+        if(isSelected){
+            panelBackground.setBackground(new Color(29,32,38));
+            lblModel.setForeground(Color.WHITE);
+            lblProductionTime.setForeground(Color.WHITE);
+            lblCostPrice.setForeground(Color.WHITE);
+            lblSalePrice.setForeground(Color.WHITE);
+            lblColor.setForeground(Color.WHITE);
+        }else{
+            panelBackground.setBackground(new Color(245,245,246));
+            lblModel.setForeground(Color.BLACK);
+            lblProductionTime.setForeground(Color.BLACK);
+            lblCostPrice.setForeground(Color.BLACK);
+            lblSalePrice.setForeground(Color.BLACK);
+            lblColor.setForeground(Color.BLACK);
+        }
         
         return this;
     }
