@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.panel;
 
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
 import br.carmaker.model.JShippingCompany;
@@ -18,6 +18,7 @@ import br.carmaker.view.list.DealershipList;
 import br.carmaker.view.list.ShippingCompanyList;
 import br.carmaker.view.list.SupplierList;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -76,6 +77,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         cardPanel.setLayout(new java.awt.CardLayout());
 
+        listSupplier.setModel(dlmSupplier);
         listSupplier.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listSupplier.setCellRenderer(new SupplierList());
         listSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -109,6 +111,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         cardPanel.add(supplierPanel, "card4");
 
+        listShippingCompany.setModel(dlmSC);
         listShippingCompany.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listShippingCompany.setCellRenderer(new ShippingCompanyList());
         listShippingCompany.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +145,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         cardPanel.add(shippingCompanyPanel, "card3");
 
+        listDealership.setModel(dlmDealership);
         listDealership.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         listDealership.setCellRenderer(new DealershipList());
         listDealership.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,17 +228,17 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
     private void btnAddAffiliatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddAffiliatesMouseClicked
         this.setEnabled(false);
-        RegisterDialog dialog = new RegisterDialog(mainFrame, false, 3, EMenuItem.AFFILIATES);
+        RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, EMenuItem.AFFILIATES);
         dialog.setVisible(true);
 
-        mainFrame.setEnabled(false);
+        initLists();
     }//GEN-LAST:event_btnAddAffiliatesMouseClicked
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         int index = jComboBox1.getSelectedIndex();
         cardPanel.removeAll();
-        
-        switch(index){
+
+        switch (index) {
             case 1:
                 cardPanel.add(shippingCompanyPanel);
                 break;
@@ -245,7 +249,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
                 cardPanel.add(supplierPanel);
                 break;
         }
-        
+
         cardPanel.repaint();
         cardPanel.revalidate();
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -255,7 +259,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
             JDealership dealership = listDealership.getSelectedValue();
 
             mainFrame.setEnabled(false);
-            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, 
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3,
                     EMenuItem.AFFILIATES, dealership, EAffiliate.DEALERSHIP);
             dialog.setVisible(true);
             initDealershipList();
@@ -267,7 +271,7 @@ public class AffiliatePanel extends javax.swing.JPanel {
             JShippingCompany shippingCompany = listShippingCompany.getSelectedValue();
 
             mainFrame.setEnabled(false);
-            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, 
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3,
                     EMenuItem.AFFILIATES, shippingCompany, EAffiliate.SHIPPING_COMPANY);
             dialog.setVisible(true);
             initDealershipList();
@@ -275,11 +279,11 @@ public class AffiliatePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_listShippingCompanyMouseClicked
 
     private void listSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listSupplierMouseClicked
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {            
             JSupplier supplier = listSupplier.getSelectedValue();
 
             mainFrame.setEnabled(false);
-            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3, 
+            RegisterDialog dialog = new RegisterDialog(mainFrame, true, 3,
                     EMenuItem.AFFILIATES, supplier, EAffiliate.SUPPLIER);
             dialog.setVisible(true);
             initDealershipList();
@@ -288,40 +292,47 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
     private void listSupplierKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listSupplierKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            int id = listSupplier.getSelectedValue().getId();
-            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_SUPPLIER, this);
-            if (ConfirmDialog.getUserChoice()) {
-                JDbFacade.getInstance().deleteSupplier(id);
-                initSupplierList();
+            JSupplier s = listSupplier.getSelectedValue();
+            if (s != null && s.getId() != -1) {
+                int id = s.getId();
+                ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_SUPPLIER, this);
+                if (ConfirmDialog.getUserChoice()) {
+                    JDbFacade.getInstance().deleteSupplier(id);
+                    initSupplierList();
+                }
             }
+
         }
     }//GEN-LAST:event_listSupplierKeyPressed
 
     private void listShippingCompanyKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listShippingCompanyKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            int id = listSupplier.getSelectedValue().getId();
-            ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_SHIPPING_COMPANY, this);
-            if (ConfirmDialog.getUserChoice()) {
-                JDbFacade.getInstance().deleteShippingCompany(id);
-                initShippingCompanyList();
+            JShippingCompany s = listShippingCompany.getSelectedValue();
+            if (s != null && s.getId() != -1) {
+                int id = s.getId();
+                ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_SHIPPING_COMPANY, this);
+                if (ConfirmDialog.getUserChoice()) {
+                    JDbFacade.getInstance().deleteShippingCompany(id);
+                    initShippingCompanyList();
+                }
             }
+
         }
     }//GEN-LAST:event_listShippingCompanyKeyPressed
 
     private void listDealershipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listDealershipKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            JSupplier s = listSupplier.getSelectedValue();
-            
-            if(s != null){
-                int id = s.getId();
+            JDealership d = listDealership.getSelectedValue();
+
+            if (d != null) {
+                int id = d.getId();
                 ConfirmDialog.showConfirmationMessage(mainFrame, JConstants.CONFIRM_DELETE_DEALERSHIP, this);
                 if (ConfirmDialog.getUserChoice()) {
                     JDbFacade.getInstance().deleteDealership(id);
                     initDealershipList();
                 }
             }
-            
-            
+
         }
     }//GEN-LAST:event_listDealershipKeyPressed
 
@@ -344,6 +355,14 @@ public class AffiliatePanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private JFrame mainFrame;
+    private DefaultListModel<JSupplier> dlmSupplier = new DefaultListModel<>();
+    private DefaultListModel<JShippingCompany> dlmSC = new DefaultListModel<>();
+    private DefaultListModel<JDealership> dlmDealership = new DefaultListModel<>();
+    
+    private List<JSupplier> suppliers = new ArrayList<>();
+    private List<JShippingCompany> shippingCompanies = new ArrayList<>();
+    private List<JDealership> dealerships = new ArrayList<>();
+    
 
     private void initLists() {
         initSupplierList();
@@ -352,30 +371,42 @@ public class AffiliatePanel extends javax.swing.JPanel {
     }
 
     private void initSupplierList() {
-        DefaultListModel<JSupplier> dlmSupplier = new DefaultListModel<>();
-        List<JSupplier> sup = JDbFacade.getInstance().readAllSuppliers();
+        dlmSupplier = (DefaultListModel<JSupplier>) listSupplier.getModel();
+        
+        dlmSupplier.clear();
+        suppliers.clear();
+        
+        suppliers = JDbFacade.getInstance().readAllSuppliers();
 
-        for (int i = 0; i < sup.size(); i++) {
-            dlmSupplier.addElement(sup.get(i));
+        for (int i = 0; i < suppliers.size(); i++) {
+            dlmSupplier.addElement(suppliers.get(i));
         }
 
         listSupplier.setModel(dlmSupplier);
     }
 
     private void initShippingCompanyList() {
-       DefaultListModel<JShippingCompany> dlmSC = new DefaultListModel<>();
-        List<JShippingCompany> sc = JDbFacade.getInstance().readAllShippingCompanies();
+        dlmSC = (DefaultListModel<JShippingCompany>) listShippingCompany.getModel();
+        
+        dlmSC.clear();
+        shippingCompanies.clear();
+        
+        shippingCompanies = JDbFacade.getInstance().readAllShippingCompanies();
 
-        for (int i = 0; i < sc.size(); i++) {
-            dlmSC.addElement(sc.get(i));
+        for (int i = 0; i < shippingCompanies.size(); i++) {
+            dlmSC.addElement(shippingCompanies.get(i));
         }
 
         listShippingCompany.setModel(dlmSC);
     }
 
     private void initDealershipList() {
-        DefaultListModel<JDealership> dlmDealership = new DefaultListModel<>();
-        List<JDealership> dealerships = JDbFacade.getInstance().readAllDealerships();
+        dlmDealership = (DefaultListModel<JDealership>) listDealership.getModel();
+        
+        dlmDealership.clear();
+        dealerships.clear();
+        
+        dealerships = JDbFacade.getInstance().readAllDealerships();
 
         for (int i = 0; i < dealerships.size(); i++) {
             dlmDealership.addElement(dealerships.get(i));
@@ -383,6 +414,4 @@ public class AffiliatePanel extends javax.swing.JPanel {
 
         listDealership.setModel(dlmDealership);
     }
-    
-    
 }

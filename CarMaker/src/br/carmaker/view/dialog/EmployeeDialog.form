@@ -405,12 +405,8 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JFormattedTextField" name="tfPhone">
-          <Events>
-            <EventHandler event="caretUpdate" listener="javax.swing.event.CaretListener" parameters="javax.swing.event.CaretEvent" handler="tfPhoneCaretUpdate"/>
-          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(maskFormat)"/>
-            <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="MaskFormatter maskFormat = new MaskFormatter();&#xa;String mask = &quot;(##) #####-####&quot;;&#xa;&#xa;try{&#xa;    maskFormat.setMask(mask);&#xa;    maskFormat.setPlaceholderCharacter(&apos; &apos;);&#xa;}catch(Exception ex){&#xa;    ex.printStackTrace();&#xa;}"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(JFormatFields.getPhoneFormat())"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">

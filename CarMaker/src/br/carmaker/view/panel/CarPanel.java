@@ -6,7 +6,7 @@
 package br.carmaker.view.panel;
 
 import br.carmaker.model.JCar;
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.enums.EMenuItem;

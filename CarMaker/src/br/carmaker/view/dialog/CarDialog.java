@@ -6,8 +6,9 @@
 package br.carmaker.view.dialog;
 
 import br.carmaker.model.JCar;
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
+import br.carmaker.model.util.JFormatFields;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
@@ -57,9 +58,9 @@ public class CarDialog extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         tfModel = new javax.swing.JTextField();
         spnProductionTime = new javax.swing.JSpinner();
-        tfCostPrice = new javax.swing.JTextField();
-        tfSalePrice = new javax.swing.JTextField();
         cbColor = new javax.swing.JComboBox<>();
+        tfCostPrice = new javax.swing.JFormattedTextField(JFormatFields.getMoneyFormat());
+        tfSalePrice = new javax.swing.JFormattedTextField(JFormatFields.getMoneyFormat());
 
         panelFooter.setBackground(new java.awt.Color(37, 37, 39));
 
@@ -133,9 +134,9 @@ public class CarDialog extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfModel)
                     .addComponent(spnProductionTime)
+                    .addComponent(cbColor, 0, 545, Short.MAX_VALUE)
                     .addComponent(tfCostPrice)
-                    .addComponent(tfSalePrice)
-                    .addComponent(cbColor, 0, 545, Short.MAX_VALUE))
+                    .addComponent(tfSalePrice))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -149,15 +150,15 @@ public class CarDialog extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(spnProductionTime, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfCostPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(tfSalePrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbColor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,9 +184,18 @@ public class CarDialog extends javax.swing.JPanel {
         }
         car.setModel(tfModel.getText());
         car.setProductionTime((int) spnProductionTime.getValue());
-        car.setCostPrice(Double.parseDouble(tfCostPrice.getText()));
-        car.setSalePrice(Double.parseDouble(tfSalePrice.getText()));
         car.setColor((String) cbColor.getSelectedItem());
+        
+        String cost = tfCostPrice.getText();
+        cost = cost.replace(",", "").replace(".", "");
+        cost = cost.substring(0, cost.length()-2);
+        car.setCostPrice(Double.parseDouble(cost));
+        
+        String sale = tfSalePrice.getText();
+        sale = sale.replace(",", "").replace(".", "");
+        sale = sale.substring(0, sale.length()-2);
+        car.setSalePrice(Double.parseDouble(sale));
+        
 
         if (validation(car)) {
             if (creating) {
@@ -226,9 +236,9 @@ public class CarDialog extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelFooter;
     private javax.swing.JSpinner spnProductionTime;
-    private javax.swing.JTextField tfCostPrice;
+    private javax.swing.JFormattedTextField tfCostPrice;
     private javax.swing.JTextField tfModel;
-    private javax.swing.JTextField tfSalePrice;
+    private javax.swing.JFormattedTextField tfSalePrice;
     // End of variables declaration//GEN-END:variables
 
     private final JDialog registerDialog;
@@ -252,8 +262,16 @@ public class CarDialog extends javax.swing.JPanel {
     private void setCar() {
         tfModel.setText(car.getModel());
         spnProductionTime.setValue(car.getProductionTime());
-        tfCostPrice.setText(Double.toString(car.getCostPrice()));
-        tfSalePrice.setText(Double.toString(car.getSalePrice()));
         cbColor.setSelectedItem(car.getColor());
+        
+        String cost = Double.toString(car.getCostPrice());
+        cost = cost.replace(".", "");
+        cost = cost.substring(0, cost.length() -1);
+        tfCostPrice.setText(cost);
+        
+        String sale = Double.toString(car.getSalePrice());
+        sale = sale.replace(".", "");
+        sale = sale.substring(0, sale.length() -1);
+        tfSalePrice.setText(sale);
     }
 }

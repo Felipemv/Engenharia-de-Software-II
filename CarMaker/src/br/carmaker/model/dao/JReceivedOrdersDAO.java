@@ -146,7 +146,7 @@ public class JReceivedOrdersDAO extends AOrderDAO {
                 + TABLE_NAME + "." + DEALERSHIP_ID;
 
         sql += " INNER JOIN " + JShippingCompanyDAO.TABLE_NAME + " ON "
-                + JDealershipDAO.TABLE_NAME + "." + JDealershipDAO.SC_ID + "="
+                + JDealershipDAO.TABLE_NAME + "." + JDealershipDAO.SCOMP_ID + "="
                 + JShippingCompanyDAO.TABLE_NAME + "." + JShippingCompanyDAO.ID;
 
         sql += " WHERE " + TABLE_NAME + "." + DELETED + "=0";

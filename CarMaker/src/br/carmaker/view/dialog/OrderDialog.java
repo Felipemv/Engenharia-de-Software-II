@@ -6,7 +6,7 @@
 package br.carmaker.view.dialog;
 
 import br.carmaker.model.JCar;
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
 import br.carmaker.model.JFeedstock;

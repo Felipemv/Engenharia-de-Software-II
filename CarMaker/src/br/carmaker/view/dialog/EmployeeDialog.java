@@ -5,10 +5,11 @@
  */
 package br.carmaker.view.dialog;
 
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.enums.EEmployeeType;
+import br.carmaker.model.util.JFormatFields;
 import br.carmaker.view.frame.LoginFrame;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -91,16 +92,7 @@ public class EmployeeDialog extends javax.swing.JPanel {
         panelFooter = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        MaskFormatter maskFormat = new MaskFormatter();
-        String mask = "(##) #####-####";
-
-        try{
-            maskFormat.setMask(mask);
-            maskFormat.setPlaceholderCharacter(' ');
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        tfPhone = new javax.swing.JFormattedTextField(maskFormat);
+        tfPhone = new javax.swing.JFormattedTextField(JFormatFields.getPhoneFormat());
         jLabel10 = new javax.swing.JLabel();
         rbManager = new javax.swing.JRadioButton();
         rbEmployee = new javax.swing.JRadioButton();
@@ -257,12 +249,6 @@ public class EmployeeDialog extends javax.swing.JPanel {
                     .addComponent(btnCancel))
                 .addGap(25, 25, 25))
         );
-
-        tfPhone.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
-                tfPhoneCaretUpdate(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel10.setText("Cargo:");
@@ -424,10 +410,6 @@ public class EmployeeDialog extends javax.swing.JPanel {
         registerDialog.dispose();
         parent.setEnabled(true);
     }//GEN-LAST:event_btnCancelMouseClicked
-
-    private void tfPhoneCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPhoneCaretUpdate
-        System.out.println(tfPhone.getText().trim().length());
-    }//GEN-LAST:event_tfPhoneCaretUpdate
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

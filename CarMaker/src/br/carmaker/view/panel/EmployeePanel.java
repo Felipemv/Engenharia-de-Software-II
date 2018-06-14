@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.panel;
 
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
 import br.carmaker.model.enums.EMenuItem;

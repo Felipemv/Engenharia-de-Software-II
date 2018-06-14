@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import br.carmaker.model.JSupplier;
@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import br.carmaker.model.util.JFormatFields;
 
 /**
  *
@@ -57,7 +58,6 @@ public class FeedstockDialog extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         spnAmount = new javax.swing.JSpinner();
-        tfPrice = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -67,6 +67,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
         btnRemoveSupplier = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listSelected = new javax.swing.JList<>();
+        tfPrice = new javax.swing.JFormattedTextField(JFormatFields.getMoneyFormat());
         panelFooter = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -77,6 +78,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
 
         jLabel3.setText("Preço por lote: ");
 
+        spnAmount.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
         spnAmount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         spnAmount.setRequestFocusEnabled(false);
 
@@ -173,9 +175,9 @@ public class FeedstockDialog extends javax.swing.JPanel {
                             .addComponent(jLabel3))
                         .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfPrice)
                             .addComponent(spnAmount)
-                            .addComponent(tfName))
+                            .addComponent(tfName)
+                            .addComponent(tfPrice))
                         .addGap(24, 24, 24))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -261,7 +263,14 @@ public class FeedstockDialog extends javax.swing.JPanel {
         }
         feedstock.setName(tfName.getText());
         feedstock.setQuantity((int) spnAmount.getValue());
-        feedstock.setCost(Double.parseDouble(tfPrice.getText()));
+        
+        String cost = tfPrice.getText();
+        cost = cost.replace(",", "");
+        cost = cost.replace(".", "");
+        int size = cost.length();
+        cost = cost.substring(0, size -2);
+        
+        feedstock.setCost(Double.parseDouble(cost));
         
         List<JSupplier> sup = new ArrayList<>();
         for (int i = 0; i < selectedSp.size(); i++) {
@@ -338,7 +347,7 @@ public class FeedstockDialog extends javax.swing.JPanel {
     private javax.swing.JPanel panelFooter;
     private javax.swing.JSpinner spnAmount;
     private javax.swing.JTextField tfName;
-    private javax.swing.JTextField tfPrice;
+    private javax.swing.JFormattedTextField tfPrice;
     // End of variables declaration//GEN-END:variables
 
     private final JDialog registerDialog;
@@ -426,7 +435,12 @@ public class FeedstockDialog extends javax.swing.JPanel {
     private void setFeedstock() {
         tfName.setText(feedstock.getName());
         spnAmount.setValue(feedstock.getQuantity());
-        tfPrice.setText(Double.toString(feedstock.getCost()));
+        
+        String cost = Double.toString(feedstock.getCost());
+        cost = cost.replace(".", "");
+        cost = cost.substring(0, cost.length() - 1);
+        
+        tfPrice.setText(cost);
        
         dlmAvailable = (DefaultListModel) listAvailable.getModel();
         dlmAvailable.clear();

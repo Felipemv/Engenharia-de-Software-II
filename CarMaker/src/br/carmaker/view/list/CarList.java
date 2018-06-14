@@ -6,7 +6,7 @@
 package br.carmaker.view.list;
 
 import br.carmaker.model.JCar;
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JList;

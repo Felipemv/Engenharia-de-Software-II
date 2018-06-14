@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.dialog;
 
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JDealership;
 import br.carmaker.model.JShippingCompany;
@@ -73,7 +73,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         panelView = new javax.swing.JPanel();
         panelSupplier = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        tfLeadTime = new javax.swing.JTextField();
+        spnLeadTime = new javax.swing.JSpinner();
         panelShippingCompany = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -199,27 +199,27 @@ public class AffiliateDialog extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel6.setText("Lead time: ");
 
-        tfLeadTime.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        spnLeadTime.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout panelSupplierLayout = new javax.swing.GroupLayout(panelSupplier);
         panelSupplier.setLayout(panelSupplierLayout);
         panelSupplierLayout.setHorizontalGroup(
             panelSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelSupplierLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSupplierLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                .addComponent(tfLeadTime, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                .addComponent(spnLeadTime, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelSupplierLayout.setVerticalGroup(
             panelSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSupplierLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfLeadTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addGroup(panelSupplierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(spnLeadTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         panelView.add(panelSupplier, "card2");
@@ -433,9 +433,9 @@ public class AffiliateDialog extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbGeneral;
     private javax.swing.JSpinner spnAmount;
     private javax.swing.JSpinner spnFleet;
+    private javax.swing.JSpinner spnLeadTime;
     private javax.swing.JTextField tfAddress;
     private javax.swing.JTextField tfCnpj;
-    private javax.swing.JTextField tfLeadTime;
     private javax.swing.JTextField tfName;
     // End of variables declaration//GEN-END:variables
 
@@ -457,7 +457,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         supplier.setName(tfName.getText());
         supplier.setAddress(tfAddress.getText());
         supplier.setCnpj(tfCnpj.getText());
-        supplier.setLeadTime(Integer.parseInt(tfCnpj.getText()));
+        supplier.setLeadTime((int) spnLeadTime.getValue());
 
         if (supplierValidation()) {
             if (JDbFacade.getInstance().createSupplier(supplier)) {
@@ -515,11 +515,10 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void editSupplier() {
-        supplier = new JSupplier();
-
         supplier.setName(tfName.getText());
         supplier.setAddress(tfAddress.getText());
         supplier.setCnpj(tfCnpj.getText());
+        supplier.setLeadTime((int) spnLeadTime.getValue());
 
         if (supplierValidation()) {
             if (JDbFacade.getInstance().editSupplier(supplier)) {
@@ -533,8 +532,6 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void editShippingCompany() {
-        shippingCompany = new JShippingCompany();
-
         shippingCompany.setName(tfName.getText());
         shippingCompany.setAddress(tfAddress.getText());
         shippingCompany.setCnpj(tfCnpj.getText());
@@ -551,8 +548,6 @@ public class AffiliateDialog extends javax.swing.JPanel {
     }
 
     private void editDealership() {
-        dealership = new JDealership();
-
         dealership.setName(tfName.getText());
         dealership.setAddress(tfAddress.getText());
         dealership.setCnpj(tfCnpj.getText());
@@ -632,7 +627,7 @@ public class AffiliateDialog extends javax.swing.JPanel {
         tfName.setText(supplier.getName());
         tfAddress.setText(supplier.getAddress());
         tfCnpj.setText(supplier.getCnpj());
-        tfLeadTime.setText(Integer.toString(supplier.getLeadTime()));
+        spnLeadTime.setValue(supplier.getLeadTime());
     }
 
     private void setShippingCompany() {

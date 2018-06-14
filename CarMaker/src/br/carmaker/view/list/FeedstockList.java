@@ -5,7 +5,7 @@
  */
 package br.carmaker.view.list;
 
-import br.carmaker.model.JConstants;
+import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JFeedstock;
 import java.awt.Color;
