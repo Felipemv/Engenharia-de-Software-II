@@ -15,6 +15,7 @@ import br.carmaker.model.dao.JPlacedOrdersDAO;
 import br.carmaker.model.dao.JReceivedOrdersDAO;
 import br.carmaker.model.dao.JShippingCompanyDAO;
 import br.carmaker.model.dao.JSupplierDAO;
+import java.util.Date;
 import java.util.List;
 
 /**

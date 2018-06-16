@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -250,5 +251,9 @@ public class JPlacedOrdersDAO extends AOrderDAO {
 
         ConnectionFactory.closeConnection(connection, stmt);
         return true;
+    }
+
+    public static List<JPlacedOrders> getPlacedOrderToReport(Date dateStart, Date dateFinish) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

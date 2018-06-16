@@ -139,4 +139,11 @@ public abstract class JConstants {
     public static final String CAR = "Carro";
     public static final String DATE_FORMAT = "dd/MM/yyyy";
     
+    //Tela de relatórios
+    public static final String REPORTS_DESCRIPTION = "Os relatórios são gerados baseados nos pedidos que são recebidos e realizados. Para gerar um relatório, basta selecionar o tipo de pedido que deseja e a data de início e de término do relatório e clicar em gerar.";
+    public static final String SEND_REPORT_BY_EMAIL = "Enviar relatório por email?";
+    public static final String SELECT_DATE_START = "Data de início inválida";
+    public static final String SELECT_DATE_FINISH = "Data de término inválida";
+    public static final String DATE_FINISH_MUST_BE_BIGGER = "Data de término deve ser maior que a data de inicio";
+    public static final String DATE_FORMAT_REPORT = "yyyy-MM-dd";
 }
