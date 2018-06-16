@@ -20,9 +20,9 @@ public class JEmployee extends ABaseEntity {
     private String registerNumber;
     private EEmployeeType role;
     private String email;
-    private String password;
     private byte[] photo;
     private boolean online;
+    private JLogin login;
 
     public String getName() {
         return name;
@@ -72,14 +72,6 @@ public class JEmployee extends ABaseEntity {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public byte[] getPhoto() {
         return photo;
     }
@@ -94,5 +86,13 @@ public class JEmployee extends ABaseEntity {
 
     public void setOnline(boolean online) {
         this.online = online;
+    }
+
+    public JLogin getLogin() {
+        return login;
+    }
+
+    public void setLogin(JLogin login) {
+        this.login = login;
     }
 }

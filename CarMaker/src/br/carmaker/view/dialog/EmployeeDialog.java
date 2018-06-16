@@ -8,6 +8,8 @@ package br.carmaker.view.dialog;
 import br.carmaker.model.util.JConstants;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
+import br.carmaker.model.JLogin;
+import br.carmaker.model.dao.JLoginDAO;
 import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.util.JFormatFields;
 import br.carmaker.view.frame.LoginFrame;
@@ -18,6 +20,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -74,14 +77,14 @@ public class EmployeeDialog extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         tfName = new javax.swing.JTextField();
         tfEmail = new javax.swing.JTextField();
-        tfConfirmEmail = new javax.swing.JTextField();
         pfPassword = new javax.swing.JPasswordField();
         pfConfirmPassword = new javax.swing.JPasswordField();
+        tfUsername = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -122,9 +125,6 @@ public class EmployeeDialog extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel3.setText("Email:");
 
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jLabel4.setText("Confirmar email: ");
-
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabel5.setText("Senha:");
 
@@ -135,11 +135,14 @@ public class EmployeeDialog extends javax.swing.JPanel {
 
         tfEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
-        tfConfirmEmail.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-
         pfPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
 
         pfConfirmPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        tfUsername.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jLabel4.setText("Usuário:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,16 +153,16 @@ public class EmployeeDialog extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfConfirmEmail)
                     .addComponent(tfEmail)
                     .addComponent(pfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
                     .addComponent(pfConfirmPassword)
-                    .addComponent(tfName))
+                    .addComponent(tfName)
+                    .addComponent(tfUsername))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -171,12 +174,12 @@ public class EmployeeDialog extends javax.swing.JPanel {
                     .addComponent(tfName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfConfirmEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -358,25 +361,28 @@ public class EmployeeDialog extends javax.swing.JPanel {
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
         if (creating) {
             employee = new JEmployee();
+            login = new JLogin();
         }
         employee.setName(tfName.getText());
         employee.setEmail(tfEmail.getText());
-        employee.setPassword(new String(pfPassword.getPassword()));
         employee.setAddress(tfAddress.getText());
         employee.setPhone(tfPhone.getText());
         employee.setRegisterNumber(tfRegister.getText());
         employee.setPhoto(getImage());
+        
+        login.setUser(tfUsername.getText());
+        login.setPassword(new String(pfConfirmPassword.getPassword()));
+        employee.setLogin(login);
 
         if (rbManager.isSelected()) {
             employee.setRole(EEmployeeType.Manager);
         } else if (rbEmployee.isSelected()) {
             employee.setRole(EEmployeeType.Employee);
         }
-
-        String confirmEmail = tfConfirmEmail.getText();
+        
         String confirmPassword = new String(pfConfirmPassword.getPassword());
 
-        if (validation(employee, confirmEmail, confirmPassword)) {
+        if (validation(employee, confirmPassword)) {
             if (creating) {
                 if (JDbFacade.getInstance().createEmployee(employee)) {
                     MessageDialog.showMessage(JConstants.SUCCESS_CREATE_EMPLOYEE, this);
@@ -437,26 +443,23 @@ public class EmployeeDialog extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbEmployee;
     private javax.swing.JRadioButton rbManager;
     private javax.swing.JTextField tfAddress;
-    private javax.swing.JTextField tfConfirmEmail;
     private javax.swing.JTextField tfEmail;
     private javax.swing.JTextField tfName;
     private javax.swing.JFormattedTextField tfPhone;
     private javax.swing.JTextField tfRegister;
+    private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 
     private final JDialog registerDialog;
     private final JFrame parent;
     private File image;
     private JEmployee employee;
+    private JLogin login;
     private boolean creating = true;
 
-    public boolean validation(JEmployee employee, String email, String password) {
-        if (!employee.getEmail().equals(email)) {
-            MessageDialog.showMessage(JConstants.LABEL_DIFFERENT_EMAILS, this);
-            return false;
-        }
-
-        if (!employee.getPassword().equals(password)) {
+    public boolean validation(JEmployee employee, String password) {
+        
+        if (!login.getPassword().equals(password)) {
             MessageDialog.showMessage(JConstants.LABEL_DIFFERENT_PASSWORDS, this);
             return false;
         }
@@ -471,7 +474,6 @@ public class EmployeeDialog extends javax.swing.JPanel {
             return false;
         }
             
-
         if (employee.getName().trim().length() == 0
                 || employee.getEmail().trim().length() == 0
                 || employee.getAddress().trim().length() == 0
@@ -486,6 +488,13 @@ public class EmployeeDialog extends javax.swing.JPanel {
             MessageDialog.showMessage(JConstants.LABEL_REGISTER_EXISTS, this);
             tfRegister.setText("");
             tfRegister.grabFocus();
+            return false;
+        }
+        
+        if(JDbFacade.getInstance().userExists(login.getUser(), login.getId())){
+            MessageDialog.showMessage(JConstants.LABEL_USERNAME_EXISTS, this);
+            tfUsername.setText("");
+            tfUsername.grabFocus();
             return false;
         }
 
@@ -549,15 +558,19 @@ public class EmployeeDialog extends javax.swing.JPanel {
     }
 
     private void setEmployee() {
+        getLoginInformation(employee.getId());
+        
         tfName.setText(employee.getName());
         tfEmail.setText(employee.getEmail());
-        tfConfirmEmail.setText(employee.getEmail());
-        pfPassword.setText(employee.getPassword());
-        pfConfirmPassword.setText(employee.getPassword());
+        tfUsername.setText(login.getUser());
+        pfPassword.setText(login.getPassword());
+        pfConfirmPassword.setText(login.getPassword());
         tfAddress.setText(employee.getAddress());
         tfPhone.setText(employee.getPhone());
         tfRegister.setText(employee.getRegisterNumber());
         lblEmployeePhoto.setIcon(getUserImage(employee.getPhoto()));
+        
+        
         if (employee.getRole() == EEmployeeType.Employee) {
             rbEmployee.setSelected(true);
             rbManager.setSelected(false);
@@ -565,5 +578,9 @@ public class EmployeeDialog extends javax.swing.JPanel {
             rbEmployee.setSelected(false);
             rbManager.setSelected(true);
         }
+    }
+    
+    private void getLoginInformation(int idEmployee){
+        login = JDbFacade.getInstance().readLoginByEmployeeId(idEmployee);
     }
 }

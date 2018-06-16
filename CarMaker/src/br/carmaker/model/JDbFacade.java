@@ -10,6 +10,7 @@ import br.carmaker.model.dao.JDealershipDAO;
 import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.model.dao.JFeedstockDAO;
 import br.carmaker.model.dao.JFeedstockHasSupplierDAO;
+import br.carmaker.model.dao.JLoginDAO;
 import br.carmaker.model.dao.JPlacedOrdersDAO;
 import br.carmaker.model.dao.JReceivedOrdersDAO;
 import br.carmaker.model.dao.JShippingCompanyDAO;
@@ -32,7 +33,7 @@ public class JDbFacade {
     }
 
     //CRUD de Funcionários
-    
+        
     public boolean createEmployee(JEmployee employee) {
         return JEmployeeDAO.insertEmployee(employee);
     }
@@ -55,6 +56,20 @@ public class JDbFacade {
     
     public boolean registerExists(String register, int id){
         return JEmployeeDAO.registerExists(register, id);
+    }
+    
+    //Login
+       
+    public int login(JLogin login){
+        return JLoginDAO.getInstance().login(login);
+    }
+    
+    public boolean userExists(String user, int id) {
+        return JLoginDAO.userExists(user, id);
+    }
+
+    public JLogin readLoginByEmployeeId(int employeeId) {
+        return JLoginDAO.getLoginByEmployeeId(employeeId);
     }
 
     //CRUD de Carros

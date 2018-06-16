@@ -5,7 +5,8 @@
  */
 package br.carmaker.view.frame;
 
-import br.carmaker.controller.Login;
+import br.carmaker.model.JDbFacade;
+import br.carmaker.model.JLogin;
 import java.awt.event.KeyEvent;
 
 /**
@@ -66,7 +67,7 @@ public class LoginFrame extends javax.swing.JFrame {
         tfUser.setBackground(new java.awt.Color(64, 64, 64));
         tfUser.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfUser.setForeground(new java.awt.Color(255, 255, 255));
-        tfUser.setText("rafael@");
+        tfUser.setText("admin");
         tfUser.setBorder(null);
         tfUser.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -89,7 +90,7 @@ public class LoginFrame extends javax.swing.JFrame {
         tfPassword.setBackground(new java.awt.Color(64, 64, 64));
         tfPassword.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         tfPassword.setForeground(new java.awt.Color(255, 255, 255));
-        tfPassword.setText("123");
+        tfPassword.setText("admin");
         tfPassword.setBorder(null);
         tfPassword.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -238,7 +239,7 @@ public class LoginFrame extends javax.swing.JFrame {
         String user = tfUser.getText();
         String password = new String(tfPassword.getPassword());
 
-        int id = Login.getInstance().validate(user, password);
+        int id = JDbFacade.getInstance().login(new JLogin(user, password));
 
         if (id != -1) {
             new MainFrame(id).setVisible(true);

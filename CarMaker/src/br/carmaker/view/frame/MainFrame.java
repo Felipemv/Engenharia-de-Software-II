@@ -10,13 +10,11 @@ import br.carmaker.model.enums.EEmployeeType;
 import br.carmaker.model.enums.EMenuItem;
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JEmployee;
-import br.carmaker.model.dao.JEmployeeDAO;
 import br.carmaker.view.dialog.ConfirmDialog;
 import br.carmaker.view.panel.AffiliatePanel;
 import br.carmaker.view.panel.CarPanel;
 import br.carmaker.view.panel.EmployeePanel;
 import br.carmaker.view.panel.FeedstockPanel;
-import br.carmaker.view.panel.HomePanel;
 import br.carmaker.view.panel.OrderPanel;
 import br.carmaker.view.panel.ReportPanel;
 import java.awt.Color;
@@ -131,7 +129,6 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("CarMaker");
         setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 

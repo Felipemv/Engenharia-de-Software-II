@@ -103,6 +103,7 @@ public abstract class JConstants {
     public static final String LABEL_INVALID_EMAIL = "Email inválido!";
     public static final String LABEL_INVALID_PHONE = "Telefone inválido!";
     public static final String LABEL_REGISTER_EXISTS = "Número de registro já foi utilizado.";
+    public static final String LABEL_USERNAME_EXISTS = "Nome de usuário já foi utilizado.";
     public static final String LABEL_CANT_DELETE_OWN_USER = "Você não pode deletar seu próprio usuário do sistema.";
     public static final String LABEL_NEED_ONE_SUPPLIER = "Você precisa adicionar no mínimo um fornecedor.";
     public static final String LABEL_NO_ITEM_SELECTED = "Ops! Nenhum item foi selecionado!";

@@ -10,12 +10,21 @@ CREATE TABLE IF NOT EXISTS employee (
     register VARCHAR(45) NOT NULL,
     role VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
-    pass VARCHAR(45) NOT NULL,
     photo LONGBLOB NULL,
     deleted int NOT NULL DEFAULT 0, 
     PRIMARY KEY (id),
     UNIQUE INDEX register_UNIQUE (register ASC)
 )  ENGINE=INNODB;
+
+CREATE TABLE IF NOT EXISTS login(
+	id INT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(30) NOT NULL,
+    password VARCHAR(30) NOT NULL,
+    employee_id INT NOT NULL,
+    deleted INT NOT NULL DEFAULT 0,
+    PRIMARY KEY(id),
+    FOREIGN KEY (employee_id) REFERENCES employee(id)
+);
 
 CREATE TABLE IF NOT EXISTS car (
     id INT NOT NULL AUTO_INCREMENT,
@@ -107,13 +116,12 @@ CREATE TABLE IF NOT EXISTS received_order (
         REFERENCES dealership (id)
 )  ENGINE=INNODB;
 
-#Exemplos de funcionários
-INSERT INTO employee(name, address, phone, register, role, email, pass) 
-	VALUES('Rafael', 'a', '1', '123', 1, 'rafael@', '123');
+#Usuário padrão
+INSERT INTO employee(id, name, address, phone, register, role, email) 
+	VALUES (1, 'Admin', '-', '-', '-', 1, '-');
     
-INSERT INTO employee(name, address, phone, register, role, email, pass) 
-	VALUES('Felipe', 'b', '2', '345', 0, 'felipe@', '123');
-    
+INSERT INTO login(id, username, password, employee_id) VALUES (1, 'admin', 'admin', 1);
+
 #Exemplos de carros
 INSERT INTO car (model, production_time, cost_price, sale_price, color)
 	VALUES('Fiat UNO', 12, 2000.00, 5000.00, 'Black');
@@ -188,3 +196,5 @@ INSERT INTO feedstock_has_supplier(feedstock_id, supplier_id) VALUES(2,3);
 
 INSERT INTO feedstock_has_supplier(feedstock_id, supplier_id) VALUES(3,1);    
 INSERT INTO feedstock_has_supplier(feedstock_id, supplier_id) VALUES(3,3);
+
+select * from employee;
