@@ -5,10 +5,15 @@
  */
 package br.carmaker.view.panel;
 
+import br.carmaker.controller.relatorio;
 import br.carmaker.model.util.JConstants;
 import br.carmaker.view.dialog.MessageDialog;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -291,14 +296,22 @@ public class ReportPanel extends javax.swing.JPanel {
     }
 
     private void generateReceivedOrderReport(String dateStart, String dateFinish) {
-
+        try {
+            relatorio.geraRelatorioRecebidos(dateStart, dateFinish);
+        } catch (JRException | SQLException ex) {
+            System.out.println("Erro na geração do relatório: " + ex.getMessage());
+        }
     }
 
     private void generatePlacedOrderReport(String dateStart, String dateFinish) {
- 
+        try {
+            relatorio.geraRelatorioRealizados(dateStart, dateFinish);
+        } catch (JRException | SQLException ex) {
+            System.out.println("Erro na geração do relatório: " + ex.getMessage());
+        }
     }
 
     private void sendReportByEmail(String email) {
-        
+        relatorio.Email(email);
     }
 }
