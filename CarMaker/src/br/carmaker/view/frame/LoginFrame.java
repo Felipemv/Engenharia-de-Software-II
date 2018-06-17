@@ -7,7 +7,12 @@ package br.carmaker.view.frame;
 
 import br.carmaker.model.JDbFacade;
 import br.carmaker.model.JLogin;
+import br.carmaker.model.JPlacedOrders;
+import br.carmaker.model.JReceivedOrders;
+import br.carmaker.model.enums.EDeliveryStatus;
 import java.awt.event.KeyEvent;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -242,10 +247,43 @@ public class LoginFrame extends javax.swing.JFrame {
         int id = JDbFacade.getInstance().login(new JLogin(user, password));
 
         if (id != -1) {
+            updateAllDeliveryStatus();
             new MainFrame(id).setVisible(true);
             this.dispose();
         } else {
             lblUserError.setVisible(true);
+        }
+    }
+
+    private void updateAllDeliveryStatus() {
+        //Atualização dos pedidos recebidos
+        List<JReceivedOrders> received = JDbFacade.getInstance().readReceivedOrdersNotDelivered();
+        for (int i = 0; i < received.size(); i++) {
+            received.get(i).setStatus(calculateStatus(received.get(i).getExpectedDate()));
+            JDbFacade.getInstance().editReceivedOrderStatus(received.get(i));
+        }
+
+        //Atualização dos pedidos realizados
+        List<JPlacedOrders> placed = JDbFacade.getInstance().readPlacedOrdersNotDelivered();
+        for (int i = 0; i < placed.size(); i++) {
+            placed.get(i).setStatus(calculateStatus(placed.get(i).getExpectedDate()));
+            JDbFacade.getInstance().editPlacedOrderStatus(placed.get(i));
+        }
+    }
+
+    private EDeliveryStatus calculateStatus(Date expectedDate) {
+        long time = expectedDate.getTime();
+        long today = System.currentTimeMillis();
+        long oneDayInMillis = 1000 * 60 * 60 * 24; //Segundo * Minuto * Hora * Dia
+
+        if (today < time) {
+            return EDeliveryStatus.ON_TIME;
+        
+        } else if (today >= time && today < time + oneDayInMillis) {
+            return EDeliveryStatus.SCHEDULED_ARRIVAL;
+        
+        } else {
+            return EDeliveryStatus.LATE;
         }
     }
 }

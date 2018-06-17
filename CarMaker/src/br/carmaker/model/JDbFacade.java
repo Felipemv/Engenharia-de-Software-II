@@ -15,7 +15,6 @@ import br.carmaker.model.dao.JPlacedOrdersDAO;
 import br.carmaker.model.dao.JReceivedOrdersDAO;
 import br.carmaker.model.dao.JShippingCompanyDAO;
 import br.carmaker.model.dao.JSupplierDAO;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -215,6 +214,14 @@ public class JDbFacade {
         return JReceivedOrdersDAO.deleteReceivedOrder(id);
     }
     
+    public List<JReceivedOrders> readReceivedOrdersNotDelivered() {
+        return JReceivedOrdersDAO.getReceivedOrdersNotDelivered();
+    }
+
+    public void editReceivedOrderStatus(JReceivedOrders order) {
+        JReceivedOrdersDAO.editReceivedOrderStatus(order);
+    }
+    
     //CRUD de pedidos recebidos
     
     public boolean createPlacedOrder(JPlacedOrders order) {
@@ -235,5 +242,13 @@ public class JDbFacade {
     
     public boolean deletePlacedOrder(int id){
         return JPlacedOrdersDAO.deletePlacedOrder(id);
+    }
+    
+    public List<JPlacedOrders> readPlacedOrdersNotDelivered() {
+        return JPlacedOrdersDAO.getReceivedOrdersNotDelivered();
+    }
+
+    public void editPlacedOrderStatus(JPlacedOrders order) {
+        JPlacedOrdersDAO.editPlacedOrderStatus(order);
     }
 }

@@ -253,7 +253,57 @@ public class JPlacedOrdersDAO extends AOrderDAO {
         return true;
     }
 
-    public static List<JPlacedOrders> getPlacedOrderToReport(Date dateStart, Date dateFinish) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static List<JPlacedOrders> getReceivedOrdersNotDelivered() {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<JPlacedOrders> listOrders = new ArrayList<>();
+        JPlacedOrders order;
+
+        String sql = "SELECT " + TABLE_NAME + "." + ID + ", "
+                + TABLE_NAME + "." + EXPECTED_DATE + ", "
+                + TABLE_NAME + "." + STATUS
+                + " FROM " + TABLE_NAME
+                + " WHERE " + DELETED + "=0"
+                + " AND (" + STATUS + "=" + EDeliveryStatus.ON_TIME.getStatus()
+                + " OR " + STATUS + "=" + EDeliveryStatus.SCHEDULED_ARRIVAL.getStatus() + ")";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                order = new JPlacedOrders();
+
+                order.setId(rs.getInt(ID));
+                order.setStatus(EDeliveryStatus.valueOf(rs.getInt(STATUS)));
+                order.setExpectedDate(new Date(rs.getDate(EXPECTED_DATE).getTime()));
+
+                listOrders.add(order);
+            }
+        } catch (SQLException ex) {
+        }
+        ConnectionFactory.closeConnection(connection, stmt, rs);
+        return listOrders;
+    }
+
+    public static void editPlacedOrderStatus(JPlacedOrders order) {
+        Connection connection = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+
+        String sql = "UPDATE " + TABLE_NAME + " SET " + STATUS + "=?  WHERE " + ID + "=?";
+
+        try {
+            stmt = connection.prepareStatement(sql);
+
+            stmt.setInt(1, order.getStatus().getStatus());
+            stmt.setInt(2, order.getId());
+
+            stmt.execute();
+        } catch (SQLException ex) {
+            ConnectionFactory.closeConnection(connection, stmt);
+        }
+        ConnectionFactory.closeConnection(connection, stmt);
     }
 }
